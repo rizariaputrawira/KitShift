@@ -1,6 +1,6 @@
 ---
 name: workflow-brainstorming
-description: "[Matt+Superpowers] Use before unresolved creative or behavioral design work, or for an explicit decision stress-test."
+description: "[Matt+Superpowers] Use before unresolved creative or behavioral design work, explicit decision stress-tests, or when the user asks to be grilled."
 ---
 
 # Brainstorming
@@ -12,7 +12,7 @@ Turn uncertainty into an evidence-backed design whose scope the user can recogni
 1. Select a provisional path: **spike**, **bounded**, or **architectural**. Bounded requires an existing affected flow that can actually be inspected. Choose the least elaborate path sufficient for the evidenced risk and uncertainty; change paths only when inspection reveals a concrete need. Briefly state the selected path and its reason.
 2. Read the current request, relevant project guidance and existing requirement/design owners. Trace the affected flow and real callers. Discover repo/tool-provided facts rather than asking the user. Use source navigation and, for an existing UI, available read-only DOM/screenshot evidence when it resolves a real visual choice. Missing material context blocks dependent decisions, not unrelated safe inspection.
 3. Write back the intended outcome, audience/use, constraints and observable success in a short note. Distinguish supplied facts from assumptions; invite correction. Ask only for consequential missing intent. Do not re-interview facts the request already supplies.
-4. Carry that understanding into every proposed choice. Use the current native question interface for material user decisions. A small batch of related, independent questions is appropriate when each has settled prerequisites; keep dependent questions sequential and omit already settled or discoverable facts. An explicit **stress-test** loads [ready-frontier rounds](references/stress-test.md) for systematic decision dependency review, not a default interview quota.
+4. Carry that understanding into every proposed choice. Use the current native question interface for material user decisions. A small batch of related, independent questions is appropriate when each has settled prerequisites; keep dependent questions sequential and omit already settled or discoverable facts. An explicit **stress-test/grill** loads [ready-frontier rounds](references/stress-test.md) for dependency-aware questions. For consequential domain terminology, relationships or durable domain decisions on that branch, consult `skill://docs-domain-modeling` and reuse its canonical records rather than beginning a second interview.
 
 ## Approval boundary
 

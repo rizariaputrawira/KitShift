@@ -66,3 +66,7 @@ reconciliation. Default resumption now rejects invalid-date snapshot names and
 reports highest-sequence ambiguity instead of silently selecting a snapshot.
 Upstream identities, notices, documentation-first opt-in and native authority are
 unchanged. These are source-reviewed corrections, not runtime or actor evidence.
+
+## Active Matt Pocock adoption integration — 2026-10-22
+
+The reusable specification content contract now lives in `docs-specification/references/content-contract.md`; this delivery owner's `references/specification.md` links to it rather than maintaining duplicate content/readiness rules. The new owner records the current Matt Pocock source pin and retains the full notice. Existing historical source pins and verification records above remain unchanged. The opted-in delivery baseline and native authorization remain owned here; sharing a passive reference neither invokes an explicit-only workflow nor authorizes tracker publication.

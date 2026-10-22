@@ -1,5 +1,5 @@
 ---
-name: brand-concepts
+name: ui-brand-concepts
 description: "[Taste] Create image-led brand-board and logo-world concepts from a supplied brief and assets; also use when explicitly requested as brandkit."
 ---
 

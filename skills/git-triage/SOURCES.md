@@ -1,7 +1,11 @@
 # Sources and provenance
 
-This skill is independently authored for this configuration. No external skill text, code, or license notice was copied. Its read-only permissions and reporting procedure are original; pointers reuse the named local skill owners. It makes no claim of GitHub API availability or enforcement.
+OMP-native passive adaptation of pinned Matt Pocock triage guidance, merged with existing read-only evidence/reporting rules. Canonical local owner is `git-triage`.
 
-## Local maintenance
+| Pinned source | Local files | Adopted / divergence |
+|---|---|---|
+| [mattpocock/skills@5beb35b: `skills/engineering/triage/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/triage/SKILL.md) | `SKILL.md` | Supplied-item versus queue workflow, category/state roles, transitions, evidence, briefs, needs-info and privacy. No forced tracker API, auto mutation, setup command, or fabricated verification. |
+| [mattpocock/skills@5beb35b: `skills/engineering/triage/AGENT-BRIEF.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/triage/AGENT-BRIEF.md) | `SKILL.md` | Durable behavioral brief fields/acceptance/out-of-scope; examples omitted. |
+| [mattpocock/skills@5beb35b: `skills/engineering/triage/OUT-OF-SCOPE.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/triage/OUT-OF-SCOPE.md) | `SKILL.md` (summary only) | Concept-level prior rejection matching, maintainer confirmation, and distinction between rejected and already-implemented work. Full file conventions, templates and examples are not redistributed; no `.out-of-scope/` store is assumed or mutated implicitly. |
 
-Clarified that triage alone remains read-only, while a separate explicit request supplies authority only for its named actions, subject to native policy. Resolve missing authority or material ambiguity/consequences without adding a redundant confirmation gate for already authorized writes. This is a local guidance clarification, not runtime enforcement or a change to native OMP permissions.
+Exact MIT notice reproduced unchanged in `LICENSE.matt`. Existing local read-only permissions and reporting remain; procedures do not enforce runtime permissions.

@@ -1,6 +1,6 @@
 ---
 name: git-pr-work
-description: "Use when turning an issue or requested change into bounded implementation and pull-request preparation."
+description: "[Matt Pocock] Prepare bounded implementation and pull-request material from a supplied issue or requested change."
 ---
 
 # Work with an issue or pull request
@@ -13,4 +13,5 @@ Translate the authorized request into a bounded change and useful PR material; t
 4. Draft PR title/body without publishing if useful or requested. Follow the user's explicit format and inspect applicable repository guidance and PR templates before drafting. Reuse their structure without duplicate sections. When no format or template applies, use these fallback headings/slots: **Refs** (source/request evidence; head is current or suggested/not-created; base known, proposed, or unknown), **Summary and scope**, **Related issue**, **Verification** (observed and unrun), and **Limits**. Preserve relevant scope, verification, and limits in the selected structure. Mark each unknown ref unknown; never copy another PR's refs onto this change. Do not insert closing keywords unless requested. A direct request for PR or issue API changes authorizes only those requested changes, subject to native policy and unresolved material consequences.
 
 For a complex change, make the review path legible without imposing this structure on small diffs: identify the core behavior and its primary files first, then integration/wiring, mechanical or generated changes, and high-risk boundaries. Summarize the evidence that supports the acceptance claims and state meaningful unrun checks or limits. Keep behavior-changing work distinguishable from mechanical edits; suggest splitting when notes cannot make a change of reviewable size. Do not rewrite history or hide behavior changes as cleanup.
+Use a compact visual summary appropriate to the change (behavior pseudocode, control-flow/component tree, file tree, or focused diff). For material changes, include concrete before/after evidence (screenshots for visual work when available; otherwise observed test/output evidence); label unrun evidence honestly. Describe merge danger as one-way or two-way, explain reversibility, and state blast radius with affected consumers/boundaries. Retain repository/user format when supplied; these slots supplement rather than override it.
 5. Return the bounded plan/status and concrete next steps. Explain which authorized actions remain without performing unrequested actions. A draft is useful for a human to apply manually.

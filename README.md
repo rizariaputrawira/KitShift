@@ -26,7 +26,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 ## Capabilities
 
-- **Reusable procedures:** 39 skills covering engineering, UI, security, Git, documentation, writing, and handoffs, with their supporting files and attribution.
+- **Reusable procedures:** 52 skills covering engineering, UI, security, Git, documentation, writing, teaching, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, retaining omp's native base prompt.
 - **Native omp configuration:** three model-role selections, appearance preferences, native planning, and selected privacy/resource settings—without restoring custom director/worker orchestration.
 - **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths supplied during installation.
@@ -121,12 +121,58 @@ Ask for the task directly, or name the relevant skill when you want a specific p
 |---|---|
 | Engineering | [Debugging](skills/code-debugging/SKILL.md), [code review](skills/code-review/SKILL.md), [TDD](skills/code-tdd/SKILL.md), [simplification](skills/code-simplicity/SKILL.md) |
 | Planning and documentation | [Brainstorming](skills/workflow-brainstorming/SKILL.md), [domain modeling](skills/docs-domain-modeling/SKILL.md), [documentation-first delivery](skills/workflow-delivery/SKILL.md) |
-| UI and motion | [UI design / Impeccable](skills/ui-design/SKILL.md), [Taste frontend](skills/taste-skill/SKILL.md), [Stitch input](skills/stitch-design-input/SKILL.md), [mobile web](skills/ui-mobile-web/SKILL.md), [web motion](skills/ui-web-motion/SKILL.md), [Expo motion](skills/ui-expo-motion/SKILL.md), [UI stress testing](skills/ui-stress-test/SKILL.md) |
+| UI and motion | [UI design / Impeccable](skills/ui-design/SKILL.md), [Taste frontend](skills/ui-taste-frontend/SKILL.md), [Stitch input](skills/ui-stitch-design-input/SKILL.md), [mobile web](skills/ui-mobile-web/SKILL.md), [web motion](skills/ui-web-motion/SKILL.md), [Expo motion](skills/ui-expo-motion/SKILL.md), [UI stress testing](skills/ui-stress-test/SKILL.md) |
 | Security | [Security review](skills/security-review/SKILL.md), [security audit](skills/security-audit/SKILL.md), [dependency intake](skills/security-intake/SKILL.md) |
 | Git | [Change status](skills/git-change-status/SKILL.md), [commit messages](skills/git-commit-message/SKILL.md), [PR work](skills/git-pr-work/SKILL.md) |
 | Writing and continuity | [Writing review](skills/writing-authenticity/SKILL.md), [provenance review](skills/content-provenance-audit/SKILL.md), [handoffs](skills/workflow-handoff/SKILL.md) |
 
 Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
+
+### Skill naming
+
+Canonical skill directory names match their `SKILL.md` names and start with a functional domain: `agent-`, `code-`, `content-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`.
+
+The domain-prefix migration renames `brand-concepts` to `ui-brand-concepts`, `stitch-design-input` to `ui-stitch-design-input`, `swift-development` to `code-swift-development`, and the `taste-skill` package (previous invocation name `design-taste-frontend`) to `ui-taste-frontend`. Use the new names for `skill://` URIs and `/skill:` commands. Historical verification records and upstream source paths retain their original names.
+
+For an existing installation, move each old skill directory to its new name before copying the updated repository skills. The generic installer does not remove old paths; leaving both would expose duplicate skills. Preserve local edits and backups when migrating, and restart omp afterward.
+
+### Matt Pocock skill adoption
+
+The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
+
+This adoption adds 13 skills and merges into 11 existing owners, for 24 adoption owners within the 52-skill collection. The documentation-first delivery workflow also reuses the standalone specification content contract instead of maintaining a duplicate.
+
+| Upstream skill(s) | KitShift owner(s) |
+|---|---|
+| `ask-matt` | [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md) |
+| `code-review` | [code-review](skills/code-review/SKILL.md) |
+| `codebase-design`, `improve-codebase-architecture` | [code-architecture](skills/code-architecture/SKILL.md) |
+| `diagnosing-bugs` | [code-debugging](skills/code-debugging/SKILL.md) |
+| `domain-modeling` | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md) |
+| `grill-with-docs`, `grill-me`, `grilling` | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md) |
+| `implement`, `implement-spec` | [code-implementation](skills/code-implementation/SKILL.md) |
+| `pr` | [git-pr-work](skills/git-pr-work/SKILL.md) |
+| `prototype` | [code-prototyping](skills/code-prototyping/SKILL.md) for logic/state questions; [ui-prototyping](skills/ui-prototyping/SKILL.md) for UI alternatives |
+| `research` | [workflow-research](skills/workflow-research/SKILL.md) |
+| `retro` | [workflow-retrospective](skills/workflow-retrospective/SKILL.md) |
+| `setup-matt-pocock-skills` | [workflow-project-setup](skills/workflow-project-setup/SKILL.md) |
+| `tdd` | [code-tdd](skills/code-tdd/SKILL.md) |
+| `to-spec` | [docs-specification](skills/docs-specification/SKILL.md) |
+| `to-tickets` | [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md) |
+| `triage` | [git-triage](skills/git-triage/SKILL.md) |
+| `wayfinder` | [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
+| `wizard` | [workflow-wizard](skills/workflow-wizard/SKILL.md) |
+| `handoff` | [workflow-handoff](skills/workflow-handoff/SKILL.md) |
+| `teach` | [workflow-teaching](skills/workflow-teaching/SKILL.md) |
+| `to-questionnaire` | [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md) |
+| `wait-what` | [writing-explanation](skills/writing-explanation/SKILL.md) |
+| `writing-for-agents` | [agent-guidance](skills/agent-guidance/SKILL.md) |
+
+Newly adopted descriptions use a compact `[Matt Pocock]` source tag followed by the capability's trigger. Merged skills retain combined contributor tags. Each adapted owner records its exact source paths, modifications, and full Matt Pocock MIT notice in `SOURCES.md` and `LICENSE.matt`; previous source records and notices remain.
+
+These are passive native omp instructions, not the upstream plugin or its executables. Explicit-only skills retain `disable-model-invocation: true`; merged owners retain their established exposure. Setup is only needed for the tracker/documentation operations that actually depend on it. No automatic commits, pushes, tracker publication, mandatory subagent topology, universal TDD, or implicit documentation-first baseline is adopted. The optional skill selector recommends a path when requested; it is not a global router.
+
+
 
 ## MCP integrations
 
@@ -154,8 +200,8 @@ Three packages were initially excluded while their source records were investiga
 
 | Package | Established evidence and remaining boundary |
 |---|---|
-| [Stitch input](skills/stitch-design-input/SOURCES.md) | Leonxlnx's MIT source is corroborated by the Google Stitch contribution and an attributed redistribution. The package preserves the locally adapted procedure and illustrative sample; the exact historical import event remains unknown. |
-| [Taste frontend](skills/taste-skill/SOURCES.md) | Aria's original expanded file exactly matches Leonxlnx's pinned expanded Taste source. The earlier shorter-source comparison did not identify that complete baseline. Both full MIT notices are retained; the current local adaptation is preserved rather than importing newer upstream behavior. |
+| [Stitch input](skills/ui-stitch-design-input/SOURCES.md) | Leonxlnx's MIT source is corroborated by the Google Stitch contribution and an attributed redistribution. The package preserves the locally adapted procedure and illustrative sample; the exact historical import event remains unknown. |
+| [Taste frontend](skills/ui-taste-frontend/SOURCES.md) | Aria's original expanded file exactly matches Leonxlnx's pinned expanded Taste source. The earlier shorter-source comparison did not identify that complete baseline. Both full MIT notices are retained; the current local adaptation is preserved rather than importing newer upstream behavior. |
 | [UI design](skills/ui-design/NOTICE.md) | Impeccable's Apache-2.0 and nested platform notice remain. The bundled screenshot helper exactly matches `modern-screenshot@4.7.0`, and its full MIT notice is now included. Remaining nested-rights, helper-security, and external-engine limitations are explicitly retained. |
 
 These source comparisons do not prove original authorship, comprehensive rights clearance, or consuming-agent behavior. No expansion is attributed to the kit's owner merely because it appeared in their configuration.
@@ -201,6 +247,8 @@ Initial verification used **Linux/WSL2, Node.js 24.20.0, and omp 18.12.6**:
 
 After restoring the three packages, the same installer regression scenarios passed again. An isolated install produced **267 managed files across 39 skill packages**; native omp startup discovered `stitch-design-input`, `ui-design`, and `design-taste-frontend` with zero messages. The restored payloads were compared against the installed originals: procedural/helper content was preserved, with only attribution/source records and the added notices changed. The screenshot helper and its full MIT notice passed exact hash checks. MCP connections, helper engines, and skill-driven task behavior were not exercised.
 
+The active Matt Pocock adoption was checked with Node.js 24.20.0 and omp 18.12.6: all 27 published upstream entries map to 24 local owners with the current pin, contributor-tagged descriptions, and byte-exact MIT notices. All 52 skill directory/frontmatter identities match; 463 relative Markdown links and 199 skill pointers resolve outside fenced examples, with historical provenance names preserved. Every repository skill file matches its installed copy, and fresh `omp read` processes load all 52 canonical skill URIs without inference requests. All four installer regression scenarios pass. A synthetic Bash helper smoke confirms denied commands do not execute, approved commands execute, progress is reported, and the secret-clearing helper unsets its variable; secret-entry TTY behavior and real task-specific wizards were not exercised.
+
 **Not verified:** MCP connectivity, provider authentication, configured model-role availability, skill behavior, other operating systems, or compatibility with other omp versions. MCP servers were disabled only for the isolated startup probe. Passing installer tests or discovering skills is not proof of end-to-end agent behavior.
 
 ## Help and maintenance
@@ -213,4 +261,4 @@ For harness installation and runtime questions, consult the [omp documentation](
 
 This is a personal collection, not a claim that every skill is original KitShift work. Preserve each skill's `SOURCES.md`, `NOTICE.md`, and `LICENSE*` files where present. Licenses and provenance vary; no repository-wide license grants additional rights over third-party material. Inclusion is not a complete legal, security, or behavioral audit.
 
-The guide structure draws on [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config), while the shared-skill organization was informed by [mattpocock/skills](https://github.com/mattpocock/skills). Their old orchestration machinery and installation scripts were not imported. README navigation and relative links follow [GitHub's README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
+The guide structure draws on [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config), while the shared-skill organization and the active adaptations mapped above draw on [mattpocock/skills](https://github.com/mattpocock/skills). Upstream plugin installers, executable runners, and compulsory orchestration were not imported. README navigation and relative links follow [GitHub's README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).

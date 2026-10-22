@@ -11,14 +11,20 @@ All local paths in this table are relative to this skill directory. Each URL bin
 | Pinned source | Local files | Adopted mechanism | Removed/replaced incompatibilities | Notice |
 |---|---|---|---|---|
 | [open-gsd/gsd-core@69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8: `gsd-core/workflows/pause-work.md`](https://raw.githubusercontent.com/open-gsd/gsd-core/69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8/gsd-core/workflows/pause-work.md) | `SKILL.md`, `references/portable-format.md` | Capture exact position, completed/partial/remaining work, decisions, blockers, observed modified files/background state and ordered required reads. | Native six-heading portable Markdown and non-overwriting three-digit sequence retained; no .planning JSON/state engine, blocking-ack ritual, WIP commit, daemon/job change or runtime timestamp command. Native Plan Mode exports proposed content only. | `LICENSE.gsd` |
+| [mattpocock/skills@5beb35b040e3de97e54fa9e386d7e42d15c295c2: `skills/productivity/handoff/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/productivity/handoff/SKILL.md) | `SKILL.md` | MODIFIED/ADAPTED | Retains exact task summary and references to existing artifacts; substitutes authorized native path and relevant privacy practice for forced temporary directory, static skill hints and unconditional redaction. | `LICENSE.matt` |
 
 ## Exact license mapping
 
+- [mattpocock/skills@5beb35b040e3de97e54fa9e386d7e42d15c295c2: `LICENSE`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/LICENSE) → `LICENSE.matt`. Full upstream MIT notice reproduced unchanged.
 - [open-gsd/gsd-core@69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8: `LICENSE`](https://raw.githubusercontent.com/open-gsd/gsd-core/69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8/LICENSE) → `LICENSE.gsd`. Full upstream MIT notice reproduced unchanged, including copyright; retrieved bytes SHA-256 `3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e`.
 
 ## Incumbent disposition and local ownership
 
 Enhance the incumbent exporter in place; preserve default .handoff naming, non-overwrite sequence and six headings with Progress nesting. Remove metadata frontmatter and dangerous receiving prompt treating snapshot Goal/Constraints as authoritative; explicitly support pause and read-only proposed export.
+
+## Companion coverage and exclusions
+
+The upstream handoff skill has no companion references. Upstream agent metadata is not imported. Existing `workflow-handoff-read` remains the separate read-only owner; this adaptation preserves the incumbent portable format and does not merge reader behavior.
 
 ## Local authored material
 

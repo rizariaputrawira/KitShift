@@ -1,0 +1,26 @@
+---
+name: code-architecture
+description: "[Matt Pocock] Design or deepen code modules and interfaces; survey architecture friction, testability or AI-navigability; compare alternative designs."
+---
+
+# Code Architecture
+
+Design deep modules: substantial behavior behind a small interface at a clean seam, improving caller leverage and maintainer locality. This skill owns architecture vocabulary and its design/survey workflows; it does not authorize implementation, testing, document changes or execution beyond the current request and native permissions.
+
+## Shared vocabulary
+
+Use these terms consistently. A **module** is anything with an interface and implementation, from a function to a tier-spanning slice. An **interface** is everything callers must know: types, invariants, ordering, error modes, configuration and performance—not merely a type signature. An **implementation** is behavior inside the module; an **adapter** is a concrete thing satisfying an interface at a seam. **Depth** is capability per unit of interface learned: deep modules hide much behavior behind a small interface; shallow modules expose nearly as much complexity as they contain. A **seam** is where behavior can be changed without editing its callers. **Leverage** is the capability callers gain from depth; **locality** is the concentration of change, bugs and verification in one place.
+
+The interface is the test surface; internal seams can support implementation tests without becoming public. Apply the deletion test: if deleting a proposed module makes complexity reappear across callers, it may earn its place; if complexity vanishes, it may be pass-through. A seam needs a real variation: one adapter alone is hypothetical, while two independently justified adapters demonstrate a real seam. Do not introduce indirection, adapters or abstractions speculatively. Good interfaces keep surface small, accept necessary dependencies explicitly, return results where practical, and hide details only when doing so creates useful depth. A mock seam is not itself a design goal.
+
+## Design and deepen modules
+
+1. Establish the requested behavior, affected callers, constraints, existing requirements/decisions, glossary language, interfaces and evidence. Separate sourced facts from assumptions; preserve accepted decisions unless an authorized decision reopens them.
+2. Identify the actual source of friction and candidate module. Describe its current interface, implementation, seam, dependencies, caller coupling, test surface and change locality. Use deletion test and actual variation to distinguish value from indirection.
+3. Choose a proportionate design. For a deepening cluster, load [deepening](references/deepening.md) to classify dependencies and test strategy. For requested alternative interface exploration, load [design it twice](references/design-it-twice.md). Recommend a small interface that hides coherent behavior, place the seam where variation actually belongs, and state what remains visible.
+4. Compare alternatives by depth/leverage, locality, seam placement, dependencies/adapters, testability and migration/caller impact. Name tradeoffs and unsupported assumptions; recommend one or a defensible hybrid. Record only a proposed design unless implementation or decision recording is authorized.
+5. Finish with candidate scope and source basis, current versus proposed interface/seam, hidden behavior, dependency strategy, expected leverage/locality, test surface, migration risks and unresolved decisions. Do not claim runtime/test proof absent observation.
+
+When asked to improve or survey codebase architecture, focus on real friction, not a comprehensive inventory. If the user names an area, inspect it; otherwise use accessible change history to prioritize frequently changed areas, widening the sample only when no hotspot emerges. Read relevant domain language and decisions, inspect representative callers and tests, and identify friction directly from source: navigation across shallow modules, duplicated policy in callers, leaked dependencies, missing behavior-level test seams or scattered change. Trace each candidate to concrete paths and examples. Apply the deletion test and treat testability as an interface property. Do not infer architecture from filenames alone or propose speculative abstractions.
+Return a concise prioritized set of candidates, each with paths, observed friction, a concrete deepening proposal, expected locality/leverage and test consequences, dependency category, confidence and any ADR tension. Explain the strongest candidate and why. Produce a standalone HTML report only when requested or materially useful, using native capabilities; otherwise report inline. For HTML, use a self-contained static file in an appropriate temporary location, accessible evidence-linked cards and before/after diagrams; avoid external dependencies/CDNs, unsafe embedded content or platform-specific opener assumptions. Do not write into the repository unless asked. Load [HTML report guidance](references/html-report.md) when HTML is requested or selected. Do not propose detailed interfaces in the initial survey; ask which candidate to explore next. A chosen candidate proceeds through the design workflow above, not an upstream grilling command.
+

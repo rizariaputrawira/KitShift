@@ -19,7 +19,7 @@ Compare a working case with the failing case, preserving known reports. Minimize
 
 State plausible falsifiable hypotheses with predictions: “If this adapter bypasses the library denial, calling the library follows the contract but this CLI path does not.” Rank by available evidence, not a forced hypothesis count. Each probe must distinguish predictions. Prefer `debug` for program state, stack, breakpoints and stepping where available and authorized; otherwise targeted source/call tracing or temporary instrumentation. Redact secret values and quote only needed signal.
 
-For deep invalid-data/call-chain failures load [root-cause tracing](references/root-cause-tracing.md). For async timing/flakiness load [condition-based waiting](references/condition-based-waiting.md). Measure actual reproduction rates only when authorized and needed; no fixed repeat counts, stress fleet or retries is implied.
+For deep invalid-data/call-chain failures load [root-cause tracing](references/root-cause-tracing.md). For async timing/flakiness load [condition-based waiting](references/condition-based-waiting.md). When a supported failure motivates a module/interface/seam redesign, load [code architecture](skill://code-architecture); redesign remains a separate authorized choice, not a prerequisite to diagnosis. Measure actual reproduction rates only when authorized and needed; no fixed repeat counts, stress fleet or retries are implied. Keep human-driven observations user-controlled, request-specific, and redact secrets before sharing; do not assume shell access, credentials, or a scripted HITL runner.
 
 ## Performance branch
 

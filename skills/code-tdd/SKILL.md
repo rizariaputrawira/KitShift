@@ -11,7 +11,7 @@ Use only when test-first/red-green-refactor is requested or approved. Ordinary r
 
 Read the requested contract, affected consumers, existing test framework and relevant glossary/decisions. Infer the public or consumer-visible seam from the actual flow; ask only if it is materially ambiguous, not for permission to test every routine seam. The existing seam must exercise the real bug/behavior, including a multi-caller interaction if that is what fails.
 
-Before writing a test, name a plausible wrong production behavior it must catch and derive the expected result independently from the requirement, a hand-worked example or known-good literal. Load [tests](references/tests.md) for seam/oracle choices and [honest tests](references/honest-tests.md) when writing or changing assertions, fixtures or helpers. If a double is necessary, read [mocking](references/mocking.md) first.
+Before writing a test, name a plausible wrong production behavior it must catch and derive the expected result independently from the requirement, a hand-worked example or known-good literal. Load [tests](references/tests.md) for seam/oracle choices and [honest tests](references/honest-tests.md) when writing or changing assertions, fixtures or helpers. If a double is necessary, read [mocking](references/mocking.md) first. When the shape of the interface/seam itself is in question, load [code architecture](skill://code-architecture) for shared vocabulary and design principles.
 
 ## One vertical cycle
 

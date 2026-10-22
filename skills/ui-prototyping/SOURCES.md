@@ -12,15 +12,10 @@ source. Local capability names do not change upstream ownership.
 
 | Immutable upstream path | Distributed local file | Baseline relationship | Current modifications |
 |---|---|---|---|
-| [skills/prototype/SKILL.md](https://github.com/emilkowalski/skills/blob/e8a175de22ae1e49370fc144c1f3bb9aeedf988d/skills/prototype/SKILL.md) | `SKILL.md` | MODIFIED/ADAPTED | Metadata, explicit-only exposure, attribution, isolation, and selection authority retained. Requested counts/axes govern comparisons; empty-project work does not skip direction planning or grant setup authority; necessary local checks are distinguished from broader effects, and actual runtime/Playwright MCP verification is required for authorized implementation. |
-| [skills/prototype/PICKER.md](https://github.com/emilkowalski/skills/blob/e8a175de22ae1e49370fc144c1f3bb9aeedf988d/skills/prototype/PICKER.md) | `PICKER.md` | MODIFIED/ADAPTED | Optional markup/styles replace mandatory class/structure guidance. Reference wiring uses synchronous DOM mounting with optional cleanup/replay callbacks, valid initial URL fallback, unchanged-selection preservation, focused keyboard shortcuts and guards, pressed-state buttons, explicit button types, conditional replay, and host teardown. |
-
-Baseline comparison: omp-docflow commit
-`e850b6a07a55bc893d97c786928c45906952bbe7`. Modified-file diffs and matching
-expression establish the adaptation boundary where stated, not an import date.
-No upstream executable, service, generator or model/tool permission is adopted.
-
-## Local workflow and picker corrections
+| [emilkowalski/skills@e8a175de22ae1e49370fc144c1f3bb9aeedf988d: `skills/prototype/SKILL.md`](https://github.com/emilkowalski/skills/blob/e8a175de22ae1e49370fc144c1f3bb9aeedf988d/skills/prototype/SKILL.md) | `SKILL.md` | MODIFIED/ADAPTED | Explicit-only exposure, isolation, selection authority, requested-count/comparison boundaries, local checks, and native permission constraints retained. |
+| [emilkowalski/skills@e8a175de22ae1e49370fc144c1f3bb9aeedf988d: `skills/prototype/PICKER.md`](https://github.com/emilkowalski/skills/blob/e8a175de22ae1e49370fc144c1f3bb9aeedf988d/skills/prototype/PICKER.md) | `PICKER.md` | MODIFIED/ADAPTED | Picker markup/accessibility mechanics, URL selection, valid fallback, state preservation, focused keyboard guards, optional replay and cleanup retained. |
+| [mattpocock/skills@5beb35b040e3de97e54fa9e386d7e42d15c295c2: `skills/engineering/prototype/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/prototype/SKILL.md) | `../code-prototyping/SKILL.md` | MODIFIED/ADAPTED | Shared question-led prototype contract and non-shipping boundary are owned by `code-prototyping`; this skill covers only UI variations. |
+| [mattpocock/skills@5beb35b040e3de97e54fa9e386d7e42d15c295c2: `skills/engineering/prototype/UI.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/prototype/UI.md) | `SKILL.md`, `PICKER.md` | MODIFIED/ADAPTED | Host-page-first placement, radical variants, URL selection, accessible switcher, evidence and authorized promotion principles; local authorization replaces broader automatic effects. | `LICENSE.matt` |
 
 Requested counts and comparison axes, including palette/copy-only comparisons, replace the arbitrary five-variant ceiling and silent removal of converged directions. Standalone work still requires implementation scope and plans directions before building. Planning remains no-write/no-execution; implementation includes proportionate local verification under native permissions, not automatic publication, new exposure, integration changes, or dependency installation.
 

@@ -1,5 +1,5 @@
 ---
-name: stitch-design-input
+name: ui-stitch-design-input
 description: Create or refine a proposed Google Stitch DESIGN.md from the project brief and observed context, only when requested.
 ---
 

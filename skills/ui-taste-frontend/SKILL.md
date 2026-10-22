@@ -1,5 +1,5 @@
 ---
-name: design-taste-frontend
+name: ui-taste-frontend
 description: "[Taste Skill] Use selectively for landing pages, portfolios, and marketing redesigns needing distinctive, brief-led frontend design; not dashboards or native app UI."
 ---
 

@@ -1,38 +1,18 @@
 # Sources and adaptation — brainstorming
 
-## Immutable adopted sources
+## Exact pinned sources
 
-- **M** — `https://github.com/mattpocock/skills` at immutable revision `d81f3a183412e71a5b1e84ca21bc1a35eea03a60`; MIT; notice `LICENSE.matt`.
-- **S** — `https://github.com/obra/superpowers` at immutable revision `8ca22dba9a94f28898bbce59f2537ff4d87c747d`; MIT; notice `LICENSE.superpowers`.
+Source repository: [mattpocock/skills](https://github.com/mattpocock/skills), revision `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, MIT; full upstream notice retained unmodified in `LICENSE.matt`.
 
-The files below are authored adaptations, not upstream executable distributions. URLs resolve the exact inspected pin, not main/next. License files retain the full upstream MIT text; no scanner, dependency, script, installer, hook, engine or provider configuration is distributed. `SOURCES.md` itself is an original provenance synthesis for these local files.
-
-|Exact pinned upstream path|Local repository-relative file|Substantive adopted mechanism|Included notice|
+| Exact upstream path | Local repository-relative file | Adopted mechanism | Divergence / notice |
 |---|---|---|---|
-|[`skills/brainstorming/SKILL.md`](https://raw.githubusercontent.com/obra/superpowers/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/brainstorming/SKILL.md)|`config/agent/skills/workflow-brainstorming/SKILL.md`|Intent write-back from supplied facts; spike/bounded/architectural path-specific approval and design self-review.|`LICENSE.superpowers`|
-|[`skills/productivity/grilling/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/skills/productivity/grilling/SKILL.md)|`config/agent/skills/workflow-brainstorming/references/stress-test.md`|Decision tree, settled-prerequisite frontier, recommended independent questions in rounds and frontier recomputation.|`LICENSE.matt`|
-|[`LICENSE`](https://raw.githubusercontent.com/mattpocock/skills/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/LICENSE)|`config/agent/skills/workflow-brainstorming/LICENSE.matt`|Full upstream notice, unmodified retrieved text.|`LICENSE.matt`|
-|[`LICENSE`](https://raw.githubusercontent.com/obra/superpowers/8ca22dba9a94f28898bbce59f2537ff4d87c747d/LICENSE)|`config/agent/skills/workflow-brainstorming/LICENSE.superpowers`|Full upstream notice, unmodified retrieved text.|`LICENSE.superpowers`|
+|[`skills/productivity/grilling/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/productivity/grilling/SKILL.md)|`skills/workflow-brainstorming/references/stress-test.md`|Decision tree, settled-prerequisite frontier, independent questions in recommended rounds, fact-finding before dependent questions, recomputation to convergence.|No mandatory subagent dispatch, hidden authority or blanket approval ritual. Native questions and existing approval boundaries govern. `LICENSE.matt`.|
+|[`skills/productivity/grill-me/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/productivity/grill-me/SKILL.md)|`skills/workflow-brainstorming/SKILL.md`, `references/stress-test.md`|Explicit user request to grill routes into the shared interview/stress-test process.|Merged; no duplicate skill alias or second interview. User-supplied decisions and direct authorization remain intact. `LICENSE.matt`.|
+|[`skills/engineering/grill-with-docs/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/grill-with-docs/SKILL.md)|`skills/workflow-brainstorming/SKILL.md`, `references/stress-test.md`|Interviewing coupled to domain modeling and durable glossary/decision records.|Merged optional domain-documentation branch links `skill://docs-domain-modeling`; no second interview, fixed formats, automatic writes or source tool aliases. `LICENSE.matt`.|
+|[`skills/engineering/to-spec/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/to-spec/SKILL.md)|`skills/docs-specification/SKILL.md`|Existing-context synthesis, source/consumer inspection, seams and structured spec decisions.|Independent user-invoked owner; no re-interview, forced publication or doc-first gate. `LICENSE.matt`.|
+|[`skills/engineering/to-tickets/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/to-tickets/SKILL.md)|`skills/workflow-ticket-planning/SKILL.md`|Tracer-bullet outcomes, blockers, frontier and wide-refactor exception.|Independent user-invoked owner; tracker mutation requires authorization. `LICENSE.matt`.|
+|[`skills/engineering/wayfinder/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/wayfinder/SKILL.md)|`skills/workflow-wayfinder/SKILL.md`|Large-work destination map, fog/frontier, decision tickets and one-at-a-time advancement.|Distinct planning map, not build-ticket planning; no mandatory subagents, branches, pushes or tracker writes. `LICENSE.matt`.|
+|[`skills/engineering/setup-matt-pocock-skills/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/setup-matt-pocock-skills/SKILL.md)|`skills/workflow-project-setup/SKILL.md`|Discover/configure tracker, labels and domain-doc conventions.|Optional setup; canonical owners and authorized changes only. `LICENSE.matt`.|
+|[`LICENSE`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/LICENSE)|`skills/workflow-brainstorming/LICENSE.matt`; each distinct adapted skill's `LICENSE.matt`|Full upstream MIT notice, unmodified.|No upstream tool/agent metadata imported.|
 
-## Local modifications and removed incompatibilities
-
-Removed incumbent unsupported runtime-magic keyword assertions and keyword-conditioned delegation; upstream visual server, forced writing-plans transition, auto-commit, universal TDD, tracker tasks and provider directives. Preserved path-specific approval; native Plan Mode owns its single approval route. Adopted-project document destinations now resolve through the shared docs-engineering catalog/location contract; pre-adoption owners are not relocated implicitly. The former independent dated-spec fallback is removed.
-
-All procedures obey current higher-priority OMP/user permissions. Their instructions do not create a sandbox, model binding, execution authorization or approval API. References load only for their stated branch; shared owners are linked rather than cloned. Missing material source/evidence remains a gap, not a fabricated pass. These adaptations preserve the approved requested behavior rather than importing upstream engines.
-
-## Incumbent preservation
-
-The local spike/bounded/architectural boundaries from the prior `config/agent/skills/workflow-brainstorming/SKILL.md` remain the starting contract. Its runtime keyword assertions and brand-specific new-file path are not retained. Historical incumbent bytes belong to the parent recovery receipt, not a second active owner.
-
-## Proportionate-workflow revision — 2026-10-21
-
-Path selection now follows evidenced risk and uncertainty rather than preferring
-the heavier process. Ordinary clarification can batch related independent material
-decisions through the current native interface while keeping dependent questions
-sequential. Stress-test convergence reconciles existing authority without an
-automatic extra approval round. Upstream pins, notices and the explicit
-stress-test trigger are unchanged. Source edits do not establish agent behavior.
-
-## Evidence limits
-
-Pinned text and full repository LICENSE were retrieved read-only for this adaptation. No target source was executed and no runtime, build, test, lint, format, native discovery or compatibility gate was run while drafting. Source provenance is not behavioral assurance. Historical baseline and later actual verification belong to the integration owner's evidence record.
+The interview skills were merged into the incumbent brainstorming owner; no compatibility aliases remain. Brainstorming retains its existing Superpowers attribution and `LICENSE.superpowers`; the pinned Matt source and notice remain separate. Existing path-specific native authority and proportionate spike/bounded/architectural choices remain. New spec, ticket-planning, wayfinder and setup owners each carry their own exact source mappings and notice. Upstream scripts/templates/`agents/openai.yaml` are not distributed.

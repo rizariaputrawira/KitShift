@@ -1,5 +1,5 @@
 ---
-name: swift-development
+name: code-swift-development
 description: "[Emil Kowalski] Write, review, or migrate Swift; diagnose concurrency errors, hangs, data races, retain cycles, or performance problems. Also use when explicitly requested as write-swift."
 ---
 

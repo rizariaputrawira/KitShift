@@ -14,13 +14,21 @@ All local paths in this table are relative to this skill directory. Each URL bin
 | [open-gsd/gsd-core@69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8: `gsd-core/workflows/extract-learnings.md`](https://raw.githubusercontent.com/open-gsd/gsd-core/69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8/gsd-core/workflows/extract-learnings.md) | `SKILL.md`, `references/learning-extraction.md` | Evidence-attributed decisions, contextual lessons, applicable candidate patterns and surprises; record missing artifacts. | No required PLAN/SUMMARY dialect, automatic overwrite/LEARNINGS/state updates, estimation-calibration command or graduation; recurrence and promotion need observed evidence and explicit authorization. | `LICENSE.gsd` |
 | [open-gsd/gsd-core@69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8: `gsd-core/templates/retrospective.md`](https://raw.githubusercontent.com/open-gsd/gsd-core/69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8/gsd-core/templates/retrospective.md) | `references/learning-extraction.md` | Review what shipped, worked and caused inefficiency; cross-milestone trends require actual comparable observations. | No fabricated model-mix/cost/coverage table or automatic living-policy update; use existing owner and explicit recommendation boundary. | `LICENSE.gsd` |
 
+
+## Matt Pocock source mapping
+
+| Pinned source | Local files | Adopted / divergence |
+|---|---|---|
+| [mattpocock/skills@5beb35b: `skills/engineering/retro/SKILL.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/retro/SKILL.md) | `SKILL.md`, `references/learning-extraction.md` | Session evidence review across navigation, checks, standards, global guidance, tools, no-ops and information access. Native source access only; no mandatory foreign writing skill, blanket findings, or automatic environment edits. |
+
+Exact Matt MIT notice reproduced unchanged in `LICENSE.matt`. Upstream source companion files: none; upstream references are inline in the skill. Existing GSD notices and provenance remain intact.
 ## Exact license mapping
 
 - [open-gsd/gsd-core@69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8: `LICENSE`](https://raw.githubusercontent.com/open-gsd/gsd-core/69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8/LICENSE) → `LICENSE.gsd`. Full upstream MIT notice reproduced unchanged, including copyright; retrieved bytes SHA-256 `3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e`.
 
 ## Incumbent disposition and local ownership
 
-Replace the incumbent inspiration-only citation with concrete evidence-grounded GSD adaptations. Retain recommendation-only permissions. No Matt source text is adapted here, so the old floating Matt link is removed and no Matt notice is distributed in this skill.
+Replace the incumbent inspiration-only Matt citation with the pinned retro skill mapping above. Matt review dimensions are adapted alongside GSD evidence extraction; retain recommendation-only permissions. `LICENSE.matt` preserves the exact upstream notice.
 
 ## Local authored material
 

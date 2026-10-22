@@ -1,26 +1,15 @@
-# Stress-test: ready-frontier rounds
+# Stress-test and interview: ready-frontier rounds
 
-Load only for an explicit request to grill or stress-test a decision, plan or idea. This is a decision dependency procedure, not an interview quota or permission to implement.
+Load for an explicit request to grill/stress-test a decision, plan or idea, or when unresolved consequential choices require clarification. This is a decision dependency procedure, not an interview quota or permission to implement.
 
 ## Build the decision tree
 
-1. State the outcome under examination and the already fixed constraints. Read the actual proposal and the relevant canonical sources.
-2. Separate **facts to discover**, **settled choices**, and **unsettled consequential choices**. For each unsettled choice, name its prerequisites and the downstream choices it controls. Do not turn a discoverable implementation fact into a user preference question.
-3. Resolve factual prerequisites with authorized inspection. A pending source read or missing material fact leaves that branch unavailable. Other independent ready branches may proceed; a dependent question must wait.
+1. State the outcome under examination and fixed constraints. Read the proposal and relevant canonical sources. When documentation terminology, relationships or domain decisions are part of the choice, load `skill://docs-domain-modeling`; use its canonical glossary/ADR ownership and formats, not a parallel modeling procedure.
+2. Separate facts to discover, settled choices, and unsettled consequential choices. For each open choice, name prerequisites and downstream decisions it controls. Never ask the user to supply a fact available from repository/tools. Resolve factual prerequisites through authorized inspection; a pending fact blocks dependent questions, not independent ready branches.
+3. The frontier contains only choices whose prerequisites are settled. For every ready consequential choice, provide a numbered question, real options/trade-offs and evidence-backed recommendation. Ask the whole independent frontier in one round; dependent questions wait. Use a concise format:
+   - **Q1 — Decision:** choice and why it matters.
+   - **Recommendation:** preferred option, evidence, and material cost/constraint.
+4. Preserve facts and decisions the request already supplies. Do not convert an explicit settled instruction into a question merely to fill a round. After answers, record settled choices, resolve newly relevant facts, prune invalid alternatives and recompute the frontier. Surface contradictions with fixed constraints rather than silently deciding precedence.
+5. Stop when no material decision remains unexplored or assumed. Write back the shared outcome, settled choices, constraints, exclusions and remaining uncertainty. A material unavailable source blocks only its dependent decision; name the source and consequence exactly.
 
-The **frontier** contains only choices whose prerequisites are settled. Example: retention policy may be ready after legal constraints are read; archive format is not ready if the retention/export requirement remains open. “What database do we use?” is not a choice when the existing contract already fixes it.
-
-## Ask one ready round
-
-For each ready consequential choice, provide a numbered question, the real options/trade-off, and a recommended answer justified by evidence. Include only questions independent of the other open questions in this round:
-
-- **Q1 — Decision:** the remaining choice and why it matters.
-- **Recommendation:** preferred option, reason, and material cost/constraint.
-
-A round can contain one question. If a question needs the answer to Q1, reserve it for the next round. Ask the user for decisions, not facts available from the repository or tools. Supplied decisions remain supplied; do not reopen them merely to fill a round.
-
-## Recompute, then converge
-
-After the answers, record the settled choices in the discussion, resolve newly relevant facts, prune invalid alternatives and recompute the frontier. Surface contradictions with fixed constraints instead of silently choosing precedence. Stop when no material decision branch remains unexplored or assumed. If a material source/decision is unavailable, name the exact blocked branch and unresolved consequence.
-
-Write back the shared outcome, settled choices, constraints, exclusions and remaining uncertainty. Reconcile the answers with the current request and native authorization. Seek a decision or approval only for a remaining material choice, changed scope/consequence outside current authority, or an existing native approval boundary. Do not add another approval after the user's answers already settle authorized scope. An empty frontier means no material question remains; it neither grants new authority nor revokes authority already supplied. Use existing design owners for any authorized write.
+An empty frontier is not permission to act; it neither grants new authority nor revokes authority already supplied. The user's direct request authorizes necessary work in its stated scope. Seek a decision only for a remaining material choice, changed scope/consequence, or native approval boundary; do not add a second approval after answers settle authorized scope. Use existing design/document owners for authorized writes. Documentation creation/publishing is authorized only where requested or otherwise within current authority. Plan Mode returns proposed content without checkout writes. If the explicit choice includes domain modeling and authoritative records, use `skill://docs-domain-modeling` for that branch; do not make a separate interview out of documenting answers.
