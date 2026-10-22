@@ -1,0 +1,21 @@
+# Reusable template, not a classified project or evidence of completeness.
+# Replace provisional values after inspection; preserve existing canonical owners.
+# Field contract: references/manifest.md. Add only justified selected/omitted concepts.
+version: 1
+project:
+  # After authorized completed adoption only:
+  # documentation-location-standard: catalog-v1
+  types:
+    - software
+  platforms: []
+  capabilities: []
+  profile: lean
+  criticality: unknown
+  security:
+    data-sensitivity: unknown
+    exposure: unknown
+    rationale: "UNRESOLVED: inspect repository data, exposure, trust boundaries and obligations before selecting risk coverage."
+documents: {}
+# Resolve local paths through references/locations.md and catalog.yaml.
+# Setup also creates templates/navigator.md at the catalog navigator path.
+# Optional traceability uses the catalog traceability-map path or a reviewed source.

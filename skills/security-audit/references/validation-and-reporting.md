@@ -1,0 +1,23 @@
+# Source challenge and bounded reporting
+
+The shared [source-review procedure](skill://docs-engineering/references/security.md#source-review-procedure), [evidence and finding decisions](skill://docs-engineering/references/security.md#evidence-and-finding-decisions) and [reporting and completion](skill://docs-engineering/references/security.md#reporting-and-completion) own the common procedure. Use actual native role/result schemas and the requested output format, not a second findings schema here.
+
+## Challenge every candidate root cause
+
+The controller consolidates stable local candidate identifiers and challenges each current basis. Reread decisive current source, verify locations and accepted input/interface shape, reconstruct strongest authentication/authorization/normalization/lifecycle/framework controls and every prerequisite, then attempt disproof. Supply relevant architecture/coverage context, selected companion rules and original evidence when delegating; another reviewer's conclusion is not source authority.
+
+Retain the attacker capability, invariant, real source/caller trace, preconditions, strongest controls, credible bounded impact, missing facts and scope for each candidate. Confirmed requires complete evidence for the claimed source-visible consequence, not runtime exploitation. Needs-validation names decisive missing facts and the evidence that would resolve them; rejected retains the source-backed disproof. Account for every candidate, including unresolved ones, without mandatory custom fields or arrays. Unsupported guesses do not establish severity.
+
+Apply [delegation and challenge](skill://docs-engineering/references/security.md#delegation-and-challenge) when separate review is explicitly required or a concrete independence need warrants it. Otherwise the controller may challenge directly, without labeling that work independent. Unavailable required independence is a limitation, never a pass. Material changes to trace, impact, severity or evidence method require renewed source challenge before accepting the strengthened basis; a new root cause receives its own identifier. Carry previous records only as prior evidence subject to current checking.
+
+## Runtime evidence is a separate authorized branch
+
+Reviewers never execute. Before any separately authorized runtime evidence, read and apply [Separate authorization for runtime evidence](skill://docs-engineering/references/security.md#separate-authorization-for-runtime-evidence). The executor must demonstrate OS containment, dummy data, no real credentials or home state, no external/shared network (isolated loopback only if required), read-only target/toolchain, confined writes and resource/time limits. Perform only the named minimum check; no live probing, shared-service stress, dependency installs or expanded payload campaign. Missing authorization or containment prerequisites leaves the review source-only and runtime evidence unverified. Read-only instructions or a role name are not containment.
+
+## Derive the report, never strengthen it
+
+Report explicit authorized scope and source basis; the evaluator/source/operation basis actually observed and its unverified parts; inspected/uninspected/unavailable/deferred/out-of-scope coverage; coverage challenge performed and remaining gaps; every candidate identifier with its decision or unresolved state; source versus separately authorized contained runtime evidence and exact impact/severity basis; precise needs-validation facts and safe next evidence; rejected claims with disproof sufficient to preserve accounting; separate hardening observations and positive controls. Do not claim exact-file reviewer provenance, model identity or sandbox guarantees beyond observed evidence. Use [findings and assurance evidence](skill://docs-engineering/references/security.md#findings-and-assurance-evidence) for assurance claims.
+
+No candidate disappears because it failed a confidence threshold. An incomplete review can report valid bounded decisions, but must list unresolved candidates and cannot claim the whole assessment passed or the rest is safe. Identify any required independence not obtained. Prose cannot upgrade decision, severity, reachability or evidence method. No fixed home report files, required scripts/validators, automatic posting/commit, or synthetic assurance when there are no findings.
+
+Remediation recommendations name the invariant, narrow last-trusted-decision fix and meaningful boundary regression route. `Fixed` requires current correction basis and finding-specific successful remediation evidence; a code edit, author assertion, unrelated passing test or old run cannot close it.

@@ -1,0 +1,11 @@
+.handoff/
+.env
+.env.*
+!.env.example
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.bak*
+node_modules/
+.DS_Store

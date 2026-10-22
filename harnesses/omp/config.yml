@@ -1,0 +1,86 @@
+symbolPreset: unicode
+composer:
+  shape: band
+theme:
+  dark: onyx
+  light: onyx
+modelRoles:
+  smol: openai-codex/gpt-6-luna:low
+  default: openai-codex/gpt-6.1-sol:medium
+  slow: openai-codex/gpt-6-astra:high
+cycleOrder:
+  - smol
+  - default
+  - slow
+modelRoleStorage: global
+statusLine:
+  preset: default
+  sessionAccent: true
+  transparent: false
+  compactThinkingLevel: true
+  showHookStatus: true
+  separator: pipe
+  contextLine: annotated
+hideThinkingBlock: false
+tier:
+  openai: none
+  advisor: none
+retry:
+  enabled: true
+tools:
+  approvalMode: yolo
+eval:
+  py: false
+  js: false
+bash:
+  patterns:
+    - match: git *push *--force*
+      approval: prompt
+    - match: "* git *push *--force*"
+      approval: prompt
+    - match: git *push *-f*
+      approval: prompt
+    - match: "* git *push *-f*"
+      approval: prompt
+    - match: git *reset *--hard*
+      approval: prompt
+    - match: "* git *reset *--hard*"
+      approval: prompt
+    - match: git *clean *-*f*
+      approval: prompt
+    - match: "* git *clean *-*f*"
+      approval: prompt
+dev:
+  autoqaConsent: denied
+  autoqa: false
+terminal:
+  showProgress: false
+power:
+  sleepPrevention: idle
+features:
+  unexpectedStopDetection: mechanical
+tui:
+  codexResetFireworks: false
+display:
+  shimmer: classic
+  showTokenUsage: true
+plan:
+  enabled: true
+  defaultOnStartup: false
+contextPromotion:
+  enabled: false
+extendedContext: false
+compaction:
+  enabled: true
+codexResets:
+  autoRedeem: "no"
+telemetry:
+  otlpExportEnabled: false
+task:
+  showResolvedModelBadge: true
+setupVersion: 2
+skills:
+  enableAgentsUser: false
+  enableAgentsProject: false
+browser:
+  enabled: false

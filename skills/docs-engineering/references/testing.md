@@ -1,0 +1,12 @@
+# Verification information
+
+## Strategy plan and cases
+Strategy ties product/quality/security risks to test levels, environments, data safety, platform matrix and evidence approach. Plan coordinates scoped objectives/owners/methods/environments, dependencies, entry/exit and not-run/blockers. Cases capture rationale/source requirement or risk, preconditions/input, expected observable outcome, failure/negative/boundary cases and reproducible method. Existing source tests can be canonical cases; no recopying test bodies. Reuse `code-tdd` when test-first requested, not a new test workflow or automatic TDD invocation from the artifact alias.
+
+## Specialized verification
+Acceptance tests verify behavioral acceptance; performance tests use actual NFR workload/environment/window/threshold, never invented budgets; security tests target identified threats/controls/trust and include denied/failure paths; platform compatibility tests separate declared support from observed OS/browser/device coverage. Security review is complementary, not a substitute for required runtime checks. Platform-specific scope requires platform-specific evidence. Test intent or generated cases cannot count as executed verification.
+
+## Results summary and defects
+Verification-report records inspected scope/basis/revision, actual command/method/platform/environment/time, exit/result/evidence, not-run areas and blockers. Test-summary aggregates precise executed scope/results/limitations and release readiness without inflating coverage. Defect-register links reproduction/impact, owner/disposition, changed basis and remediation-specific successful retest before fixed status. A test without rationale is an audit question requiring inspection, not automatic invalidity. Unrelated/stale results and worker assertions do not prove acceptance. Updated requirements/code/platform/risk or verification basis triggers scoped retest/review, not forged success.
+
+For acceptance-to-observable-evidence guidance, use `skill://workflow-delivery/references/verification.md` when relevant and enabled. Its proof procedure can be used without activating documentation-first delivery or a pre-code baseline. This reference owns verification information and canonical case/report reuse, not another execution gate or engine. Requested test-first alone routes to `skill://code-tdd`; ordinary regression coverage does not force it.

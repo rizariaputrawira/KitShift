@@ -1,0 +1,15 @@
+# Reusable empty map. Populate only inspected project IDs/anchors and links.
+# Contract and endpoint table: references/traceability.md.
+version: 1
+nodes: {}
+links: []
+# Node fields: kind, source, scope; optional requirement security and platforms.
+# Kinds: need, product-requirement, requirement, architecture, decision, design,
+# implementation, threat, control, test, review, evidence, finding.
+# Evidence also requires result (passed/failed/not-run), observed-at (quoted),
+# basis, and platforms when verification is platform-specific.
+# Finding disposition: confirmed/needs-validation/rejected; confirmed has open/fixed.
+# Fixed requires current successful remediation-specific evidence, not a report claim.
+# Each link has from, relation, to. Relations: derives-from, realized-by, verified-by,
+# evidenced-by, mitigated-by, supersedes, related-to. No duplicate or cyclic derivation
+# or supersession facts; keep manifest-owned supersession out of this map.

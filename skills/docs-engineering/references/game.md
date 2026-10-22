@@ -1,0 +1,18 @@
+# Game information ownership
+
+## Vision and player behavior
+Vision identifies intended experience/audience/outcomes and scope. GDD synthesizes game design and links subordinate owners. Core loop describes player actions, feedback/reward and repetition/progression; mechanics specify rules/preconditions/outcomes/edges; systems specify interacting state and invariants. Use a lean GDD or existing sections for offline indie scope where sufficient. Rules constrain AI changes; design intent is separate from observed playtests. Changes to loop/rules/systems trigger their scoped acceptance and implementation review.
+
+## Content and production direction
+Levels own playable space/objective/progression and level acceptance. Narrative/world owns authored fiction/continuity and chronology; characters own roles, traits and narrative/mechanic behavior. These may be meaningful sections of one content owner only when genuinely shared. Art and audio have their own production acceptance/pipeline rights, format/performance/fidelity constraints, asset provenance and review. Combine only if same actual owner/lifecycle; game audio is not automatically governed by visual tokens. UI/UX reuses PRODUCT.md, DESIGN.md and approved composition, not a parallel game visual system. Platform requirements govern actual console/mobile/desktop distribution/accessibility/compatibility deltas, not invented certification.
+
+## Economy progression and balance
+Economy records currencies/sources/sinks/transfers/persistence and authority/abuse invariants. Progression records unlock/advancement rules; balance records tunable values, hypothesis, metric/context and verification; balance-change-log records actual versioned adjustments and rationale/evidence. These can be same-owner sections but not undocumented aliases discarding distinctions. Compare current configuration to intended values; never invent thresholds or successful playtest outcomes. Economy integrity changes load server/persistence/security context, not just GDD.
+
+## Playtests and telemetry
+Playtest plan owns hypotheses, actual eligible cohort/context, method/consent/privacy, observable acceptance and analysis plan. Report owns observed sessions/results, basis, limitations and interpretation; planned evidence is not observed evidence. Telemetry owns event semantics/purpose/minimization/consent/retention/access, signal-to-design rationale and implemented collection. Treat qualitative results honestly; no invented players or statistical claims. A balance task excludes unrelated narrative/art unless a real dependency is demonstrated.
+
+## Persistence networking and live service
+Save/persistence owns schema/version/compatibility, integrity, atomicity, migration/recovery and expected failure behavior for local or online state. Multiplayer/networking owns client/server authority, principals/trust, synchronization/reconciliation, replay/idempotency, latency/disconnection and malicious-client acceptance. Live ops owns actual schedule/content/event/service responsibility, safety, rollback/monitoring/incident evidence. Localization owns supported languages, string/content/format/locale constraints and translation/test provenance; it is not contingent on a live backend.
+
+Technical-design (including game technical design alias) owns implementation decisions and links these game requirements. Accounts, backend, multiplayer, persistent economy, updates or live service trigger security and operations proportionate to actual trust/data/exposure. Offline save/load still has compatibility/integrity risk. Mobile games compose [mobile](mobile.md#shared-mobile-requirements), not duplicate behavior owners.

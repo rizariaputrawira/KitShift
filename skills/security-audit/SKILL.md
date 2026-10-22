@@ -1,0 +1,17 @@
+---
+name: security-audit
+description: "[Cloudflare] Use only for an explicitly bounded implementation-level security audit or deep security review."
+---
+
+# Bounded source-led security audit
+
+Adapted from Cloudflare's pinned audit procedures; [SOURCES.md](SOURCES.md) records file mappings and removals, and [LICENSE.cloudflare](LICENSE.cloudflare) retains the full notice. This skill does not authorize a pen test, execution, new engine or report-file creation.
+
+1. Establish explicit audit authorization, target/source basis, boundaries, requested outcome and available evidence. A focused diff belongs to `security-review`; external adoption belongs to `security-intake`. Loading a companion does not expand scope.
+2. Read [reconnaissance](references/reconnaissance.md). Map actors, assets, ordinary authority, entry surfaces, strongest controls, trust crossings and lifecycle variants. The controller owns an evidence-backed coverage record, reusing existing security documentation when sufficient; no fixed fleet, six-phase engine or new task database.
+3. Read [attack classes](references/attack-classes.md), then only applicable domain companions. Select by actual trust-sensitive boundary, not language/package names. Mark inspected, uninspected, unavailable and out-of-scope coverage explicitly.
+4. Read [hunting](references/hunting.md). Inspect directly or, when allowed and useful, assign coherent boundary investigations through actually available native source-review roles. Delegated reviewers do not execute, edit targets, fetch targets or network resources, inspect credentials, install or delegate. Use [delegation and challenge](skill://docs-engineering/references/security.md#delegation-and-challenge) when assigning work or deciding whether separate staffing is needed.
+5. Read [validation and reporting](references/validation-and-reporting.md) and apply the shared [evidence and finding decisions](skill://docs-engineering/references/security.md#evidence-and-finding-decisions). Challenge every candidate against current source and strongest controls. Separate discovery, challenge or coverage reviewers are conditional on explicit requirements or concrete independence needs, not universal phases. Controller challenge is not independent review; unavailable required independence is a stated limitation, not a pass.
+6. Report bounded decisions, rejected claims, precise needs-validation facts, undisposed candidates and actual coverage gaps using the native role/result contract and requested output format. No report forest, automatic file writes, Node validators or custom record schema. Existing document owners receive records only with authorized writes.
+
+Source confirmation requires complete evidence for the bounded source-visible consequence, never a claim of runtime exploitation. Unknown decisive runtime/model/deployment facts remain needs-validation. This audit is source-only: no target execution or editing, target/network fetching, credentials, installs or live probing. Only a separately authorized executor with demonstrated OS containment can perform a named minimum dummy-data check under the [runtime evidence requirements](skill://docs-engineering/references/security.md#separate-authorization-for-runtime-evidence); if unavailable, remain source-only with runtime evidence unverified. No availability stress, shared services, real credentials, payload expansion or mock/scanner fallback.

@@ -1,0 +1,17 @@
+# Release and operations information
+
+## Environment deployment and configuration
+Environment records actual runtime/support topology, access boundary and nonsecret prerequisites. Deployment owns procedure, dependencies, sequencing/health checks and observed target; architecture deployment-view owns structural rationale. Configuration inventory lists nonsecret names, meaning, defaults only when known, validation and owner; never secret values. Planned environment parameters stay unresolved until sourced. Changes to topology/config/dependency/deployment trigger scoped review; a deployment plan does not require already passing release tests to be drafted.
+
+For documentation-first delivery, prepare applicable intended topology, nonsecret configuration and deployment constraints before implementation, clearly separating plans/unknown targets from observed environments. Required unresolved implementation-affecting release facts block readiness; do not invent servers or deployment success.
+
+## Migration rollback and release
+Migration owns source/target schema/state, compatibility, ordering, data-loss/backfill/recovery constraints and test route. Rollback owns trigger/authority, safe reversal and irreversible effects; do not assume rollback is feasible from a reversible code diff. Release plan coordinates actual scope/channel/owners/evidence/approvals. Release notes are user-relevant shipped changes; changelog preserves versioned history. Platform/store requirements record official mutable policy/review date, app-specific applicability and submitted/signed/store outcome evidence; checklist completion is not approval. Scope/schema/channel/policy or release contents changes trigger their owners.
+
+## Runbook and observability
+Runbook addresses actual operators: symptom/impact, safe diagnosis, permissions/hazards, escalation, mitigation/recovery/rollback and verification. Observability owns signal/alert schema/purpose/measurement/action and retention/access without sensitive logging. SLA/SLO entries identify genuinely adopted source/authority, service boundary, target/window/measurement; separate contractual promise from internal objective. Inspect instrumentation and operational evidence; no invented environments, service promises or on-call identities.
+
+## Recovery and incidents
+Backup/restore describes important state/retention/custody/access, backup verification and actual restore route/evidence. Disaster recovery adds system-wide loss scenario/dependencies/recovery priority, adopted RPO/RTO only when sourced and observed rehearsal gaps. Sections may share owner, not substitute backup success for restore success. Incident-response owns detection/triage/containment/escalation/communications/evidence safety and recovery responsibilities. Postmortem owns actual observed timeline/impact/contributing conditions and accountable actions; hypotheses remain labeled. Changes to state/recovery targets, incidents or support responsibilities trigger review. Without operated surfaces, explain omission rather than create runbooks; risk and real client obligations still govern selection.
+
+Prepare applicable release, migration/rollback and operator/recovery procedures before code when they constrain implementation. Record actual target, release, incident and restore results only after relevant observations, never from a plan or unrelated passing log. Unknown SLA/SLO/RPO/RTO values and restore outcomes stay explicit. No operated surface means justified omission, not fictional service obligations.
