@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added a user-facing `SKILL-USAGE.md` with use cases, invocation labels, prompts, and expected results for all 52 skills, plus five Mermaid decision/data-flow diagrams. The hypothetical booking-product example keeps optional platform branches and permission boundaries explicit rather than prescribing an all-skills pipeline.
 - Expanded README documentation navigation and source-family/license references using KitShift's package-local evidence. Distinguished adapted material, local guidance, research-only inputs, mixed notices, and unresolved provenance/downstream-license gaps; no project-wide license or blanket redistribution grant was added.
 - Adapted all 27 active `mattpocock/skills` packages at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, merging overlapping disciplines and adding distinct domain-prefixed capabilities. Descriptions use Matt Pocock provenance tags or retain combined contributor tags; per-owner source maps and full MIT notices preserve attribution.
 - Added an upstream-to-local mapping in the README. Kept native omp interfaces, explicit-only exposure where appropriate, existing documentation ownership, and request-specific authority for tracker publication, shell execution, commits, and pushes. Experimental/misc upstream packages, plugin metadata, and upstream executable runners are not installed.

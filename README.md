@@ -117,6 +117,8 @@ Ask for the task directly, or name the relevant skill when you want a specific p
 - “Use ui-mobile-web to investigate this mobile scrolling issue.”
 - “Use workflow-handoff to capture the current state before I pause.”
 
+See the [complete skill use-case guide](SKILL-USAGE.md) for all 52 skills, invocation labels, example prompts, expected results, and workflow diagrams.
+
 | Area | Example skills |
 |---|---|
 | Engineering | [Debugging](skills/code-debugging/SKILL.md), [code review](skills/code-review/SKILL.md), [TDD](skills/code-tdd/SKILL.md), [simplification](skills/code-simplicity/SKILL.md) |
@@ -263,7 +265,7 @@ For harness installation and runtime questions, consult the [omp documentation](
 
 | Need | Reference |
 |---|---|
-| Choose a skill or find the adopted upstream name | [Skills and workflows](#skills-and-workflows), [Matt Pocock adoption map](#matt-pocock-skill-adoption), and the relevant `skills/<name>/SKILL.md` |
+| Choose a skill, see use cases, or find the adopted upstream name | [Complete skill use-case guide](SKILL-USAGE.md), [skills and workflows](#skills-and-workflows), [Matt Pocock adoption map](#matt-pocock-skill-adoption), and the relevant `skills/<name>/SKILL.md` |
 | Work on this repository | [Repository Guidelines](AGENTS.md) |
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), and [installer](scripts/install-omp.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [installer tests](tests/install-omp.test.mjs), and [changelog](CHANGELOG.md) |
@@ -313,4 +315,3 @@ Research citations are not bundled dependencies or permission grants. In particu
 - Before relying on redistribution permission where evidence is incomplete, establish the exact applicable source, terms, and notice obligations, or exclude the affected material. Attribution is not endorsement, and local presence is not permission.
 
 This is a documentation and local-evidence summary, not legal advice, a compliance certification, or an exhaustive rights/security audit. Upstream plugin installers, executable runners, and compulsory orchestration are not imported merely because their procedures are adapted. README navigation and relative links follow [GitHub's README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
-
