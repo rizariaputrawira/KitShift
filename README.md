@@ -22,7 +22,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 - [Updates and troubleshooting](#updates-and-troubleshooting)
 - [Verification and known limits](#verification-and-known-limits)
 - [Help and maintenance](#help-and-maintenance)
-- [Sources and licenses](#sources-and-licenses)
+- [Documentation, sources, and licenses](#documentation-sources-and-licenses)
 
 ## Capabilities
 
@@ -257,8 +257,60 @@ Maintained by [@rizariaputrawira](https://github.com/rizariaputrawira) as a pers
 
 For harness installation and runtime questions, consult the [omp documentation](https://github.com/can1357/oh-my-pi/tree/main/docs). See the [changelog](CHANGELOG.md) for kit changes. This repository does not promise a support schedule or a compatibility matrix beyond the verification above.
 
-## Sources and licenses
+## Documentation, sources, and licenses
 
-This is a personal collection, not a claim that every skill is original KitShift work. Preserve each skill's `SOURCES.md`, `NOTICE.md`, and `LICENSE*` files where present. Licenses and provenance vary; no repository-wide license grants additional rights over third-party material. Inclusion is not a complete legal, security, or behavioral audit.
+### Documentation
 
-The guide structure draws on [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config), while the shared-skill organization and the active adaptations mapped above draw on [mattpocock/skills](https://github.com/mattpocock/skills). Upstream plugin installers, executable runners, and compulsory orchestration were not imported. README navigation and relative links follow [GitHub's README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
+| Need | Reference |
+|---|---|
+| Choose a skill or find the adopted upstream name | [Skills and workflows](#skills-and-workflows), [Matt Pocock adoption map](#matt-pocock-skill-adoption), and the relevant `skills/<name>/SKILL.md` |
+| Work on this repository | [Repository Guidelines](AGENTS.md) |
+| Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), and [installer](scripts/install-omp.mjs) |
+| Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [installer tests](tests/install-omp.test.mjs), and [changelog](CHANGELOG.md) |
+| Change agent guidance without duplicating its owners | [Agent guidance](skills/agent-guidance/SKILL.md), [authoring](skills/agent-guidance/references/authoring.md), and [omp skill contract](skills/agent-guidance/references/omp-skill-contract.md) |
+| Trace copied/adapted material and retained notices | The source-family table below, each applicable skill's `SOURCES.md`, and its full `LICENSE*` files; [UI design notices](skills/ui-design/NOTICE.md) cover the nested UI payloads |
+
+This navigation follows the approach in [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config#documentation-sources-and-licenses), not its deployment layout or licensing conclusions. KitShift has no central `config/SKILL-SOURCES.md`; its available evidence is package-local. Historical source records may retain Aria-era paths or former skill names; those are not proof that the old files or integrations exist here.
+
+### Skill sources and retained notices
+
+This is a mixed-source collection, not a claim that every skill is original KitShift work. The table identifies source families and representative full notices. Each applicable package retains its own notices; its source record defines the exact files, revisions, adaptations, and exclusions. A comparison or license-evidence pin is not necessarily the historical import commit.
+
+| Source | Scope in KitShift | Local evidence and bundled license |
+|---|---|---|
+| [Matt Pocock skills](https://github.com/mattpocock/skills) | The [active adoption map](#matt-pocock-skill-adoption), plus earlier Matt-derived specification/planning material in `workflow-delivery`. Mixed-source owners retain their other notices too. | MIT: [full notice](skills/code-architecture/LICENSE.matt), [current source mapping](skills/code-architecture/SOURCES.md), and [historical delivery mappings](skills/workflow-delivery/SOURCES.md). The active pin does not replace every historical baseline. |
+| [Superpowers — obra / Jesse Vincent](https://github.com/obra/superpowers) | `agent-guidance`, `code-debugging`, `code-review`, `code-tdd`, `workflow-brainstorming`, and `workflow-delivery`. Selected procedures, not the upstream plugin. | MIT: [full notice](skills/agent-guidance/LICENSE.superpowers), [guidance source map](skills/agent-guidance/SOURCES.md), and [delivery source map](skills/workflow-delivery/SOURCES.md). |
+| [Open GSD](https://github.com/open-gsd/gsd-core) | `docs-engineering`, `docs-plan-review`, `workflow-delivery`, `workflow-handoff`, `workflow-handoff-read`, and `workflow-retrospective`. Adapted documentation, verification, handoff, and learning procedures—not the GSD runtime. | MIT: [full notice](skills/docs-engineering/LICENSE.gsd), [documentation sources](skills/docs-engineering/SOURCES.md), and [retrospective sources](skills/workflow-retrospective/SOURCES.md). |
+| [Ponytail — DietrichGebert](https://github.com/DietrichGebert/ponytail) | `code-simplicity` and its review/debt references. | MIT: [full notice](skills/code-simplicity/LICENSE.ponytail) and [inline adaptation record](skills/code-simplicity/SKILL.md). The exact imported revision is not established by the available package record; see the limits below. |
+| [Emil Kowalski skills](https://github.com/emilkowalski/skills) | `code-swift-development`, `ui-expo-motion`, `ui-gesture-design`, `ui-library-selection`, `ui-mobile-web`, `ui-prototyping`, `ui-sonner`, `ui-stress-test`, and `ui-web-motion`. | MIT: [full notice](skills/code-swift-development/LICENSE.emil), [Swift sources](skills/code-swift-development/SOURCES.md), and [dual-source UI-prototyping record](skills/ui-prototyping/SOURCES.md). UI prototyping retains both [Emil](skills/ui-prototyping/LICENSE.emil) and [Matt](skills/ui-prototyping/LICENSE.matt) notices. |
+| [Taste family — Leonxlnx](https://github.com/Leonxlnx/taste-skill) | `ui-brand-concepts`, `ui-image-generation`, `ui-image-to-code`, `ui-stitch-design-input`, and the expanded baseline for `ui-taste-frontend`. | MIT: [Leonxlnx notice](skills/ui-taste-frontend/LICENSE.leonxlnx), [brand notice](skills/ui-brand-concepts/LICENSE.taste), [image-source mappings](skills/ui-image-generation/SOURCES.md), [Stitch evidence](skills/ui-stitch-design-input/SOURCES.md), and [expanded Taste evidence](skills/ui-taste-frontend/SOURCES.md). |
+| [Taste Skill — tasteskill/tasteskill](https://github.com/tasteskill/tasteskill) | Retained shorter-source comparison for `ui-taste-frontend`, not the identified complete expanded baseline. | MIT, copyright jeettrench: [full notice](skills/ui-taste-frontend/LICENSE.taste) and [source distinction](skills/ui-taste-frontend/SOURCES.md). Both Taste notices remain; neither establishes an ownership transfer. |
+| [Impeccable — Paul Bakaus](https://github.com/pbakaus/impeccable) | `ui-design`, its command references, and bundled helper material, subject to the nested notices below. | Apache-2.0: [full license](skills/ui-design/LICENSE), [entrypoint comparison pin](skills/ui-design/SKILL.md), and [attribution/modification notices](skills/ui-design/NOTICE.md). |
+| [Platform Design Skills — ehmo](https://github.com/ehmo/platform-design-skills) | The iOS/Android references retained inside `ui-design`; separately attributed from Impeccable. | MIT: [full notice](skills/ui-design/LICENSE.platform-design-skills) and [nested attribution](skills/ui-design/NOTICE.md#platform-design-skills). This does not grant rights to all platform documentation, fonts, or trademarks. |
+| [modern-screenshot — qq15725/modern-screenshot](https://github.com/qq15725/modern-screenshot) | `ui-design/scripts/modern-screenshot.umd.js`; the local record identifies an exact-byte match to `modern-screenshot@4.7.0`. | MIT, copyright wxm: [full notice](skills/ui-design/LICENSE.modern-screenshot) and [version/hash evidence and limits](skills/ui-design/NOTICE.md#retained-helper-and-data-limits). This is not a dependency-completeness or security verdict. |
+| [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill) | `security-audit` and its adapted audit references. | MIT: [full notice](skills/security-audit/LICENSE.cloudflare) and [source map](skills/security-audit/SOURCES.md). |
+| [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector) | `security-intake` and its source-only checklist; the scanner/install workflow is not included. | Apache-2.0: [full license](skills/security-intake/LICENSE.skillspector) and [attribution/modification record](skills/security-intake/SOURCES.md). |
+| [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review) | `security-review` and its adapted review guidance, not the upstream execution pipeline. | MIT: [full notice](skills/security-review/LICENSE.anthropic) and [source map](skills/security-review/SOURCES.md). |
+
+Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) in [the PR source record](skills/git-pr-work/SOURCES.md). That record links a moving upstream path rather than a separately pinned downstream license notice. Matt's retained MIT notice alone should not be treated as proof of complete downstream rights or notice coverage.
+
+### Local guidance and research-only references
+
+The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. This is an authorship/provenance statement, not a new license grant.
+
+`ui-browser` and `workflow-upstream-review` currently have no package-level `SOURCES.md` or license notice. Their presence is not evidence of third-party clearance or a project-wide redistribution grant.
+
+Research citations are not bundled dependencies or permission grants. In particular, the [delivery record](skills/workflow-delivery/SOURCES.md#research-only-ownershipfrontier-evidence--no-titus-text-reused) says no Titus text/template was copied because no covering grant was established. The [writing record](skills/writing-authenticity/SOURCES.md#research-only-inputs-and-disposition) separately identifies unlicensed/unknown-grant and GPL-3.0 research/rejection inputs; it does not identify their code or prose as incorporated into KitShift.
+
+### Attribution and redistribution limits
+
+**No project-wide `LICENSE` file is present.** This README does not add one, relicense third-party content, or grant blanket permission over locally authored material. Follow the actual terms and scope attached to each component rather than labeling the whole kit MIT or Apache-2.0.
+
+- Preserve applicable full copyright, permission, license, and attribution notices with copied/adapted material. For Apache-2.0 components, retain the applicable notices and modification records as required by their terms. A source link or picker description is not a substitute for those files.
+- Keep mixed-source notices together: for example, Matt/Emil UI prototyping, Matt/Superpowers/GSD delivery, both Taste notices, and Impeccable's separately licensed nested components.
+- Preserve unresolved evidence honestly. Ponytail's inline record references an Aria-era ledger absent here and does not establish an immutable import pin. The [UI notice](skills/ui-design/NOTICE.md) does not comprehensively establish historical import permissions or every nested right. The [restored-skill provenance summary](#restored-skill-provenance) records the narrower Taste, Stitch, and screenshot-helper evidence without claiming complete clearance.
+- Fonts, external engines, tools, services, and dependencies are not cleared by an adjacent skill's license. The bundled font-index JSON files are metadata, not font licenses or a bundled font collection.
+- Before relying on redistribution permission where evidence is incomplete, establish the exact applicable source, terms, and notice obligations, or exclude the affected material. Attribution is not endorsement, and local presence is not permission.
+
+This is a documentation and local-evidence summary, not legal advice, a compliance certification, or an exhaustive rights/security audit. Upstream plugin installers, executable runners, and compulsory orchestration are not imported merely because their procedures are adapted. README navigation and relative links follow [GitHub's README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
+

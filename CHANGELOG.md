@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Expanded README documentation navigation and source-family/license references using KitShift's package-local evidence. Distinguished adapted material, local guidance, research-only inputs, mixed notices, and unresolved provenance/downstream-license gaps; no project-wide license or blanket redistribution grant was added.
 - Adapted all 27 active `mattpocock/skills` packages at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, merging overlapping disciplines and adding distinct domain-prefixed capabilities. Descriptions use Matt Pocock provenance tags or retain combined contributor tags; per-owner source maps and full MIT notices preserve attribution.
 - Added an upstream-to-local mapping in the README. Kept native omp interfaces, explicit-only exposure where appropriate, existing documentation ownership, and request-specific authority for tracker publication, shell execution, commits, and pushes. Experimental/misc upstream packages, plugin metadata, and upstream executable runners are not installed.
 - The adoption adds 13 skills and merges into 11 existing owners, bringing the collection to 52 skills. Verified the complete 27-entry adoption map, exact MIT notices and tagged descriptions, 52 native skill loads, installed file equality, 463 relative links, 199 skill pointers, all four installer regression scenarios, and a synthetic wizard-helper consent/progress/clearing smoke. Skill-driven tasks, real wizards, and secret-entry TTY behavior remain unverified.
