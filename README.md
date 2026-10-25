@@ -16,6 +16,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 - [Capabilities](#capabilities)
 - [Quick start](#quick-start)
 - [How it works](#how-it-works)
+- [Agent collaboration](#agent-collaboration)
 - [Skills and workflows](#skills-and-workflows)
 - [MCP integrations](#mcp-integrations)
 - [Safety and privacy](#safety-and-privacy)
@@ -109,6 +110,10 @@ Unspecified settings follow the installed omp version's defaults. Upgrading omp 
 | `plan` | `openai-codex/gpt-6.1-sol` |
 
 These are personal selections, not a performance ranking, entitlement check, or fixed agent-identity policy. Native delegation remains available; KitShift does not impose custom worker routing or a second approval system.
+
+### Agent collaboration
+
+omp supplies execution and native capabilities; assignments define responsibilities, while skills supply reusable procedures. Neither a skill nor a configured model selector is a fixed worker identity. [How agents work in KitShift](AGENT-WORKFLOW.md) explains direct work, optional delegation, handoffs, conditional independent review and evidence acceptance, with diagrams and hypothetical booking examples.
 
 ## Skills and workflows
 

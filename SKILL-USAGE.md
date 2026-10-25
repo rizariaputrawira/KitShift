@@ -19,6 +19,8 @@ Examples describe **intended results, not checks already performed**. A skill do
 
 The diagrams show decision and information flow, not automatic dispatch. Dashed arrows are conditional additions. Each skill appears in one use-case table; its link opens the full procedure. [Sources and license boundaries](README.md#documentation-sources-and-licenses) remain separate from this usage guide.
 
+For who owns execution, delegation, review and acceptance, read [How agents work in KitShift](AGENT-WORKFLOW.md). That guide explains collaboration responsibilities; this guide remains the skill-selection catalog.
+
 ## Example: a community-workshop booking product
 
 **Hypothetical scenario—not a KitShift application:** workshop members reserve shared equipment; staff manage availability and returns. The project may have a public marketing website, a staff dashboard, and mobile web. React Native/Expo and Swift are **alternative, optional client projects**, not requirements.
