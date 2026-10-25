@@ -34,6 +34,27 @@ All local paths in this table are relative to this skill directory. Each URL bin
 
 The exact pinned [`LICENSE`](https://raw.githubusercontent.com/ChrisTitusTech/titus-ai/3b752711dabebdc5f3762555d23fd75fc1c9eb92/LICENSE) request returned HTTP 404. No covering grant is established, so no Titus notice is invented and no Titus asset is redistributed. The local ownership expression is independently authored: resolve facts to existing maintained owners, identify prerequisites from actual evidence, keep exact approved scope separate from observational progress, and continue only the earliest ready currently authorized incomplete slice. No SPEC/MAP/ANSWERS file engine or Titus template is adopted.
 
+## Research-only decision-escalation evidence — 2026-10-25
+
+- [code-yeongyu/oh-my-openagent@784d7f9197eac084340331c1612f939728c6ad57: `packages/senpi-task/src/category/openai-categories.ts`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/packages/senpi-task/src/category/openai-categories.ts): inspected the distinction between evidence-resolvable work and unsettled consequential decisions, plus evidence-bearing escalation.
+- [The same revision: `packages/senpi-task/src/completion/dag-verification-directive.ts`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/packages/senpi-task/src/completion/dag-verification-directive.ts): inspected scope/evidence acceptance and the distinction between inspecting existing proof and replaying checks.
+- [The same revision: `LICENSE.md`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/LICENSE.md): Sustainable Use License with use/distribution restrictions and notice obligations, plus separately licensed third-party components; not a blanket permissive grant.
+
+These are research-only references, not imported source mappings. The decision-escalation section in `references/implementation-brief.md` is original local guidance extending its existing discretion, material-ambiguity and partial-return contracts; no OmO prompt, code, template or translated instruction body is redistributed. Existing upstream mappings and full notices remain unchanged. Local escalation returns the unresolved decision, inspected basis, options and affected work to the integration owner; it does not register categories, select models, enforce permissions, require delegation or adopt the upstream runtime. Copying or adapting upstream expression would require a separate exact-file rights/notice assessment; this record does not grant redistribution rights.
+
+### Bounded source-loaded assessment
+
+Six fresh native task actors read isolated baseline/candidate snapshots of `references/implementation-brief.md`, then performed paired read-only synthetic tasks. Relative companion pointers mapped to unchanged canonical sources; no actor needed another reference. The controller defined expectations before dispatch and inspected all six tool transcripts and final outputs. Each actor made only the two assigned source reads; none wrote, executed, delegated or asked an interactive question. Actor model identities were not exposed.
+
+- Baseline SHA-256: `5d8198696f87e62571e75e59cd9be7794701c1439de870dcb00b8470eb4de28f`.
+- Candidate SHA-256: `11378d4f378fe69208366deebd324d23d697b1377f2316f2c416552351f7ffd6`.
+- Mechanical countercase: both actors returned the exact `endpoint` → `route` migration for two supplied functions, preserved paths/methods/body, and did not escalate because the broader task covered 180 callers. Unprovided callers and execution remained explicitly unverified.
+- Invariant-sensitive bug: both identified the pending-revocation/session-replacement problem, left the user-retained logout failure policy unresolved and returned the independent approved metric rename. The candidate also enumerated both policy options and their outage/caller effects; neither claimed to have fixed the bug.
+- Shared dependency: both inspected the supplied `parseTag` implementation, treated the approved `string | null` contract as ready, and produced disjoint web/CLI assignments preserving valid empty strings with null-specific handling. Integrated checks remained with the integration owner; neither dispatched workers or reopened the settled signature.
+
+These observations support the bounded draft/decision behavior only. Baselines also respected the essential boundaries; no general comparative improvement, performance/cost benefit, production edits, executable bug fix, native discovery, OS containment or future compliance is established. The fixture tasks and snapshots were temporary assessment artifacts, not installed skill variants.
+
+
 ## Incumbent disposition and local ownership
 
 Retain the delivery owner for explicitly selected or project-required documentation-first work, not automatic routing of new apps or substantial features. Use current project instructions and enabled UI capabilities rather than a retired global policy. Preserve host permissions, source-grounded specifications, proportionate planning and observed acceptance without a second approval ceremony.
