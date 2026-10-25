@@ -28,7 +28,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 - **Reusable procedures:** 52 skills covering engineering, UI, security, Git, documentation, writing, teaching, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, retaining omp's native base prompt.
-- **Native omp configuration:** three model-role selections, appearance preferences, native planning, and selected privacy/resource settings—without restoring custom director/worker orchestration.
+- **Native omp configuration:** three cycling model-role selections plus commit and plan selectors, appearance preferences, native planning, and selected privacy/resource settings—without restoring custom director/worker orchestration.
 - **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths supplied during installation.
 - **Explicit installation:** preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
@@ -105,6 +105,8 @@ Unspecified settings follow the installed omp version's defaults. Upgrading omp 
 | `smol` | `openai-codex/gpt-6-luna:low` |
 | `default` | `openai-codex/gpt-6.1-sol:medium` |
 | `slow` | `openai-codex/gpt-6-astra:high` |
+| `commit` | `openai-codex/gpt-6-luna` |
+| `plan` | `openai-codex/gpt-6.1-sol` |
 
 These are personal selections, not a performance ranking, entitlement check, or fixed agent-identity policy. Native delegation remains available; KitShift does not impose custom worker routing or a second approval system.
 

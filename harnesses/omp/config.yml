@@ -8,6 +8,8 @@ modelRoles:
   smol: openai-codex/gpt-6-luna:low
   default: openai-codex/gpt-6.1-sol:medium
   slow: openai-codex/gpt-6-astra:high
+  commit: openai-codex/gpt-6-luna
+  plan: openai-codex/gpt-6.1-sol
 cycleOrder:
   - smol
   - default
