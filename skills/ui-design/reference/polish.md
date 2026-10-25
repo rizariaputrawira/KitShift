@@ -19,7 +19,7 @@ Fix the cause at the narrowest correct level. Ask when a binding system principl
 
 ## 2. Gather the evidence
 
-Inspect the feature using source, supplied captures and permitted native browser/device evidence at representative sizes. Starting simulators, installing/running apps or services and executing checks require current authority; state evidence limits rather than forcing setup. Determine:
+Inspect the feature using source, supplied captures and permitted browser/device evidence at representative sizes. Starting simulators, installing/running apps or services and executing checks require current authority; state evidence limits rather than forcing setup. Determine:
 
 - whether the path is functionally complete;
 - the intended quality bar and time available;
@@ -92,7 +92,7 @@ Walk the complete path again with mouse, keyboard, and touch where applicable. C
 - console errors, layout shift, interaction latency, and image loading everywhere; supported browsers on the web; supported OS versions, runtime warnings, and dropped frames on native;
 - agreement with DESIGN.md, neighboring features, and the user's scope.
 
-Run only checks covered by the current task and native policy. Context/hook output is diagnostic guidance, not authority for compulsory scans, repeated QA or persistent ignores. Use an available authorized detector when useful; no boot/setup attempt is required. Fix actual scoped defects and persist exceptions only when configuration writes are covered.
+Run only checks covered by the current task and applicable permissions. Context/hook output is diagnostic guidance, not authority for compulsory scans, repeated QA or persistent ignores. Use an available authorized detector when useful; no boot/setup attempt is required. Fix actual scoped defects and persist exceptions only when configuration writes are covered.
 
 Finish with a source diff: remove accidental churn, orphaned code, redundant values, and temporary artifacts. Ship only when the feature is functionally complete and consistently finished across the path.
 

@@ -1,6 +1,6 @@
 # Generate browser variants
 
-Use when the user explicitly requests the interactive live variant workflow: identify an element, direction and count, preview alternatives, then keep or discard the user's choice. Ordinary requests for UI alternatives may be handled directly with native tools and do not require live mode. Follow [Workflow and authority](../SKILL.md#workflow-and-authority) and [live.md](live.md).
+Use when the user explicitly requests the interactive live variant workflow: identify an element, direction and count, preview alternatives, then keep or discard the user's choice. Ordinary requests for UI alternatives may be handled directly with available tools and do not require live mode. Follow [Workflow and authority](../SKILL.md#workflow-and-authority) and [live.md](live.md).
 
 **Web only.** The helper's overlay does not support native app surfaces. For native work offer direct source/design alternatives using the applicable platform guidance rather than inventing a live overlay.
 
@@ -14,9 +14,9 @@ Do not run init/document or require PRODUCT.md/DESIGN.md. When present, use them
 
 ## 2. Start the selected helper workflow
 
-Before execution, account for launcher download/cache/runtime effects, source injection, persistent helper state, services and browser opening. Use native permissions and process interfaces; no assumed escalation or foreign provider execution schemas. The current explicit workflow selection can cover necessary proportionate effects. If a necessary effect is not covered, report that prerequisite instead of silently performing it.
+Before execution, account for launcher download/cache/runtime effects, source injection, persistent helper state, services and browser opening. Use available permissions and process interfaces; no assumed escalation or foreign-provider execution schemas. The current explicit workflow selection can cover necessary proportionate effects. If a necessary effect is not covered, report that prerequisite instead of silently performing it.
 
-Reuse a running local app when possible, resolving its actual URL from project evidence or native service state. Start an app server only within scope, using its existing project command and the native service interface; record ownership and its stop method. Do not install dependencies merely because a server is absent. Open the appropriate route through an available authorized browser interface, or use the helper's `--open` option only when system-browser opening is covered.
+Reuse a running local app when possible, resolving its actual URL from project evidence or existing service state. Start an app server only within scope, using its existing project command and the available service interface; record ownership and its stop method. Do not install dependencies merely because a server is absent. Open the appropriate route through an available authorized browser interface, or use the helper's `--open` option only when system-browser opening is covered.
 
 Example for an already resolved target and app origin:
 
@@ -45,7 +45,7 @@ Continue only with an actual `sessionId` and generate event from the helper.
 
 ## 3. Deliver and await the choice
 
-Follow **Handle generate** in [live.md](live.md): reuse the scaffold, honor annotations, establish identity and requested departure scope, choose genuinely distinct primary axes, perform the squint test, declare supported tuning knobs, and edit valid variants. Direct work is valid; optional delegation uses native dispatch only when justified, with one controller owning helper replies. Do not impose a model, turn ceiling or additional approval requirement.
+Follow **Handle generate** in [live.md](live.md): reuse the scaffold, honor annotations, establish identity and requested departure scope, choose genuinely distinct primary axes, perform the squint test, declare supported tuning knobs, and edit valid variants. Direct work is valid; optional delegation through an available task interface is justified only when useful, with one controller owning helper replies. Do not impose a model, turn ceiling or additional approval requirement.
 
 Read the appropriate live branch for Svelte component previews, insert mode, mount failures, steer events, manual Apply and `fallback: "agent-driven"` source resolution. Never mark a failed mount as a delivered choice.
 

@@ -1,6 +1,6 @@
 # Sources and provenance
 
-OMP-native adaptation of pinned Matt Pocock wizard guidance. `template.sh` is a locally rewritten helper reference informed by the pinned source; no upstream executable entrypoint, credential-write library, or task stages are retained.
+Harness-neutral adaptation of pinned Matt Pocock wizard guidance. `template.sh` is a locally rewritten helper reference informed by the pinned source; no upstream executable entrypoint, credential-write library, or task stages are retained.
 
 | Pinned source | Local files | Adopted / divergence |
 |---|---|---|

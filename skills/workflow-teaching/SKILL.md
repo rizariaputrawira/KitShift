@@ -9,7 +9,7 @@ Teach in the user's current authorized workspace, across sessions, without assum
 
 ## Workspace contracts
 
-The names below are defaults for a newly selected dedicated teaching workspace, not a migration mandate. In an existing repository, reuse its canonical mission, glossary, source, lesson and learning-record owners; for adopted documentation resolve their actual locations through `skill://docs-engineering/references/locations.md`. Do not create a competing glossary or relocate files implicitly. Use only artifacts relevant to the user's authorized teaching scope:
+The names below are defaults for a newly selected dedicated teaching workspace, not a migration mandate. In an existing repository, reuse its canonical mission, glossary, source, lesson and learning-record owners; for adopted documentation resolve their actual locations through [docs-engineering locations](../docs-engineering/references/locations.md). Do not create a competing glossary or relocate files implicitly. Use only artifacts relevant to the user's authorized teaching scope:
 
 - `MISSION.md` records the user's reason, observable success, constraints, and explicit out-of-scope topics. Ask before changing an established mission; record an agreed change with a learning record.
 - `RESOURCES.md` tracks trusted knowledge sources and useful communities, with a note on when each applies and explicit gaps. Prefer primary sources, recognized experts, peer-reviewed work, and well-moderated communities. Do not present model memory as researched fact.

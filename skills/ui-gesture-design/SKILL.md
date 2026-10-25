@@ -12,7 +12,7 @@ and the complete [MIT notice](LICENSE.emil).
 
 Identify the requested interaction, product conventions, target inputs/platforms, and whether the user wants review, proposals, or implementation. Reviews/proposals remain read-only. Build a prototype, change dependencies, or implement only within the current authorization; a bare invocation asks what needs attention rather than delivering a canned greeting.
 
-Use this skill as a gesture-interaction and optional Apple-influenced design lens, not a mandatory visual system. When constructing web motion, read `skill://ui-web-motion` for the matching implementation procedure. When the problem concerns mobile browser touch, scrolling, keyboard, or viewport behavior, read `skill://ui-mobile-web`. Preserve compatible existing components, libraries, tokens, and semantics.
+Use this skill as a gesture-interaction and optional Apple-influenced design lens, not a mandatory visual system. When constructing web motion, read [web motion guidance](../ui-web-motion/SKILL.md) for the matching implementation procedure. When the problem concerns mobile browser touch, scrolling, keyboard, or viewport behavior, read [mobile web guidance](../ui-mobile-web/SKILL.md). Preserve compatible existing components, libraries, tokens, and semantics.
 
 The retained ideas draw on [Designing Fluid Interfaces, WWDC18](https://developer.apple.com/videos/play/wwdc2018/803/) and the other primary references in [SOURCES.md](SOURCES.md). The prose below is a local web interpretation, not verbatim Apple quotations, current Apple product defaults, or a guarantee that browser APIs reproduce native behavior.
 

@@ -1,6 +1,6 @@
 # Impeccable Finish Reviewer
 
-Optional role prompt for a native delegated review or a direct self-check. The caller supplies the actual skill base directory, task, evidence paths and result contract. This file neither registers a role nor grants tools, permissions, a model profile or independence. A direct self-check is not an independent review. Native task/tool schemas and current user instructions govern; see [Workflow and authority](../../SKILL.md#workflow-and-authority).
+Optional prompt for a delegated review through an available task interface or a direct self-check. The caller supplies the actual skill base directory, task, evidence paths and result contract. This passive reference registers no role on any host and grants no tools, permissions, model profile or independence. A direct self-check is not an independent review. Available task/tool schemas and current user instructions govern; see [Workflow and authority](../../SKILL.md#workflow-and-authority).
 
 Review the assigned artifact without editing it. Report findings to the caller; review authority does not authorize repairs, snapshots, configuration writes, helper execution, browser launches or servers. For a source-only review, inspect supplied sources and existing captures and clearly limit the result to that evidence. Use additional tools only when the current assignment permits them.
 
@@ -23,7 +23,7 @@ When visual evidence is available, inspect the captures and approved comp before
 
 ## Result
 
-Use the caller's native result contract. In the absence of a more specific contract, report:
+Use the caller's result contract. In the absence of a more specific contract, report:
 
 - `disposition`: `recapture` when required evidence blocks the requested visual judgment; `rebuild` when evidence shows that the core composition/material target needs re-derivation rather than local patches; `fix` for supported material defects; `ship` only for the inspected scope with no unresolved material findings. A source-only or partial review must explicitly state its unassessed scope; it is not whole-product approval.
 - `evidence`: inspected paths, review mode (delegated or direct self-check), coverage and missing/unread inputs.

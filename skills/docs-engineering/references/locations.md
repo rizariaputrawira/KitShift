@@ -1,6 +1,6 @@
 # Canonical documentation location contract
 
-Document selection is dynamic; location is deterministic after explicit adoption. This shared contract governs documentation creation, lookup, review and durable updates across skills. It does not activate the suite, grant writes or migrate a project merely because OMP opens it.
+Document selection is dynamic; location is deterministic after explicit adoption. This shared contract governs documentation creation, lookup, review and durable updates across skills. It does not activate the suite, grant writes or migrate a project merely because a host opens it.
 
 ## Adoption boundary
 

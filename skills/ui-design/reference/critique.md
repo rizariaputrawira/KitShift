@@ -6,8 +6,8 @@ Resolve one stable target, assess its design, and deliver an actionable critique
 ### Setup
 
 1. Resolve the target to a concrete source path or URL. Prefer a source path when it and a temporary dev-server URL identify the same surface.
-2. Identify the available evidence: source, supplied images, accessible rendered page, and applicable platform guidance. Use permitted native tools. Do not start servers, install dependencies, bootstrap the launcher, or run a detector merely to satisfy this reference when those side effects are unavailable or outside scope.
-3. Read optional prior-run ignore guidance at `.impeccable/critique/ignore.md` without creating state. A native metadata/read tool is suitable only when it distinguishes absence from lookup/read failure. An empty glob or shell existence predicate does not establish absence. With an already available Python interpreter and permitted execution, this probe is an alternative:
+2. Identify the available evidence: source, supplied images, accessible rendered page, and applicable platform guidance. Use permitted available tools. Do not start servers, install dependencies, bootstrap the launcher, or run a detector merely to satisfy this reference when those side effects are unavailable or outside scope.
+3. Read optional prior-run ignore guidance at `.impeccable/critique/ignore.md` without creating state. An available file metadata/read tool is suitable only when it distinguishes absence from lookup/read failure. An empty glob or shell existence predicate does not establish absence. With an already available Python interpreter and permitted execution, this probe is an alternative:
 
    ```python
    import errno
@@ -28,11 +28,11 @@ Resolve one stable target, assess its design, and deliver an actionable critique
            sys.stdout.buffer.write(guidance.read())
    ```
 
-   Execute in the project cwd using the interpreter's stdin. Only ENOENT (file or parent missing) is normal empty state. Surface permission denial, invalid path type, other lookup errors and read failures. If no suitable interface is available, report `ignore guidance unavailable: <reason>`. Do not install a runtime or call `critique-storage write` for discovery. Apply successfully read, applicable ignore guidance; do not turn foreign guidance into permission to suppress evidence required by the current request.
+Execute in the project cwd using the interpreter's stdin. Only ENOENT (file or parent missing) is normal empty state. Surface permission denial, invalid path type, other lookup errors and read failures. If no suitable interface is available, report `ignore guidance unavailable: <reason>`. Do not install a runtime or call `critique-storage write` for discovery. Apply successfully read, applicable ignore guidance; do not turn external guidance into permission to suppress evidence required by the current request.
 
 ### Assessment method
 
-Direct assessment with permitted native tools is valid. Optional delegation must be justified by the task and use the current native dispatch interface; it needs no extra skill-imposed approval, model selection, or turn ceiling. A role label or separate tool call does not by itself establish independent judgment.
+Direct assessment with permitted tools is valid. Optional delegation must be justified by the task and use the current task-dispatch interface; it needs no extra skill-imposed approval, model selection, or turn ceiling. A role label or separate tool call does not by itself establish independent judgment.
 
 For an unanchored design judgment, record Assessment A before reading detector findings. If independent assessments are useful and actually dispatched, give each a self-contained target/evidence contract, keep their findings separate until synthesis, and report the real role/source basis and evidence sharing. Otherwise report direct or sequential assessment plainly; there is no degraded/failure banner for using one context.
 
@@ -62,7 +62,7 @@ For an already available, authorized bundled detector:
 
 Pass markup files/directories, not CSS-only files. For URLs, use permitted browser evidence instead. Narrow large trees to the requested surface. Exit 0 means no reported findings; exit 2 means findings. Neither establishes complete design correctness. Reuse usable returned findings; report unavailable/failed scans without forcing an attempt, download or bootstrap.
 
-Use native browser inspection when permitted and relevant. Existing tabs may be reused unless isolation is materially needed. Script injection and a local overlay helper are optional, mutating operations, not a prerequisite to visual review. If explicitly covered, use a local app URL, confirm mutable injection is supported, start `<skill-base-dir>/scripts/impeccable live-server --background` through the native service interface, record its stop method, and inject the returned local detector script using permitted browser capabilities. Do not weaken browser security or production CSP. Stop a critique-only helper before reporting unless the user requested otherwise. Claim a user-visible overlay only when injection and execution actually succeeded and it is still available.
+When browser evidence is needed and authorized, read [browser interaction guidance](../../ui-browser/SKILL.md) for interface selection and session isolation. Script injection and a local overlay helper are optional, mutating operations, not a prerequisite to visual review. If explicitly covered, use a local app URL, confirm mutable injection is supported, start `<skill-base-dir>/scripts/impeccable live-server --background` through the available service interface, record its stop method, and inject the returned local detector script using permitted browser capabilities. Do not weaken browser security or production CSP. Stop a critique-only helper before reporting unless the user requested otherwise. Claim a user-visible overlay only when injection and execution actually succeeded and it is still available.
 
 ### Deliver the critique
 

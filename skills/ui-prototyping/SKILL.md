@@ -5,7 +5,7 @@ disable-model-invocation: true
 ---
 
 # UI Variations
-This is the explicitly invoked UI branch of `code-prototyping`. It explores the UI comparison the user requests: layout, interaction, motion, palette or copy. State meaningful distinctions and tradeoffs, grounded in the brief. For logic/state questions use `skill://code-prototyping/LOGIC.md`; do not duplicate that procedure here.
+This is the explicitly invoked UI branch of `code-prototyping`. It explores the UI comparison the user requests: layout, interaction, motion, palette or copy. State meaningful distinctions and tradeoffs, grounded in the brief. For logic/state questions use [the code-prototyping logic procedure](../code-prototyping/LOGIC.md); do not duplicate that procedure here.
 
 ## Principles
 

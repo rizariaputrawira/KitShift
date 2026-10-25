@@ -1,6 +1,6 @@
 # Sources and modifications
 
-OMP-native passive adaptation, pinned source revision `5beb35b040e3de97e54fa9e386d7e42d15c295c2`.
+Harness-neutral passive adaptation, pinned source revision `5beb35b040e3de97e54fa9e386d7e42d15c295c2`.
 
 | Pinned source | Local mapping | Adaptation |
 |---|---|---|

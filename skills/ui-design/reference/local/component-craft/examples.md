@@ -55,7 +55,7 @@ For a compact menu trigger, the accessible name and expanded state should corres
 - Make boundaries, separators, shadows, and surface changes earn their contrast. Do not add blur, glow, gradients, shadows, decorative icons, or press scaling by default.
 - Match feedback to the action: confirmation for a completed change, clear error recovery for a failed one, and immediate acknowledgment for a pending action. Keep the user's input and focus intact where appropriate.
 - Check empty, loading, error, long-content, and keyboard-focus conditions when those states exist in scope. A static proposal should name unverified conditions rather than imply they were exercised.
-- Motion-specific recommendations belong to [shared motion principles](skill://ui-web-motion/references/principles.md), loaded only when motion is part of the task. Project tokens, reduced-motion preferences, and direct feedback remain relevant.
+- Motion-specific recommendations belong to [shared motion principles](../../../../ui-web-motion/references/principles.md), loaded only when motion is part of the task. Project tokens, reduced-motion preferences, and direct feedback remain relevant.
 
 ## Review output
 

@@ -1,6 +1,6 @@
 # ADR format and decision status
 
-Load only when a consequential architecture/domain decision needs a durable record. After explicit docs-engineering adoption read `skill://docs-engineering/references/locations.md` and use its `adr` path and numbering convention, inspecting existing records and avoiding overwrites. Before adoption reuse the existing ADR convention/location; if none exists, propose a project convention under current authorization without adopting or migrating the project implicitly. Create the directory only for a real authorized ADR.
+Load only when a consequential architecture/domain decision needs a durable record. After explicit docs-engineering adoption read [documentation locations](../../docs-engineering/references/locations.md) and use its `adr` path and numbering convention, inspecting existing records and avoiding overwrites. Before adoption reuse the existing ADR convention/location; if none exists, propose a project convention under current authorization without adopting or migrating the project implicitly. Create the directory only for a real authorized ADR.
 
 ## Minimal record
 

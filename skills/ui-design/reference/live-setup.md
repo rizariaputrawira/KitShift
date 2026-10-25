@@ -95,4 +95,4 @@ Per-framework: Next.js inline `headers()` in `next.config.*`; Nuxt `routeRules['
 
 ## Troubleshooting
 
-If a declined/missing development allowance blocks injection, report the exact prerequisite; do not delete state or repeat the question automatically. When the user subsequently authorizes the change, inspect current policy and update only the covered development configuration. After authorized setup, resume the live workflow through the native service/result interfaces.
+If a declined/missing development allowance blocks injection, report the exact prerequisite; do not delete state or repeat the question automatically. When the user subsequently authorizes the change, inspect current policy and update only the covered development configuration. After authorized setup, resume the live workflow through available service and result interfaces.

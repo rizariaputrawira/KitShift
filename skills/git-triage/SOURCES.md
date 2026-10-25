@@ -1,6 +1,6 @@
 # Sources and provenance
 
-OMP-native passive adaptation of pinned Matt Pocock triage guidance, merged with existing read-only evidence/reporting rules. Canonical local owner is `git-triage`.
+Harness-neutral passive adaptation of pinned Matt Pocock triage guidance, merged with existing read-only evidence/reporting rules. Canonical local owner is `git-triage`.
 
 | Pinned source | Local files | Adopted / divergence |
 |---|---|---|
@@ -9,3 +9,5 @@ OMP-native passive adaptation of pinned Matt Pocock triage guidance, merged with
 | [mattpocock/skills@5beb35b: `skills/engineering/triage/OUT-OF-SCOPE.md`](https://raw.githubusercontent.com/mattpocock/skills/5beb35b040e3de97e54fa9e386d7e42d15c295c2/skills/engineering/triage/OUT-OF-SCOPE.md) | `SKILL.md` (summary only) | Concept-level prior rejection matching, maintainer confirmation, and distinction between rejected and already-implemented work. Full file conventions, templates and examples are not redistributed; no `.out-of-scope/` store is assumed or mutated implicitly. |
 
 Exact MIT notice reproduced unchanged in `LICENSE.matt`. Existing local read-only permissions and reporting remain; procedures do not enforce runtime permissions.
+
+Local simplification — 2026-10-24: merged the duplicate opening action into supplied-item step 1, preserving remote-text distrust, sensitive-data redaction, bounded PR inspection and no automatic checkout/execution. Queue routing, invocation metadata, upstream pins and the full notice are unchanged.

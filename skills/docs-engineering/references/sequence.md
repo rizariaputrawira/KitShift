@@ -1,7 +1,7 @@
 # Information sequence and lifecycle actions
 
 ## Lifecycle phases
-Phases identify information roles, not universal numbered execution gates or a mandated lifecycle. Only explicitly selected or project-required documentation-first delivery uses the reviewed pre-code baseline owned by `skill://workflow-delivery/references/documentation-baseline.md`; native permissions remain authoritative. Its selected boundary must be ready before app implementation. New-app/substantial scope alone does not impose that workflow.
+Phases identify information roles, not universal numbered execution gates or a mandated lifecycle. Only explicitly selected or project-required documentation-first delivery uses the reviewed pre-code baseline owned by [workflow delivery](../../workflow-delivery/references/documentation-baseline.md); permissions of the current host remain authoritative. Its selected boundary must be ready before app implementation. New-app/substantial scope alone does not impose that workflow.
 
 | Phase | Information role |
 |---|---|
@@ -28,12 +28,12 @@ Catalog dependencies are true information prerequisites, not mandatory files. `s
 
 Graph direction is concept -> prerequisite. Known IDs only, no self edges or cycles. Family defaults are not a blanket waterfall: artifact edges carry purpose-specific minimum input. Informational references/downstream evidence/feedback are related links or update triggers, not prerequisites. The selected manifest `depends-on` captures actual necessary owner-entry information; creation graph does not automatically load all references into context. Equivalent existing sections/evidence can satisfy an edge without selecting another file. Report each input as sufficient/missing/provisional and parallel opportunities; do not store current-agent/current-wave/execution-state.
 
-For implementation planning, choose a real production-quality end-to-end tracer through the required producer/consumer boundary and verify its acceptance before expansion. A scaffold, disconnected layer or reduced criterion is not that tracer. Name exact consumes/produces interfaces, necessary prerequisite evidence and unresolved one-way choices; parallelize only genuinely independent work. Sequence here remains an information view, never a GSD executor or manifest task queue. For consequential multi-slice plans load the single `skill://docs-plan-review/references/coverage-checklist.md` before native proposal/reapproval; do not duplicate its checklist or create another approval gate.
+For implementation planning, choose a real production-quality end-to-end tracer through the required producer/consumer boundary and verify its acceptance before expansion. A scaffold, disconnected layer or reduced criterion is not that tracer. Name exact consumes/produces interfaces, necessary prerequisite evidence and unresolved one-way choices; parallelize only genuinely independent work. Sequence here remains an information view, never an executor or manifest task queue. For consequential multi-slice plans load the single [docs plan-review checklist](../../docs-plan-review/references/coverage-checklist.md) before native proposal/reapproval; do not duplicate its checklist or create another approval gate.
 
 For gated delivery, first prepare/review required whole-boundary information through the delivery-owned baseline, then implement its authorized tracer. A slice cannot evade required architecture/design/test intent. `status`, `next` and `sequence` distinguish due pre-code gaps from later runtime evidence.
 
 ## Eight native actions
-Use `/skill:docs-engineering <action>` arguments, not custom slash commands or a shell CLI. Plan Mode stays read-only and returns proposed writes through native approval.
+Use an ordinary request naming `docs-engineering <action>` to select an action; slash-skill syntax is optional only when the selected host supports it. Plan Mode stays read-only and returns proposed writes through the host's native approval process.
 
 For each action's procedure, permission boundary and observable completion, read [Native arguments](../SKILL.md#native-arguments); this reference owns information order and prerequisites, not a second action contract.
 

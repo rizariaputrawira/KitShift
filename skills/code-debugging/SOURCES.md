@@ -28,9 +28,9 @@ Removed inspiration-only body, confirm-the-user reruns, upstream no-hypotheses-w
 
 Pinned revision `5beb35b040e3de97e54fa9e386d7e42d15c295c2` replaces the earlier candidate for the current upstream skill mapping above; existing Superpowers references and earlier separately recorded 2024/2025 historical evidence remain unchanged. The HITL template was inspected as source, not executed or imported. Its usable concept—feed human observations into an evidence-driven probe—is retained only in native process terms; no upstream runner is shipped.
 
-Architecture-triggered failure redesign points to `skill://code-architecture` without turning diagnosis into unsolicited redesign.
+Architecture-triggered failure redesign points to the [code-architecture skill](../code-architecture/SKILL.md) without turning diagnosis into unsolicited redesign.
 
-All procedures obey current higher-priority OMP/user permissions. Their instructions do not create a sandbox, model binding, execution authorization or approval API. References load only for their stated branch; shared owners are linked rather than cloned. Missing material source/evidence remains a gap, not a fabricated pass. These adaptations preserve the approved requested behavior rather than importing upstream engines.
+All procedures operate within applicable host/user permissions. Their instructions do not create a sandbox, model binding, execution authorization or approval interface. References load only for their stated branch; shared owners are linked rather than cloned. Missing material source/evidence remains a gap, not a fabricated pass. These adaptations preserve the approved requested behavior rather than importing upstream engines.
 
 ## Evidence limits
 

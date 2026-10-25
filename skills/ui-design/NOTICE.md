@@ -10,11 +10,13 @@ The `skill/reference/ios.md` and `skill/reference/android.md` platform reference
 **Original license:** MIT
 **Author:** ehmo
 
-## Local OMP adaptation
+## Local adaptation
 
-The entrypoint records the Impeccable 4.5.0 comparison revision. Local changes retain its design guidance while making persistent helper workflows opt-in, ordinary UI work native, and launcher download/cache/execution effects subject to current authority. Command references and role prompts use actual native tool/delegation contracts, separate reporting from persistence/repair, and preserve the brief over style defaults. Bundled foreign-format role files do not register OMP agents or set native model/approval policy.
+The entrypoint records the Impeccable 4.5.0 comparison revision. Local changes retain its design guidance while making persistent helper workflows opt-in, ordinary UI work independent of any particular host, and launcher download/cache/execution effects subject to current authority. Command references and role prompts use available tool/delegation contracts, separate reporting from persistence/repair, and preserve the brief over style defaults. Bundled foreign-format role files are passive references, not registered roles on any host or model/application profiles. Provider-specific helper hooks are not assumed to integrate with any host; use them only when supported and authorized.
 
 The external-generation reference follows current loaded MCP schemas rather than the retired PERSONALITY integration contract or cached endpoint assumptions. Unsupported timing, model-tier and quality-superiority claims are removed from affected workflow guidance. Source/loading verification is not proof of consuming-agent behavior, engine implementation, sandbox enforcement or rendered UI quality. Existing third-party license and attribution notices remain applicable.
+
+The critique browser-evidence branch now reads the shared `ui-browser` guidance for interface selection and session isolation instead of permitting existing-tab reuse independently. The shared policy remains the canonical owner; this correction does not authorize browser execution, profile access, helper startup or injection.
 
 ## Static simplicity corrections
 

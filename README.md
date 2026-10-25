@@ -110,7 +110,9 @@ These are personal selections, not a performance ranking, entitlement check, or 
 
 ## Skills and workflows
 
-Ask for the task directly, or name the relevant skill when you want a specific procedure. Examples:
+Ask for the task directly, or name the relevant skill when you want a specific procedure.
+
+The shared skill procedures are harness- and agent-neutral: cross-skill references are relative file links, and instructions use the selected host's available tools, permissions and approval mechanisms. Read linked canonical sources only when enabled and authorized; a link does not bypass deliberate disablement. The [passive skill contract](skills/agent-guidance/references/skill-contract.md) owns packaging, invocation and permission rules. Runtime-specific checks live in conditional compatibility references, including the [omp compatibility companion](skills/docs-engineering/references/omp-compatibility.md). Configuration, deployment and recorded runtime evidence remain with [the omp adapter](harnesses/omp/COMPATIBILITY.md). Portable source guidance is not proof that another harness integration has been implemented or tested.
 
 - “Use code-debugging to investigate this failure and verify the fix.”
 - “Use code-review on my current changes. Report findings without editing.”
@@ -136,7 +138,13 @@ Canonical skill directory names match their `SKILL.md` names and start with a fu
 
 The domain-prefix migration renames `brand-concepts` to `ui-brand-concepts`, `stitch-design-input` to `ui-stitch-design-input`, `swift-development` to `code-swift-development`, and the `taste-skill` package (previous invocation name `design-taste-frontend`) to `ui-taste-frontend`. Use the new names for `skill://` URIs and `/skill:` commands. Historical verification records and upstream source paths retain their original names.
 
-For an existing installation, move each old skill directory to its new name before copying the updated repository skills. The generic installer does not remove old paths; leaving both would expose duplicate skills. Preserve local edits and backups when migrating, and restart omp afterward.
+For an existing installation, do not rename the old directories into the new destinations: the manifest still owns their old paths, so changed files at the new paths are rejected as unmanaged conflicts. Instead:
+
+1. Move each old skill directory to a separate, unused backup location **outside every skill-discovery root**, preserving its contents and local edits. If you already renamed it in place, move that directory to the backup location too. Do not overwrite an existing backup or a separately installed new-name directory.
+2. Keep `.kitshift-manifest.json` intact. Preview the normal installer command with `--update --dry-run` and all three local MCP path arguments, then remove `--dry-run` to apply. With the new destinations absent, the installer creates and manages them; other conflicts still require deliberate reconciliation.
+3. Compare the backups with the new packages and reconcile any local edits deliberately. Do not copy an old `SKILL.md` back wholesale, because its old frontmatter name would undo the identity migration. Restart omp after migration.
+
+The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
 
 ### Matt Pocock skill adoption
 
@@ -251,7 +259,9 @@ After restoring the three packages, the same installer regression scenarios pass
 
 The active Matt Pocock adoption was checked with Node.js 24.20.0 and omp 18.12.6: all 27 published upstream entries map to 24 local owners with the current pin, contributor-tagged descriptions, and byte-exact MIT notices. All 52 skill directory/frontmatter identities match; 463 relative Markdown links and 199 skill pointers resolve outside fenced examples, with historical provenance names preserved. Every repository skill file matches its installed copy, and fresh `omp read` processes load all 52 canonical skill URIs without inference requests. All four installer regression scenarios pass. A synthetic Bash helper smoke confirms denied commands do not execute, approved commands execute, progress is reported, and the secret-clearing helper unsets its variable; secret-entry TTY behavior and real task-specific wizards were not exercised.
 
-**Not verified:** MCP connectivity, provider authentication, configured model-role availability, skill behavior, other operating systems, or compatibility with other omp versions. MCP servers were disabled only for the isolated startup probe. Passing installer tests or discovering skills is not proof of end-to-end agent behavior.
+The harness-neutral skill revision preserved all 52 entrypoint frontmatters, exact license files and bundled scripts; 773 relative file links/anchors resolved across skill and affected operator documents. Isolated omp 18.12.6 reads loaded all 52 candidate skill bodies and both renamed shared references with exact source equality and no inference requests. A final browser-safety correction was reloaded separately. Ten source-loaded actor runs covered incompatible handoffs without delegation, lightweight ordinary changes, deliberate skill disablement and browser-interface routing without a CLI, including the corrected browser branch and ordinary countercase. Baseline decisions also succeeded; these bounded observations establish no comparative behavioral improvement or other-harness runtime support. The active installation was not updated.
+
+**Not verified:** MCP connectivity, provider authentication, configured model-role availability, skill behavior beyond the recorded synthetic cases, other operating systems, other harness integrations, or compatibility with other omp versions. MCP servers were disabled only for the earlier isolated startup probe. Passing installer tests or discovering skills is not proof of end-to-end agent behavior.
 
 ## Help and maintenance
 
@@ -269,7 +279,7 @@ For harness installation and runtime questions, consult the [omp documentation](
 | Work on this repository | [Repository Guidelines](AGENTS.md) |
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), and [installer](scripts/install-omp.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [installer tests](tests/install-omp.test.mjs), and [changelog](CHANGELOG.md) |
-| Change agent guidance without duplicating its owners | [Agent guidance](skills/agent-guidance/SKILL.md), [authoring](skills/agent-guidance/references/authoring.md), and [omp skill contract](skills/agent-guidance/references/omp-skill-contract.md) |
+| Change agent guidance without duplicating its owners | [Agent guidance](skills/agent-guidance/SKILL.md), [authoring](skills/agent-guidance/references/authoring.md), and [passive skill contract](skills/agent-guidance/references/skill-contract.md) |
 | Trace copied/adapted material and retained notices | The source-family table below, each applicable skill's `SOURCES.md`, and its full `LICENSE*` files; [UI design notices](skills/ui-design/NOTICE.md) cover the nested UI payloads |
 
 This navigation follows the approach in [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config#documentation-sources-and-licenses), not its deployment layout or licensing conclusions. KitShift has no central `config/SKILL-SOURCES.md`; its available evidence is package-local. Historical source records may retain Aria-era paths or former skill names; those are not proof that the old files or integrations exist here.

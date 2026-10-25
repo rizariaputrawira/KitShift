@@ -1,6 +1,6 @@
 # Glossary format
 
-Load when recording settled terminology. Reuse the existing content structure; the following is a lean format fallback, not a reason to multiply glossaries. After explicit docs-engineering adoption resolve the `glossary` owner through `skill://docs-engineering/references/locations.md`; before adoption preserve existing locations.
+Load when recording settled terminology. Reuse the existing content structure; the following is a lean format fallback, not a reason to multiply glossaries. After explicit docs-engineering adoption resolve the `glossary` owner through [documentation locations](../../docs-engineering/references/locations.md); before adoption preserve existing locations.
 
 ## Contents
 

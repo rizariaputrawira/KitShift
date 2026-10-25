@@ -18,9 +18,9 @@ Load when defining or assessing delivery proof. The integration owner coordinate
 
 ## Result contract
 
-For each criterion record its canonical anchor, implementation/consumer evidence, observed behavioral evidence, and one of:
+For each criterion connect its canonical anchor, delivered behavior/current consumer, decisive evidence locator and inspected material source/input/environment basis. State whether decisive proof was actually inspected, only reported by another actor, unavailable/unrun/incomplete, or invalidated by a changed material basis; explain the missing fact or invalidated basis. These are provenance explanations, not new result states or a required schema. Record implementation/consumer evidence, observed behavioral evidence and one of:
 
-- **satisfied:** the required proof is observed and relevant to the current basis;
+- **satisfied:** the required proof was inspected and is relevant to the current basis; reported-only or invalidated checks cannot establish satisfaction;
 - **failed:** current evidence contradicts the criterion or required implementation is absent/unwired;
 - **unverified:** implementation may be present but decisive evidence is unrun, missing, incomplete or environment-dependent.
 

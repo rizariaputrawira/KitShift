@@ -6,7 +6,7 @@ Load when writing an instruction body or context pointer. The document is for a 
 
 A pointer names out-of-context material **and the observable branch that should reach it**. Put the distinctive leading trigger first and collapse synonyms for the same branch. Example: “When a correction and prior findings are supplied, read the fix-review reference before dispositioning them.” A bare “see review docs” hides the branch; an always-loaded paragraph reproducing the entire review procedure spends attention on unrelated turns.
 
-Give an exact local relative target or enabled `skill://<name>/<relative-path>` target, replacing the placeholders with the actual owner and asset. Do not make a pointer an unconditional autoload of every reference. A missing material target blocks that dependent claim/action; disabled suite files are not automatically reloaded by path fallback. Shared references remain callable plain material, not imaginary runtime invocations.
+Name the exact canonical target and keep its load conditional. A missing material target blocks that dependent claim/action, not unrelated work.
 
 ## Information hierarchy
 
@@ -16,7 +16,9 @@ Give an exact local relative target or enabled `skill://<name>/<relative-path>` 
 
 Co-locate a concept's definition, constraints and caveats. A long but unique document can still bury the decision; split by actual branch or sequence, not arbitrary length. A sequence split earns its place when later steps demonstrably pull attention away from a hard current completion criterion. Moving text to another heading does not create a real context boundary.
 
-When authoring or merging an OMP skill, read the picker-description and provenance convention in `skill://agent-guidance/references/omp-skill-contract.md`; that contract owns the exact rules.
+## Skill packaging
+
+When authoring or merging a skill, read [the passive skill contract](skill-contract.md) for package structure, picker descriptions, provenance, reference resolution, loading and disablement rules. That contract owns the shared rules.
 
 ## Ordered steps and observable bounds
 

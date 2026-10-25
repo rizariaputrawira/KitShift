@@ -28,6 +28,6 @@ The local pass retains read-only proposal, authorized harness, and requested-fix
 
 ## Local verification
 
-The revised entrypoint loaded through `skill://ui-stress-test`. A temporary source/package/catalog check preserved metadata, resolved four local Markdown links, confirmed all nine catalog families, and checked four email fixtures and one URL fixture against reserved domain namespaces without issuing network requests. It also checked removal of ten retired assertions, presence of thirteen approved source boundaries, and the retained Emil notice.
+The `skills/ui-stress-test/SKILL.md` entrypoint loaded successfully through the then-supported skill mechanism. A temporary source/package/catalog check preserved metadata, resolved four local Markdown links, confirmed all nine catalog families, and checked four email fixtures and one URL fixture against reserved domain namespaces without issuing network requests. It also checked removal of ten retired assertions, presence of thirteen approved source boundaries, and the retained Emil notice.
 
 These are source/package/data checks, not consuming-agent behavior, a UI harness, rendered stress testing, production-build exclusion, live backend isolation, accessibility, or real-device proof. No app, target-project fixtures, dependencies, or runtime settings were created or changed. Historical comparison pins and the MIT notice were retained.

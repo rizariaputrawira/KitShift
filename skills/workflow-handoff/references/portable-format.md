@@ -1,6 +1,6 @@
 # Portable snapshot format
 
-The exporter consumes current observed task/source/evidence state. Writes are limited to an explicitly authorized new handoff path; in native Plan Mode or other read-only assignments return proposed content only. The read-only reader `skill://workflow-handoff-read` loads the selected snapshot only. Actual continuation follows current native authorization; use `skill://workflow-delivery/references/resumption.md` only for explicitly selected or project-required documentation-first delivery.
+The exporter consumes current observed task/source/evidence state. Writes are limited to an explicitly authorized new handoff path; in host read-only assignments return proposed content only. The read-only reader [workflow-handoff-read](../../workflow-handoff-read/SKILL.md) loads the selected snapshot only. Actual continuation follows current host authorization; use [workflow-delivery resumption](../../workflow-delivery/references/resumption.md) only for explicitly selected or project-required documentation-first delivery.
 
 ## File and section contract
 

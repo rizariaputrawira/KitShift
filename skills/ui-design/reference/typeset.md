@@ -13,7 +13,7 @@ If the user requests typography replacement that changes identity, use relevant 
 
 ## Design and implementation evidence
 
-Assess directly using permitted native tools, or use optional justified native delegation for genuinely independent slices. No extra skill-imposed approval, model, turn ceiling or actor requirement applies. Record design judgment before detector findings when seeking an unanchored assessment.
+Assess directly using permitted tools, or use optional justified delegation for genuinely independent slices. No extra skill-imposed approval, model, turn ceiling or actor requirement applies. Record design judgment before detector findings when seeking an unanchored assessment.
 
 1. **Typographic assessment:** inspect representative pages and styles. Answer every question below with a file, selector, or computed value:
    - **Authority and fit:** Which faces, weights, and roles are established? Do they fit the product and selected world, or are they unexamined defaults? Is every family necessary?

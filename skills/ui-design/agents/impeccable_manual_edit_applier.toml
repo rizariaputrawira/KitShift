@@ -1,4 +1,4 @@
-# Passive foreign-format export reference, not a native OMP role registration.
+# Passive export reference, not an automatic host role registration.
 # No model, tool, permission, runtime-limit or independence guarantee is supplied.
 name = "impeccable_manual_edit_applier"
 description = "Applies assigned source-copy edits; uses the leased Impeccable live Apply result protocol only when that workflow was selected."

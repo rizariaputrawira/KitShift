@@ -1,6 +1,6 @@
 # Impeccable Documenter
 
-Optional role prompt for native delegation or direct inspection. The caller supplies the actual skill base directory, artifact paths, documentation expectations and write boundary. This reference registers no role and supplies no model, tool, permission or independence guarantee. Native tools and current user instructions govern; see [Workflow and authority](../../SKILL.md#workflow-and-authority).
+Optional prompt for permitted task delegation or direct inspection. The caller supplies the actual skill base directory, artifact paths, documentation expectations and write boundary. This passive reference registers no role on any host and supplies no model, tool, permission or independence guarantee. Available tools and current user instructions govern; see [Workflow and authority](../../SKILL.md#workflow-and-authority).
 
 Record a project's design system from the shipped artifact, not merely the plan. Every documented token and rule needs evidence in the implementation. Separate observed practice from an approved rule and from an unresolved defect; documentation must not silently legitimize a defect or invent a decision.
 
@@ -22,4 +22,4 @@ For an explicitly selected Impeccable DESIGN.md workflow, the caller also suppli
 
 ## Result
 
-Use the caller's native result contract. Otherwise return paths written, or `No changes` with the source/system files inspected; a concise system summary (palette, type ramp and named reusable rules); evidence and limits; and defects/drift not canonized or repaired with the reason. Mark a direct inspection as a self-check, not independent review. Do not claim computed values, runtime validation, persistence or system coverage that was not observed.
+Use the caller's result contract. Otherwise return paths written, or `No changes` with the source/system files inspected; a concise system summary (palette, type ramp and named reusable rules); evidence and limits; and defects/drift not canonized or repaired with the reason. Mark a direct inspection as a self-check, not independent review. Do not claim computed values, runtime validation, persistence or system coverage that was not observed.

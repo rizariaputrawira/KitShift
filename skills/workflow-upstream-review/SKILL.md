@@ -51,9 +51,9 @@ Assess significance independently: `critical` for evidenced severe security/data
 
 Recommend these owners without executing downstream work:
 
-- For external skills/plugins/MCP/executables/dependencies or material authority/network/process/filesystem changes, point to `skill://security-intake` with candidate revision and a supplied-source evidence packet. Preserve its no-fetch boundary, independent assessment and own verdicts. If material is unavailable, recommend separately authorized source-view preparation, not intake fetching or automatic approval.
-- For useful upstream skill/agent guidance, point to `skill://agent-guidance` for bounded selective adaptation and attribution, not wholesale copying.
-- For integration/native behavior, name exact discovered config/extension/command/document owner paths. Only when OpenDesign is actually in scope and the skill is enabled, use `skill://ui-design/reference/open-design.md`. Only for a requested version-specific OMP compatibility next task, use enabled `skill://docs-engineering/references/omp-compatibility.md`. Generated integrations follow their actual maintained owner and preservation constraints; keep dormant integrations dormant and do not restore retired machinery.
+- For external skills/plugins/MCP/executables/dependencies or material authority/network/process/filesystem changes, point to [security-intake](../security-intake/SKILL.md) with candidate revision and a supplied-source evidence packet. Preserve its no-fetch boundary, independent assessment and own verdicts. If material is unavailable, recommend separately authorized source-view preparation, not intake fetching or automatic approval.
+- For useful upstream skill/agent guidance, point to [agent-guidance](../agent-guidance/SKILL.md) for bounded selective adaptation and attribution, not wholesale copying.
+- For integration/host behavior, name exact discovered config/extension/command/document owner paths. Only when OpenDesign is actually in scope and the skill is enabled, use [OpenDesign reference](../ui-design/reference/open-design.md). Only for a requested version-specific harness compatibility next task, use enabled [harness-compatibility](../docs-engineering/references/harness-compatibility.md). Generated integrations follow their actual maintained owner and preservation constraints; keep dormant integrations dormant and do not restore retired machinery.
 
 ## Report and bounded next task
 
@@ -69,5 +69,5 @@ Removed the retired PERSONALITY routing dependency, made discovery follow the
 actual requested layout instead of the former managed-package tree, and separated
 read-only review from implementation already authorized by the current request.
 Evidence, provenance/licensing safeguards and honest incomplete-coverage reporting
-are retained. This adaptation record establishes neither upstream OMP authorship
+are retained. This adaptation record establishes neither upstream runtime authorship
 nor behavioral verification.

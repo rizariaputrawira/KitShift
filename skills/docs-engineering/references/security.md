@@ -1,6 +1,6 @@
 # Security context, source review and evidence boundaries
 
-This is custom shared guidance, not an upstream OMP role definition, runtime policy or security certification. Current native authority, available interfaces and the requested reporting contract govern its use.
+This is custom shared guidance, not an upstream role definition, runtime policy or security certification. Current host authority, available interfaces and the requested reporting contract govern its use.
 
 ## Scope and capability selection
 
@@ -10,12 +10,12 @@ Assess authentication, authorization, permissions, sessions, tokens, passwords, 
 
 Route only the requested capability when the suite is available/enabled:
 
-- External bundle adoption/update: [security-intake](skill://security-intake), using its [intake checklist](skill://security-intake/references/intake-checklist.md).
-- Supplied diff/base/head security change: [security-review](skill://security-review), using its [change review](skill://security-review/references/change-review.md). A simple auth change does not start a whole-codebase audit.
-- Explicit bounded implementation-level deep audit: [security-audit](skill://security-audit), selecting relevant source-led references/companions.
+- External bundle adoption/update: [security intake](../../security-intake/SKILL.md), using its [intake checklist](../../security-intake/references/intake-checklist.md).
+- Supplied diff/base/head security change: [security review](../../security-review/SKILL.md), using its [change review](../../security-review/references/change-review.md). A simple auth change does not start a whole-codebase audit.
+- Explicit bounded implementation-level deep audit: [security audit](../../security-audit/SKILL.md), selecting relevant source-led references/companions.
 - `docs-engineering audit` checks documentation consistency and traceability, not implementation-level security. Its manifest never stores agents, waves or execution state.
 
-Skill loading never authorizes execution, installation, permission changes or a broader audit. Deliberate disablement/filtering wins; missing suite proof does not stop ordinary native OMP work or trigger automatic file-load/setup.
+Skill loading never authorizes execution, installation, permission changes or a broader audit. Deliberate disablement/filtering wins; missing suite proof does not stop ordinary host work or trigger automatic file-load/setup.
 
 For adopted projects, durable security documentation resolves through [locations](locations.md) and the manifest to its selected canonical security owner. Authorized persistence reconciles findings/review/remediation/release evidence into those owners, not a new directory convention. Temporary scanner output and raw tool artifacts stay evidence locators; do not move or duplicate them merely to populate canonical documentation. Security review/intake/audit does not itself authorize adoption or project writes.
 

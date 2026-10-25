@@ -24,7 +24,7 @@ Platform references for the local corrections:
 - [MDN: viewport metadata](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport) — layout/visual viewport resize options.
 - [Chrome: viewport resize behavior](https://developer.chrome.com/blog/viewport-resize-behavior/) — documented Chrome 108 keyboard change and opt-in layout resizing.
 
-Local verification: the revised entrypoint loaded through `skill://ui-mobile-web`; a temporary source/package smoke check preserved the name/description, resolved three local Markdown links, checked balanced code fences and three pinch-zoom-preserving gesture declarations, and checked removal of seven retired instructions and presence of eight approved boundaries. This is not a consuming-agent assessment or physical-device verification.
+Local verification: at the recorded verification, the revised entrypoint at `skills/ui-mobile-web/SKILL.md` loaded through its then-supported skill URI; a temporary source/package smoke check preserved the name/description, resolved three local Markdown links, checked balanced code fences and three pinch-zoom-preserving gesture declarations, and checked removal of seven retired instructions and presence of eight approved boundaries. This is not a consuming-agent assessment or physical-device verification.
 
 ## Added-skill source review correction
 

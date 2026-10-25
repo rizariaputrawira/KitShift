@@ -252,7 +252,7 @@ Concrete visual guardrails grounded in the incumbent implementation or the user'
 
 Only write this extension when the user requested it or selected a persistent workflow whose actual helper consumer needs it. A request for DESIGN.md alone does not silently create `.impeccable/` state. The bundled profile below separates token primitives in frontmatter from extensions such as ramps, shadows, motion, breakpoints, component snippets and narrative.
 
-The example is a versioned helper protocol, not native OMP integration or a guarantee about a current external schema. Confirm the selected consumer before depending on it. For an authorized sidecar-only refresh, preserve DESIGN.md; otherwise report the proposed extension without writing it.
+The example is a versioned helper protocol, not integration with any host or a guarantee about a current external schema. Confirm the selected consumer before depending on it. For an authorized sidecar-only refresh, preserve DESIGN.md; otherwise report the proposed extension without writing it.
 
 #### Schema
 

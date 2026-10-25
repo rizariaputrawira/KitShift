@@ -13,4 +13,4 @@ Exact Matt MIT notice is reproduced unchanged in `LICENSE.matt`. Existing local 
 
 ## Local maintenance
 
-PR drafting follows explicit user formatting and applicable repository guidance/templates before using the skill's fallback headings. Preserve relevant evidence in the selected structure without duplicating sections. This is a local guidance correction, not an upstream OMP requirement or additional publication authority.
+PR drafting follows explicit user formatting and applicable repository guidance/templates before using the skill's fallback headings. Preserve relevant evidence in the selected structure without duplicating sections. This is a local guidance correction, not a host runtime requirement or additional publication authority.

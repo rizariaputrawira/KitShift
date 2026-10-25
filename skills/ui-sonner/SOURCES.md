@@ -28,7 +28,7 @@ Published types/runtime take precedence over conflicting unversioned prose for t
 
 ## Local verification
 
-Native `skill://ui-sonner` loading succeeded. A temporary source/package check preserved metadata, resolved four local Markdown links, and syntax-checked two JSX snippets with Bun.Transpiler 1.4.2.
+The `skills/ui-sonner/SKILL.md` entrypoint loaded successfully through the then-supported skill mechanism. A temporary source/package check preserved metadata, resolved four local Markdown links, and syntax-checked two JSX snippets with Bun.Transpiler 1.4.2.
 
 A synthetic loopback fixture loaded the real published Sonner 2.0.8 module with React 18.3.1 from version-pinned public module URLs, without package installation. Playwright MCP exercised untargeted/named delivery, `getToasts`, nondismissible timeout versus `Infinity`, real promise loading/success/rejection and `unwrap`, same-id updates, the documented operation helper's result/error preservation, custom and built-in keyboard dismissal, scoped toast actions inside a native modal, modal focus return, system light/dark changes, reduced-motion styles, and rendered card bounds at 1280×720 and 390×844. A screenshot was inspected.
 

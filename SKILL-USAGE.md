@@ -4,13 +4,15 @@ A practical guide to all **52 skills**: when to choose one, what to ask, and wha
 
 ## How to use this guide
 
-- **U — user-invoked only:** explicitly request the skill. Its metadata disables implicit model invocation.
-- **M — model-invokable:** the assistant may select it when relevant; you can also request it explicitly. Its action-specific scope still applies. For example, a model-invokable security audit still needs an explicit, bounded audit request.
+- **U — user-invoked only:** explicitly request the skill. Its metadata requests no implicit model invocation; the selected host must support that field to enforce exposure. The explicit-request boundary still applies where it does not.
+- **M — model-invokable:** the assistant may select it when relevant and supported by the host; you can also request it explicitly. Its action-specific scope still applies. For example, a model-invokable security audit still needs an explicit, bounded audit request.
 - The prompt column gives example arguments for that row's skill. You can also say “Use `<skill-name>` to …” in ordinary language.
 
+Ordinary-language requests work without a particular slash-command interface:
+
 ```text
-/skill:workflow-brainstorming Grill me about the booking cancellation rules.
-/skill:code-implementation Implement the approved availability slice; do not commit or publish.
+Use workflow-brainstorming to grill me about the booking cancellation rules.
+Use code-implementation to implement the approved availability slice; do not commit or publish.
 ```
 
 Examples describe **intended results, not checks already performed**. A skill does not create missing tools, grant permissions, or guarantee model compliance. Read-only requests remain read-only. Image generation, installation, tracker publication, commits, pushes, and deployment need their own applicable authority.

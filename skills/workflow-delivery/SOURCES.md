@@ -2,7 +2,7 @@
 
 ## Status and modification notice
 
-This is an OMP-native passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, native permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. That earlier cutover retained existing names. This capability-prefix migration renames the local owner to workflow-delivery while retaining exact upstream identities and notices; no duplicate procedure wrapper is introduced.
+This is a harness-neutral passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, host permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. That earlier cutover retained existing names. This capability-prefix migration renames the local owner to workflow-delivery while retaining exact upstream identities and notices; no duplicate procedure wrapper is introduced.
 
 ## Exact source-to-local mapping
 
@@ -36,15 +36,15 @@ The exact pinned [`LICENSE`](https://raw.githubusercontent.com/ChrisTitusTech/ti
 
 ## Incumbent disposition and local ownership
 
-Retain the delivery owner for explicitly selected or project-required documentation-first work, not automatic routing of new apps or substantial features. Use current project instructions and enabled UI capabilities rather than a retired global policy. Preserve native permissions, source-grounded specifications, proportionate planning and observed acceptance without a second approval ceremony.
+Retain the delivery owner for explicitly selected or project-required documentation-first work, not automatic routing of new apps or substantial features. Use current project instructions and enabled UI capabilities rather than a retired global policy. Preserve host permissions, source-grounded specifications, proportionate planning and observed acceptance without a second approval ceremony.
 
 ## Local authored material
 
-OMP role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links load only when their action/branch applies and the suite is enabled/available.
+Host-role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links are read only when their action/branch applies and the linked capability is authorized and available.
 
-`references/documentation-baseline.md` is original local authorship for the approved documentation-first workflow: tailored whole-boundary selection, substantive pre-code readiness, native permission/reapproval separation and complete affected-owner as-built reconciliation. Its integration into SKILL/specification/planning/brief/feedback/verification/resumption links that single owner rather than another execution engine. No upstream attribution, new license body, normative ISO clauses or formal conformity claim applies to this original procedure. The existing upstream pins and full notices remain unchanged.
+`references/documentation-baseline.md` is original local authorship for the approved documentation-first workflow: tailored whole-boundary selection, substantive pre-code readiness, host permission/reapproval separation and complete affected-owner as-built reconciliation. Its integration into SKILL/specification/planning/brief/feedback/verification/resumption links that single owner rather than another execution engine. No upstream attribution, new license body, normative ISO clauses or formal conformity claim applies to this original procedure. The existing upstream pins and full notices remain unchanged.
 
-The optional Vibe links and milestone guidance originated in research of the OMP 18.8.9 [native Vibe contract](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md) and [runtime](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/vibe/runtime.ts), not copied upstream instruction bodies. That historical basis is not a current runtime guarantee; current interfaces and permissions govern execution. No fixed model mapping or retired policy owner remains in this workflow.
+The optional execution-mode guidance is historically informed by research of the OMP 18.8.9 [Vibe contract](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md) and [runtime](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/vibe/runtime.ts); no upstream instruction body was copied. This historical source basis is retained as provenance, not as a current host capability or runtime guarantee. Current host interfaces and permissions govern execution.
 
 ## Native-workflow revision — 2026-10-20
 
@@ -70,3 +70,9 @@ unchanged. These are source-reviewed corrections, not runtime or actor evidence.
 ## Active Matt Pocock adoption integration — 2026-10-22
 
 The reusable specification content contract now lives in `docs-specification/references/content-contract.md`; this delivery owner's `references/specification.md` links to it rather than maintaining duplicate content/readiness rules. The new owner records the current Matt Pocock source pin and retains the full notice. Existing historical source pins and verification records above remain unchanged. The opted-in delivery baseline and native authorization remain owned here; sharing a passive reference neither invokes an explicit-only workflow nor authorizes tracker publication.
+
+## Local workflow-contract refinement
+
+`references/implementation-brief.md` now owns dependency handoffs: inspectable producer outputs, consumer expectations, integration ownership and current-basis readiness before dependent mutation. `references/verification.md` connects each criterion to inspected proof and its material basis, distinguishing reported-only, missing and invalidated evidence without adding result states. These are original local refinements. Existing upstream pins/notices, optional delegation, documentation-first opt-in and native permission boundaries are unchanged.
+
+Local simplification — 2026-10-24: removed the duplicate plan-review paragraph from `references/planning.md`; the conditional pointer and full review/permission contract remain under its self-check section. No review requirement, source pin or notice changed.

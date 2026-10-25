@@ -1,4 +1,4 @@
-# Passive foreign-format export reference, not a native OMP role registration.
+# Passive export reference, not an automatic host role registration.
 # No model, tool, permission, runtime-limit or independence guarantee is supplied.
 name = "impeccable_finish_reviewer"
 description = "Reviews a finished artifact against the user brief, applicable direction and approved comp, returning evidence-scoped material findings."

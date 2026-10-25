@@ -2,9 +2,9 @@
 
 ## Maintained ownership and changes
 
-The original source-repository owner was `config/agent/skills/docs-engineering/`; this is historical provenance, not a required current project path. Resolve the actual enabled installation through native skill discovery. The initial cutover copied staging `SKILL.md`, `references/` and `templates/`: 25 production files, a 129-concept catalog and seven template contracts at that time. Those historical counts and staging receipts are not a current installed inventory or acceptance result. This is custom authored documentation governance with the adaptations identified below, not upstream-shipped OMP behavior, copied normative ISO clauses or certification.
+The original source-repository owner was `config/agent/skills/docs-engineering/`; this is historical provenance, not a required current project path. Resolve the actual enabled installation through supported host skill discovery. The initial cutover copied staging `SKILL.md`, `references/` and `templates/`: 25 production files, a 129-concept catalog and seven template contracts at that time. Those historical counts and staging receipts are not a current installed inventory or acceptance result. This is custom authored documentation governance with the adaptations identified below, not upstream-shipped behavior, copied normative ISO clauses or certification.
 
-The adopted entrypoint removes staging-only and preserve-incumbents restrictions. Conditional owner links replace frozen integration prescriptions. Context distinguishes fixed approved scope from delegated implementation discretion and ordered resumption reads. Requirements retain stable atomic IDs with many-to-many acceptance mapping, not execution checkboxes. Sequence uses real prerequisites and an end-to-end tracer, not a task engine. Verification links the single delivery evidence procedure. Security routes separate intake/review/audit to one candidate/disposition lifecycle. Compatibility is independently authored for passive/native/behavioral layers and safe disabled or missing capability behavior. Native action contracts live in SKILL.md; sequence reads that owner rather than maintaining a second action table.
+The adopted entrypoint removes staging-only and preserve-incumbents restrictions. Conditional owner links replace frozen integration prescriptions. Context distinguishes fixed approved scope from delegated implementation discretion and ordered resumption reads. Requirements retain stable atomic IDs with many-to-many acceptance mapping, not execution checkboxes. Sequence uses real prerequisites and an end-to-end tracer, not a task engine. Verification links the single delivery evidence procedure. Security routes separate intake/review/audit to one candidate/disposition lifecycle. Compatibility is independently authored for passive, host-interface and behavioral layers and safe disabled or missing capability behavior. Native action contracts live in SKILL.md; sequence reads that owner rather than maintaining a second action table.
 
 The documentation-first update links the original project-delivery baseline owner from selection, sequence, context and audit rather than duplicating its gate. Authorized setup/create prepares necessary intended information; maintain reconciles every affected owner against sources and observed evidence. Operations/user guidance separates pre-code plans from later actual outcomes. The standards map is original public-metadata/abstract-based guidance with explicit access limits and the 15289:2019-to-12207:2017/15288:2015 edition boundary, not ISO conformity. Catalog bytes/IDs/schema, manifest v1, trace fields/relations, four profiles and all seven templates remain unchanged.
 
@@ -12,8 +12,10 @@ The compatibility reference was rewritten on 2026-10-20 as an on-demand native
 OMP assessment procedure. It separates source/config inspection, passive loading
 and authorized behavior checks without a custom checker, machine record,
 fixed-role receipts or retired integration requirements. Its existing reference
-path is retained for conditional callers. The rewrite makes no installed-version
-or behavioral compatibility claim and adds no runtime mechanism.
+path was retained for conditional callers at that revision. The rewrite made no
+installed-version or behavioral compatibility claim and added no runtime mechanism.
+
+The subsequent portability refactor extracted shared assessment rules into `references/harness-compatibility.md`. The original `references/omp-compatibility.md` is retained as the packaged omp-specific companion, selected only for omp assessments; it supplies the concrete native checks and official source locator without duplicating the common procedure. Integration documentation links to this owner and records exercised runtime evidence. This later split does not redefine the 2026-10-20 procedure as host-neutral or claim another harness implementation. Existing source pins, catalog/schema, templates and full notices are unchanged.
 
 The 2026-10-20 delivery revision makes baseline selection, context, audit and
 sequence links conditional on explicitly selected or project-required
@@ -42,8 +44,7 @@ candidate accounting, strongest-control checks, honest uncertainty and remediati
 proof remain. Documentation audit/template callers use the same conditional
 boundaries rather than imposing independent actors on ordinary documentation work.
 Security-package callers and their provenance are reconciled with that owner.
-This is a custom guidance change, not an OMP implementation or role-definition
-change, runtime verification, certification or assurance that the target is safe.
+This is a custom guidance change, not a source-level host implementation or role-definition change, runtime verification, certification or assurance that the target is safe.
 
 The catalog's security-strategy anchor and security-review-evidence criterion now
 follow the revised shared guidance; catalog identifiers and schema are unchanged.
@@ -52,7 +53,7 @@ follow the revised shared guidance; catalog identifiers and schema are unchanged
 
 Repository: https://github.com/open-gsd/gsd-core
 
-Immutable revision: `69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8`. Full upstream MIT notice is [LICENSE.gsd](LICENSE.gsd). Local adaptations are modified for OMP passive skills and native authorization.
+Immutable revision: `69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8`. Full upstream MIT notice is [LICENSE.gsd](LICENSE.gsd). Local adaptations are modified for a passive host-neutral skill package and use of current permissions.
 
 | Exact upstream path at that revision | Local file | Substantive adopted mechanism | Removed incompatibility/modification |
 |---|---|---|---|

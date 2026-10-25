@@ -9,12 +9,12 @@ Actively sharpen the domain language and relationships while designing. Merely r
 
 ## Inspect and challenge
 
-1. Discover the glossary/domain-map and ADR owners. For explicitly adopted docs-engineering projects, read `skill://docs-engineering/references/locations.md` and resolve `glossary` and `adr` through the manifest/catalog, not legacy filenames. Before adoption follow existing context links and established owners without relocating files. Read relevant requirements, decisions, code and callers before proposing language changes.
+1. Discover the glossary/domain-map and ADR owners. For explicitly adopted docs-engineering projects, read [documentation locations](../docs-engineering/references/locations.md) and resolve `glossary` and `adr` through the manifest/catalog, not legacy filenames. Before adoption follow existing context links and established owners without relocating files. Read relevant requirements, decisions, code and callers before proposing language changes.
 2. Identify overloaded terms and competing meanings. State the precise conflict: for example, “account” may mean an identity, a tenant, or a billing relationship. Compare the user's intent, canonical glossary and implementation rather than treating any one label as proof.
 3. Stress-test relationships with concrete counterexamples: Can a user belong to two tenants? Can an order be partly cancelled after shipment? Who owns the retained record after deletion? Choose scenarios that distinguish competing definitions, cardinality, lifecycle, ownership or invariants. Do not invent unsupported business requirements from the examples.
 4. Cross-check decisive behavior in actual sources. If code differs from approved intent, report the discrepancy; buggy code does not redefine the approved model. Resolve material conflicting sources through the current decision owner rather than silently picking whichever file was read last.
 5. Offer canonical wording and the remaining consequential choice with a recommendation. Ask only when evidence cannot settle it. Completion of discussion means each changed concept has a definition, context, important distinctions and a real decision basis; unresolved concepts stay unresolved.
-6. When a settled domain term informs a requested module/interface/seam design, load [code architecture](skill://code-architecture) to reuse its architecture vocabulary; domain terms and ownership still come from the glossary. Apply it only when useful; ordinary terminology modeling does not require architecture context.
+6. When a settled domain term informs a requested module/interface/seam design, load [code architecture](../code-architecture/SKILL.md) to reuse its architecture vocabulary; domain terms and ownership still come from the glossary. Apply it only when useful; ordinary terminology modeling does not require architecture context.
 
 ## Record only settled, authorized changes
 

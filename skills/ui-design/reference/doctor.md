@@ -36,7 +36,7 @@ Report all groups together. When repairs are specifically authorized, inspect th
 
 ## Step 3: Interpret retired fields in context
 
-A helper's deprecated-field finding describes that helper's consumption, not the native task's authority. Explain which field is no longer read and why. Do not delete user context or disregard a current explicit requirement merely because a helper does not consume its schema. Removal is a separate authorized repair.
+A helper's deprecated-field finding describes that helper's consumption, not the current task's authority. Explain which field is no longer read and why. Do not delete user context or disregard a current explicit requirement merely because a helper does not consume its schema. Removal is a separate authorized repair.
 
 ## Step 4: Do not overclaim on truth drift
 

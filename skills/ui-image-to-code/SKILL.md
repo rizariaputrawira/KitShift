@@ -25,7 +25,7 @@ The brief and supplied authoritative facts/assets govern section count, copy, st
 
 ### When new reference generation is actually requested
 
-Read `skill://ui-image-generation` for that requested branch and inspect the current permitted tool contract. Do not invoke OpenDesign unless requested. A skill name or a nominal tool listing does not establish availability, account access, permission, or delivery.
+Read [image-generation guidance](../ui-image-generation/SKILL.md) for that requested branch and inspect the current permitted tool contract. Do not invoke OpenDesign unless requested. A skill name or a nominal tool listing does not establish availability, account access, permission, or delivery.
 
 Produce only the requested image outputs/count. A request for an eight-section website does not imply eight generated images; a request for four separate section images does request those four outputs. Additional detail views, crops, or regeneration are optional scope/tool decisions, not a mandatory one-image-per-section pipeline. Preserve usable supplied references instead of replacing them automatically.
 
@@ -90,7 +90,7 @@ Translate the supported reference into real layout and components, preserving it
 - Implement semantic links, buttons, forms, names/labels, keyboard operation, visible focus, and specified states. Controls perform their stated action through the actual authorized handlers/routes; decorative mock functionality is not working implementation.
 - Use requirements and existing behavior for interactions and responsive states that the image cannot establish. Do not invent hidden features or infer hover/motion from a static visual impression.
 - Keep content readable and usable at relevant widths, zoom/text sizes, and supported themes. Do not remove required content or shrink it into illegibility to match one screenshot.
-- If motion is actually requested, use the matching `skill://ui-web-motion` procedure and preserve useful reduced/no-motion behavior; motion-implied artwork is not proof of an implemented animation.
+- If motion is actually requested, use the matching [web motion procedure](../ui-web-motion/SKILL.md) and preserve useful reduced/no-motion behavior; motion-implied artwork is not proof of an implemented animation.
 - If a required action depends on an unavailable API, asset, or decision, finish independent reachable work and identify the missing prerequisite. Do not hide it behind a no-op, fabricated backend, placeholder destination, or false completion claim.
 
 **Done:** all authorized surfaces and functional acceptance criteria are implemented, or a specific unreachable dependency is reported without disguising unfinished behavior.

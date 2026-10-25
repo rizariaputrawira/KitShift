@@ -2,7 +2,7 @@
 
 ## Status and modification notice
 
-This is an OMP-native passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, native permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. The canonical local name/folder is `workflow-retrospective`. The locally authored, explicit-only `retro` compatibility wrapper was retired by user approval; use the canonical owner directly. The procedure, companion reference, source mappings, and license were retained. Relative local mappings remain accurate, and immutable upstream path identities are unchanged.
+This is a harness-neutral passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, native permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. The canonical local name/folder is `workflow-retrospective`. The locally authored, explicit-only `retro` compatibility wrapper was retired by user approval; use the canonical owner directly. The procedure, companion reference, source mappings, and license were retained. Relative local mappings remain accurate, and immutable upstream path identities are unchanged.
 
 ## Exact source-to-local mapping
 
@@ -32,4 +32,4 @@ Replace the incumbent inspiration-only Matt citation with the pinned retro skill
 
 ## Local authored material
 
-OMP role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links load only when their action/branch applies and the suite is enabled/available.
+Host role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links load only when their action/branch applies and the suite is enabled/available.

@@ -19,7 +19,7 @@ Compare a working case with the failing case, preserving known reports. Minimize
 
 State plausible falsifiable hypotheses with predictions: “If this adapter bypasses the library denial, calling the library follows the contract but this CLI path does not.” Rank by available evidence, not a forced hypothesis count. Each probe must distinguish predictions. Prefer `debug` for program state, stack, breakpoints and stepping where available and authorized; otherwise targeted source/call tracing or temporary instrumentation. Redact secret values and quote only needed signal.
 
-For deep invalid-data/call-chain failures load [root-cause tracing](references/root-cause-tracing.md). For async timing/flakiness load [condition-based waiting](references/condition-based-waiting.md). When a supported failure motivates a module/interface/seam redesign, load [code architecture](skill://code-architecture); redesign remains a separate authorized choice, not a prerequisite to diagnosis. Measure actual reproduction rates only when authorized and needed; no fixed repeat counts, stress fleet or retries are implied. Keep human-driven observations user-controlled, request-specific, and redact secrets before sharing; do not assume shell access, credentials, or a scripted HITL runner.
+For deep invalid-data/call-chain failures load [root-cause tracing](references/root-cause-tracing.md). For async timing/flakiness load [condition-based waiting](references/condition-based-waiting.md). When a supported failure motivates a module/interface/seam redesign, load the [code-architecture skill](../code-architecture/SKILL.md); redesign remains a separate authorized choice, not a prerequisite to diagnosis. Measure actual reproduction rates only when authorized and needed; no fixed repeat counts, stress fleet or retries are implied. Keep human-driven observations user-controlled, request-specific, and redact secrets before sharing; do not assume shell access, credentials, or a scripted HITL runner.
 
 ## Performance branch
 
@@ -27,7 +27,7 @@ Define the user-relevant slow operation/workload and available baseline. Use act
 
 ## Root correction and evidence
 
-Once the causal explanation is supported, change the root source/invariant within the user's requested scope and applicable native constraints. Inspect affected callers so the correction is not a one-path workaround. Preserve unrelated user changes. Add meaningful regression coverage at the seam that exercises the real pattern; ordinary regression work does not automatically invoke TDD. If test-first is requested, load `skill://code-tdd`.
+Once the causal explanation is supported, change the root source/invariant within the user's requested scope and applicable host constraints. Inspect affected callers so the correction is not a one-path workaround. Preserve unrelated user changes. Add meaningful regression coverage at the seam that exercises the real pattern; ordinary regression work does not automatically invoke TDD. If test-first is requested, load the [code-tdd skill](../code-tdd/SKILL.md).
 
 If you deliberately force a test red by mutating code or a fixture, compare it with a pristine copy and verify the intended mutation landed before treating the failure as evidence.
 

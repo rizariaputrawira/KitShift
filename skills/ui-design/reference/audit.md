@@ -3,7 +3,7 @@ Run systematic **technical** quality assessment and return the requested report.
 
 Check measurable implementation evidence, not only aesthetics. Distinguish source inference from exercised behavior and record unmeasured dimensions instead of inventing scores.
 
-Use `skill://ui-browser` when a specific permitted check needs rendered, responsive or interactive evidence. Browser/server/device execution, dependency installation and helper runtime effects require current authority; unavailable or out-of-scope tooling is an evidence limit, not a failed audit. Source review can stand alone.
+Use [browser interaction guidance](../../ui-browser/SKILL.md) when a specific permitted check needs rendered, responsive or interactive evidence. Browser/server/device execution, dependency installation and helper runtime effects require current authority; unavailable or out-of-scope tooling is an evidence limit, not a failed audit. Source review can stand alone.
 
 **Web only.** Native platforms (`ios` / `android` / `adaptive`) route to [audit.native.md](audit.native.md) instead; if the project is native, switch to it now.
 

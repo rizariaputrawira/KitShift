@@ -8,15 +8,15 @@ description: "[Taste Skill] Use selectively for landing pages, portfolios, and m
 > Landing pages, portfolios, and redesigns. Not dashboards, not data tables, not multi-step product UI.
 > Every rule below is **contextual**. None of it fires automatically. First read the brief, then pull only what fits.
 
-Modified adaptation of the expanded Taste Skill; exact baseline comparison, local changes, and remaining provenance limits are recorded in [SOURCES.md](SOURCES.md). Full MIT notices for the [expanded source](LICENSE.leonxlnx) and the [retained shorter-source comparison](LICENSE.taste) accompany this third-party guidance; it is not upstream OMP policy.
+Modified adaptation of the expanded Taste Skill; exact baseline comparison, local changes, and remaining provenance limits are recorded in [SOURCES.md](SOURCES.md). Full MIT notices for the [expanded source](LICENSE.leonxlnx) and the [retained shorter-source comparison](LICENSE.taste) accompany this third-party guidance; it is not upstream policy.
 
 ## Scope and authority
 
-Use this as a selective design reference within the current request. For general UI workflow and authority, follow `skill://ui-design`; for relevant motion details use `skill://ui-web-motion`, and mobile viewport/browser behavior uses `skill://ui-mobile-web`. A source review of this skill does not execute those workflows.
+Use this as a selective design reference within the current request. For general UI workflow and authority, follow [UI design guidance](../ui-design/SKILL.md); for relevant motion details use [web motion guidance](../ui-web-motion/SKILL.md), and mobile viewport/browser behavior uses [mobile web guidance](../ui-mobile-web/SKILL.md). A source review of this skill does not execute those workflows.
 
 Preserve the actual framework, design system, dependencies, supplied content and working behavior. The brief, accessibility, project constraints and authorized scope outrank every aesthetic heuristic below. Read-only reviews remain read-only. Loading this skill does not authorize installing packages, initializing a project, generating images, contacting external services, persisting design records or changing native runtime/model/approval settings.
 
-Use the available native interfaces. Ask only for materially unresolved choices, batch independent questions and honor the requested output format. No task needs a ceremonial design declaration, numeric dial report or style checklist to proceed.
+Use the available host interfaces. Ask only for materially unresolved choices, batch independent questions and honor the requested output format. No task needs a ceremonial design declaration, numeric dial report or style checklist to proceed.
 
 ---
 
@@ -150,7 +150,7 @@ Reuse the existing icon family and sizing/stroke conventions. Phosphor, HugeIcon
 Use the product's actual voice and semantic needs. Do not replace supplied text, symbols or emoji solely to enforce a style ban.
 
 ### 3.E Responsiveness & Layout Mechanics
-Reuse project breakpoints and content widths. Choose Grid, Flexbox and viewport units for the actual layout. `dvh` follows the changing viewport; it is not a universal guarantee against browser-chrome layout shifts. For mobile viewport/scroll behavior, follow `skill://ui-mobile-web` and verify the relevant browser states rather than imposing `100dvh` everywhere.
+Reuse project breakpoints and content widths. Choose Grid, Flexbox and viewport units for the actual layout. `dvh` follows the changing viewport; it is not a universal guarantee against browser-chrome layout shifts. For mobile viewport/scroll behavior, follow [mobile web guidance](../ui-mobile-web/SKILL.md) and verify the relevant browser states rather than imposing `100dvh` everywhere.
 
 ### 3.F Dependency Verification
 Before using a dependency, inspect the actual manifest/lockfile and compatible API. If absent, prefer an existing capability when it meets the task. Introduce a package only when necessary, proportionate and authorized; resolve material cost, security or compatibility consequences before acting. A command in an appendix is reference material, not an instruction to execute it.
@@ -211,7 +211,7 @@ If a required asset is unavailable, report the exact dependency and continue ind
 ### 4.9 Content Density
 Keep reading order and the primary task legible. Concise headings and supporting text can help, but preserve supplied facts, specifications, required disclosures and technical meaning. Use readable lists/tables, grouping or an authorized disclosure pattern according to the content; do not replace them solely because they exceed a row count.
 
-Review copy for concrete ambiguity, factual errors and audience fit. A visual change does not authorize rewriting every string that resembles a style heuristic. For requested editorial work use `skill://writing-authenticity`.
+Review copy for concrete ambiguity, factual errors and audience fit. A visual change does not authorize rewriting every string that resembles a style heuristic. For requested editorial work use [writing authenticity guidance](../writing-authenticity/SKILL.md).
 
 Metrics, prices and specifications require real evidence. In an authorized prototype, label synthetic values visibly where needed; a hidden HTML comment is not disclosure to a visitor. Preserve supported exact values even when they look unusually round or precise.
 
@@ -381,7 +381,7 @@ Use this for: feature lists, testimonial grids, logo walls, anything that just n
 
 Avoid per-frame React state updates, unnecessary layout measurement and competing animation writers on the same properties. CSS timelines, IntersectionObserver, existing motion values and appropriately bounded event listeners are options; no browser API is categorically banned by taste.
 
-Use layout transitions only for actual state changes. In React, verify the installed library's supported orchestration API and lifecycle cleanup; do not assume an old parameter or a component-tree restriction applies to every version. Follow `skill://ui-web-motion` for the relevant motion task.
+Use layout transitions only for actual state changes. In React, verify the installed library's supported orchestration API and lifecycle cleanup; do not assume an old parameter or a component-tree restriction applies to every version. Follow [web motion guidance](../ui-web-motion/SKILL.md) for the relevant motion task.
 
 ## 6. PERFORMANCE & ACCESSIBILITY GUARDRAILS
 

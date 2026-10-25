@@ -1,6 +1,6 @@
 # Sources and provenance
 
-OMP-native passive adaptation of pinned Matt Pocock research guidance; no agent metadata or scripts imported.
+Harness-neutral passive adaptation of pinned Matt Pocock research guidance; no agent metadata or scripts imported.
 
 | Pinned source | Local files | Adopted / divergence |
 |---|---|---|

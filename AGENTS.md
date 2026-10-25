@@ -46,8 +46,8 @@ There is no root build command, lint command, package manifest, or dependency-in
 - Installer filesystem operations are synchronous; tests use async filesystem APIs with `spawnSync` for the CLI. Pass options/paths explicitly. There is no application DI container or frontend state store; installed management state belongs to the hash manifest.
 - Validation helpers throw descriptive errors; the CLI boundary prints `kitshift: ...` and sets a nonzero exit code. Preserve deterministic traversal, whole-plan preflight, symlink/path checks, atomic replacement, and private file permissions.
 - Skill directory names must match frontmatter `name` and retain functional prefixes such as `code-`, `docs-`, `ui-`, or `workflow-`. Descriptions are concise selection triggers with verified source tags, e.g. `[Matt Pocock] ...`; retain combined contributor tags when merging.
-- Preserve explicit-only exposure metadata such as `disable-model-invocation: true`; metadata is not an authorization boundary. Reuse conditional relative or `skill://` pointers rather than duplicating procedures.
-- For guidance changes, consult `skills/agent-guidance/SKILL.md` and its authoring/omp-contract references. Update affected `SOURCES.md`, pinned source mappings, and full notices with adaptations. Reconcile names, links, README inventory, and changelog when capabilities change.
+- Preserve explicit-only exposure metadata such as `disable-model-invocation: true`; metadata is not an authorization boundary. Reuse conditional relative file links rather than duplicating procedures or requiring a private loader URI. Keep shared skill instructions harness- and agent-neutral; retain host-specific authoring and compatibility details in conditionally selected packaged companions. Configuration, deployment notes and exercised integration evidence belong under `harnesses/<name>/`.
+- For guidance changes, consult `skills/agent-guidance/SKILL.md` and its `references/authoring.md` and `references/skill-contract.md`. Update affected `SOURCES.md`, pinned source mappings, and full notices with adaptations. Reconcile names, links, README inventory, and changelog when capabilities change.
 
 ## Important Files
 
@@ -56,6 +56,10 @@ There is no root build command, lint command, package manifest, or dependency-in
 - `mcp/omp.json`: JSON template; placeholders are whole string values, not embedded interpolation.
 - `guidance/APPEND_SYSTEM.md`: personal preferences appended to omp's native prompt, not a replacement system prompt.
 - `README.md` and `CHANGELOG.md`: operator commands, adoption mappings, safety boundaries, and scoped verification records.
+
+## GitHub MCP
+
+This KitShift setup defines a GitHub MCP server in `mcp/omp.json`. When the current agent environment exposes that server, use its GitHub MCP tools for authorized remote repository, issue, pull-request, review, and release work; use local Git commands for local repository state and file changes. Read the selected tool's current schema before calling it, follow its permission requirements, and report tool-observed results. Do not expose credentials or private authentication parameters. MCP availability does not itself authorize a remote mutation; require the user's applicable request and approval.
 
 ## Runtime/Tooling Preferences
 

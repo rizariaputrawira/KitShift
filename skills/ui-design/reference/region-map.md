@@ -1,6 +1,6 @@
 # Region map
 
-A region map names visible regions in a selected comp; it is neither a page build nor asset approval. Follow [Workflow and authority](../SKILL.md#workflow-and-authority). Ordinary mapping/report requests can use native image inspection and an in-chat map. The helper sequence below applies only when its execution, generated reports/crops and persisted map files are covered; no initialization or build-state writes are required merely to map a comp.
+A region map names visible regions in a selected comp; it is neither a page build nor asset approval. Follow [Workflow and authority](../SKILL.md#workflow-and-authority). Ordinary mapping/report requests can use available image inspection and an in-chat map. The helper sequence below applies only when its execution, generated reports/crops and persisted map files are covered; no initialization or build-state writes are required merely to map a comp.
 
 1. Run `<skill-base-dir>/scripts/impeccable comp-spec --comp <comp.png> --grid` and open the original and gridded images.
 2. Run `<skill-base-dir>/scripts/impeccable comp-spec --schema` for the JSON fields. Write `regions.json` with a `regions` array. Each region needs a stable `id`, `kind`, `note`, and exactly one of `pixelBox`, normalized `box`, or `grid`. Use the original comp’s dimensions.

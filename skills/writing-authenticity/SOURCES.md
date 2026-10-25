@@ -1,11 +1,11 @@
 # Source and provenance record
 
-## Independently authored OMP procedure
+## Independently authored procedure
 
-- **Source identity:** Local OMP capability `writing-authenticity`; no external skill text, template, examples or implementation is incorporated.
+- **Source identity:** Local capability `writing-authenticity`; no external skill text, template, examples or implementation is incorporated.
 - **Source pins and license:** Not applicable. Original locally authored expression; no third-party license is asserted or required for this content.
 - **Actual use:** The canonical entrypoint is loaded for explicitly requested writing-quality review/editing and substantial editorial analysis. It sets an editorial contract; it does not detect authorship or grant rewrite authority.
-- **Local consumers:** `config/agent/AGENTS.md` conditional skill selection; `config/files.tsv` deployment; `SKILL-USAGE.md`, `docs/capability-inventory.md`, `docs/capabilities.md`, `config/SKILL-SOURCES.md` catalog and provenance.
+- **Local consumers:** The skill is documented in `README.md` and `SKILL-USAGE.md`; its installation/deployment entry is maintained by the installer.
 - **Intentional divergence:** Not a detector-evasion or fixed humanization recipe. No AI-likelihood scores, style heuristics presented as authorship evidence, fabricated detail or automatic editing. Audit is read-only by default; targeted rewriting requires authority.
 
 ## Research-only inputs and disposition

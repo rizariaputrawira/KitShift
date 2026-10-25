@@ -32,7 +32,7 @@ Former quotation-style passages are now local paraphrases, not asserted verbatim
 
 ## Local verification
 
-Native `skill://ui-gesture-design` loading succeeded. A temporary source/package smoke preserved name/description, resolved four local Markdown links, syntax-checked four JavaScript snippets with Bun.Transpiler 1.4.2, exercised seven relative-velocity cases and three projection cases, and confirmed preservation of the eight principles.
+The `skills/ui-gesture-design/SKILL.md` entrypoint loaded successfully through the then-supported skill mechanism. A temporary source/package smoke preserved name/description, resolved four local Markdown links, syntax-checked four JavaScript snippets with Bun.Transpiler 1.4.2, exercised seven relative-velocity cases and three projection cases, and confirmed preservation of the eight principles.
 
 A synthetic loopback fixture used the revised CSS through Playwright MCP at 1280×720 and 390×844. It checked normal/reduced-motion closed-panel offset and inert/hidden state, semantic keyboard opening, Escape dismissal and focus restoration, light/dark foregrounds, opaque higher-contrast material fallback, effective pinch-zoom axis policy, and absence of horizontal overflow; a screenshot was inspected. Only the owned tab/server were closed, leaving the pre-existing tab intact.
 

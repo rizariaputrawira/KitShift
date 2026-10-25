@@ -304,7 +304,7 @@ function shouldDismissDown({
 element.style.transform = `translateY(${distance}px)`;
 ```
 
-Choose distance/velocity thresholds from the existing component and test them on the target interaction; there is no universal flick threshold. A zero-duration sample contributes no velocity, but a valid distance decision still applies. Call the predicate only on an uncancelled release of the active pointer, never on `pointercancel` or lost capture. Preserve browser scrolling and pinch zoom through the gesture surface's `touch-action` rules and its ancestors; see `skill://ui-mobile-web` when those platform behaviors are the reported problem.
+Choose distance/velocity thresholds from the existing component and test them on the target interaction; there is no universal flick threshold. A zero-duration sample contributes no velocity, but a valid distance decision still applies. Call the predicate only on an uncancelled release of the active pointer, never on `pointercancel` or lost capture. Preserve browser scrolling and pinch zoom through the gesture surface's `touch-action` rules and its ancestors; see [mobile web guidance](../ui-mobile-web/SKILL.md) when those platform behaviors are the reported problem.
 
 Four details that separate a good drag from a bad one:
 

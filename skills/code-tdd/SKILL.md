@@ -11,7 +11,7 @@ Use only when test-first/red-green-refactor is requested or approved. Ordinary r
 
 Read the requested contract, affected consumers, existing test framework and relevant glossary/decisions. Infer the public or consumer-visible seam from the actual flow; ask only if it is materially ambiguous, not for permission to test every routine seam. The existing seam must exercise the real bug/behavior, including a multi-caller interaction if that is what fails.
 
-Before writing a test, name a plausible wrong production behavior it must catch and derive the expected result independently from the requirement, a hand-worked example or known-good literal. Load [tests](references/tests.md) for seam/oracle choices and [honest tests](references/honest-tests.md) when writing or changing assertions, fixtures or helpers. If a double is necessary, read [mocking](references/mocking.md) first. When the shape of the interface/seam itself is in question, load [code architecture](skill://code-architecture) for shared vocabulary and design principles.
+Before writing a test, name a plausible wrong production behavior it must catch and derive the expected result independently from the requirement, a hand-worked example or known-good literal. Load [behavior tests and independent oracles](references/tests.md) when choosing a seam or writing/changing assertions, fixtures or helpers. If a double is necessary, read [mocking](references/mocking.md) first. When the shape of the interface/seam itself is in question, load the [code-architecture skill](../code-architecture/SKILL.md) for shared vocabulary and design principles.
 
 ## One vertical cycle
 
@@ -20,10 +20,10 @@ Before writing a test, name a plausible wrong production behavior it must catch 
 3. **REFACTOR, optional:** Only after observed green, improve structure/names where warranted without changing behavior or extending scope. Preserve the same checks. Skip gratuitous abstraction or cleanup.
 4. Repeat for the next complete behavior informed by the last cycle. Relevant error/denial paths are real behaviors, not afterthoughts; cover them when part of the acceptance contract.
 
-Verification belongs to the authorized integration owner. A worker with no execution assignment writes the test/fix and names the checks; it must not claim to have completed the observed TDD loop. Do not launch duplicate suites or override native tool/approval restrictions. For final evidence routing when delivery is involved, use `skill://workflow-delivery/references/verification.md` rather than importing upstream universal suite gates.
+Verification belongs to the authorized integration owner. A worker with no execution assignment writes the test/fix and names the checks; it must not claim to have completed the observed TDD loop. Do not launch duplicate suites or override host tool/approval restrictions. For final evidence routing when delivery is involved, use the [verification reference](../workflow-delivery/references/verification.md) rather than importing upstream universal suite gates.
 
 ## Honest outcome
 
 Report the tested seam/behavior, independent expectation basis, observed RED cause, minimal correction, observed GREEN/refactor evidence and any unrun relevant checks. If execution is unavailable, say exactly what is unrun and what would establish it: source work may be ready, but **TDD is not observed complete**. Existing code and user changes are not deleted just to stage a red-first story; disclose any test-after work honestly. Preserve actual prior failure reports without replaying them merely for confirmation.
 
-For asynchronous timing failures load `skill://code-debugging/references/condition-based-waiting.md`; reuse existing predicates/timeouts rather than inventing a polling library.
+For asynchronous timing failures load [condition-based waiting](../code-debugging/references/condition-based-waiting.md); reuse existing predicates/timeouts rather than inventing a polling library.

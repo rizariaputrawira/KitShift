@@ -20,7 +20,7 @@ Default to read-only review. A review request does not authorize fixes, checkout
 
 Keep the verdicts separate so one pass cannot mask the other's failure. Use pass/issues/unknown within the stated source coverage; observed behavior evidence has its own actual status. Pre-existing unrelated defects are labeled separately. A plausible correctness problem outside explicit spec wording can be a correctness finding, but is not an invented Spec requirement.
 
-For requested module-depth or architecture judgment, load [code architecture](skill://code-architecture) for shared vocabulary; do not turn review into speculative redesign.
+For requested module-depth or architecture judgment, load the [code-architecture skill](../code-architecture/SKILL.md) for shared vocabulary; do not turn review into speculative redesign.
 For a task/merge review or authorized source-inspecting review worker, load [review brief](references/review-brief.md). Main may split genuinely independent work using available native roles only; reviewers do not delegate or mutate. A diff-only reviewer is not an independent source inspection for claims requiring surrounding controls. No mandatory fleet, model tier or reviewer gate is imposed.
 
 ## Correction review

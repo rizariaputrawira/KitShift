@@ -1,6 +1,6 @@
 # Animation review standards
 
-Independently authored replacement for legacy standards, except the selectively adapted Emil performance diagnostic identified in [SOURCES.md](../SOURCES.md) and covered by [LICENSE.emil](../LICENSE.emil). Read `skill://ui-web-motion/references/principles.md` for shared motion constraints and fallback ranges. Source inspection cannot prove browser performance or gesture feel.
+Independently authored replacement for legacy standards, except the selectively adapted Emil performance diagnostic identified in [SOURCES.md](../SOURCES.md) and covered by [LICENSE.emil](../LICENSE.emil). Read [shared motion principles](principles.md) for shared motion constraints and fallback ranges. Source inspection cannot prove browser performance or gesture feel.
 
 ## Review dimensions
 

@@ -25,7 +25,7 @@ Removed the greeting-only gate. Replaced cached current-release/blanket compilat
 
 Corrected nonisolated async execution using [SE-0461](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0461-async-function-isolation.md), including the `NonisolatedNonsendingByDefault` gate and explicit execution annotations. Restricted `MainActor.assumeIsolated` advice to callbacks already guaranteed to execute on that actor. Distinguished throwing and nonthrowing discarding task groups using [SE-0381](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0381-task-group-discard-results.md).
 
-Removed the uncited “100×+ regressions” magnitude while retaining the algorithmic-complexity guidance. These are local adaptations, not upstream OMP policy. The upstream attribution and full MIT notice remain unchanged. Source/loading checks do not establish compilation of every example or consuming-agent behavior.
+Removed the uncited “100×+ regressions” magnitude while retaining the algorithmic-complexity guidance. These are local adaptations, not host policy. The upstream attribution and full MIT notice remain unchanged. Source/loading checks do not establish compilation of every example or consuming-agent behavior.
 
 ## Added-skill source review corrections (2026-10-22)
 

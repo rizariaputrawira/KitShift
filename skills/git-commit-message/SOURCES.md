@@ -13,4 +13,4 @@ These references informed original guidance only; no prose, templates, or code w
 
 ## Local maintenance
 
-Explicit user formatting takes precedence over inferred repository style and the default split-concern response template. Status inspection uses `git --no-optional-locks status` to avoid the optional index refresh described in [Git's status documentation](https://git-scm.com/docs/git-status#_background_refresh). These are local guidance corrections, not upstream OMP behavior or technical sandbox enforcement.
+Explicit user formatting takes precedence over inferred repository style and the default split-concern response template. Status inspection uses `git --no-optional-locks status` to avoid the optional index refresh described in [Git's status documentation](https://git-scm.com/docs/git-status#_background_refresh). These are local guidance corrections, not host runtime behavior or technical sandbox enforcement.

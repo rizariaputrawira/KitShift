@@ -1,11 +1,11 @@
 # Source and provenance record
 
-## Independently authored OMP procedure
+## Independently authored procedure
 
-- **Source identity:** Local OMP capability `content-provenance-audit`; no external skill text, template, examples or implementation is incorporated.
+- **Source identity:** Local capability `content-provenance-audit`; no external skill text, template, examples or implementation is incorporated.
 - **Source pins and license:** Not applicable. Original locally authored expression; no third-party license is asserted or required for this content.
 - **Actual use:** The canonical entrypoint is loaded for authorized, read-only artifact provenance inspection or comparison. It distinguishes evidence classes and inspection limits; it does not execute content, verify authorship or modify artifacts.
-- **Local consumers:** `config/agent/AGENTS.md` conditional skill selection; `config/files.tsv` deployment; `SKILL-USAGE.md`, `docs/capability-inventory.md`, `docs/capabilities.md`, `config/SKILL-SOURCES.md` catalog and provenance.
+- **Local consumers:** The skill is documented in `README.md` and `SKILL-USAGE.md`; its installation/deployment entry is maintained by the installer.
 - **Intentional divergence:** Distinct from external skill/dependency intake and code-security review because its evidence contract concerns claims about artifacts. No detector, parser, verifier, processor, dependency or executable is bundled or promised. Research sources informed boundaries only; no external expression or implementation is copied.
 
 ## Technical references used as research, not runtime dependencies
@@ -21,4 +21,4 @@ These sources support bounded conceptual distinctions only; they do not imply th
 - Unicode Technical Report #36, https://www.unicode.org/reports/tr36/tr36-9.html — security considerations, not a current property database or basis to treat all invisible characters as malicious.
 - Microsoft Open XML custom properties, https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.customproperties.properties?view=openxml-3.0.1, and Adobe XMP overview, https://opensource.adobe.com/dc-acrobat-sdk-docs/library/overview/Overview_Metadata.html — metadata concepts; no OOXML/XMP parser is included.
 
-**Reference provenance detail:** these citations are research-only inputs consumed by this local package, not payloads or runtime dependencies. Immutable/versioned identifiers are the arXiv versions shown above; the EMNLP Findings paper at its cited proceedings identifier; C2PA Specification 2.4; Unicode TR36 revision 9; and Microsoft Open XML API view 3.0.1. DeepMind's blog and Adobe's overview are cited by URL with no immutable revision established. No source license/notice text was inspected or copied for these technical references; license status is not asserted. No local third-party consumer exists beyond this reference-only procedure. No referenced verifier/parser/detector is bundled, called, or claimed available. These sources informed evidence-class boundaries only; local wording and taxonomy are independently written.
+**Reference provenance detail:** these citations are research-only inputs consumed by this local package, not payloads or runtime dependencies. Immutable/versioned identifiers are the arXiv versions shown above; the EMNLP Findings paper at its cited proceedings identifier; C2PA Specification 2.4; Unicode TR36 revision 9; and Microsoft Open XML API view 3.0.1. DeepMind's blog and Adobe's overview are cited by URL with no immutable revision established. No source license/notice text was inspected or copied for these technical references; license status is not asserted. The skill is documented in `README.md` and `SKILL-USAGE.md`, and its installation/deployment entry is maintained by the installer. No referenced verifier/parser/detector is bundled, called, or claimed available. These sources informed evidence-class boundaries only; local wording and taxonomy are independently written.

@@ -2,7 +2,7 @@
 
 ## Status and modification notice
 
-This is an OMP-native passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, native permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. Existing canonical installed names are retained; no wrapper or compatibility alias is introduced.
+This is a harness-neutral passive Markdown adaptation of the exact pinned sources below, modified for canonical documentation ownership, native permissions/approval, evidence limits and the approved managed cutover. It is not an upstream engine, executable, host plugin or runtime enforcement mechanism. Existing canonical installed names are retained; no wrapper or compatibility alias is introduced.
 
 ## Exact source-to-local mapping
 
@@ -28,7 +28,7 @@ The upstream handoff skill has no companion references. Upstream agent metadata 
 
 ## Local authored material
 
-OMP role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links load only when their action/branch applies and the suite is enabled/available.
+Host role/permission boundaries, explicit source/approval evidence rules, conditional cross-skill routing and canonical-owner integration are local adaptations under the approved plan, not upstream runtime guarantees. SOURCES and the full notices are provenance assets; no scripts, packages, scanner rules, CI/actions, installation hooks, provider settings or engines are redistributed. Companion links load only when their action/branch applies and the suite is enabled/available.
 
 ## Delivery-routing revision — 2026-10-20
 

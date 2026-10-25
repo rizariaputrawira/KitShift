@@ -10,6 +10,6 @@ Keep reading order and access to all content intact without motion. Avoid trappi
 
 ## Implementation and proof boundary
 
-Before implementation, inspect the actual project and confirm that the required motion library and plugins are already installed and permitted. GSAP/ScrollTrigger examples are techniques, not a dependency mandate. Do not add packages, remote assets, or services without authorization. Low-level construction, lifecycle cleanup, performance, and motion implementation belong to `skill://ui-web-motion/references/build.md`.
+Before implementation, inspect the actual project and confirm that the required motion library and plugins are already installed and permitted. GSAP/ScrollTrigger examples are techniques, not a dependency mandate. Do not add packages, remote assets, or services without authorization. Low-level construction, lifecycle cleanup, performance, and motion implementation belong to [web motion build guidance](../../../../ui-web-motion/references/build.md).
 
 Test the implemented behavior in a real browser at relevant viewport sizes, including reduced-motion settings and the ordinary scroll path. Check pin spacing, content reachability, focus/navigation access, and whether the effect degrades to a coherent static presentation. Source inspection alone is not browser proof. If browser or device testing is unavailable, state that explicitly and do not claim the effect works or feels correct.

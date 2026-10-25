@@ -19,7 +19,7 @@ The shorter [tasteskill/tasteskill source at `37c8c376b92ebc02456f7c70776b514fdd
 
 ## Local correction scope
 
-The retained guidance is a selective marketing/frontend reference, not upstream OMP policy. Local changes preserve the real stack/dependencies and brief; make imagery, content editing, themes and motion scope-dependent; correct contrast and reduced-motion guidance; remove cross-project rotation, absolute punctuation/style gates, unsupported rankings/value-risk claims, and the unbundled block-library roadmap. Completion records actual checks and limits instead of plausible performance or mandatory style scores.
+The retained guidance is a selective marketing/frontend reference, not an upstream policy source. Local changes preserve the real stack/dependencies and brief; make imagery, content editing, themes and motion scope-dependent; correct contrast and reduced-motion guidance; remove cross-project rotation, absolute punctuation/style gates, unsupported rankings/value-risk claims, and the unbundled block-library roadmap. Completion records actual checks and limits instead of plausible performance or mandatory style scores.
 
 Pattern vocabulary, conditional technical sketches, design-system lookup links and the explicitly labeled web-material approximation remain references, not promised bundled components or universally verified APIs. Embedded sketch code was not compiled or browser-tested by this source correction; source loading and parsing do not demonstrate consuming-agent behavior.
 

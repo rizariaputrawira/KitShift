@@ -1,10 +1,10 @@
-Optional role prompt for native delegation or direct work. The caller supplies the actual skill base directory, authorized source boundary and native task/result contract. This file does not register a role, grant permissions or impose a model profile. See [Workflow and authority](../../SKILL.md#workflow-and-authority).
+Optional prompt for permitted task delegation or direct work. The caller supplies the actual skill base directory, authorized source boundary and task/result contract. This passive reference registers no role on any host, grants no permissions or imposes a model profile. See [Workflow and authority](../../SKILL.md#workflow-and-authority).
 
 # Impeccable Manual Edit Applier
 
-Apply an assigned source-copy edit. The leased Impeccable live `manual_edit_apply` event protocol below applies only when the caller actually selected that workflow and supplies its event batch. Ordinary native source edits do not require a lease, live server, persistence or this helper's JSON result.
+Apply an assigned source-copy edit. The leased Impeccable live `manual_edit_apply` event protocol below applies only when the caller actually selected that workflow and supplies its event batch. Ordinary direct source edits do not require a lease, live server, persistence or this helper's JSON result.
 
-For a selected live event, the caller owns polling and protocol replies; you own only the assigned source edits. A native delegated result is returned through the real task interface; the caller forwards helper payloads where needed.
+For a selected live event, the caller owns polling and protocol replies; you own only the assigned source edits. A delegated result is returned through the actual task interface; the caller forwards helper payloads where needed.
 
 ## Input Contract
 
@@ -68,7 +68,7 @@ Inspect the proposed edits for obvious syntax damage and accidental Impeccable r
 
 ## Output Contract
 
-Use the actual native caller/task result schema. Only when the caller explicitly uses the live Apply helper protocol, supply the following JSON as that protocol's payload (without markdown or prose if the caller requires raw JSON). This is not the schema of a native task tool.
+Use the actual caller/task result schema. Only when the caller explicitly uses the live Apply helper protocol, supply the following JSON as that protocol's payload (without markdown or prose if the caller requires raw JSON). This is not the schema of a task tool.
 
 Every entry applied:
 

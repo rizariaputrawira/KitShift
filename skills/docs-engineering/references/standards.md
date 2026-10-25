@@ -47,7 +47,7 @@ Android/Google published terms and Apple copyright/terms remain authoritative; t
 ## Standards mapping record
 For each actual applicability claim record source/exact edition or release, rationale, information owner, actual required review/approval/evidence, implementation status and review trigger in the owning project artifact. Provision identifiers are used only from legitimately available source text. Map observed implementation/verification separately from document approval. Missing obligations/interpretation/access blocks the affected assurance claim; safe independent work continues. Catalog related-standards references alone never make a standard applicable.
 
-The before-code documentation order is local delivery policy owned by `skill://workflow-delivery/references/documentation-baseline.md`, not ISO-mandated waterfall or proof of conformity. Public metadata/abstracts support this guidance map, not clause-level assessment:
+The before-code documentation order is local delivery policy owned by [workflow delivery](../../workflow-delivery/references/documentation-baseline.md), not ISO-mandated waterfall or proof of conformity. Public metadata/abstracts support this guidance map, not clause-level assessment:
 
 | Guidance source | Application information |
 |---|---|

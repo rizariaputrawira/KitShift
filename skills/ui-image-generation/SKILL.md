@@ -23,5 +23,4 @@ Modified integration of the Taste web/mobile image-generation procedures. Copyri
 5. Return actual requested images and observed limits. Synthetic concepts are not
    screenshots of a real product, real customer evidence or implementation proof.
 
-Implementing a supplied or permitted generated reference belongs to
-skill://ui-image-to-code. General UI refinement belongs to skill://ui-design.
+[Image-to-code guidance](../ui-image-to-code/SKILL.md) covers implementing a supplied or permitted generated reference. General UI refinement belongs to [UI design guidance](../ui-design/SKILL.md).

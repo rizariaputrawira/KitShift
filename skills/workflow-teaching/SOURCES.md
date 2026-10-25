@@ -1,6 +1,6 @@
 # Sources and modifications
 
-Status: OMP-native passive adaptation of the immutable source below; local permissions, workspace paths, and artifact-write boundaries govern. Source revision: `5beb35b040e3de97e54fa9e386d7e42d15c295c2`.
+Status: harness-neutral passive adaptation of the immutable source below; local permissions, workspace paths, and artifact-write boundaries govern. Source revision: `5beb35b040e3de97e54fa9e386d7e42d15c295c2`.
 
 | Pinned source | Local mapping | Adopted / adapted |
 |---|---|---|
