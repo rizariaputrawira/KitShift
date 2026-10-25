@@ -153,7 +153,11 @@ For an existing installation, do not rename the old directories into the new des
 
 The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
 
-### Matt Pocock skill adoption
+### Skill adoption
+
+KitShift selectively adapts skills from multiple upstream projects, merging overlapping capabilities into existing owners rather than installing duplicate workflows. See [skill sources and retained notices](#skill-sources-and-retained-notices) for the source families and package-local provenance.
+
+The following map covers the Matt Pocock portion of that collection.
 
 The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
 
@@ -282,7 +286,7 @@ For harness installation and runtime questions, consult the [omp documentation](
 
 | Need | Reference |
 |---|---|
-| Choose a skill, see use cases, or find the adopted upstream name | [Complete skill use-case guide](SKILL-USAGE.md), [skills and workflows](#skills-and-workflows), [Matt Pocock adoption map](#matt-pocock-skill-adoption), and the relevant `skills/<name>/SKILL.md` |
+| Choose a skill, see use cases, or find the adopted upstream name | [Complete skill use-case guide](SKILL-USAGE.md), [skills and workflows](#skills-and-workflows), [skill adoption](#skill-adoption), and the relevant `skills/<name>/SKILL.md` |
 | Work on this repository | [Repository Guidelines](AGENTS.md) |
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), and [installer](scripts/install-omp.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [installer tests](tests/install-omp.test.mjs), and [changelog](CHANGELOG.md) |
@@ -297,7 +301,7 @@ This is a mixed-source collection, not a claim that every skill is original KitS
 
 | Source | Scope in KitShift | Local evidence and bundled license |
 |---|---|---|
-| [Matt Pocock skills](https://github.com/mattpocock/skills) | The [active adoption map](#matt-pocock-skill-adoption), plus earlier Matt-derived specification/planning material in `workflow-delivery`. Mixed-source owners retain their other notices too. | MIT: [full notice](skills/code-architecture/LICENSE.matt), [current source mapping](skills/code-architecture/SOURCES.md), and [historical delivery mappings](skills/workflow-delivery/SOURCES.md). The active pin does not replace every historical baseline. |
+| [Matt Pocock skills](https://github.com/mattpocock/skills) | The [active adoption map](#skill-adoption), plus earlier Matt-derived specification/planning material in `workflow-delivery`. Mixed-source owners retain their other notices too. | MIT: [full notice](skills/code-architecture/LICENSE.matt), [current source mapping](skills/code-architecture/SOURCES.md), and [historical delivery mappings](skills/workflow-delivery/SOURCES.md). The active pin does not replace every historical baseline. |
 | [Superpowers — obra / Jesse Vincent](https://github.com/obra/superpowers) | `agent-guidance`, `code-debugging`, `code-review`, `code-tdd`, `workflow-brainstorming`, and `workflow-delivery`. Selected procedures, not the upstream plugin. | MIT: [full notice](skills/agent-guidance/LICENSE.superpowers), [guidance source map](skills/agent-guidance/SOURCES.md), and [delivery source map](skills/workflow-delivery/SOURCES.md). |
 | [Open GSD](https://github.com/open-gsd/gsd-core) | `docs-engineering`, `docs-plan-review`, `workflow-delivery`, `workflow-handoff`, `workflow-handoff-read`, and `workflow-retrospective`. Adapted documentation, verification, handoff, and learning procedures—not the GSD runtime. | MIT: [full notice](skills/docs-engineering/LICENSE.gsd), [documentation sources](skills/docs-engineering/SOURCES.md), and [retrospective sources](skills/workflow-retrospective/SOURCES.md). |
 | [Ponytail — DietrichGebert](https://github.com/DietrichGebert/ponytail) | `code-simplicity` and its review/debt references. | MIT: [full notice](skills/code-simplicity/LICENSE.ponytail) and [inline adaptation record](skills/code-simplicity/SKILL.md). The exact imported revision is not established by the available package record; see the limits below. |
