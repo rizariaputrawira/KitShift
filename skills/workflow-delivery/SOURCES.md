@@ -54,6 +54,31 @@ Six fresh native task actors read isolated baseline/candidate snapshots of `refe
 
 These observations support the bounded draft/decision behavior only. Baselines also respected the essential boundaries; no general comparative improvement, performance/cost benefit, production edits, executable bug fix, native discovery, OS containment or future compliance is established. The fixture tasks and snapshots were temporary assessment artifacts, not installed skill variants.
 
+## Research-only responsibility-boundary evidence — 2026-10-25
+
+- [code-yeongyu/oh-my-openagent@784d7f9197eac084340331c1612f939728c6ad57: `packages/senpi-task/src/agents/types.ts`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/packages/senpi-task/src/agents/types.ts): inspected the distinction between role instructions/tools and model-category selection.
+- [The same revision: `packages/senpi-task/src/agents/builtin/index.ts`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/packages/senpi-task/src/agents/builtin/index.ts): inspected the separate research/planning and report-writing review responsibilities.
+- [The same revision: `packages/senpi-task/src/tools/task/plan-review-contract.ts`](https://github.com/code-yeongyu/oh-my-openagent/blob/784d7f9197eac084340331c1612f939728c6ad57/packages/senpi-task/src/tools/task/plan-review-contract.ts): inspected neutral review input rather than caller-directed approval.
+
+The [upstream license and research-only boundary above](#research-only-decision-escalation-evidence--2026-10-25) also apply to this evidence. No upstream role prompt, code or template is redistributed. The local brief's responsibility/return section and links are original extensions of existing assignment and permission contracts, not an imported agent roster. Investigation, implementation, consultation and review reuse their canonical skill owners; explicit scenario execution and integration acceptance retain their existing owners. No native role registration, category/model policy, compulsory pipeline, one-shot reviewer enforcement or report-path sandbox is added. Related original authoring/review refinements are recorded in [agent-guidance](../agent-guidance/SOURCES.md) and [code-review](../code-review/SOURCES.md).
+
+### Responsibility-contract assessment
+
+Twelve fresh native task actors exercised five paired synthetic scenarios, including a paired review repeat after incomplete source loading. The controller defined expected behavior before dispatch, inspected every tool transcript and final output, then checked that all three candidate reference snapshots matched the canonical checkout. Actor model identities were not exposed.
+
+| Reference | Baseline SHA-256 | Candidate SHA-256 |
+|---|---|---|
+| `references/implementation-brief.md` | `11378d4f378fe69208366deebd324d23d697b1377f2316f2c416552351f7ffd6` | `cb7ad883738749fed68a676b2869c13249ed9f0b90292e50343377f5a7516d7a` |
+| `../agent-guidance/references/skill-contract.md` | `f8f8c1934a69ce00c35c40844e79da1fc02a2c0217bbf6db101901f43e00b618` | `e87e52d590b474f9790bc8a49544406b93246e35e53c88f4ea9c9f451f58c346` |
+| `../code-review/references/review-brief.md` | `f116de1f0ba8b5315a7db5c46be563bf8fe2ee1024d7b6d2cc8493a0d02b9e3b` | `b95761a9c87f642aae48cc52d893414a7d0c369475af60816a2074e3c3cab5b9` |
+
+- Investigation: both read the synthetic retry contract and implementation, identified the `0`/truthiness-default mismatch, and distinguished source diagnosis from observed caller behavior. Neither changed code or executed it. External-research procedure loading was not exercised.
+- Consultation: both respected the advice-only boundary and recommended request-local cache state. The baseline did not supply the requested second viable design: its alternative retained forbidden cross-request reuse. The candidate loaded the canonical architecture procedure and offered explicit state passing or folding the cache into the handler, with tradeoffs and no implementation claim. This is a bounded output difference, not general comparative proof.
+- Review: the first pair guessed the wrong companion directory; baseline omitted the required reference, while candidate used the canonical reference instead of its assigned snapshot. Both comparisons were incomplete despite finding the defect. Fresh repeats read explicit branch-specific briefs and actual criterion/code, rejected the unclamped negative-balance regression on separate Spec and correctness axes, and did not repair, execute tests or accept the author's unsupported approval request.
+- Implementation countercase: each actor edited only its assigned temporary module, replacing a truthiness fallback with nullish handling, and returned unrun-check/integration limits without escalation or self-approval. The controller imported both actual edited modules and observed all eight cases pass for each: null, undefined, empty string, zero, false, ordinary text, whitespace and object identity.
+- Capability selection: both rejected redundant role registration and the unsupported Markdown-only report-path confinement claim, and required a fresh reviewer for the requested independent review. The candidate used direct bounded execution as the default, making read-only investigation conditional rather than requiring a five-role pipeline.
+
+Only the two implementation actors made writes, to their separate temporary fixtures; no actor ran code, dispatched workers or changed configuration. The controller retained integrated verification and acceptance. All four isolated installer scenarios passed, and 18 relative links including the heading anchor resolved across the seven changed documents. These observations do not establish native discovery/registration, enforced reviewer independence, OS containment, production behavior, cost/speed gains or future compliance. Baselines also preserved important boundaries; the initial review loading failures remain recorded rather than counted as successful comparisons. Temporary fixtures are not installed skill variants.
 
 ## Incumbent disposition and local ownership
 

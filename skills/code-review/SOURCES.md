@@ -26,6 +26,11 @@ Pinned revision `5beb35b040e3de97e54fa9e386d7e42d15c295c2` adds a conditional ar
 
 All procedures operate within applicable host/user permissions. Their instructions do not create a sandbox, model binding, execution authorization or approval interface. References load only for their stated branch; shared owners are linked rather than cloned. Missing material source/evidence remains a gap, not a fabricated pass. These adaptations preserve the approved requested behavior rather than importing upstream engines.
 
+## Local independent-review refinement — 2026-10-25
+
+`references/review-brief.md` now makes requested/required independence explicit: use a fresh permitted reviewer, supply the original criteria and inspectable comparison/evidence, and keep implementer explanations as claims rather than pressure to approve. Changed material is reviewed on its current basis; no runtime one-shot policy, mandatory review fleet or unsteerable session is asserted. This is original local wording extending the existing source-inspecting brief. The pinned research-only basis and scoped assessment are maintained by the [delivery evidence owner](../workflow-delivery/SOURCES.md); no OmO prompt/code is redistributed. Existing adopted source mappings and full notices remain unchanged.
+
+
 ## Evidence limits
 
 Pinned text and full repository LICENSE were retrieved read-only for this adaptation. No target source was executed and no runtime, build, test, lint, format, native discovery or compatibility gate was run while drafting. Source provenance is not behavioral assurance. Historical baseline and later actual verification belong to the integration owner's evidence record.

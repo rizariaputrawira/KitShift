@@ -6,6 +6,21 @@ Load when delegating an authorized slice through available host task interfaces 
 
 State one complete vertical result and its exact acceptance anchors. Include the relevant approved plan content, not merely a task title or an inaccessible URI. Explain its producer/consumer place in the delivered boundary. If substantial work has distinct acceptance or dependency boundaries, assign the next coherent milestone rather than an indefinite “finish everything”; keep later criteria allocated in the approved plan.
 
+## Responsibility and return
+
+Name the assignment's primary responsibility, permitted actions and expected return before choosing an available native worker. These are assignment boundaries, not registered agent names or mandatory workflow stages. Reuse the host's existing roles and enabled skills; a small cohesive task need not be delegated.
+
+| Responsibility | Required return and boundary |
+|---|---|
+| Investigation | Findings tied to inspected sources, with facts separated from inference and missing evidence. Finding a likely cause does not authorize a fix or prove a proposed implementation works. |
+| Implementation | The bounded change, affected consumers and acceptance coverage, with inspectable verification evidence and unrun checks identified. An implementation report is not independent review or final acceptance. |
+| Consultation | A supported recommendation, material alternatives/tradeoffs, assumptions and decisions still owned by the caller or user. Advice is not an approved design or permission to implement it. |
+| Review | Findings and verdicts against the supplied comparison, requirements and applicable standards, with evidence and coverage gaps. A requested verdict or the implementer's confidence is not proof; the review does not authorize repairs or scope changes. |
+
+Keep domain procedures with their enabled owners: for primary-source research read [workflow-research](../../workflow-research/SKILL.md); for module/interface design consultation read [code-architecture](../../code-architecture/SKILL.md); for code/change review read [code-review](../../code-review/SKILL.md); for consequential plan review read [docs-plan-review](../../docs-plan-review/SKILL.md). Load only the applicable branch, without bypassing deliberate disablement. Explicit scenario execution belongs under Verification below; reviewing a result does not mean the scenario was run.
+
+The integration owner connects these returns to the requested outcome, resolves decisions within current authority and inspects acceptance evidence. Do not dispatch every responsibility for every task or delegate final acceptance to a worker's self-assessment.
+
 ## Scope
 
 Name the allowed root and exact affected files/symbols, consumers, tests and documentation. Name exclusions and sibling ownership. Identify consumes/produces boundaries; put established signatures and prerequisite evidence under Evidence / Context. State which prerequisite is ready and which dependent work must wait. Prefer existing conventions; do not authorize architectural restructuring by implication. Shared checkout writes have one owner unless isolation is established.
@@ -45,7 +60,7 @@ Supply only decisive established sources/anchors, versions, exact interfaces/typ
 
 ## Expected Result
 
-Describe concrete implementation and affected caller/test/doc updates. The return includes paths changed, acceptance coverage, actual result/transcript/artifact locators, check input/outcome, source/environment basis, unrun checks and unresolved concerns. Tie returned producer outputs and any invalid/missing prerequisite to the dependency handoff contract above. Distinguish worker assertions from inspected proof; worker success or schema validity is not acceptance. For research/draft workers, name the allowed artifact channel and forbid checkout writes explicitly.
+Describe the result for the assigned responsibility and any authorized caller/test/doc updates. The return includes paths changed, acceptance coverage, actual result/transcript/artifact locators, check input/outcome, source/environment basis, unrun checks and unresolved concerns. Tie returned producer outputs and any invalid/missing prerequisite to the dependency handoff contract above. Distinguish worker assertions from inspected proof; worker success or schema validity is not acceptance. For research/draft workers, name the allowed artifact channel and forbid checkout writes explicitly.
 
 For substantial work, name useful checkpoints at an actual interface handoff, completed consumer path, verification boundary or newly discovered blocker. A checkpoint reports completed acceptance, changed paths, actual evidence or checks still reserved for the parent, remaining work and the precise next action. State whether it is a progress report within the current assignment or a milestone return awaiting deliberate continuation. A checkpoint is not full completion or new approval; never stop with a misleading scaffold verdict. No universal request/token/time/tool-call limit applies.
 

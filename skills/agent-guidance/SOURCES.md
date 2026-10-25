@@ -49,6 +49,11 @@ assessment still needs separate authorization and actual baseline/candidate
 evidence, but a separate reviewer is required only by that assessment's contract
 or a concrete independence need. The evaluator and limits must be reported.
 
+## Local responsibility/capability distinction — 2026-10-25
+
+`references/skill-contract.md` now distinguishes reusable skill procedures, assignment-specific responsibility/discretion and host-implemented role capabilities. It prefers existing roles and skills; another role needs a material capability, context, lifecycle or return-contract distinction that the assignment cannot adequately express and actual host support before authorized registration. This is original local guidance, not OmO prompt/schema content or runtime configuration. The pinned research-only basis and scoped assessment are maintained by the [delivery evidence owner](../workflow-delivery/SOURCES.md). Existing upstream mappings, full notices and invocation metadata are unchanged.
+
+
 ## Evidence limits
 
 Pinned text and full repository LICENSE were retrieved read-only for this adaptation. No target source was executed and no runtime, build, test, lint, format, native discovery or compatibility gate was run while drafting. Source provenance is not behavioral assurance. Historical baseline and later actual verification belong to the integration owner's evidence record.

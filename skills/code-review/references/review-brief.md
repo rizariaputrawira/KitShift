@@ -14,6 +14,8 @@ Use the actual available task interface and role schema. Give the reviewer:
 
 Do not substitute a diff-only role for decisive source/caller inspection. A supplied schema alone is not permission. If this is not a dispatched review, apply the same input checks yourself.
 
+When independent review is requested or required, use a fresh permitted reviewer rather than asking the implementer to certify its own work. Supply the original requirements and inspectable comparison/evidence, not instructions to reach a desired verdict; keep author explanations labeled as claims. Resolve a missing fact with source evidence, not pressure to approve. A material revision changes the review basis and needs review of the affected boundary, but no native one-shot policy or unsteerable session is implied by this guidance.
+
 ## Ordered inspection
 
 1. Pin the comparison and inventory every requested changed path, including WIP. Check that a batch listing a change in several files actually covers each required change—not merely that the overall diff looks tidy.
