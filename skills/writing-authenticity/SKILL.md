@@ -16,6 +16,20 @@ Use this skill for explicit writing-quality review, substantial editorial analys
 
 Write in the artifact's language and audience-appropriate register. For English and Indonesian, assess idiom in that language; English stylistic pattern bans are not Indonesian rules. For mixed-language artifacts, preserve each language's intended audience and meaning.
 
+During inspection of English human-facing text, read [the English vocabulary watchlist](references/vocabulary-en.md); for Indonesian human-facing text, read [the Indonesian vocabulary watchlist](references/vocabulary-id.md). For mixed English/Indonesian text, read both and assess each passage in its own language. These references are not a word filter for code, quotations, identifiers or machine-facing output.
+
+For each relevant occurrence, use the row to identify an actual clarity, evidence or audience-fit problem. Keep precise wording unchanged; otherwise report the problem in an audit or make the smallest authorized revision. Suggested alternatives are not interchangeable synonyms: preserve technical meaning, register and degree of certainty. A listed word alone is never a reason to change text or infer authorship.
+
+### Indonesian-language checks
+
+For Indonesian human-facing text, apply these checks during inspection and compare any revision against the original:
+
+- **Register and idiom:** match the document's purpose and audience. Keep academic or official prose formal where required; do not force conversational wording, slang, English contractions or literal English sentence patterns. Correct awkward translated phrasing only when the replacement preserves meaning.
+- **Transitions and repetition:** inspect repeated openings such as *selain itu* or *lebih lanjut*. Keep connectors that express a real addition, contrast or consequence; remove empty framing or repetition without losing the relationship between claims. Do not vary sentence lengths, paragraph shapes or list counts merely to break a pattern.
+- **Terminology:** use precise, consistent Indonesian terms or established domain terms appropriate to the audience. Keep valid words such as *meningkatkan*, *mencakup* and *berdasarkan* when they express the intended meaning; do not impose a blacklist or swap technical terms for less accurate synonyms.
+- **Voice and focus:** choose active or passive constructions according to the information being foregrounded. Keep passive wording when the procedure, object or result is the focus; name an actor when responsibility matters and the source identifies one. Do not invent an actor to make a sentence active.
+- **Evidence and qualification:** preserve warranted limits such as *dapat*, *diperkirakan* or *belum dapat disimpulkan*, along with citations and distinctions between association and causation. Remove redundant hedging only when certainty does not change; never strengthen a claim merely to sound decisive.
+
 ## Artifact-specific checks
 
 Apply only when the artifact is in scope:
