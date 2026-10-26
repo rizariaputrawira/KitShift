@@ -145,14 +145,21 @@ The shared skill procedures are harness- and agent-neutral: cross-skill referenc
 
 See the [complete skill use-case guide](SKILL-USAGE.md) for all 55 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
-| Area | Example skills |
+### Skill collection
+
+KitShift includes **55 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
+
+| Capability | Skills |
 |---|---|
-| Engineering | [Debugging](skills/code-debugging/SKILL.md), [code review](skills/code-review/SKILL.md), [TDD](skills/code-tdd/SKILL.md), [simplification](skills/code-simplicity/SKILL.md) |
-| Planning and documentation | [Brainstorming](skills/workflow-brainstorming/SKILL.md), [domain modeling](skills/docs-domain-modeling/SKILL.md), [documentation-first delivery](skills/workflow-delivery/SKILL.md) |
-| UI and motion | [UI design / Impeccable](skills/ui-design/SKILL.md), [Taste frontend](skills/ui-taste-frontend/SKILL.md), [Stitch input](skills/ui-stitch-design-input/SKILL.md), [mobile web](skills/ui-mobile-web/SKILL.md), [web motion](skills/ui-web-motion/SKILL.md), [Expo motion](skills/ui-expo-motion/SKILL.md), [UI stress testing](skills/ui-stress-test/SKILL.md) |
-| Security | [Security review](skills/security-review/SKILL.md), [security audit](skills/security-audit/SKILL.md), [dependency intake](skills/security-intake/SKILL.md) |
-| Git | [Change status](skills/git-change-status/SKILL.md), [commit messages](skills/git-commit-message/SKILL.md), [PR work](skills/git-pr-work/SKILL.md) |
-| Writing and continuity | [Writing review](skills/writing-authenticity/SKILL.md), [provenance review](skills/content-provenance-audit/SKILL.md), [handoffs](skills/workflow-handoff/SKILL.md) |
+| Engineering and agent guidance | [agent-guidance](skills/agent-guidance/SKILL.md), [code-architecture](skills/code-architecture/SKILL.md), [code-debugging](skills/code-debugging/SKILL.md), [code-implementation](skills/code-implementation/SKILL.md), [code-prototyping](skills/code-prototyping/SKILL.md), [code-python](skills/code-python/SKILL.md), [code-review](skills/code-review/SKILL.md), [code-search](skills/code-search/SKILL.md), [code-simplicity](skills/code-simplicity/SKILL.md), [code-swift-development](skills/code-swift-development/SKILL.md), [code-tdd](skills/code-tdd/SKILL.md) |
+| Documentation and domain modeling | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md), [docs-engineering](skills/docs-engineering/SKILL.md), [docs-plan-review](skills/docs-plan-review/SKILL.md), [docs-specification](skills/docs-specification/SKILL.md) |
+| Git and pull requests | [git-change-status](skills/git-change-status/SKILL.md), [git-commit-message](skills/git-commit-message/SKILL.md), [git-pr-work](skills/git-pr-work/SKILL.md), [git-triage](skills/git-triage/SKILL.md) |
+| Security | [security-audit](skills/security-audit/SKILL.md), [security-intake](skills/security-intake/SKILL.md), [security-review](skills/security-review/SKILL.md) |
+| UI design, assets and inspection | [ui-brand-concepts](skills/ui-brand-concepts/SKILL.md), [ui-browser](skills/ui-browser/SKILL.md), [ui-design](skills/ui-design/SKILL.md), [ui-image-generation](skills/ui-image-generation/SKILL.md), [ui-image-to-code](skills/ui-image-to-code/SKILL.md), [ui-library-selection](skills/ui-library-selection/SKILL.md), [ui-prototyping](skills/ui-prototyping/SKILL.md), [ui-stitch-design-input](skills/ui-stitch-design-input/SKILL.md), [ui-stress-test](skills/ui-stress-test/SKILL.md), [ui-taste-frontend](skills/ui-taste-frontend/SKILL.md) |
+| UI platforms, motion and feedback | [ui-expo-motion](skills/ui-expo-motion/SKILL.md), [ui-gesture-design](skills/ui-gesture-design/SKILL.md), [ui-mobile-web](skills/ui-mobile-web/SKILL.md), [ui-sonner](skills/ui-sonner/SKILL.md), [ui-web-motion](skills/ui-web-motion/SKILL.md) |
+| Workflow planning and execution | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md), [workflow-delivery](skills/workflow-delivery/SKILL.md), [workflow-project-setup](skills/workflow-project-setup/SKILL.md), [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md), [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md), [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md), [workflow-todo](skills/workflow-todo/SKILL.md), [workflow-wizard](skills/workflow-wizard/SKILL.md) |
+| Research, learning and continuity | [workflow-handoff](skills/workflow-handoff/SKILL.md), [workflow-handoff-read](skills/workflow-handoff-read/SKILL.md), [workflow-research](skills/workflow-research/SKILL.md), [workflow-retrospective](skills/workflow-retrospective/SKILL.md), [workflow-teaching](skills/workflow-teaching/SKILL.md), [workflow-upstream-review](skills/workflow-upstream-review/SKILL.md), [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
+| Writing and provenance analysis | [content-provenance-audit](skills/content-provenance-audit/SKILL.md), [writing-authenticity](skills/writing-authenticity/SKILL.md), [writing-explanation](skills/writing-explanation/SKILL.md) |
 
 Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
 
@@ -173,48 +180,6 @@ For an existing installation, do not rename the old directories into the new des
 3. Compare the backups with the new packages and reconcile any local edits deliberately. Do not copy an old `SKILL.md` back wholesale, because its old frontmatter name would undo the identity migration. Restart omp after migration.
 
 The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
-
-### Skill adoption
-
-KitShift selectively adapts skills from multiple upstream projects, merging overlapping capabilities into existing owners rather than installing duplicate workflows. See [skill sources and retained notices](#skill-sources-and-retained-notices) for the source families and package-local provenance.
-
-The following map covers the Matt Pocock portion of that collection.
-
-The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
-
-This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. The current 55-skill collection also includes the three cross-harness helper skills. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
-
-| Upstream skill(s) | KitShift owner(s) |
-|---|---|
-| `ask-matt` | [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md) |
-| `code-review` | [code-review](skills/code-review/SKILL.md) |
-| `codebase-design`, `improve-codebase-architecture` | [code-architecture](skills/code-architecture/SKILL.md) |
-| `diagnosing-bugs` | [code-debugging](skills/code-debugging/SKILL.md) |
-| `domain-modeling` | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md) |
-| `grill-with-docs`, `grill-me`, `grilling` | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md) |
-| `implement`, `implement-spec` | [code-implementation](skills/code-implementation/SKILL.md) |
-| `pr` | [git-pr-work](skills/git-pr-work/SKILL.md) |
-| `prototype` | [code-prototyping](skills/code-prototyping/SKILL.md) for logic/state questions; [ui-prototyping](skills/ui-prototyping/SKILL.md) for UI alternatives |
-| `research` | [workflow-research](skills/workflow-research/SKILL.md) |
-| `retro` | [workflow-retrospective](skills/workflow-retrospective/SKILL.md) |
-| `setup-matt-pocock-skills` | [workflow-project-setup](skills/workflow-project-setup/SKILL.md) |
-| `tdd` | [code-tdd](skills/code-tdd/SKILL.md) |
-| `to-spec` | [docs-specification](skills/docs-specification/SKILL.md) |
-| `to-tickets` | [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md) |
-| `triage` | [git-triage](skills/git-triage/SKILL.md) |
-| `wayfinder` | [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
-| `wizard` | [workflow-wizard](skills/workflow-wizard/SKILL.md) |
-| `handoff` | [workflow-handoff](skills/workflow-handoff/SKILL.md) |
-| `teach` | [workflow-teaching](skills/workflow-teaching/SKILL.md) |
-| `to-questionnaire` | [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md) |
-| `wait-what` | [writing-explanation](skills/writing-explanation/SKILL.md) |
-| `writing-for-agents` | [agent-guidance](skills/agent-guidance/SKILL.md) |
-
-Newly adopted descriptions use a compact `[Matt Pocock]` source tag followed by the capability's trigger. Merged skills retain combined contributor tags. Each adapted owner records its exact source paths, modifications, and full Matt Pocock MIT notice in `SOURCES.md` and `LICENSE.matt`; previous source records and notices remain.
-
-These adopted procedures are passive instructions packaged for both harnesses, not the upstream plugin or its executables. Explicit-only skills retain `disable-model-invocation: true`; merged owners retain their established exposure. Setup is only needed for the tracker/documentation operations that actually depend on it. No automatic commits, pushes, tracker publication, mandatory subagent topology, universal TDD, or implicit documentation-first baseline is adopted. The optional skill selector recommends a path when requested; it is not a global router.
-
-
 
 ## MCP integrations
 
@@ -240,18 +205,6 @@ Moving Node, a CLI, or the browser can require re-rendering MCP configuration. A
 - **Know which account is used.** GitHub MCP inherits the account available to `gh`; the kit does not reduce that account's permissions.
 - **Keep privacy claims scoped.** The omp configuration disables OTLP telemetry export and AutoQA, denies AutoQA consent, and disables automatic Codex saved-reset redemption. The design MCP has separate process-scoped privacy settings. These are not a guarantee that every external tool sends no telemetry.
 - **Preserve local data.** Config, MCP config, and the install manifest use mode `0600`. The installer rejects symlink destinations, does not automatically delete obsolete files, and does not promise transactional rollback after an I/O failure.
-
-### Restored skill provenance
-
-Three packages were initially excluded while their source records were investigated. They are now included with scoped attribution and full notices, not a blanket legal or security certification:
-
-| Package | Established evidence and remaining boundary |
-|---|---|
-| [Stitch input](skills/ui-stitch-design-input/SOURCES.md) | Leonxlnx's MIT source is corroborated by the Google Stitch contribution and an attributed redistribution. The package preserves the locally adapted procedure and illustrative sample; the exact historical import event remains unknown. |
-| [Taste frontend](skills/ui-taste-frontend/SOURCES.md) | Aria's original expanded file exactly matches Leonxlnx's pinned expanded Taste source. The earlier shorter-source comparison did not identify that complete baseline. Both full MIT notices are retained; the current local adaptation is preserved rather than importing newer upstream behavior. |
-| [UI design](skills/ui-design/NOTICE.md) | Impeccable's Apache-2.0 and nested platform notice remain. The bundled screenshot helper exactly matches `modern-screenshot@4.7.0`, and its full MIT notice is now included. Remaining nested-rights, helper-security, and external-engine limitations are explicitly retained. |
-
-These source comparisons do not prove original authorship, comprehensive rights clearance, or consuming-agent behavior. No expansion is attributed to the kit's owner merely because it appeared in their configuration.
 
 ## Updates and troubleshooting
 
@@ -340,7 +293,7 @@ For omp installation and runtime questions, consult the [omp documentation](http
 
 | Need | Reference |
 |---|---|
-| Choose a skill, see use cases, or find the adopted upstream name | [Complete skill use-case guide](SKILL-USAGE.md), [skills and workflows](#skills-and-workflows), [skill adoption](#skill-adoption), and the relevant `skills/<name>/SKILL.md` |
+| Choose a skill, see use cases, or find the adopted upstream name | [Skill collection](#skill-collection), [complete skill use-case guide](SKILL-USAGE.md), [Matt Pocock adoption mapping](#matt-pocock-adoption-mapping), and the relevant `skills/<name>/SKILL.md` |
 | Work on this repository | [Repository Guidelines](AGENTS.md) |
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), [unified installer](scripts/install.mjs), [omp installer](scripts/install-omp.mjs), and [agy installer](scripts/install-agy.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [omp tests](tests/install-omp.test.mjs), [agy tests](tests/install-agy.test.mjs), [state-helper tests](tests/state-helpers.test.mjs), [search-helper tests](tests/search-helper.test.mjs), [omp compatibility](harnesses/omp/COMPATIBILITY.md), [agy compatibility](harnesses/agy/COMPATIBILITY.md), and [changelog](CHANGELOG.md) |
@@ -351,11 +304,13 @@ This navigation follows the approach in [Aria OMP Config](https://github.com/riz
 
 ### Skill sources and retained notices
 
+KitShift selectively adapts material from multiple upstream projects, merging overlapping capabilities rather than installing duplicate workflows, and includes locally authored procedures. The source families below are not additive skill counts: one KitShift skill may combine several contributors. The [55-skill collection](#skill-collection) is the inventory; this section records provenance, not another catalog.
+
 This is a mixed-source collection, not a claim that every skill is original KitShift work. The table identifies source families and representative full notices. Each applicable package retains its own notices; its source record defines the exact files, revisions, adaptations, and exclusions. A comparison or license-evidence pin is not necessarily the historical import commit.
 
 | Source | Scope in KitShift | Local evidence and bundled license |
 |---|---|---|
-| [Matt Pocock skills](https://github.com/mattpocock/skills) | The [active adoption map](#skill-adoption), plus earlier Matt-derived specification/planning material in `workflow-delivery`. Mixed-source owners retain their other notices too. | MIT: [full notice](skills/code-architecture/LICENSE.matt), [current source mapping](skills/code-architecture/SOURCES.md), and [historical delivery mappings](skills/workflow-delivery/SOURCES.md). The active pin does not replace every historical baseline. |
+| [Matt Pocock skills](https://github.com/mattpocock/skills) | The [Matt Pocock adoption mapping](#matt-pocock-adoption-mapping), plus earlier Matt-derived specification/planning material in `workflow-delivery`. Mixed-source owners retain their other notices too. | MIT: [full notice](skills/code-architecture/LICENSE.matt), [current source mapping](skills/code-architecture/SOURCES.md), and [historical delivery mappings](skills/workflow-delivery/SOURCES.md). The active pin does not replace every historical baseline. |
 | [Superpowers — obra / Jesse Vincent](https://github.com/obra/superpowers) | `agent-guidance`, `code-debugging`, `code-review`, `code-tdd`, `workflow-brainstorming`, and `workflow-delivery`. Selected procedures, not the upstream plugin. | MIT: [full notice](skills/agent-guidance/LICENSE.superpowers), [guidance source map](skills/agent-guidance/SOURCES.md), and [delivery source map](skills/workflow-delivery/SOURCES.md). |
 | [Open GSD](https://github.com/open-gsd/gsd-core) | `docs-engineering`, `docs-plan-review`, `workflow-delivery`, `workflow-handoff`, `workflow-handoff-read`, and `workflow-retrospective`. Adapted documentation, verification, handoff, and learning procedures—not the GSD runtime. | MIT: [full notice](skills/docs-engineering/LICENSE.gsd), [documentation sources](skills/docs-engineering/SOURCES.md), and [retrospective sources](skills/workflow-retrospective/SOURCES.md). |
 | [Ponytail — DietrichGebert](https://github.com/DietrichGebert/ponytail) | `code-simplicity` and its review/debt references. | MIT: [full notice](skills/code-simplicity/LICENSE.ponytail) and [inline adaptation record](skills/code-simplicity/SKILL.md). The exact imported revision is not established by the available package record; see the limits below. |
@@ -371,6 +326,68 @@ This is a mixed-source collection, not a claim that every skill is original KitS
 
 Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) in [the PR source record](skills/git-pr-work/SOURCES.md). That record links a moving upstream path rather than a separately pinned downstream license notice. Matt's retained MIT notice alone should not be treated as proof of complete downstream rights or notice coverage.
 
+#### Matt Pocock adoption mapping
+
+This is one source-specific mapping, not the full KitShift inventory. Its **27** counts upstream skills; the [collection](#skill-collection) contains **55** current KitShift skill packages.
+
+<details>
+<summary>Expand upstream-to-KitShift mappings and adaptation boundaries</summary>
+
+The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
+
+This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. The current 55-skill collection also includes the three cross-harness helper skills. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
+
+| Upstream skill(s) | KitShift owner(s) |
+|---|---|
+| `ask-matt` | [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md) |
+| `code-review` | [code-review](skills/code-review/SKILL.md) |
+| `codebase-design`, `improve-codebase-architecture` | [code-architecture](skills/code-architecture/SKILL.md) |
+| `diagnosing-bugs` | [code-debugging](skills/code-debugging/SKILL.md) |
+| `domain-modeling` | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md) |
+| `grill-with-docs`, `grill-me`, `grilling` | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md) |
+| `implement`, `implement-spec` | [code-implementation](skills/code-implementation/SKILL.md) |
+| `pr` | [git-pr-work](skills/git-pr-work/SKILL.md) |
+| `prototype` | [code-prototyping](skills/code-prototyping/SKILL.md) for logic/state questions; [ui-prototyping](skills/ui-prototyping/SKILL.md) for UI alternatives |
+| `research` | [workflow-research](skills/workflow-research/SKILL.md) |
+| `retro` | [workflow-retrospective](skills/workflow-retrospective/SKILL.md) |
+| `setup-matt-pocock-skills` | [workflow-project-setup](skills/workflow-project-setup/SKILL.md) |
+| `tdd` | [code-tdd](skills/code-tdd/SKILL.md) |
+| `to-spec` | [docs-specification](skills/docs-specification/SKILL.md) |
+| `to-tickets` | [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md) |
+| `triage` | [git-triage](skills/git-triage/SKILL.md) |
+| `wayfinder` | [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
+| `wizard` | [workflow-wizard](skills/workflow-wizard/SKILL.md) |
+| `handoff` | [workflow-handoff](skills/workflow-handoff/SKILL.md) |
+| `teach` | [workflow-teaching](skills/workflow-teaching/SKILL.md) |
+| `to-questionnaire` | [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md) |
+| `wait-what` | [writing-explanation](skills/writing-explanation/SKILL.md) |
+| `writing-for-agents` | [agent-guidance](skills/agent-guidance/SKILL.md) |
+
+Newly adopted descriptions use a compact `[Matt Pocock]` source tag followed by the capability's trigger. Merged skills retain combined contributor tags. Each adapted owner records its exact source paths, modifications, and full Matt Pocock MIT notice in `SOURCES.md` and `LICENSE.matt`; previous source records and notices remain.
+
+These adopted procedures are passive instructions packaged for both harnesses, not the upstream plugin or its executables. Explicit-only skills retain `disable-model-invocation: true`; merged owners retain their established exposure. Setup is only needed for the tracker/documentation operations that actually depend on it. No automatic commits, pushes, tracker publication, mandatory subagent topology, universal TDD, or implicit documentation-first baseline is adopted. The optional skill selector recommends a path when requested; it is not a global router.
+
+</details>
+
+#### Historical provenance checks
+
+These checks explain earlier source investigations, not additional skills or separate installation steps. All three packages are part of the [skill collection](#skill-collection).
+
+<details>
+<summary>Expand historical Stitch, Taste and UI-design evidence</summary>
+
+Three packages were initially excluded while their source records were investigated, then included with scoped attribution and full notices, not a blanket legal or security certification:
+
+| Package | Established evidence and remaining boundary |
+|---|---|
+| [Stitch input](skills/ui-stitch-design-input/SOURCES.md) | Leonxlnx's MIT source is corroborated by the Google Stitch contribution and an attributed redistribution. The package preserves the locally adapted procedure and illustrative sample; the exact historical import event remains unknown. |
+| [Taste frontend](skills/ui-taste-frontend/SOURCES.md) | Aria's original expanded file exactly matches Leonxlnx's pinned expanded Taste source. The earlier shorter-source comparison did not identify that complete baseline. Both full MIT notices are retained; the current local adaptation is preserved rather than importing newer upstream behavior. |
+| [UI design](skills/ui-design/NOTICE.md) | Impeccable's Apache-2.0 and nested platform notice remain. The bundled screenshot helper exactly matches `modern-screenshot@4.7.0`, and its full MIT notice is now included. Remaining nested-rights, helper-security, and external-engine limitations are explicitly retained. |
+
+These source comparisons do not prove original authorship, comprehensive rights clearance, or consuming-agent behavior. No expansion is attributed to the kit's owner merely because it appeared in their configuration.
+
+</details>
+
 ### Local guidance and research-only references
 
 The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. This is an authorship/provenance statement, not a new license grant.
@@ -385,7 +402,7 @@ Research citations are not bundled dependencies or permission grants. In particu
 
 - Preserve applicable full copyright, permission, license, and attribution notices with copied/adapted material. For Apache-2.0 components, retain the applicable notices and modification records as required by their terms. A source link or picker description is not a substitute for those files.
 - Keep mixed-source notices together: for example, Matt/Emil UI prototyping, Matt/Superpowers/GSD delivery, both Taste notices, and Impeccable's separately licensed nested components.
-- Preserve unresolved evidence honestly. Ponytail's inline record references an Aria-era ledger absent here and does not establish an immutable import pin. The [UI notice](skills/ui-design/NOTICE.md) does not comprehensively establish historical import permissions or every nested right. The [restored-skill provenance summary](#restored-skill-provenance) records the narrower Taste, Stitch, and screenshot-helper evidence without claiming complete clearance.
+- Preserve unresolved evidence honestly. Ponytail's inline record references an Aria-era ledger absent here and does not establish an immutable import pin. The [UI notice](skills/ui-design/NOTICE.md) does not comprehensively establish historical import permissions or every nested right. The [historical provenance checks](#historical-provenance-checks) record the narrower Taste, Stitch, and screenshot-helper evidence without claiming complete clearance.
 - Fonts, external engines, tools, services, and dependencies are not cleared by an adjacent skill's license. The bundled font-index JSON files are metadata, not font licenses or a bundled font collection.
 - Before relying on redistribution permission where evidence is incomplete, establish the exact applicable source, terms, and notice obligations, or exclude the affected material. Attribution is not endorsement, and local presence is not permission.
 
