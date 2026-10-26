@@ -101,8 +101,8 @@ Once installed:
 - Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
 - The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
 - Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
-- All 52 skills are available on demand.
-- Native subagents `kitshift-reviewer` and `kitshift-investigator` can be invoked via `invoke_subagent`.
+- All 55 skills are available on demand.
+- Native subagents `kitshift-reviewer`, `kitshift-investigator`, `kitshift-executor`, and `kitshift-architect` are packaged for dispatch through the host's supported interface. Validation/discovery does not prove every role's tools or model selection at runtime.
 - Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
 
 ## How it works
@@ -113,9 +113,9 @@ The repository is the source of truth. The installers copy content into the targ
 |---|---|---|---|
 | Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
-| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (52 canonical skills) |
-| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) |
-| MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign; GitHub at host level) |
+| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (55 canonical skills) |
+| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (reviewer, investigator, executor, architect with `kitshift-` prefix) |
+| MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
 
@@ -141,14 +141,14 @@ omp supplies execution and native capabilities; assignments define responsibilit
 
 Ask for the task directly, or name the relevant skill when you want a specific procedure.
 
-The shared skill procedures are harness- and agent-neutral: cross-skill references are relative file links, and instructions use the selected host's available tools, permissions and approval mechanisms. Read linked canonical sources only when enabled and authorized; a link does not bypass deliberate disablement. The [passive skill contract](skills/agent-guidance/references/skill-contract.md) owns packaging, invocation and permission rules. Runtime-specific checks live in conditional compatibility references, including the [omp compatibility companion](skills/docs-engineering/references/omp-compatibility.md). Configuration, deployment and recorded runtime evidence remain with [the omp adapter](harnesses/omp/COMPATIBILITY.md). Portable source guidance is not proof that another harness integration has been implemented or tested.
+The shared skill procedures are harness- and agent-neutral: cross-skill references are relative file links, and instructions use the selected host's available tools, permissions and approval mechanisms. Read linked canonical sources only when enabled and authorized; a link does not bypass deliberate disablement. The [passive skill contract](skills/agent-guidance/references/skill-contract.md) owns packaging, invocation and permission rules. Runtime-specific checks live in the conditional [omp compatibility companion](skills/docs-engineering/references/omp-compatibility.md) and [agy compatibility companion](skills/docs-engineering/references/agy-compatibility.md). Configuration, deployment and recorded runtime evidence remain with the [omp adapter](harnesses/omp/COMPATIBILITY.md) and [agy adapter](harnesses/agy/COMPATIBILITY.md). Source packaging and native validation do not prove consuming-agent behavior or MCP connectivity.
 
 - “Use code-debugging to investigate this failure and verify the fix.”
 - “Use code-review on my current changes. Report findings without editing.”
 - “Use ui-mobile-web to investigate this mobile scrolling issue.”
 - “Use workflow-handoff to capture the current state before I pause.”
 
-See the [complete skill use-case guide](SKILL-USAGE.md) for all 52 skills, invocation labels, example prompts, expected results, and workflow diagrams.
+See the [complete skill use-case guide](SKILL-USAGE.md) for all 55 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
 | Area | Example skills |
 |---|---|
@@ -164,6 +164,10 @@ Browse [all installed skill sources](skills/) for the full collection and each p
 ### Skill naming
 
 Canonical skill directory names match their `SKILL.md` names and start with a functional domain: `agent-`, `code-`, `content-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`.
+
+Harness-specific companions use `references/<harness>-<topic>.md`, with lowercase harness IDs `omp` and `agy` and kebab-case topics: `omp-compatibility.md`, `agy-compatibility.md`, and `agy-usage.md`. Use **Oh My Pi (`omp`)** and **Antigravity CLI (`agy`)** consistently in host-selection labels. Shared procedures stay in the entrypoint or shared reference; load a companion only for its named host and operation. Do not create empty counterpart files merely for symmetry or rename retained upstream source paths.
+
+The bundled [task](skills/workflow-todo/SKILL.md), [search](skills/code-search/SKILL.md), and [notebook](skills/code-python/SKILL.md) helpers resolve their executables from the loaded skill directory while keeping the consumer workspace as cwd. Their `agy-usage.md` companions own CLI examples and limits; native omp tools use their current schemas, not those CLI subcommands. These helpers provide selected capabilities, not complete behavioral parity with omp.
 
 The domain-prefix migration renames `brand-concepts` to `ui-brand-concepts`, `stitch-design-input` to `ui-stitch-design-input`, `swift-development` to `code-swift-development`, and the `taste-skill` package (previous invocation name `design-taste-frontend`) to `ui-taste-frontend`. Use the new names for `skill://` URIs and `/skill:` commands. Historical verification records and upstream source paths retain their original names.
 

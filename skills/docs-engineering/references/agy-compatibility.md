@@ -1,4 +1,4 @@
-# Antigravity CLI (agy) compatibility assessment companion
+# Antigravity CLI (`agy`): compatibility assessment
 
 Load only when the selected compatibility or upgrade target is Antigravity CLI (`agy`). Apply the shared [harness compatibility procedure](harness-compatibility.md) for scope, authorization, evidence layers, safe missing-capability handling and result reporting. This companion supplies `agy`-specific sources and checks, not a second assessment workflow or permission to install, update or execute.
 

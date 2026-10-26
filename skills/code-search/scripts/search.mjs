@@ -4,12 +4,22 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const help = `Usage:
-  search grep <pattern> [--path <dir>] [--glob <pattern>] [--json]
-  search glob <pattern> [--path <dir>] [--json]
+  search grep <pattern> [--path <dir-or-file>] [--glob <pattern>] [--json]
+  search glob <pattern> [--path <dir-or-file>] [--json]
+
+Globs:
+  Patterns without / match basenames at any depth; patterns with / match
+  paths relative to --path. * and ? never cross /; ** as a whole path
+  segment crosses directories (including zero directories). Character
+  classes [a-z], [!a-z] and brace alternatives *.{js,ts} are supported.
+  Escape literal glob characters with a backslash. Ripgrep grep searches
+  retain its default hidden-file and ignore rules. Glob listing and the
+  Node grep fallback exclude .git and node_modules directories but include
+  other hidden and ignored files.
 
 Examples:
   search grep "renderMcp" --path scripts/
-  search glob "*.mjs" --path scripts/
+  search glob "src/**/*.ts" --path .
 `;
 
 const args = process.argv.slice(2);
@@ -20,118 +30,188 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
   process.exit(0);
 }
 
-function getOpt(flag) {
-  const idx = args.indexOf(flag);
-  return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
+function globMatcher(pattern) {
+  pattern = pattern.replace(/^\.\//, '');
+  let index = 0;
+  const literal = char => char.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
+
+  function sequence(inBrace = false) {
+    let source = '';
+    while (index < pattern.length) {
+      const char = pattern[index];
+      if (inBrace && (char === ',' || char === '}')) break;
+      index++;
+      if (char === '\\') {
+        if (index === pattern.length) throw new Error('Trailing escape in glob pattern');
+        source += literal(pattern[index++]);
+      } else if (char === '*') {
+        const start = index - 1;
+        while (pattern[index] === '*') index++;
+        const globstar = index - start > 1
+          && (start === 0 || pattern[start - 1] === '/')
+          && (index === pattern.length || pattern[index] === '/');
+        if (globstar && pattern[index] === '/') {
+          source += '(?:[^/]+/)*';
+          index++;
+        } else {
+          source += globstar ? '.*' : '[^/]*';
+        }
+      } else if (char === '?') {
+        source += '[^/]';
+      } else if (char === '[') {
+        let body = '';
+        if (pattern[index] === '!' || pattern[index] === '^') {
+          body = '^';
+          index++;
+        }
+        if (pattern[index] === ']') {
+          body += '\\]';
+          index++;
+        }
+        while (index < pattern.length && pattern[index] !== ']') {
+          const member = pattern[index++];
+          if (member === '\\') {
+            if (index === pattern.length) throw new Error('Trailing escape in glob character class');
+            const escaped = pattern[index++];
+            body += escaped === '-' ? '\\-' : literal(escaped);
+          } else {
+            body += member === '[' ? '\\[' : member;
+          }
+        }
+        if (pattern[index] !== ']' || !body || body === '^') {
+          throw new Error('Invalid glob character class');
+        }
+        index++;
+        source += `(?!/)[${body}]`;
+      } else if (char === '{') {
+        const alternatives = [sequence(true)];
+        while (pattern[index] === ',') {
+          index++;
+          alternatives.push(sequence(true));
+        }
+        if (pattern[index] !== '}' || alternatives.length < 2) {
+          throw new Error('Invalid glob brace alternatives');
+        }
+        index++;
+        source += `(?:${alternatives.join('|')})`;
+      } else {
+        source += literal(char);
+      }
+    }
+    return source;
+  }
+
+  const regex = new RegExp(`^${sequence()}$`);
+  const matchPath = pattern.includes('/');
+  return relative => regex.test(matchPath ? relative.split(path.sep).join('/') : path.basename(relative));
 }
 
-const targetPath = path.resolve(getOpt('--path') || process.cwd());
-const asJson = args.includes('--json');
-
-if (command === 'grep') {
-  const pattern = args[1];
-  if (!pattern) {
-    console.error('Error: Search pattern is required. Usage: search grep <pattern>');
-    process.exit(1);
-  }
-  const globFilter = getOpt('--glob');
-
-  // Attempt using ripgrep if installed on host
-  const rgCheck = spawnSync('which', ['rg'], { encoding: 'utf8' });
-  if (rgCheck.status === 0) {
-    const rgArgs = ['-n', '--no-heading', '--color=never'];
-    if (globFilter) rgArgs.push('--glob', globFilter);
-    rgArgs.push(pattern, targetPath);
-
-    const run = spawnSync('rg', rgArgs, { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
-    const lines = (run.stdout || '').split('\n').filter(Boolean);
-    const results = lines.map(line => {
-      const parts = line.split(':');
-      const file = parts[0];
-      const lineNum = parseInt(parts[1], 10);
-      const text = parts.slice(2).join(':');
-      return { file: path.relative(process.cwd(), file), line: lineNum, text: text.trim() };
-    });
-
-    if (asJson) {
-      console.log(JSON.stringify(results, null, 2));
+function filesUnder(targetPath) {
+  const files = [];
+  function walk(full) {
+    const info = fs.statSync(full);
+    if (info.isFile()) {
+      files.push(full);
+    } else if (info.isDirectory()) {
+      for (const entry of fs.readdirSync(full, { withFileTypes: true })) {
+        if (entry.isDirectory() && (entry.name === 'node_modules' || entry.name === '.git')) continue;
+        if (entry.isDirectory() || entry.isFile()) walk(path.join(full, entry.name));
+      }
     } else {
-      for (const r of results) {
-        console.log(`${r.file}:${r.line}: ${r.text}`);
-      }
-      console.log(`\nFound ${results.length} matches.`);
-    }
-  } else {
-    // Pure Node fallback
-    const results = [];
-    const regex = new RegExp(pattern);
-
-    function walk(dir) {
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        if (entry.name === 'node_modules' || entry.name === '.git') continue;
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          walk(full);
-        } else if (entry.isFile()) {
-          if (globFilter && !entry.name.endsWith(globFilter.replace(/^\*/, ''))) continue;
-          try {
-            const content = fs.readFileSync(full, 'utf8');
-            const lines = content.split('\n');
-            lines.forEach((l, idx) => {
-              if (regex.test(l)) {
-                results.push({
-                  file: path.relative(process.cwd(), full),
-                  line: idx + 1,
-                  text: l.trim(),
-                });
-              }
-            });
-          } catch {}
-        }
-      }
-    }
-
-    walk(targetPath);
-    if (asJson) {
-      console.log(JSON.stringify(results, null, 2));
-    } else {
-      for (const r of results) {
-        console.log(`${r.file}:${r.line}: ${r.text}`);
-      }
-      console.log(`\nFound ${results.length} matches.`);
+      throw new Error(`Not a regular file or directory: ${full}`);
     }
   }
-} else if (command === 'glob') {
-  const pattern = args[1];
-  if (!pattern) {
-    console.error('Error: Glob pattern is required. Usage: search glob <pattern>');
-    process.exit(1);
-  }
-  const regex = new RegExp('^' + pattern.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
-  const results = [];
-
-  function walk(dir) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (entry.name === 'node_modules' || entry.name === '.git') continue;
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        walk(full);
-      } else if (entry.isFile() && regex.test(entry.name)) {
-        results.push(path.relative(process.cwd(), full));
-      }
-    }
-  }
-
   walk(targetPath);
+  return files;
+}
+
+function searchWithRipgrep(pattern, targetPath, matchesFile) {
+  const run = spawnSync('rg', [
+    '--no-config', '--json',
+    '-e', pattern, '--', targetPath,
+  ], { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
+  if (run.error) {
+    if (run.error.code === 'ENOENT') return null;
+    throw run.error;
+  }
+  if (run.status !== 0 && run.status !== 1) {
+    throw new Error(run.stderr.trim() || `ripgrep failed (${run.signal || run.status})`);
+  }
+  if (run.status === 1) return [];
+
+  const decode = value => value.text ?? Buffer.from(value.bytes, 'base64').toString('utf8');
+  const results = [];
+  for (const line of run.stdout.split('\n').filter(Boolean)) {
+    const event = JSON.parse(line);
+    if (event.type !== 'match') continue;
+    const file = decode(event.data.path);
+    if (!matchesFile(file)) continue;
+    results.push({
+      file: path.relative(process.cwd(), file),
+      line: event.data.line_number,
+      text: decode(event.data.lines).trim(),
+    });
+  }
+  return results;
+}
+
+try {
+  if (command !== 'grep' && command !== 'glob') throw new Error(`Unknown command: ${command}\n\n${help}`);
+  const pattern = args[1];
+  if (!pattern) throw new Error(`${command === 'grep' ? 'Search' : 'Glob'} pattern is required`);
+  let targetPath = process.cwd();
+  let globFilter;
+  let asJson = false;
+  for (let index = 2; index < args.length; index++) {
+    const option = args[index];
+    if (option === '--json') {
+      asJson = true;
+    } else if (option === '--path' || (command === 'grep' && option === '--glob')) {
+      const value = args[++index];
+      if (!value || value.startsWith('--')) throw new Error(`Value required for ${option}`);
+      if (option === '--path') targetPath = path.resolve(value);
+      else globFilter = value;
+    } else {
+      throw new Error(`Unknown option: ${option}`);
+    }
+  }
+
+  // Check the target even when the pattern produces no results.
+  const targetInfo = fs.statSync(targetPath);
+  if (!targetInfo.isFile() && !targetInfo.isDirectory()) {
+    throw new Error(`Not a regular file or directory: ${targetPath}`);
+  }
+  const base = targetInfo.isDirectory() ? targetPath : path.dirname(targetPath);
+  const matcher = command === 'glob' ? globMatcher(pattern) : globFilter ? globMatcher(globFilter) : () => true;
+  const matchesFile = file => matcher(path.relative(base, file));
+  let results;
+  if (command === 'glob') {
+    results = filesUnder(targetPath).filter(matchesFile).map(file => path.relative(process.cwd(), file));
+  } else {
+    results = searchWithRipgrep(pattern, targetPath, matchesFile);
+    if (results === null) {
+      const regex = new RegExp(pattern);
+      results = [];
+      for (const file of filesUnder(targetPath).filter(matchesFile)) {
+        const lines = fs.readFileSync(file, 'utf8').split('\n');
+        lines.forEach((text, index) => {
+          if (regex.test(text)) {
+            results.push({ file: path.relative(process.cwd(), file), line: index + 1, text: text.trim() });
+          }
+        });
+      }
+    }
+  }
+
   if (asJson) {
     console.log(JSON.stringify(results, null, 2));
   } else {
-    for (const file of results) {
-      console.log(file);
+    for (const result of results) {
+      console.log(command === 'glob' ? result : `${result.file}:${result.line}: ${result.text}`);
     }
-    console.log(`\nFound ${results.length} files.`);
+    console.log(`\nFound ${results.length} ${command === 'glob' ? 'files' : 'matches'}.`);
   }
-} else {
-  console.error(`Unknown command: ${command}\n\n${help}`);
-  process.exit(1);
+} catch (error) {
+  console.error(`Error: ${error.message}`);
+  process.exitCode = 1;
 }

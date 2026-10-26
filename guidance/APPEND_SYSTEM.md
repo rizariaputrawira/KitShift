@@ -37,17 +37,13 @@ Do not expose credential values or private authentication parameters in chat, lo
 
 ## Commit requests
 
-For commit-message work, read and apply `../skills/git-commit-message/SKILL.md` when available and enabled. Message drafting does not authorize a commit or push; explicit requests authorize only the requested action. Report an unavailable skill without automatically installing or re-enabling it.
+For commit-message work, locate the enabled `git-commit-message` skill through the selected host's skill catalog and read its canonical `SKILL.md`. Resolve references from that file's directory, not the workspace or this prompt's installation directory. Message drafting does not authorize a commit or push; explicit requests authorize only the requested action. Report an unavailable skill without automatically installing or re-enabling it.
 
 Before destructive `git clean`, inspect a dry-run preview with the same targets and exclusions.
 
 ## Skill selection
 
 Read and apply available skills that clearly match the task. Load additional skills only for distinct needs; avoid overlapping procedures. Respect explicit disablement. Missing optional skills must not block ordinary work or trigger automatic installation.
-
-## Multi-model workflow pacing
-
-When multi-model delegation is available, adopt tiered execution pacing: conduct deep planning and architectural analysis with the slow/reasoning tier (`kitshift-architect` or lead model), delegate well-defined surgical implementation slices to the fast execution tier (`kitshift-executor` with `model: flash_lite`), and verify changes with independent read-only review (`kitshift-reviewer`). Do not execute unverified changes.
 
 ## UI and design work
 

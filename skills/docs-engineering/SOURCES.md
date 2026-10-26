@@ -100,3 +100,7 @@ are unchanged. This source correction makes no runtime or consuming-agent claim.
 ## Antigravity CLI (agy) harness companion addition — 2026-10-26
 
 Added `references/agy-compatibility.md` as the companion for Antigravity CLI (`agy`) harness assessments, updating the routing table in `references/harness-compatibility.md`. It provides native plugin validation checks (`agy plugin validate`) and official source pointers without duplicating shared assessment rules. Catalog/schema, templates, notices, and existing OMP guidance remain unchanged.
+
+## Harness companion naming correction — 2026-10-26
+
+Normalized host-selection labels and companion titles to Oh My Pi (`omp`) and Antigravity CLI (`agy`). Retained the existing `references/omp-compatibility.md` and `references/agy-compatibility.md` filenames under the `<harness>-<topic>.md` convention; no alias or duplicate procedure was added. This is a local navigation correction, not new runtime acceptance evidence. Existing pinned sources and notices remain unchanged.

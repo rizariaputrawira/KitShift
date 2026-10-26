@@ -19,25 +19,42 @@ const workflowDir = path.join(root, '.workflow');
 const tasksFile = path.join(workflowDir, 'tasks.json');
 
 function ensureStore() {
-  if (!fs.existsSync(workflowDir)) {
-    fs.mkdirSync(workflowDir, { recursive: true, mode: 0o700 });
-  }
-  if (!fs.existsSync(tasksFile)) {
-    fs.writeFileSync(tasksFile, JSON.stringify({ version: 1, tasks: [] }, null, 2) + '\n', { mode: 0o600 });
+  fs.mkdirSync(workflowDir, { recursive: true, mode: 0o700 });
+  try {
+    fs.writeFileSync(tasksFile, JSON.stringify({ version: 1, tasks: [] }, null, 2) + '\n', {
+      mode: 0o600,
+      flag: 'wx',
+    });
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err;
   }
 }
 
 function loadStore() {
-  ensureStore();
+  let store;
   try {
-    return JSON.parse(fs.readFileSync(tasksFile, 'utf8'));
+    ensureStore();
+    store = JSON.parse(fs.readFileSync(tasksFile, 'utf8'));
   } catch (err) {
-    return { version: 1, tasks: [] };
+    throw new Error(`Cannot load task store ${tasksFile}: ${err.message}`);
   }
+  const statuses = ['pending', 'in_progress', 'completed', 'blocked'];
+  const ids = new Set();
+  if (!store || store.version !== 1 || !Array.isArray(store.tasks)) {
+    throw new Error(`Invalid task store ${tasksFile}: expected version 1 and a tasks array.`);
+  }
+  for (const task of store.tasks) {
+    if (!task || typeof task !== 'object' || Array.isArray(task) ||
+        !Number.isSafeInteger(task.id) || task.id < 1 || ids.has(task.id) ||
+        typeof task.title !== 'string' || !statuses.includes(task.status)) {
+      throw new Error(`Invalid task store ${tasksFile}: tasks require unique positive integer IDs, titles, and supported statuses.`);
+    }
+    ids.add(task.id);
+  }
+  return store;
 }
 
 function saveStore(store) {
-  ensureStore();
   const tmp = `${tasksFile}.${Date.now()}.tmp`;
   fs.writeFileSync(tmp, JSON.stringify(store, null, 2) + '\n', { mode: 0o600 });
   fs.renameSync(tmp, tasksFile);
@@ -59,6 +76,7 @@ Commands:
 const args = process.argv.slice(2);
 const command = args[0] || 'list';
 
+try {
 switch (command) {
   case 'list': {
     const store = loadStore();
@@ -97,6 +115,9 @@ switch (command) {
     }
     const store = loadStore();
     const nextId = store.tasks.reduce((max, t) => Math.max(max, t.id), 0) + 1;
+    if (!Number.isSafeInteger(nextId)) {
+      throw new Error('Cannot add a task: no safe integer task IDs remain.');
+    }
     const newTask = {
       id: nextId,
       title,
@@ -163,7 +184,9 @@ switch (command) {
     break;
   }
   case 'clear': {
-    saveStore({ version: 1, tasks: [] });
+    const store = loadStore();
+    store.tasks = [];
+    saveStore(store);
     console.log('Task list cleared.');
     break;
   }
@@ -176,4 +199,8 @@ switch (command) {
   default:
     console.error(`Unknown command: ${command}\n\n${help}`);
     process.exitCode = 1;
+}
+} catch (err) {
+  console.error(`Error: ${err.message}`);
+  process.exitCode = 1;
 }

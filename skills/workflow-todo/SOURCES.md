@@ -5,3 +5,7 @@ Independently authored for KitShift to provide cross-harness task board and todo
 
 ## License
 MIT License. Part of KitShift portable coding-agent kit.
+
+## Local correction — 2026-10-26
+
+Rejected malformed/unreadable existing stores instead of silently replacing them. Moved Antigravity CLI (`agy`) command examples into `references/agy-usage.md`; native Oh My Pi (`omp`) usage stays conditional and uses the current tool schema, not CLI subcommands. Examples resolve the installed script from the skill directory while preserving workspace cwd. Removed the self-attribution picker prefix and unsupported full-parity claims. Independently authored changes; no third-party code or notice changes.

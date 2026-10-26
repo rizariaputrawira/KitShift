@@ -1,61 +1,22 @@
 ---
 name: workflow-todo
-description: "[KitShift] Structured task and todo board protocol for managing atomic task state, progress, and verification evidence."
+description: "Structured task tracking with lifecycle states, progress, and verification evidence."
 ---
 
-# Workflow Todo: Structured Task Management
+# Structured Task Tracking
 
-This skill defines the structured task protocol for breaking down work into discrete atomic tasks, tracking task lifecycle states, and binding verification evidence to completed units.
+Break work into discrete tasks, track lifecycle state, and attach actual verification evidence to completed work. Task state does not create execution or mutation authority.
 
-## Cross-Harness Invocation Contract
+## Harness-specific usage
 
-- **Oh My Pi (`omp`):** Use the native built-in `todo` tool directly (`todo list`, `todo add`, etc.). OMP maintains task state natively in runtime memory and session storage.
-- **Antigravity CLI (`agy`):** AGY does not have a native `todo` tool. Use the bundled CLI script:
-  ```bash
-  node skills/workflow-todo/scripts/todo.mjs <command>
-  ```
-  or manage structured Markdown task lists in `.workflow/plans/` and `.workflow/tasks.json`.
+- **Oh My Pi (`omp`):** Use the available native `todo` tool through its current schema. Bundled CLI subcommands such as `add` are not native tool operations.
+- **Antigravity CLI (`agy`):** Before using the bundled task helper, read [agy usage](references/agy-usage.md). It owns installed-script resolution, workspace storage, and CLI examples.
 
----
+## Task lifecycle
 
-## Task Lifecycle States
+- **`pending`:** Defined and not started.
+- **`in_progress`:** Actively worked; keep at most one active task in a sequential plan.
+- **`completed`:** Acceptance criteria satisfied with inspectable evidence.
+- **`blocked`:** Waiting for a named prerequisite or retained decision.
 
-Each atomic task progresses through four defined states:
-
-1. **`pending`**: Defined, scoped, but not yet started.
-2. **`in_progress`**: Actively being worked on by the agent or subagent. At most ONE task should be `in_progress` at any given time.
-3. **`completed`**: Proven complete with verified evidence. Must reference a test run, command output, or evidence artifact.
-4. **`blocked`**: Dependent prerequisite missing, external input needed, or invariant broken.
-
----
-
-## CLI Usage (AGY)
-
-```bash
-# List all tasks
-node skills/workflow-todo/scripts/todo.mjs list
-node skills/workflow-todo/scripts/todo.mjs list --json
-
-# Add a task
-node skills/workflow-todo/scripts/todo.mjs add "Implement user authentication" --desc "Add JWT auth route and middleware"
-
-# Update task status
-node skills/workflow-todo/scripts/todo.mjs update 1 --status in_progress
-node skills/workflow-todo/scripts/todo.mjs update 1 --status completed --evidence ".workflow/executions/evidence/task-1/report.txt"
-node skills/workflow-todo/scripts/todo.mjs update 2 --status blocked --evidence "Missing API credentials"
-
-# Remove or clear
-node skills/workflow-todo/scripts/todo.mjs remove 1
-node skills/workflow-todo/scripts/todo.mjs clear
-```
-
-State is persisted atomically to `.workflow/tasks.json` with secure file permissions (`0600`).
-
----
-
-## Evidence-Bound Rule
-
-Never mark a task `completed` without recording verified evidence:
-- A test run output showing 0 failures.
-- A terminal execution showing expected exit code and output.
-- A file inspection verifying on-disk integrity.
+Never mark work completed based only on an agent's assertion. Record actual command output, a test result, or decisive source-inspection evidence. A persistent board and the host's native task state are separate stores, not synchronized equivalents.

@@ -2,11 +2,19 @@
 
 ## Unreleased
 
-- Implemented cross-harness capability parity bridge for Antigravity CLI (`agy`):
-  - Added `workflow-todo` (`scripts/todo.mjs`) providing structured task lifecycle management (`pending`, `in_progress`, `completed`, `blocked`) and atomic `.workflow/tasks.json` state tracking matching OMP's native `todo` tool contract.
-  - Added `code-search` (`scripts/search.mjs`) wrapping ripgrep and glob patterns with fast JSON and terminal formatting, bridging OMP's native `grep` and `glob` tools into AGY without shell overhead.
-  - Added `code-python` (`scripts/notebook.mjs`) providing safe, schema-valid cell inspection, editing, insertion, deletion, and output clearing for Jupyter notebooks (`.ipynb`), matching OMP's native `notebook` and `python` tools.
-  - Added tiered subagents under `harnesses/agy/agents/`: `kitshift-executor.md` (`model: flash_lite` with write tools `[read_file, write_file, edit_file, run_command]`) for fast surgical implementation slices, and `kitshift-architect.md` (`model: pro`) for deep architectural planning, matching OMP's `--prewalk` / `--smol` / `--slow` model pacing.
+- Fixed agy implementation-review findings:
+  - Task-store read/parse failures now abort without discarding existing tasks.
+  - Notebook selectors/types fail before writes; insertion generates unique nbformat 4.5 IDs; empty/multiline sources work; atomic replacement preserves permissions and validates supported v4 structures, not the complete external schema.
+  - Search propagates ripgrep failures, treats dash-prefixed patterns as data, decodes JSON results, and shares real path/basename glob matching with the fallback.
+  - Shared preferences locate enabled skills via the host catalog and no longer impose agy role/model pacing on omp. The executor runs only explicitly assigned verification.
+  - Standardized host labels to Oh My Pi (`omp`) and Antigravity CLI (`agy`), with `references/<harness>-<topic>.md` companions. The three helpers now have conditional `references/agy-usage.md` files with installed-path-safe examples; retained existing compatibility filenames and historical source identities.
+  - Verification: `node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs` passed 39/39 tests, including native validation of a disposable full agy bundle (55 skills, 4 agents, 1 rule, 5 MCP definitions). A separate installed-helper smoke exercised todo corruption refusal, invalid notebook deletion, valid cell IDs/empty source, and nested/dash-prefixed/brace-filtered searches from a consumer workspace with no `skills/` directory. Both disposable bundles preserved skill identities and companion links. No live installation or host settings were modified; MCP handshakes, model dispatch, and consuming-agent guidance behavior were not exercised.
+
+- Added capability helpers for Antigravity CLI (`agy`):
+  - Added `workflow-todo` (`scripts/todo.mjs`) providing a persistent task board with `pending`, `in_progress`, `completed`, and `blocked` states; this is not the complete native omp `todo` contract.
+  - Added `code-search` (`scripts/search.mjs`) for ripgrep-backed regular-expression search, fallback search, and file globbing.
+  - Added `code-python` (`scripts/notebook.mjs`) for supported nbformat 4 cell operations; Python execution uses a separately available interpreter, not a bundled REPL.
+  - Added native subagents under `harnesses/agy/agents/`: `kitshift-executor.md` (`model: flash_lite`) for implementation assignments and `kitshift-architect.md` (`model: pro`) for planning. These configurations do not establish behavioral equivalence to omp's pacing flags or measured performance.
   - Expanded `mcp/agy.json` with `lsp` (`@theupsider/lsp-mcp`), `codegraph` (`@colbymchenry/codegraph`), and `filesystem` (`@modelcontextprotocol/server-filesystem`), while strictly keeping `mcp/omp.json`, `harnesses/omp/`, and `scripts/install-omp.mjs` untouched.
   - Updated `scripts/install-agy.mjs` and `tests/install-agy.test.mjs` to validate 55 skills, 4 subagents, 1 rule, and 5 MCP servers with 0 errors.
 

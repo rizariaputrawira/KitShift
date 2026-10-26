@@ -1,6 +1,6 @@
 # KitShift Skill Use Cases
 
-A practical guide to all **52 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
+A practical guide to all **55 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
 
 ## How to use this guide
 
@@ -19,7 +19,18 @@ Examples describe **intended results, not checks already performed**. A skill do
 
 The diagrams show decision and information flow, not automatic dispatch. Dashed arrows are conditional additions. Each skill appears in one use-case table; its link opens the full procedure. [Sources and license boundaries](README.md#documentation-sources-and-licenses) remain separate from this usage guide.
 
-For who owns execution, delegation, review and acceptance, read [How agents work in KitShift](AGENT-WORKFLOW.md). That guide explains collaboration responsibilities across supported harnesses (omp and Antigravity CLI); this guide remains the skill-selection catalog.
+For who owns execution, delegation, review and acceptance, read [How agents work in KitShift](AGENT-WORKFLOW.md). That guide explains collaboration responsibilities across supported harnesses—Oh My Pi (`omp`) and Antigravity CLI (`agy`); this guide remains the skill-selection catalog.
+
+## Cross-harness helpers
+
+Each entrypoint selects native tools for Oh My Pi (`omp`) or its conditional `references/agy-usage.md` companion for Antigravity CLI (`agy`). The companion resolves bundled executables from the loaded skill directory while preserving the active project's cwd; CLI examples are not native omp tool syntax.
+
+| Skill | Invocation | When to choose it | Example prompt | Intended result |
+|---|---|---|---|---|
+| [workflow-todo](skills/workflow-todo/SKILL.md) | M | Track an authorized multi-step task | “Track the reservation work and attach verification evidence as tasks complete.” | Task lifecycle state and inspectable evidence, using the host's supported store. |
+| [code-search](skills/code-search/SKILL.md) | M | Locate code or files by regex/glob | “Find capacity checks under `src/` and distinguish search failures from no matches.” | Relevant file/line results with surrounding source inspected. |
+| [code-python](skills/code-python/SKILL.md) | M | Inspect/edit notebook cells or execute authorized Python | “Clear cell 2's source without executing the notebook or changing other cells.” | A bounded notebook edit with unrelated data preserved; execution requires its own authority. |
+
 
 ## Example: a community-workshop booking product
 

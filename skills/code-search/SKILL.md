@@ -1,29 +1,17 @@
 ---
 name: code-search
-description: "[KitShift] Fast structural code and file search using ripgrep, globbing, and ast-grep patterns."
+description: "Code and file search using regular expressions and glob patterns."
 ---
 
-# Code Search: High-Performance Code & File Search
+# Code and File Search
 
-This skill guides agents on conducting fast, precise codebase and file searches without dumping entire file trees into conversation context.
+Narrow searches to the relevant directory and file types. Distinguish a successful search with no matches from a failed search before drawing conclusions about absent code.
 
-## Cross-Harness Invocation Contract
+## Harness-specific usage
 
-- **Oh My Pi (`omp`):** Use the native built-in `grep` and `glob` tools directly. OMP handles ripgrep execution and file scanning in-process.
-- **Antigravity CLI (`agy`):** AGY does not provide native `grep` or `glob` tools. Use the bundled search script or direct ripgrep via `run_command`:
-  ```bash
-  node skills/code-search/scripts/search.mjs grep "<pattern>" [--path <dir>] [--glob "*.ts"]
-  node skills/code-search/scripts/search.mjs glob "*.json" [--path <dir>]
-  ```
-  Or use the `filesystem` MCP tool (`search_files`) when configured.
+- **Oh My Pi (`omp`):** Use the available native `grep` and `glob` tools through their current schemas; use structured search rather than shell equivalents when required by the host.
+- **Antigravity CLI (`agy`):** Before using the bundled search helper, read [agy usage](references/agy-usage.md). It owns installed-script resolution, grep/glob examples, and fallback limits.
 
----
+## Inspect results
 
-## Token Efficiency Best Practices
-
-1. **Target Specific Directories:**
-   Never run broad regex searches on repo root if the domain is known (e.g. search `scripts/` or `harnesses/` rather than `.`).
-2. **Use File Extension Filters:**
-   Always narrow candidate files with `--glob "*.mjs"` or `--glob "*.py"` to eliminate irrelevant file scans.
-3. **Inspect Surrounding Lines via Line Ranges:**
-   After locating the line with `search grep`, use `read_file` with targeted `StartLine` and `EndLine` rather than reading the entire file.
+Read surrounding source at the reported locations before changing code. Use the selected host's supported line-range interface. Regex and filename searches are not AST queries, semantic search, or language-server reference resolution; use code-intelligence tools when those are available and required.

@@ -49,11 +49,6 @@ test('fresh install creates plugin structure without mcp by default', async t =>
 
   const ruleStat = await stat(join(f.target, 'rules/AGENTS.md'));
   assert.equal(ruleStat.mode & 0o777, 0o644);
-  const rule = await readFile(join(f.target, 'rules/AGENTS.md'), 'utf8');
-  assert(rule.includes('These preferences supplement host defaults.'));
-  assert(rule.includes('`../skills/git-commit-message/SKILL.md`'));
-  assert(!rule.includes('These preferences supplement OMP defaults.'));
-  assert(!rule.includes('`skill://git-commit-message`'));
 
   assert(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'));
   assert(await readFile(join(f.target, 'agents/kitshift-reviewer.md'), 'utf8'));
@@ -81,7 +76,7 @@ test('explicit update applies upstream changes and rejects local edits', async t
   await writeFile(join(f.repo, 'skills/example/SKILL.md'), '---\nname: example\ndescription: Updated\n---\nNew\n');
   assert.notEqual(f.run().status, 0);
   f.success(f.run('--update'));
-  assert(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'), 'New\n');
+  assert.equal(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'), '---\nname: example\ndescription: Updated\n---\nNew\n');
 
   await writeFile(join(f.target, 'rules/AGENTS.md'), '# Local edit\n');
   await writeFile(join(f.repo, 'skills/example/SKILL.md'), '---\nname: example\ndescription: Updated2\n---\nNew2\n');
