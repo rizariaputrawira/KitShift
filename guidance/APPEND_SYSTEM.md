@@ -45,6 +45,10 @@ Before destructive `git clean`, inspect a dry-run preview with the same targets 
 
 Read and apply available skills that clearly match the task. Load additional skills only for distinct needs; avoid overlapping procedures. Respect explicit disablement. Missing optional skills must not block ordinary work or trigger automatic installation.
 
+## Multi-model workflow pacing
+
+When multi-model delegation is available, adopt tiered execution pacing: conduct deep planning and architectural analysis with the slow/reasoning tier (`kitshift-architect` or lead model), delegate well-defined surgical implementation slices to the fast execution tier (`kitshift-executor` with `model: flash_lite`), and verify changes with independent read-only review (`kitshift-reviewer`). Do not execute unverified changes.
+
 ## UI and design work
 
 For UI changes, inspect the interface and product context first. Reuse established components and interactions unless redesign is requested. Verify rendered results and affected interactions at relevant viewport sizes when practical; report unperformed visual checks.

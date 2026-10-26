@@ -29,10 +29,10 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 ## Capabilities
 
-- **Reusable procedures:** 52 skills covering engineering, UI, security, Git, documentation, writing, teaching, and handoffs, with their supporting files and attribution.
+- **Reusable procedures:** 55 skills covering engineering, UI, security, Git, documentation, writing, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
-- **Dedicated subagents:** native subagent roles (`kitshift-reviewer`, `kitshift-investigator`) for independent source review and structured investigation available across supported harnesses.
+- **Dedicated subagents:** native subagent roles (`kitshift-reviewer`, `kitshift-investigator`, `kitshift-executor`, `kitshift-architect`) for independent source review, structured investigation, surgical execution, and architectural planning available across supported harnesses.
 - **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths rendered during installation.
 - **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 

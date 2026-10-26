@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Implemented cross-harness capability parity bridge for Antigravity CLI (`agy`):
+  - Added `workflow-todo` (`scripts/todo.mjs`) providing structured task lifecycle management (`pending`, `in_progress`, `completed`, `blocked`) and atomic `.workflow/tasks.json` state tracking matching OMP's native `todo` tool contract.
+  - Added `code-search` (`scripts/search.mjs`) wrapping ripgrep and glob patterns with fast JSON and terminal formatting, bridging OMP's native `grep` and `glob` tools into AGY without shell overhead.
+  - Added `code-python` (`scripts/notebook.mjs`) providing safe, schema-valid cell inspection, editing, insertion, deletion, and output clearing for Jupyter notebooks (`.ipynb`), matching OMP's native `notebook` and `python` tools.
+  - Added tiered subagents under `harnesses/agy/agents/`: `kitshift-executor.md` (`model: flash_lite` with write tools `[read_file, write_file, edit_file, run_command]`) for fast surgical implementation slices, and `kitshift-architect.md` (`model: pro`) for deep architectural planning, matching OMP's `--prewalk` / `--smol` / `--slow` model pacing.
+  - Expanded `mcp/agy.json` with `lsp` (`@theupsider/lsp-mcp`), `codegraph` (`@colbymchenry/codegraph`), and `filesystem` (`@modelcontextprotocol/server-filesystem`), while strictly keeping `mcp/omp.json`, `harnesses/omp/`, and `scripts/install-omp.mjs` untouched.
+  - Updated `scripts/install-agy.mjs` and `tests/install-agy.test.mjs` to validate 55 skills, 4 subagents, 1 rule, and 5 MCP servers with 0 errors.
+
 - Added Antigravity CLI (`agy`) as KitShift's second native harness adapter:
   - Packaged KitShift as a native Antigravity plugin (`plugins/kitshift/`), containing `plugin.json`, `rules/AGENTS.md` (transformed from `guidance/APPEND_SYSTEM.md`), the complete 52-skill collection, native subagents (`kitshift-reviewer`, `kitshift-investigator`), optional rendered `mcp_config.json`, and `.kitshift-manifest.json`.
   - Added `scripts/install-agy.mjs` for preview, atomic installation, managed updates, and conflict protection.

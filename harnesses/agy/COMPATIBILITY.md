@@ -16,10 +16,10 @@ For a requested `agy` assessment, read the packaged [agy compatibility companion
 
 - **Installed runtime binary:** `/home/personal/.local/bin/agy` (SHA-256 `40349135371a8ed1f1af1e9f8b741de99174ae9fce6380b96c2d1f543480af7a`).
 - **Static validation:** `agy plugin validate <target> --json` executed against a candidate KitShift plugin bundle reported `0` errors across all components:
-  - `skills`: 52 canonical skills loaded.
-  - `agents`: 2 subagents (`kitshift-reviewer`, `kitshift-investigator`).
+  - `skills`: 55 canonical skills loaded.
+  - `agents`: 4 subagents (`kitshift-reviewer`, `kitshift-investigator`, `kitshift-executor`, `kitshift-architect`).
   - `rules`: 1 rule file (`rules/AGENTS.md`).
-  - `mcpServers`: 2 local servers (`playwright`, `open-design` when installed with `--with-mcp`).
+  - `mcpServers`: 5 local stdio servers (`playwright`, `open-design`, `lsp`, `codegraph`, `filesystem` when installed with `--with-mcp`).
   - `.kitshift-manifest.json`: safely ignored by the plugin loader and validator.
 - **Skill size observations:** Under strict validation (`--strict`), `agy plugin validate` flags 3 canonical skills whose `SKILL.md` bodies exceed the 24,000-byte inline cap:
   - `skills/code-swift-development/SKILL.md` (45,807 bytes)
@@ -43,12 +43,14 @@ For a requested `agy` assessment, read the packaged [agy compatibility companion
    - Subagents are defined under `agents/<name>.md` with frontmatter (`name`, `description`, `tools`, `model`).
    - `kitshift-reviewer`: Read-only code reviewer restricting tools to `[read_file, search_web]`, inheriting model, guided by `skills/code-review/references/review-brief.md`.
    - `kitshift-investigator`: Read-only investigator restricting tools to `[read_file, search_web]`, inheriting model, guided by `skills/workflow-delivery/references/implementation-brief.md`.
+   - `kitshift-executor`: Surgical implementation subagent using fast model `flash_lite` with write tools `[read_file, write_file, edit_file, run_command]`, providing parity with OMP's `--prewalk` / `--smol` execution tier.
+   - `kitshift-architect`: Deep system architect subagent using reasoning model `pro` with read-only tools `[read_file, search_web]`, providing parity with OMP's `--slow` planning tier.
    - Subagents execute with the user's active workspace as CWD; references resolve via the loaded `<skills>` catalog.
 
 4. **MCP Configuration (`mcp_config.json`):**
    - Stdio MCP server definitions in `mcp/agy.json` omit `cwd` (unsupported by `agy`).
    - Dynamic header command expansion (e.g. `!token=$(gh auth token)`) is unsupported in `agy`.
-   - Plugin MCP server keys share a global namespace with the host `~/.gemini/config/mcp_config.json`. To prevent colliding with or shadowing the host's authenticated `github` MCP server, `mcp/agy.json` configures only the local stdio servers (`playwright` and `open-design`), leaving `github` MCP to host configuration.
+   - Configures local stdio servers (`playwright`, `open-design`, `lsp`, `codegraph`, `filesystem`), providing AGY with browser automation (#1), code intelligence (#2), semantic codebase graphing (#10), and filesystem search (#3). GitHub MCP is left to host configuration.
 
 ## Limits
 
