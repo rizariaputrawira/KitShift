@@ -30,11 +30,11 @@ Use this kit to keep a consistent setup across projects without copying credenti
 ## Capabilities
 
 - **Reusable procedures:** 52 skills covering engineering, UI, security, Git, documentation, writing, teaching, and handoffs, with their supporting files and attribution.
-- **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, adapted to native harness prompts (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
+- **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
-- **Dedicated subagents:** native Antigravity subagent roles (`kitshift-reviewer`, `kitshift-investigator`) for independent source review and structured investigation.
+- **Dedicated subagents:** native subagent roles (`kitshift-reviewer`, `kitshift-investigator`) for independent source review and structured investigation available across supported harnesses.
 - **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths rendered during installation.
-- **Explicit installation:** preview changes, copy files, and apply managed updates via `scripts/install-omp.mjs` or `scripts/install-agy.mjs`. Conflicting files and local edits are rejected rather than silently overwritten.
+- **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
 Skills and guidance are instructions for the agent, not guarantees of compliance, isolation, service availability, or lower cost.
 
@@ -114,9 +114,9 @@ The repository is the source of truth. The installers copy content into the targ
 | Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
 | Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (52 canonical skills) |
-| Subagents | [harnesses/agy/agents/](harnesses/agy/agents/) | Native task assignments | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) |
+| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) |
 | MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign; GitHub at host level) |
-| Installer | [scripts/install-omp.mjs](scripts/install-omp.mjs) / [scripts/install-agy.mjs](scripts/install-agy.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
+| Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
 
 Unspecified settings follow the installed omp version's defaults. Upgrading omp can change those defaults without changing the repository snapshot.

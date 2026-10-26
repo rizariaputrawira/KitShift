@@ -12,12 +12,14 @@ async function fixture(t) {
   const root = await mkdtemp(join(tmpdir(), 'kitshift-test-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const repo = join(root, 'repo');
-  for (const dir of ['scripts', 'guidance', 'harnesses/omp', 'mcp', 'skills/example']) {
+  for (const dir of ['scripts', 'guidance', 'harnesses/omp', 'harnesses/omp/agents', 'mcp', 'skills/example']) {
     await mkdir(join(repo, dir), { recursive: true });
   }
   await cp(join(repository, 'scripts/install-omp.mjs'), join(repo, 'scripts/install-omp.mjs'));
   await cp(join(repository, 'scripts/install-common.mjs'), join(repo, 'scripts/install-common.mjs'));
   await cp(join(repository, 'mcp/omp.json'), join(repo, 'mcp/omp.json'));
+  await cp(join(repository, 'harnesses/omp/agents/kitshift-reviewer.md'), join(repo, 'harnesses/omp/agents/kitshift-reviewer.md'));
+  await cp(join(repository, 'harnesses/omp/agents/kitshift-investigator.md'), join(repo, 'harnesses/omp/agents/kitshift-investigator.md'));
   await writeFile(join(repo, 'guidance/APPEND_SYSTEM.md'), '# Personal preferences\n');
   await writeFile(join(repo, 'harnesses/omp/config.yml'), 'theme:\n  dark: onyx\n');
   await writeFile(join(repo, 'skills/example/SKILL.md'), '---\nname: example\ndescription: Example skill\n---\nExample instructions.\n');

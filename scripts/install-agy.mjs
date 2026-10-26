@@ -83,20 +83,9 @@ function parseArgs(args) {
 
 function renderAgyRule(sourcePath) {
   const source = readRegularFile(sourcePath).toString('utf8');
-  const ompAnchor = 'These preferences supplement OMP defaults.';
-  const ompReplacement = 'These preferences supplement host defaults.';
-  const linkAnchor = '`skill://git-commit-message`';
-  const linkReplacement = '`../skills/git-commit-message/SKILL.md`';
-
-  const countOmp = source.split(ompAnchor).length - 1;
-  if (countOmp !== 1) fail(`Expected exact 1 occurrence of omp prompt anchor, found ${countOmp}`);
-  const countLink = source.split(linkAnchor).length - 1;
-  if (countLink !== 1) fail(`Expected exact 1 occurrence of git-commit-message link anchor, found ${countLink}`);
-
-  const rendered = source.replace(ompAnchor, ompReplacement).replace(linkAnchor, linkReplacement);
-  const bytes = Buffer.byteLength(rendered, 'utf8');
+  const bytes = Buffer.byteLength(source, 'utf8');
   if (bytes > 24000) fail(`Rendered rules/AGENTS.md exceeds 24,000-byte cap: ${bytes} bytes`);
-  return Buffer.from(rendered, 'utf8');
+  return Buffer.from(source, 'utf8');
 }
 
 function main() {

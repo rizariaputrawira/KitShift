@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -81,6 +82,9 @@ function main() {
   files.get('config.yml').mode = 0o600;
   collectFiles(path.join(repository, 'guidance', 'APPEND_SYSTEM.md'), 'APPEND_SYSTEM.md', files);
   collectFiles(path.join(repository, 'skills'), 'skills', files);
+  if (fs.existsSync(path.join(repository, 'harnesses', 'omp', 'agents'))) {
+    collectFiles(path.join(repository, 'harnesses', 'omp', 'agents'), 'agents', files);
+  }
   files.set('mcp.json', { content: renderMcp(path.join(repository, 'mcp', 'omp.json'), replacements), mode: 0o600 });
 
   installBundle({

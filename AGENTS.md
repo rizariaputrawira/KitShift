@@ -6,11 +6,11 @@ KitShift is a portable personal coding-agent kit: passive skills, working guidan
 
 ## Architecture & Data Flow
 
-KitShift provides dedicated installers for each supported harness:
-- `scripts/install-omp.mjs` builds an installation plan into the omp agent directory (`~/.omp/agent` by default) from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, and rendered `mcp/omp.json` → `mcp.json`.
-- `scripts/install-agy.mjs` builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (rendered from `guidance/APPEND_SYSTEM.md`), all 52 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, optional rendered `mcp/agy.json` → `mcp_config.json`, and `.kitshift-manifest.json`.
+KitShift provides a unified installer (`scripts/install.mjs`) alongside dedicated harness scripts:
+- `node scripts/install.mjs omp` (or `scripts/install-omp.mjs`) builds an installation plan into the omp agent directory (`~/.omp/agent` by default) from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, subagents from `harnesses/omp/agents/` → `agents/`, and rendered `mcp/omp.json` → `mcp.json`.
+- `node scripts/install.mjs agy` (or `scripts/install-agy.mjs`) builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (from `guidance/APPEND_SYSTEM.md`), all 52 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, optional rendered `mcp/agy.json` → `mcp_config.json`, and `.kitshift-manifest.json`.
 
-Both installers share the engine in `scripts/install-common.mjs` (`installBundle()`, `collectFiles()`, `renderMcp()`, `loadManifest()`, `writeAtomic()`). MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
+All installers share the engine in `scripts/install-common.mjs` (`installBundle()`, `collectFiles()`, `renderMcp()`, `loadManifest()`, `writeAtomic()`). MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
 
 Conflicts abort before writes. Identical files can be adopted; updates reject unmanaged differing files and locally edited managed files. Approved files use per-file atomic replacement, followed by a private manifest update. Preserve the manifest for managed updates. This is not transactional rollback, a symlink installation, or two-way synchronization; removed source files remain installed unless explicitly migrated.
 
@@ -30,8 +30,9 @@ omp discovers skill metadata from `SKILL.md` and reads procedures/references on 
 Run from the repository root:
 
 ```sh
-node scripts/install-omp.mjs --help
-node scripts/install-agy.mjs --help
+node scripts/install.mjs --help
+node scripts/install.mjs omp --help
+node scripts/install.mjs agy --help
 node --test tests/install-omp.test.mjs tests/install-agy.test.mjs
 ```
 
