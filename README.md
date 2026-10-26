@@ -4,7 +4,7 @@
 
 My personal coding-agent kit: skills, working preferences, harness settings, and MCP connections in one repository. Clone it on another machine, review the configuration, and explicitly install the setup you want to use.
 
-[Oh My Pi (omp)](https://github.com/can1357/oh-my-pi) is the first supported harness. It supplies the coding-agent runtime; KitShift supplies the configuration and reusable guidance. Pi, Antigravity CLI, and Claude Code are intended targets, **not implemented integrations**.
+[Oh My Pi (omp)](https://github.com/can1357/oh-my-pi) and [Antigravity CLI (agy)](https://github.com/google-deepmind/antigravity) are the supported harnesses. They supply the coding-agent runtimes; KitShift supplies the configuration, reusable guidance, subagents, and skills. Pi and Claude Code are prospective targets.
 
 Use this kit to keep a consistent setup across projects without copying credentials or tying your live configuration to a checkout. It is not a harness binary, an application template, or an installer for external services.
 
@@ -15,6 +15,8 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 - [Capabilities](#capabilities)
 - [Quick start](#quick-start)
+  - [Oh My Pi (omp) setup](#oh-my-pi-omp-setup)
+  - [Antigravity CLI (agy) setup](#antigravity-cli-agy-setup)
 - [How it works](#how-it-works)
 - [Agent collaboration](#agent-collaboration)
 - [Skills and workflows](#skills-and-workflows)
@@ -28,10 +30,11 @@ Use this kit to keep a consistent setup across projects without copying credenti
 ## Capabilities
 
 - **Reusable procedures:** 52 skills covering engineering, UI, security, Git, documentation, writing, teaching, and handoffs, with their supporting files and attribution.
-- **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, retaining omp's native base prompt.
-- **Native omp configuration:** three cycling model-role selections plus commit and plan selectors, appearance preferences, native planning, and selected privacy/resource settings—without restoring custom director/worker orchestration.
-- **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths supplied during installation.
-- **Explicit installation:** preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
+- **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, adapted to native harness prompts (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
+- **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
+- **Dedicated subagents:** native Antigravity subagent roles (`kitshift-reviewer`, `kitshift-investigator`) for independent source review and structured investigation.
+- **Portable MCP definitions:** Playwright, GitHub, and local design tooling, with machine-specific executable paths rendered during installation.
+- **Explicit installation:** preview changes, copy files, and apply managed updates via `scripts/install-omp.mjs` or `scripts/install-agy.mjs`. Conflicting files and local edits are rejected rather than silently overwritten.
 
 Skills and guidance are instructions for the agent, not guarantees of compliance, isolation, service availability, or lower cost.
 
@@ -43,59 +46,78 @@ The documented shell examples target Linux/WSL2. Other operating systems have no
 
 Install these separately:
 
-- **Node.js 20 or newer** to run the installer. Initial verification used Node.js 24.20.0.
-- **omp** using its [official installation instructions](https://github.com/can1357/oh-my-pi#install). The exported configuration and initial runtime check used omp 18.12.6; this is not a minimum-version guarantee.
+- **Node.js 20 or newer** to run the installer scripts. Initial verification used Node.js 24.20.0.
+- **omp** and/or **Antigravity CLI (agy)** depending on your target harness.
+  - omp: [official installation instructions](https://github.com/can1357/oh-my-pi#install).
+  - agy: installed binary on `PATH` (e.g. `~/.local/bin/agy`).
 - **Git** to clone and update the repository.
 - **GitHub CLI** (`gh` on `PATH`) for GitHub MCP authentication.
-- **Playwright MCP** and a Chromium executable for browser tooling.
+- **Playwright MCP** and a Chromium executable for browser tooling (required for omp; optional for agy).
 - The local design CLI used by **OpenDesign Cloud or Local Codex**, plus its local daemon when you use that integration.
 
-All three MCP executable paths are currently required by the installer, even if you do not plan to use every integration. Installation does not download dependencies, authenticate accounts, or start services.
+### Oh My Pi (omp) setup
 
-Authenticate separately on each machine:
-
-```sh
-omp login openai-codex
-gh auth login
-```
-
-The omp configuration uses the `openai-codex` provider. An OpenAI API key does not automatically authenticate that separate provider. Your account must have access to the configured model IDs, or you must select alternatives. See omp's [provider documentation](https://github.com/can1357/oh-my-pi/blob/v18.12.6/docs/providers.md).
-
-### 2. Clone and preview
+Clone and preview:
 
 ```sh
-git clone https://github.com/rizariaputrawira/kitshift.git
-cd kitshift
-
 node scripts/install-omp.mjs --dry-run \
   --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
   --browser /absolute/path/to/chromium/chrome \
   --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
 ```
 
-Replace the example paths with existing local files: readable JavaScript entry points for the two CLIs and an executable Chromium browser. They are path examples, not files supplied by this repository.
+Rerun **without `--dry-run`** to install into `~/.omp/agent`. For managed updates, run `node scripts/install-omp.mjs --update ...`.
 
-Review [the omp settings](harnesses/omp/config.yml) and [personal guidance](guidance/APPEND_SYSTEM.md), then inspect the preview. Dry run creates no destination directories or files.
+Start omp from your project directory:
 
-### 3. Install and start omp
+```sh
+omp
+```
 
-Rerun the preview command **without `--dry-run`** to install into `~/.omp/agent`. Use `--target /path/to/agent-directory` if you want a different destination; that option does not automatically configure omp to use it. For an isolated default-profile launch, set `PI_CODING_AGENT_DIR` to that directory when starting omp.
+### Antigravity CLI (agy) setup
 
-If existing content differs, installation stops before writing. Preserve your existing configuration separately and reconcile the differences deliberately; do not delete your whole omp directory to resolve a conflict.
+KitShift installs as a native Antigravity plugin under `~/.gemini/config/plugins/kitshift` (or in a project workspace under `<workspace>/.agents/plugins/kitshift` via `--target`).
 
-Start `omp` from the project you want to work on and describe the outcome. No separate KitShift service or mandatory documentation setup is required.
+#### Default install (skills, rules, subagents without MCP)
+
+```sh
+node scripts/install-agy.mjs --dry-run
+node scripts/install-agy.mjs
+```
+
+#### Install with Playwright and OpenDesign MCP
+
+```sh
+node scripts/install-agy.mjs --dry-run \
+  --with-mcp \
+  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
+  --browser /absolute/path/to/chromium/chrome \
+  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
+```
+
+Rerun **without `--dry-run`** to install. For managed updates, run `node scripts/install-agy.mjs --update`.
+
+Once installed:
+- Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
+- The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
+- Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
+- All 52 skills are available on demand.
+- Native subagents `kitshift-reviewer` and `kitshift-investigator` can be invoked via `invoke_subagent`.
+- Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
 
 ## How it works
 
-The repository is the source of truth. The installer copies its content into the selected omp agent directory, renders local MCP paths, and records managed file hashes in a private `.kitshift-manifest.json`. There are no installed symlinks and no automatic two-way synchronization.
+The repository is the source of truth. The installers copy content into the target harness directory or plugin bundle, substitute local paths, and record managed file hashes in a private `.kitshift-manifest.json`. There are no installed symlinks and no automatic two-way synchronization.
 
-| Component | Repository source | Installed responsibility |
-|---|---|---|
-| Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) | omp preferences and model-role selectors |
-| Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | Preferences appended to omp's native prompt |
-| Skills | [skills/](skills/) | On-demand procedures and supporting files |
-| MCP connections | [mcp/omp.json](mcp/omp.json) | Connection definitions rendered with local executable paths |
-| Installer | [scripts/install-omp.mjs](scripts/install-omp.mjs) | Preflight, explicit copying, permissions, and managed updates |
+| Component | Repository source | omp installed role | agy installed role |
+|---|---|---|---|
+| Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
+| Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
+| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (52 canonical skills) |
+| Subagents | [harnesses/agy/agents/](harnesses/agy/agents/) | Native task assignments | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) |
+| MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign; GitHub at host level) |
+| Installer | [scripts/install-omp.mjs](scripts/install-omp.mjs) / [scripts/install-agy.mjs](scripts/install-agy.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
+| Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
 
 Unspecified settings follow the installed omp version's defaults. Upgrading omp can change those defaults without changing the repository snapshot.
 

@@ -2,13 +2,15 @@
 
 ## Project Overview
 
-KitShift is a portable personal coding-agent kit: passive skills, working guidance, harness settings, and MCP definitions. omp is the only implemented harness integration; other integrations are prospective. This is not an application or the omp runtime. Edit canonical repository files; installation is a separate, explicit operation.
+KitShift is a portable personal coding-agent kit: passive skills, working guidance, harness settings, and MCP definitions. omp and Antigravity CLI (`agy`) are the implemented harness integrations; other integrations are prospective. This is not an application or an agent runtime. Edit canonical repository files; installation is a separate, explicit operation.
 
 ## Architecture & Data Flow
 
-`scripts/install-omp.mjs` is the executable entrypoint. It builds one installation plan from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, and rendered `mcp/omp.json` → `mcp.json`. It resolves MCP placeholders with supplied local paths and preflights the complete plan against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
+KitShift provides dedicated installers for each supported harness:
+- `scripts/install-omp.mjs` builds an installation plan into the omp agent directory (`~/.omp/agent` by default) from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, and rendered `mcp/omp.json` → `mcp.json`.
+- `scripts/install-agy.mjs` builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (rendered from `guidance/APPEND_SYSTEM.md`), all 52 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, optional rendered `mcp/agy.json` → `mcp_config.json`, and `.kitshift-manifest.json`.
 
-The installer has no exported API: local helpers feed `main()`, which runs at module load. `collectFiles()` traverses sources deterministically, `renderMcp()` substitutes whole-value placeholders, `loadManifest()` validates management state, and `writeAtomic()` replaces approved files. Exercise it through the CLI rather than importing it.
+Both installers share the engine in `scripts/install-common.mjs` (`installBundle()`, `collectFiles()`, `renderMcp()`, `loadManifest()`, `writeAtomic()`). MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
 
 Conflicts abort before writes. Identical files can be adopted; updates reject unmanaged differing files and locally edited managed files. Approved files use per-file atomic replacement, followed by a private manifest update. Preserve the manifest for managed updates. This is not transactional rollback, a symlink installation, or two-way synchronization; removed source files remain installed unless explicitly migrated.
 
@@ -17,10 +19,11 @@ omp discovers skill metadata from `SKILL.md` and reads procedures/references on 
 ## Key Directories
 
 - `skills/<domain>-<capability>/`: independently packaged guidance, references, provenance, and notices. Some packages contain bundled scripts or third-party payloads; do not assume everything is inert Markdown.
-- `harnesses/omp/`: native settings and integration-specific compatibility evidence.
-- `guidance/`: personal preferences appended to the native prompt.
-- `mcp/`: portable connection templates, not bundled servers or credentials.
-- `scripts/`: standalone installer implementation; `tests/`: isolated CLI/filesystem regression scenarios. There is no application `src/` tree.
+- `harnesses/omp/`: native settings and integration-specific compatibility evidence for Oh My Pi.
+- `harnesses/agy/`: reference settings, subagent definitions, and integration-specific compatibility evidence for Antigravity CLI.
+- `guidance/`: personal preferences appended to native harness prompts.
+- `mcp/`: portable connection templates (`omp.json`, `agy.json`), not bundled servers or credentials.
+- `scripts/`: installer implementation and shared engine (`install-common.mjs`); `tests/`: isolated CLI/filesystem regression scenarios. There is no application `src/` tree.
 
 ## Development Commands
 
@@ -28,7 +31,8 @@ Run from the repository root:
 
 ```sh
 node scripts/install-omp.mjs --help
-node --test tests/install-omp.test.mjs
+node scripts/install-agy.mjs --help
+node --test tests/install-omp.test.mjs tests/install-agy.test.mjs
 ```
 
 Preview installation using existing absolute local paths:
@@ -59,14 +63,23 @@ There is no root build command, lint command, package manifest, or dependency-in
 
 ## Important Files
 
-- `scripts/install-omp.mjs`: argument parsing, MCP rendering, preflight, permission handling, and managed updates.
-- `harnesses/omp/config.yml`: native model, approval, privacy, and appearance settings.
-- `mcp/omp.json`: JSON template; placeholders are whole string values, not embedded interpolation.
-- `guidance/APPEND_SYSTEM.md`: personal preferences appended to omp's native prompt, not a replacement system prompt.
-- `harnesses/omp/COMPATIBILITY.md`: integration evidence and pointers to version-specific assessment procedures; historical checks are not current compatibility guarantees.
+- `scripts/install-common.mjs`: shared installer core (traversal, validation, hash manifest, atomic replacement, MCP rendering).
+- `scripts/install-omp.mjs`: omp installer argument parsing, preflight, permission handling, and managed updates.
+- `scripts/install-agy.mjs`: Antigravity CLI plugin installer, rule renderer, subagent bundling, and managed updates.
+- `harnesses/omp/config.yml`: native omp model, approval, privacy, and appearance settings.
+- `harnesses/agy/settings.json`: reference host settings template for Antigravity CLI.
+- `harnesses/agy/agents/`: native subagent definitions (`kitshift-reviewer.md`, `kitshift-investigator.md`).
+- `mcp/omp.json`: JSON template for omp MCP connections.
+- `mcp/agy.json`: JSON template for Antigravity MCP connections (omitting unsupported stdio `cwd`).
+- `guidance/APPEND_SYSTEM.md`: personal preferences appended to native prompts.
+- `harnesses/omp/COMPATIBILITY.md`: omp integration evidence and assessment records.
+- `harnesses/agy/COMPATIBILITY.md`: Antigravity CLI integration evidence, native validator checks, and architecture boundaries.
+- `skills/docs-engineering/references/agy-compatibility.md`: packaged `agy` assessment companion.
+- `tests/install-omp.test.mjs`: isolated omp installer regression scenarios.
+- `tests/install-agy.test.mjs`: isolated Antigravity CLI plugin installer and native validator scenarios.
 - `README.md`: setup, maintenance, adoption mappings, and source/license boundaries.
-- `SKILL-USAGE.md`: illustrative skill-selection scenarios, not mandatory orchestration or evidence of execution.
-- `CHANGELOG.md`: changes and scoped verification records; historical checks are not current guarantees.
+- `SKILL-USAGE.md`: illustrative skill-selection scenarios across supported harnesses.
+- `CHANGELOG.md`: changes and scoped verification records.
 
 ## Runtime/Tooling Preferences
 

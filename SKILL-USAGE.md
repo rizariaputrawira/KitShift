@@ -19,7 +19,7 @@ Examples describe **intended results, not checks already performed**. A skill do
 
 The diagrams show decision and information flow, not automatic dispatch. Dashed arrows are conditional additions. Each skill appears in one use-case table; its link opens the full procedure. [Sources and license boundaries](README.md#documentation-sources-and-licenses) remain separate from this usage guide.
 
-For who owns execution, delegation, review and acceptance, read [How agents work in KitShift](AGENT-WORKFLOW.md). That guide explains collaboration responsibilities; this guide remains the skill-selection catalog.
+For who owns execution, delegation, review and acceptance, read [How agents work in KitShift](AGENT-WORKFLOW.md). That guide explains collaboration responsibilities across supported harnesses (omp and Antigravity CLI); this guide remains the skill-selection catalog.
 
 ## Example: a community-workshop booking product
 
