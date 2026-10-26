@@ -16,24 +16,25 @@ import {
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const help = `Usage:
   node scripts/install-agy.mjs [--target DIR] [--dry-run] [--update]
-    [--with-mcp --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH]
+    [--with-mcp --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH [--workspace-dir DIR]]
 
 Copies this repository's skills, plugin rules, subagents, and optional MCP
 configuration into a native Antigravity CLI plugin bundle. The default target is
 ~/.gemini/config/plugins/kitshift. No symlinks are installed.
 
 By default, installs without MCP configuration. To include Playwright and
-OpenDesign MCP servers, pass --with-mcp along with existing local paths for all
-three MCP flags. JavaScript entry points must be readable; the browser must be
-executable. GitHub MCP should be configured at the host level in ~/.gemini/config/mcp_config.json.
+OpenDesign MCP servers (along with LSP, Codegraph, and Filesystem), pass --with-mcp
+along with existing local paths for the three MCP flags. JavaScript entry points
+must be readable; the browser must be executable.
 
   --target DIR         Install into this plugin directory (relative paths allowed).
   --dry-run            Preflight and show planned copies without writing anything.
   --update             Replace only files unchanged since a prior managed install.
-  --with-mcp           Render and install mcp_config.json for Playwright and OpenDesign.
+  --with-mcp           Render and install mcp_config.json for Playwright, OpenDesign, LSP, Codegraph, and Filesystem.
   --playwright-cli P   Absolute path to Playwright MCP cli.js (requires --with-mcp).
   --browser P          Absolute path to Chromium browser executable (requires --with-mcp).
   --open-design-cli P  Absolute path to OpenDesign CLI od.mjs (requires --with-mcp).
+  --workspace-dir DIR  Workspace root for filesystem MCP (optional, defaults to cwd).
   --help, -h           Show this help.
 
 Unmanaged differing files, user-edited managed files, and symlink destinations
@@ -44,7 +45,7 @@ keep it for safe updates. Manifest and MCP config permissions are 0600.
 
 function parseArgs(args) {
   const options = { target: path.join(os.homedir(), '.gemini', 'config', 'plugins', 'kitshift') };
-  const values = new Set(['--target', '--playwright-cli', '--browser', '--open-design-cli']);
+  const values = new Set(['--target', '--playwright-cli', '--browser', '--open-design-cli', '--workspace-dir']);
   const switches = new Set(['--dry-run', '--update', '--with-mcp', '--help', '-h']);
   const seen = new Set();
   for (let index = 0; index < args.length; index++) {
@@ -119,6 +120,7 @@ function main() {
       '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
       '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
       '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
+      '{{WORKSPACE_DIR}}': options['workspace-dir'] ? validateLocalPath('--workspace-dir', options['workspace-dir']) : process.cwd(),
     };
     files.set('mcp_config.json', {
       content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),

@@ -103,6 +103,9 @@ test('--with-mcp renders mcp_config.json and requires all three mcp flags', asyn
   assert(!('cwd' in mcp.mcpServers.playwright));
   assert(mcp.mcpServers['open-design']);
   assert(!('cwd' in mcp.mcpServers['open-design']));
+  assert(mcp.mcpServers.lsp);
+  assert(mcp.mcpServers.codegraph);
+  assert(mcp.mcpServers.filesystem);
   assert(!('github' in mcp.mcpServers));
 
   // Verify that updating without --with-mcp retains previously managed mcp_config.json
@@ -159,10 +162,10 @@ test('native agy plugin validate passes against full installed bundle', async t 
   const result = JSON.parse(val.stdout);
 
   assert.equal(result.name, 'kitshift');
-  assert.equal(result.components.skills, 52);
-  assert.equal(result.components.agents, 2);
+  assert.equal(result.components.skills, 55);
+  assert.equal(result.components.agents, 4);
   assert.equal(result.components.rules, 1);
-  assert.equal(result.components.mcpServers, 2);
+  assert.equal(result.components.mcpServers, 5);
 
   const errors = (result.findings || []).filter(f => f.severity === 'error');
   assert.equal(errors.length, 0, `Expected 0 validation errors, got: ${JSON.stringify(errors)}`);
