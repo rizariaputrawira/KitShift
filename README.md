@@ -68,6 +68,8 @@ node scripts/install-omp.mjs --dry-run \
 
 Rerun **without `--dry-run`** to install into `~/.omp/agent`. For managed updates, run `node scripts/install-omp.mjs --update ...`.
 
+All three local MCP path arguments remain required for omp installs, previews, and updates. Only the agy installer supports optional MCP configuration. The agy-specific LSP, Codegraph, and Filesystem definitions are not added to omp's `mcp.json`; its native tools remain the selected path in the three helper skills.
+
 Start omp from your project directory:
 
 ```sh

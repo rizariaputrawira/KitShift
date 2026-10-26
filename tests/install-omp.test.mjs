@@ -38,6 +38,18 @@ test('dry run leaves a missing target absent', async t => {
   await assert.rejects(access(f.target), { code: 'ENOENT' });
 });
 
+test('omp refuses missing MCP paths before writing on install, preview, and update', async t => {
+  const f = await fixture(t);
+  for (const args of [[], ['--dry-run'], ['--update'], ['--playwright-cli', join(f.root, 'cli.mjs')]]) {
+    const result = spawnSync(process.execPath, [
+      join(f.repo, 'scripts/install-omp.mjs'), '--target', f.target, ...args,
+    ], { encoding: 'utf8' });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /Required option --(?:playwright-cli|browser) is missing/);
+    await assert.rejects(access(f.target), { code: 'ENOENT' });
+  }
+});
+
 test('an unmanaged conflict prevents every planned write', async t => {
   const f = await fixture(t);
   await mkdir(f.target);

@@ -16,20 +16,21 @@ import {
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const help = `Usage:
   node scripts/install-omp.mjs [--target DIR] [--dry-run] [--update]
-    [--with-mcp --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH]
+    --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH
+    --open-design-cli ABSOLUTE_JS_PATH
 
 Copies this repository's omp config, system guidance, skills, subagents, and
 rendered MCP configuration. The default target is ~/.omp/agent. No symlinks are installed.
 
-By default, installs without MCP configuration. To include Playwright and
-OpenDesign MCP servers, pass --with-mcp (or all three MCP flags). JavaScript entry
-points must be readable; the browser must be executable. GitHub keeps native
-PATH-resolved gh auth; no token is read or exported by this script.
+All three MCP paths are required, including for updates and dry runs. Install
+Playwright MCP, its Chromium browser, and OpenDesign separately, then pass their
+existing local paths. JavaScript entry points must be readable; the browser must
+be executable. Node MCP commands use this installer's Node executable. GitHub
+keeps native PATH-resolved gh auth; no token is read or exported by this script.
 
   --target DIR         Install into this agent directory (relative paths allowed).
   --dry-run            Preflight and show planned copies without writing anything.
   --update             Replace only files unchanged since a prior managed install.
-  --with-mcp           Render and install mcp.json for Playwright and OpenDesign.
   --playwright-cli P   Absolute path to Playwright MCP cli.js.
   --browser P          Absolute path to Chromium browser executable.
   --open-design-cli P  Absolute path to OpenDesign CLI od.mjs.
@@ -44,7 +45,7 @@ keep it for safe updates. Config, MCP config, and manifest permissions are 0600.
 function parseArgs(args) {
   const options = { target: path.join(os.homedir(), '.omp', 'agent') };
   const values = new Set(['--target', '--playwright-cli', '--browser', '--open-design-cli']);
-  const switches = new Set(['--dry-run', '--update', '--with-mcp', '--help', '-h']);
+  const switches = new Set(['--dry-run', '--update', '--help', '-h']);
   const seen = new Set();
   for (let index = 0; index < args.length; index++) {
     const argument = args[index];
@@ -63,16 +64,6 @@ function parseArgs(args) {
     }
   }
 
-  const mcpFlags = ['playwright-cli', 'browser', 'open-design-cli'];
-  const hasAnyMcpFlag = mcpFlags.some(flag => options[flag]);
-
-  if (hasAnyMcpFlag || options['with-mcp']) {
-    for (const flag of mcpFlags) {
-      if (!options[flag]) {
-        fail(`Required option --${flag} is missing for MCP configuration. Use --help for usage.`);
-      }
-    }
-  }
 
   return options;
 }
@@ -95,17 +86,15 @@ function main() {
     collectFiles(path.join(repository, 'harnesses', 'omp', 'agents'), 'agents', files);
   }
 
-  if (options['with-mcp'] || options['playwright-cli']) {
-    const replacements = {
-      '{{NODE}}': process.execPath,
-      '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
-      '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
-      '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
-      '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
-      '{{TMP_DIR}}': os.tmpdir(),
-    };
-    files.set('mcp.json', { content: renderMcp(path.join(repository, 'mcp', 'omp.json'), replacements), mode: 0o600 });
-  }
+  const replacements = {
+    '{{NODE}}': process.execPath,
+    '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
+    '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
+    '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
+    '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
+    '{{TMP_DIR}}': os.tmpdir(),
+  };
+  files.set('mcp.json', { content: renderMcp(path.join(repository, 'mcp', 'omp.json'), replacements), mode: 0o600 });
 
   installBundle({
     target,

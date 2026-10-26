@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Restored omp's pre-agy installation contract: all three local MCP paths are required for installs, previews and updates; optional MCP remains agy-only. Added a no-write missing-path regression and documented harness isolation. All 47 tests passed with zero skips. A disposable upgrade from `7ad7652` preserved omp config/rendered MCP bytes and all 52 existing skill entrypoints; a separate agy installation left the omp target unchanged. Native omp 18.12.6 reads matched all 55 installed skill bodies without inference. Live configuration, MCP connections, model dispatch and performance were not exercised.
+
 - Fixed five PR review findings in the portable helpers:
   - Task update/remove now require complete positive safe-integer IDs; a missing `--evidence` value fails before changing task status or stored evidence.
   - Notebook mutations reject symlink paths without replacing the link or target; read/info may still follow links.

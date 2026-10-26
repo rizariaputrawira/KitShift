@@ -11,6 +11,19 @@ This directory owns omp configuration, deployment notes and verification records
 
 For a requested omp assessment, read the packaged [omp compatibility companion](../../skills/docs-engineering/references/omp-compatibility.md). It selects the shared [harness compatibility procedure](../../skills/docs-engineering/references/harness-compatibility.md) and owns native commands, official version-pinned sources, isolated loading checks and permission/evidence limits. It is installed with the skills and does not depend on this repository-only document.
 
+## Observed agy integration isolation
+
+On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6, compared the pre-agy `main` snapshot `7ad7652226a4061ef1be8b742d439e2963edf34d` with `e75df71` plus the omp installer correction:
+
+- Restored the original omp requirement for all three MCP paths on installs, previews and updates. Optional MCP remains an agy-only installer behavior. A regression scenario rejects missing paths without creating the target.
+- Installed the original bundle into a disposable target, previewed and applied the current managed update through the unified installer. Preview changed no target files; `config.yml` and rendered `mcp.json` remained byte-identical after updating. All 52 pre-existing skill entrypoints remained byte-identical to the baseline.
+- The omp bundle retained exactly Playwright, GitHub and OpenDesign MCP definitions, without agy's plugin manifest, `mcp_config.json`, executor or architect. The separately packaged `kitshift-reviewer` and `kitshift-investigator` are additive omp definitions, not replacements for native roles.
+- Installing agy into a separate disposable target changed no omp target paths or bytes. The three new shared skill entrypoints select native omp tools; bundled CLI helpers are conditional agy paths and are not automatically executed by installation.
+- All 47 installer/helper tests passed with zero skips, including native agy plugin validation. Native `omp read` calls from a separate consumer workspace loaded all 55 installed skill bodies with matching canonical content through `PI_CODING_AGENT_DIR`, without inference.
+
+These checks cover installer isolation, managed upgrade preservation and passive source loading. New skill/agent metadata is discoverable in omp; no zero-context-cost claim is made. Agent dispatch, effective tool/model resolution, consuming-model behavior, performance, MCP handshakes and interactive TUI behavior were not exercised. No live installation, persistent settings, credentials or services were changed.
+
+
 ## Observed portability revision
 
 On Linux/WSL2 with Node.js 24.20.0 and omp 18.12.6, isolated native reads matched all 52 candidate skill bodies and the renamed `skill-contract.md` and `harness-compatibility.md` references exactly, without inference. The final browser-safety correction was reloaded separately. All four installer scenarios passed; metadata, licenses and bundled scripts were preserved, and 773 relative links/anchors resolved across skills and affected operator documents.
