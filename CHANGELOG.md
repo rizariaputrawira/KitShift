@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Reconciled README with both harnesses: corrected per-host agent inventory, documented all five optional agy MCP definitions and unpinned `npx` runtime dependencies, made filesystem roots explicit, separated MCP-refresh and non-MCP updates, and refreshed harness-aware navigation and current versus historical verification. All 162 local link occurrences and 31 heading fragments resolved; code fences were balanced. Both documented unified-installer help commands succeeded with matching interfaces. Implementation and live configuration were unchanged; the 47-test result is retained from the preceding integration verification, not rerun for this documentation-only change. External links were not checked.
+
 - Restored omp's pre-agy installation contract: all three local MCP paths are required for installs, previews and updates; optional MCP remains agy-only. Added a no-write missing-path regression and documented harness isolation. All 47 tests passed with zero skips. A disposable upgrade from `7ad7652` preserved omp config/rendered MCP bytes and all 52 existing skill entrypoints; a separate agy installation left the omp target unchanged. Native omp 18.12.6 reads matched all 55 installed skill bodies without inference. Live configuration, MCP connections, model dispatch and performance were not exercised.
 
 - Fixed five PR review findings in the portable helpers:
