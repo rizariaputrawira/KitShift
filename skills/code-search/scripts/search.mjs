@@ -126,33 +126,58 @@ function filesUnder(targetPath) {
 }
 
 function searchWithRipgrep(pattern, targetPath, matchesFile) {
-  const run = spawnSync('rg', [
-    '--no-config', '--json',
-    '-e', pattern, '--', targetPath,
-  ], { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
-  if (run.error) {
-    if (run.error.code === 'ENOENT') return null;
-    throw run.error;
+  function run(args, input) {
+    const result = spawnSync('rg', ['--no-config', ...args], {
+      encoding: 'utf8', maxBuffer: 10 * 1024 * 1024, input,
+    });
+    if (result.error) {
+      if (result.error.code === 'ENOENT') return null;
+      throw result.error;
+    }
+    if (result.status !== 0 && result.status !== 1) {
+      throw new Error(result.stderr.trim() || `ripgrep failed (${result.signal || result.status})`);
+    }
+    return result;
   }
-  if (run.status !== 0 && run.status !== 1) {
-    throw new Error(run.stderr.trim() || `ripgrep failed (${run.signal || run.status})`);
-  }
-  if (run.status === 1) return [];
 
+  // Let rg apply its hidden/ignore rules before applying our shared glob matcher.
+  const inventory = run(['--files', '--null', '--', targetPath]);
+  if (inventory === null) return null;
+  const files = inventory.stdout.split('\0').filter(file => file && matchesFile(file));
   const decode = value => value.text ?? Buffer.from(value.bytes, 'base64').toString('utf8');
   const results = [];
-  for (const line of run.stdout.split('\n').filter(Boolean)) {
-    const event = JSON.parse(line);
-    if (event.type !== 'match') continue;
-    const file = decode(event.data.path);
-    if (!matchesFile(file)) continue;
-    results.push({
-      file: path.relative(process.cwd(), file),
-      line: event.data.line_number,
-      text: decode(event.data.lines).trim(),
-    });
+  function search(files, input) {
+    const result = run(['--json', '-e', pattern, '--', ...files], input);
+    if (result === null) return false;
+    if (result.status === 1) return true;
+    for (const line of result.stdout.split('\n').filter(Boolean)) {
+      const event = JSON.parse(line);
+      if (event.type !== 'match') continue;
+      results.push({
+        file: path.relative(process.cwd(), decode(event.data.path)),
+        line: event.data.line_number,
+        text: decode(event.data.lines).trim(),
+      });
+    }
+    return true;
   }
-  return results;
+
+  // An empty selection must still reject invalid regexes, without reading stdin.
+  if (files.length === 0) return search(['-'], '') ? results : null;
+  let batch = [];
+  let bytes = 0;
+  for (const file of files) {
+    const size = Buffer.byteLength(file) + 1;
+    // Bound both argument count and bytes, rather than relying on the OS limit.
+    if (batch.length && (batch.length >= 128 || bytes + size > 32 * 1024)) {
+      if (!search(batch)) return null;
+      batch = [];
+      bytes = 0;
+    }
+    batch.push(file);
+    bytes += size;
+  }
+  return search(batch) ? results : null;
 }
 
 try {
@@ -194,6 +219,8 @@ try {
       results = [];
       for (const file of filesUnder(targetPath).filter(matchesFile)) {
         const lines = fs.readFileSync(file, 'utf8').split('\n');
+        // split() adds a non-line after a terminal newline (also for an empty file).
+        if (lines.at(-1) === '') lines.pop();
         lines.forEach((text, index) => {
           if (regex.test(text)) {
             results.push({ file: path.relative(process.cwd(), file), line: index + 1, text: text.trim() });

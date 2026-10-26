@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Fixed five PR review findings in the portable helpers:
+  - Task update/remove now require complete positive safe-integer IDs; a missing `--evidence` value fails before changing task status or stored evidence.
+  - Notebook mutations reject symlink paths without replacing the link or target; read/info may still follow links.
+  - Ripgrep inventories eligible files using its hidden/ignore rules, applies the shared glob matcher before content search, and searches bounded batches. The fallback no longer invents a line after a terminal newline or in an empty file.
+  - Verification: all 46 tests passed with zero skips via `node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs`, including native agy validation of a disposable bundle. A separate isolated CLI smoke verified task-byte preservation, symlink refusal and successful regular-file notebook editing, excluded high-volume search matches, and real blank-line results. No live installation or host settings changed; MCP handshakes and model dispatch were not exercised.
+
 - Fixed agy implementation-review findings:
   - Task-store read/parse failures now abort without discarding existing tasks.
   - Notebook selectors/types fail before writes; insertion generates unique nbformat 4.5 IDs; empty/multiline sources work; atomic replacement preserves permissions and validates supported v4 structures, not the complete external schema.

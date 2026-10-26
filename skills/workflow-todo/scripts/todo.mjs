@@ -73,6 +73,13 @@ Commands:
   help                                 Show this help
 `;
 
+function taskId(value) {
+  if (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < 1) {
+    throw new Error('Task ID must be a complete positive safe integer.');
+  }
+  return Number(value);
+}
+
 const args = process.argv.slice(2);
 const command = args[0] || 'list';
 
@@ -133,12 +140,7 @@ switch (command) {
     break;
   }
   case 'update': {
-    const id = parseInt(args[1], 10);
-    if (isNaN(id)) {
-      console.error('Error: Valid task ID is required. Usage: todo update <id> --status <status>');
-      process.exitCode = 1;
-      break;
-    }
+    const id = taskId(args[1]);
     const statusIdx = args.indexOf('--status');
     const status = statusIdx !== -1 ? args[statusIdx + 1] : null;
     const validStatuses = ['pending', 'in_progress', 'completed', 'blocked'];
@@ -149,6 +151,9 @@ switch (command) {
     }
     const evidenceIdx = args.indexOf('--evidence');
     const evidence = evidenceIdx !== -1 ? args[evidenceIdx + 1] : null;
+    if (evidenceIdx !== -1 && (!evidence || evidence.startsWith('--'))) {
+      throw new Error('--evidence requires a value.');
+    }
 
     const store = loadStore();
     const task = store.tasks.find(t => t.id === id);
@@ -165,12 +170,7 @@ switch (command) {
     break;
   }
   case 'remove': {
-    const id = parseInt(args[1], 10);
-    if (isNaN(id)) {
-      console.error('Error: Valid task ID is required.');
-      process.exitCode = 1;
-      break;
-    }
+    const id = taskId(args[1]);
     const store = loadStore();
     const initLen = store.tasks.length;
     store.tasks = store.tasks.filter(t => t.id !== id);

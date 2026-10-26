@@ -128,6 +128,9 @@ function validateNotebook(nb) {
 }
 
 function saveNotebook(nb) {
+  if (fs.lstatSync(nbPath).isSymbolicLink()) {
+    throw new Error('Cannot mutate a symlink notebook; use the regular file path instead.');
+  }
   validateNotebook(nb);
   const mode = fs.statSync(nbPath).mode & 0o7777;
   const tmp = `${nbPath}.${randomUUID()}.tmp`;

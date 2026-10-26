@@ -53,7 +53,13 @@ async function fixture(t, mode = 'fallback') {
     assert.match(result.stderr, /Error:/);
   }
   async function fakeRg(body, mode = 0o755) {
-    await writeFile(path.join(bin, 'rg'), `#!${process.execPath}\n${body}\n`, { mode });
+    await writeFile(path.join(bin, 'rg'), `#!${process.execPath}
+if (process.argv.includes('--files')) {
+  process.stdout.write(process.cwd() + '/file.txt\\0');
+} else {
+  ${body}
+}
+`, { mode });
   }
   return { root, workspace, bin, file, run, success, failure, fakeRg };
 }
@@ -112,6 +118,11 @@ for (const mode of ['fallback', 'rg']) {
     const f = await fixture(t, mode);
     await f.file('file.txt');
     f.failure(f.run('grep', '['));
+    f.failure(f.run('grep', '[', '--glob', '*.missing'));
+    assert.deepEqual(f.success(f.run('grep', 'needle', '--glob', '*.missing')), []);
+    await mkdir(path.join(f.workspace, 'empty'));
+    f.failure(f.run('grep', '[', '--path', 'empty'));
+    assert.deepEqual(f.success(f.run('grep', 'needle', '--path', 'empty')), []);
     f.failure(f.run('grep', 'needle', '--path', 'missing'));
     f.failure(f.run('glob', '*.ts', '--path', 'missing'));
     f.failure(f.run('glob', '[broken'));
@@ -120,8 +131,74 @@ for (const mode of ['fallback', 'rg']) {
 
 }
 
+test('fallback: empty files and terminal newlines do not create synthetic matching lines', async t => {
+  const f = await fixture(t);
+  await f.file('empty.txt', '');
+  await f.file('terminated.txt', 'needle\n');
+  await f.file('unterminated.txt', 'needle');
+  await f.file('blank.txt', '\n');
+  await f.file('interior.txt', 'needle\n\nlast\n\n');
+  assert.deepEqual(f.success(f.run('grep', '^$', '--path', 'empty.txt')), []);
+  assert.deepEqual(f.success(f.run('grep', '^$', '--path', 'terminated.txt')), []);
+  assert.deepEqual(f.success(f.run('grep', '^$', '--path', 'unterminated.txt')), []);
+  assert.deepEqual(f.success(f.run('grep', '^$', '--path', 'blank.txt')), [
+    { file: 'blank.txt', line: 1, text: '' },
+  ]);
+  assert.deepEqual(f.success(f.run('grep', '^$', '--path', 'interior.txt')), [
+    { file: 'interior.txt', line: 2, text: '' },
+    { file: 'interior.txt', line: 4, text: '' },
+  ]);
+  assert.deepEqual(f.success(f.run('grep', '.*', '--path', 'terminated.txt')), [
+    { file: 'terminated.txt', line: 1, text: 'needle' },
+  ]);
+  assert.deepEqual(f.success(f.run('grep', '.*', '--path', 'unterminated.txt')), [
+    { file: 'unterminated.txt', line: 1, text: 'needle' },
+  ]);
+});
+
+test('rg: excluded matching content cannot exhaust the content output buffer', { skip: rgUnavailable }, async t => {
+  const f = await fixture(t, 'rg');
+  await f.file('excluded.txt', `needle ${'x'.repeat(11 * 1024 * 1024)}\n`);
+  await f.file('nested/keep.ts');
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--glob', 'nested/*.ts')), [
+    { file: path.join('nested', 'keep.ts'), line: 1, text: 'needle' },
+  ]);
+});
+
+test('rg: preselection retains ignore rules and relative shared glob matching', { skip: rgUnavailable }, async t => {
+  const f = await fixture(t, 'rg');
+  await f.file('src/.ignore', 'ignored.ts\nignored/\n');
+  for (const name of [
+    'src/root.ts', 'src/deep/keep.ts', 'src/.hidden.ts', 'src/.secret/hidden.ts',
+    'src/ignored.ts', 'src/ignored/file.ts', 'src/deep/other.js', 'outside.ts',
+  ]) await f.file(name);
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--path', 'src', '--glob', '**/*.ts'))
+    .map(row => row.file).sort(), [path.join('src', 'root.ts'), path.join('src', 'deep', 'keep.ts')].sort());
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--path', 'src', '--glob', '*.ts'))
+    .map(row => row.file).sort(), [path.join('src', 'root.ts'), path.join('src', 'deep', 'keep.ts')].sort());
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--path', 'src', '--glob', 'deep/*.ts')), [
+    { file: path.join('src', 'deep', 'keep.ts'), line: 1, text: 'needle' },
+  ]);
+  // An explicitly targeted file retains rg's explicit-path exception to ignore rules.
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--path', 'src/.hidden.ts', '--glob', '*.ts')), [
+    { file: path.join('src', '.hidden.ts'), line: 1, text: 'needle' },
+  ]);
+});
+
+test('rg: matching results are retained across bounded file batches', { skip: rgUnavailable }, async t => {
+  const f = await fixture(t, 'rg');
+  const expected = [];
+  for (let index = 0; index < 140; index++) {
+    const name = `file-${index}.ts`;
+    await f.file(name, index % 2 ? 'absent\n' : 'needle\n');
+    if (index % 2 === 0) expected.push(name);
+  }
+  assert.deepEqual(f.success(f.run('grep', 'needle', '--glob', '*.ts')).map(row => row.file).sort(), expected.sort());
+});
+
 test('ripgrep status 1 alone is a successful no-match result', async t => {
   const f = await fixture(t);
+  await f.file('file.txt');
   await f.fakeRg('process.exit(1);');
   assert.deepEqual(f.success(f.run('grep', 'needle')), []);
 });
@@ -137,6 +214,7 @@ test('ripgrep non-match errors, malformed output and spawn errors are not swallo
   for (const entry of cases) {
     await t.test(entry.name, async t => {
       const f = await fixture(t);
+      await f.file('file.txt');
       await f.fakeRg(entry.body, entry.mode);
       const result = f.run('grep', 'needle');
       f.failure(result);

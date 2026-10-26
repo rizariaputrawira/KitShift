@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, readdir, rm, stat, chmod } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, readdir, rm, stat, chmod, symlink, lstat, readlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -104,6 +104,48 @@ test('todo rejects malformed JSON and unsupported store structures without overw
   }
 });
 
+test('todo rejects incomplete or unsafe IDs before changing or creating a store', async t => {
+  const f = await fixture(t);
+  const invalid = ['1junk', '1.5', '1e2', '0', '-1', '+1', ' 1', '', '9007199254740992'];
+  for (const id of [...invalid, undefined]) {
+    for (const command of ['update', 'remove']) {
+      const args = id === undefined ? [] : [id];
+      if (command === 'update') args.push('--status', 'completed');
+      f.failure(f.todo(command, ...args));
+      assert.deepEqual(await readdir(f.workflow), []);
+    }
+  }
+  f.success(f.todo('add', 'Keep'));
+  const bytes = await readFile(f.tasks, 'utf8');
+  for (const id of invalid) {
+    for (const args of [['update', id, '--status', 'completed'], ['remove', id]]) {
+      f.failure(f.todo(...args));
+      assert.equal(await readFile(f.tasks, 'utf8'), bytes);
+      assert.deepEqual(await readdir(f.workflow), ['tasks.json']);
+    }
+  }
+});
+
+test('todo rejects missing evidence values without changing status or existing evidence', async t => {
+  const f = await fixture(t);
+  f.success(f.todo('add', 'Keep'));
+  f.success(f.todo('update', '1', '--status', 'in_progress', '--evidence', 'original.txt'));
+  const bytes = await readFile(f.tasks, 'utf8');
+  for (const args of [
+    ['--status', 'completed', '--evidence'],
+    ['--evidence', '--status', 'completed'],
+    ['--status', 'completed', '--evidence', ''],
+  ]) {
+    const result = f.todo('update', '1', ...args);
+    f.failure(result);
+    assert.match(result.stderr, /--evidence requires a value/);
+    assert.equal(await readFile(f.tasks, 'utf8'), bytes);
+    assert.deepEqual(await readdir(f.workflow), ['tasks.json']);
+  }
+  f.success(f.todo('update', '1', '--status', 'completed'));
+  assert.equal(JSON.parse(await readFile(f.tasks, 'utf8')).tasks[0].evidence, 'original.txt');
+});
+
 test('todo fails on an unreadable store path rather than replacing it', async t => {
   const f = await fixture(t);
   await mkdir(f.tasks);
@@ -155,6 +197,32 @@ test('notebook rejects unsupported inserted types without writes', async t => {
   for (const type of ['raw', 'unknown', 'CODE', '']) {
     f.failure(f.notebook('insert', '--at', '0', '--type', type, '--source', 'changed'));
     assert.equal(await readFile(f.book, 'utf8'), bytes);
+  }
+});
+
+test('notebook permits symlink reads but rejects every mutation without replacing link or target', async t => {
+  const f = await fixture(t);
+  const target = join(f.root, 'target.ipynb');
+  const bytes = await writeNotebook({ book: target });
+  await symlink('target.ipynb', f.book);
+  f.success(f.notebook('info'));
+  const result = f.notebook('read', '--json');
+  f.success(result);
+  assert.deepEqual(JSON.parse(result.stdout), validNotebook().cells);
+  for (const [command, args] of [
+    ['edit', ['--cell', '0', '--source', 'changed']],
+    ['insert', ['--at', '0', '--type', 'markdown', '--source', 'changed']],
+    ['delete', ['--cell', '0']],
+    ['clear-outputs', []],
+  ]) {
+    const result = f.notebook(command, ...args);
+    f.failure(result);
+    assert.match(result.stderr, /symlink notebook/);
+    assert.equal((await lstat(f.book)).isSymbolicLink(), true);
+    assert.equal(await readlink(f.book), 'target.ipynb');
+    assert.equal(await readFile(target, 'utf8'), bytes);
+    assert.equal(await readFile(f.book, 'utf8'), bytes);
+    assert.deepEqual((await readdir(f.root)).sort(), ['.workflow', 'analysis.ipynb', 'target.ipynb']);
   }
 });
 

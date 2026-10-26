@@ -23,3 +23,5 @@ Bash ANSI-C quoting (`$'...\n...'`) passes an actual newline. Ordinary double-qu
 ## Validation and limits
 
 Cell indices must be complete nonnegative integers within the operation's bounds. Insert accepts `code` or `markdown`; an empty source is valid. The helper checks supported nbformat 4 structure and generates unique cell IDs for nbformat 4.5 and later. It is not a full external JSON-schema validator or a Python syntax checker. Invalid arguments or unsupported structure must fail without replacing the notebook. Inspect saved cells and use the project's notebook validator when full schema acceptance is required.
+
+`info` and `read` may follow a notebook symlink. Mutations (`edit`, `insert`, `delete`, and `clear-outputs`) reject a symlink notebook path before writing, preserving both the link and its target. Use the regular file path when an authorized mutation is needed; regular-file saves retain permission-preserving atomic replacement.
