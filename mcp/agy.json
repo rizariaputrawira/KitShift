@@ -46,6 +46,33 @@
         "OPEN_DESIGN_VELA_TELEMETRY": "0"
       },
       "timeoutSeconds": 60
+    },
+    "lsp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@theupsider/lsp-mcp"
+      ],
+      "timeoutSeconds": 60
+    },
+    "codegraph": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@colbymchenry/codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "timeoutSeconds": 60
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "{{WORKSPACE_DIR}}"
+      ],
+      "timeoutSeconds": 60
     }
   }
 }
