@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Simplified README skill naming to current conventions and host-supported invocation. Moved helper usage links out of naming and historical renames into a collapsible update procedure explicitly limited to installations with old names; scoped omp restart guidance to older omp installations. Preserved rename identities, backup/manifest/preview safeguards and duplicate-discovery warnings. Verified the 55-skill inventory remains complete, all 201 local links and 35 heading fragments resolve, and code fences/three collapsible sections are balanced. No runtime or skill content changed; external links and browser rendering were not checked.
+
 - Reorganized README around the complete 55-skill capability inventory instead of one upstream collection. Moved the Matt Pocock mapping into a source-specific collapsible section, clarified overlapping contributor counts, and relocated restored-skill evidence from safety guidance to explicitly historical provenance. Preserved both evidence tables verbatim and reconciled navigation. Verified all 55 canonical skills appear exactly once in the inventory, all 199 local links and 33 heading fragments resolve, and code fences/collapsible sections are balanced. No skill content or runtime behavior changed; external links and rendered browser layout were not checked.
 
 - Replaced README's agy binary-path example with a direct link to the official CLI installation instructions. Verified that the linked official Quickstart contains the platform-specific CLI installers; no installer was executed.

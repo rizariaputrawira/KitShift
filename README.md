@@ -145,6 +145,8 @@ The shared skill procedures are harness- and agent-neutral: cross-skill referenc
 
 See the [complete skill use-case guide](SKILL-USAGE.md) for all 55 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
+For agy helper commands and limits, read the [task](skills/workflow-todo/references/agy-usage.md), [search](skills/code-search/references/agy-usage.md), or [notebook](skills/code-python/references/agy-usage.md) companion. On omp, use the native tools through their current schemas. The helpers provide selected capabilities, not complete behavioral parity with omp.
+
 ### Skill collection
 
 KitShift includes **55 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
@@ -165,21 +167,11 @@ Browse [all installed skill sources](skills/) for the full collection and each p
 
 ### Skill naming
 
-Canonical skill directory names match their `SKILL.md` names and start with a functional domain: `agent-`, `code-`, `content-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`.
+Canonical skill directory names match the frontmatter `name` in their `SKILL.md` and start with a functional domain: `agent-`, `code-`, `content-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`.
 
 Harness-specific companions use `references/<harness>-<topic>.md`, with lowercase harness IDs `omp` and `agy` and kebab-case topics: `omp-compatibility.md`, `agy-compatibility.md`, and `agy-usage.md`. Use **Oh My Pi (`omp`)** and **Antigravity CLI (`agy`)** consistently in host-selection labels. Shared procedures stay in the entrypoint or shared reference; load a companion only for its named host and operation. Do not create empty counterpart files merely for symmetry or rename retained upstream source paths.
 
-The bundled [task](skills/workflow-todo/SKILL.md), [search](skills/code-search/SKILL.md), and [notebook](skills/code-python/SKILL.md) helpers resolve their executables from the loaded skill directory while keeping the consumer workspace as cwd. Their `agy-usage.md` companions own CLI examples and limits; native omp tools use their current schemas, not those CLI subcommands. These helpers provide selected capabilities, not complete behavioral parity with omp.
-
-The domain-prefix migration renames `brand-concepts` to `ui-brand-concepts`, `stitch-design-input` to `ui-stitch-design-input`, `swift-development` to `code-swift-development`, and the `taste-skill` package (previous invocation name `design-taste-frontend`) to `ui-taste-frontend`. Use the new names for `skill://` URIs and `/skill:` commands. Historical verification records and upstream source paths retain their original names.
-
-For an existing installation, do not rename the old directories into the new destinations: the manifest still owns their old paths, so changed files at the new paths are rejected as unmanaged conflicts. Instead:
-
-1. Move each old skill directory to a separate, unused backup location **outside every skill-discovery root**, preserving its contents and local edits. If you already renamed it in place, move that directory to the backup location too. Do not overwrite an existing backup or a separately installed new-name directory.
-2. Keep `.kitshift-manifest.json` intact. Preview the normal installer command with `--update --dry-run` and all three local MCP path arguments, then remove `--dry-run` to apply. With the new destinations absent, the installer creates and manages them; other conflicts still require deliberate reconciliation.
-3. Compare the backups with the new packages and reconcile any local edits deliberately. Do not copy an old `SKILL.md` back wholesale, because its old frontmatter name would undo the identity migration. Restart omp after migration.
-
-The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
+Request a skill by its canonical name in ordinary language. Use `skill://<name>` or `/skill:<name>` only where the selected host supports that interface; these are not portable requirements. See [SKILL-USAGE.md](SKILL-USAGE.md#how-to-use-this-guide) for invocation guidance and [migrating older skill names](#migrating-older-skill-names) only if your installation still has pre-prefix names.
 
 ## MCP integrations
 
@@ -224,6 +216,27 @@ node scripts/install.mjs agy --help
 Keep `.kitshift-manifest.json` in the destination. Updates can replace previously managed files only when they still match the recorded hash. Identical files can be adopted; locally edited files, including MCP configuration, are protected. Host or manual changes in the destination do not flow back into the repository. Files removed from a newer kit are left in place, so an update is not an exact mirror or uninstaller.
 
 To migrate an older agy installation made without MCP, supply all three local MCP paths and run the setup command with `--update --dry-run`, then remove `--dry-run` to apply. Choose explicit `--workspace-dir` roots if the installer's current directory is not the intended Filesystem scope. Existing local MCP edits or unmanaged conflicts must be reconciled deliberately; the update does not overwrite them.
+
+### Migrating older skill names
+
+**Only follow this if your installation still contains one of the old names below.** Fresh installations and installations already using canonical names need no skill-name migration. This procedure was originally documented for older omp installations.
+
+<details>
+<summary>Expand the historical rename mapping and safe migration steps</summary>
+
+The domain-prefix migration renamed `brand-concepts` to `ui-brand-concepts`, `stitch-design-input` to `ui-stitch-design-input`, `swift-development` to `code-swift-development`, and the `taste-skill` package (previous invocation name `design-taste-frontend`) to `ui-taste-frontend`. Use the canonical names through your host's supported invocation interface. Historical verification records and upstream source paths retain their original names.
+
+For an affected installation, do not rename the old directories into the new destinations: the manifest still owns their old paths, so changed files at the new paths are rejected as unmanaged conflicts. Instead:
+
+1. Move each old skill directory to a separate, unused backup location **outside every skill-discovery root**, preserving its contents and local edits. If you already renamed it in place, move that directory to the backup location too. Do not overwrite an existing backup or a separately installed new-name directory.
+2. Keep `.kitshift-manifest.json` intact. Preview the normal installer command with `--update --dry-run` and all three local MCP path arguments, then remove `--dry-run` to apply. With the new destinations absent, the installer creates and manages them; other conflicts still require deliberate reconciliation.
+3. Compare the backups with the new packages and reconcile any local edits deliberately. Do not copy an old `SKILL.md` back wholesale, because its old frontmatter name would undo the identity migration. For an older omp installation, restart omp after completing the migration; use the selected host's supported reload procedure otherwise.
+
+The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
+
+</details>
+
+### Troubleshooting
 
 | Symptom | What to check |
 |---|---|
