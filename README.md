@@ -49,7 +49,7 @@ Install these separately:
 - **Node.js 20 or newer** to run the installer scripts. Initial verification used Node.js 24.20.0.
 - **omp** and/or **Antigravity CLI (agy)** depending on your target harness.
   - omp: [official installation instructions](https://github.com/can1357/oh-my-pi#install).
-  - agy: installed binary on `PATH` (e.g. `~/.local/bin/agy`).
+  - agy: [official CLI installation instructions](https://antigravity.google/docs/getting-started?tab=cli#download-and-install).
 - **Git** to clone and update the repository.
 - **GitHub CLI** (`gh` on `PATH`) for GitHub MCP authentication.
 - **Playwright MCP** and a Chromium executable for browser tooling, required for both harness installers.
