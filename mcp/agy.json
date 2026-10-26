@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "{{NODE}}",
+      "args": [
+        "{{PLAYWRIGHT_CLI}}",
+        "--headless",
+        "--isolated",
+        "--sandbox",
+        "--executable-path",
+        "{{BROWSER}}",
+        "--output-dir",
+        "{{PLAYWRIGHT_OUTPUT_DIR}}"
+      ],
+      "timeoutSeconds": 60
+    },
+    "open-design": {
+      "command": "{{NODE}}",
+      "args": [
+        "{{OPEN_DESIGN_CLI}}",
+        "mcp"
+      ],
+      "env": {
+        "OD_DAEMON_URL": "http://127.0.0.1:7456",
+        "DO_NOT_TRACK": "1",
+        "OTEL_SDK_DISABLED": "true",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "",
+        "OTEL_EXPORTER_OTLP_HEADERS": "",
+        "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "",
+        "OTEL_EXPORTER_OTLP_TRACES_HEADERS": "",
+        "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT": "",
+        "OTEL_EXPORTER_OTLP_METRICS_HEADERS": "",
+        "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT": "",
+        "OTEL_EXPORTER_OTLP_LOGS_HEADERS": "",
+        "RTK_TELEMETRY_DISABLED": "1",
+        "NEXT_TELEMETRY_DISABLED": "1",
+        "PI_AUTO_QA": "0",
+        "PI_AUTO_QA_PUSH": "0",
+        "PI_AUTO_QA_PUSH_URL": "",
+        "PI_AUTO_QA_PUSH_TOKEN": "",
+        "POSTHOG_KEY": "",
+        "LANGFUSE_PUBLIC_KEY": "",
+        "LANGFUSE_SECRET_KEY": "",
+        "OPEN_DESIGN_TELEMETRY_RELAY_URL": "",
+        "OPEN_DESIGN_OBJECT_RELAY_URL": "",
+        "OPEN_DESIGN_VELA_TELEMETRY": "0"
+      },
+      "timeoutSeconds": 60
+    }
+  }
+}
