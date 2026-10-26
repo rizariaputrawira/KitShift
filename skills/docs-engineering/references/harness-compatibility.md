@@ -13,6 +13,7 @@ Before resolving host-specific commands or sources, select only the companion fo
 | Selected target | Additional reference |
 |---|---|
 | omp | Read the packaged [omp compatibility companion](omp-compatibility.md). |
+| agy (Antigravity CLI) | Read the packaged [agy compatibility companion](agy-compatibility.md). |
 | Other harnesses | Use their current supported interfaces and official version-pinned sources; no dedicated companion or verified integration is implied. |
 
 ## Assessment procedure

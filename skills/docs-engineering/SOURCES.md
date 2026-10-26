@@ -96,3 +96,7 @@ unavailable external owner still blocks its dependent design claim. Removed the
 obsolete staged-test capability mention; explicit-only prototype use is preserved.
 Catalog/schema, templates, notices, adoption and conditional delivery boundaries
 are unchanged. This source correction makes no runtime or consuming-agent claim.
+
+## Antigravity CLI (agy) harness companion addition — 2026-10-26
+
+Added `references/agy-compatibility.md` as the companion for Antigravity CLI (`agy`) harness assessments, updating the routing table in `references/harness-compatibility.md`. It provides native plugin validation checks (`agy plugin validate`) and official source pointers without duplicating shared assessment rules. Catalog/schema, templates, notices, and existing OMP guidance remain unchanged.
