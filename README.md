@@ -33,7 +33,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
 - **Dedicated subagents:** `kitshift-reviewer` and `kitshift-investigator` for both harnesses; `kitshift-executor` and `kitshift-architect` additionally packaged for agy. Definitions do not prove effective runtime tools or model selection.
-- **Portable MCP definitions:** Playwright and local design tooling for both harnesses, GitHub for omp, and optional LSP, Codegraph, and Filesystem definitions for agy. Machine-specific local paths are rendered during installation.
+- **Portable MCP definitions:** Playwright and local design tooling for both harnesses, GitHub for omp, and LSP, Codegraph, and Filesystem for agy. Machine-specific local paths are rendered during every installation and managed update.
 - **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
 Skills and guidance are instructions for the agent, not guarantees of compliance, isolation, service availability, or lower cost.
@@ -52,9 +52,9 @@ Install these separately:
   - agy: installed binary on `PATH` (e.g. `~/.local/bin/agy`).
 - **Git** to clone and update the repository.
 - **GitHub CLI** (`gh` on `PATH`) for GitHub MCP authentication.
-- **Playwright MCP** and a Chromium executable for browser tooling (required for omp; optional for agy).
-- The local design CLI used by **OpenDesign Cloud or Local Codex**, plus its local daemon when you use that integration.
-- **npm / `npx` on `PATH`** for agy's optional LSP, Codegraph, and Filesystem servers. Their runtime commands may download and execute packages; see [MCP integrations](#mcp-integrations).
+- **Playwright MCP** and a Chromium executable for browser tooling, required for both harness installers.
+- The local design CLI used by **OpenDesign Cloud or Local Codex**, required for both harness installers, plus its local daemon when you use that integration.
+- **npm / `npx` on `PATH`** for agy's LSP, Codegraph, and Filesystem servers. Their runtime commands may download and execute packages; see [MCP integrations](#mcp-integrations).
 
 ### Oh My Pi (omp) setup
 
@@ -72,7 +72,7 @@ node scripts/install-omp.mjs --dry-run \
 
 Rerun **without `--dry-run`** to install into `~/.omp/agent`. For managed updates, run `node scripts/install-omp.mjs --update ...`.
 
-All three local MCP path arguments remain required for omp installs, previews, and updates. Only the agy installer supports optional MCP configuration. The agy-specific LSP, Codegraph, and Filesystem definitions are not added to omp's `mcp.json`; its native tools remain the selected path in the three helper skills.
+All three local MCP path arguments are required for installs, previews, and updates on both harnesses. The agy-specific LSP, Codegraph, and Filesystem definitions are not added to omp's `mcp.json`; its native tools remain the selected path in the three helper skills.
 
 Start omp from your project directory:
 
@@ -84,29 +84,21 @@ omp
 
 KitShift installs as a native Antigravity plugin under `~/.gemini/config/plugins/kitshift` (or in a project workspace under `<workspace>/.agents/plugins/kitshift` via `--target`).
 
-#### Default install (skills, rules, subagents without MCP)
-
-```sh
-node scripts/install-agy.mjs --dry-run
-node scripts/install-agy.mjs
-```
-
-#### Install with all five MCP definitions
-
 ```sh
 node scripts/install-agy.mjs --dry-run \
-  --with-mcp \
   --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
   --browser /absolute/path/to/chromium/chrome \
   --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs \
   --workspace-dir /absolute/path/to/your/project
 ```
 
-Rerun **without `--dry-run`** to install. The bundle includes Playwright, OpenDesign, LSP, Codegraph, and Filesystem definitions together; this flag does not select individual servers.
+Rerun **without `--dry-run`** to install. Every agy install, preview, and update requires all three local MCP paths and renders all five definitions: Playwright, OpenDesign, LSP, Codegraph, and Filesystem. `--workspace-dir` remains optional.
+
+The former `--with-mcp` switch has been removed; omit it from older commands.
 
 Set `--workspace-dir` to the directory the Filesystem server should expose. For multiple roots, use one quoted comma-separated value, such as `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Roots must be existing absolute readable directories. If omitted, the installer records its current working directory; opening agy in another project does not automatically change those configured roots. This filesystem-server scope is not a sandbox for other host tools.
 
-For managed updates, follow [updates and troubleshooting](#updates-and-troubleshooting). Updating without `--with-mcp` retains any previously installed MCP configuration; it does not refresh or disable it.
+For managed updates and migration from an older installation without MCP, follow [updates and troubleshooting](#updates-and-troubleshooting).
 
 Once installed:
 - Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
@@ -130,19 +122,11 @@ The repository is the source of truth. The installers copy content into the targ
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
 
-Unspecified settings follow the installed omp version's defaults. Upgrading omp can change those defaults without changing the repository snapshot.
+### Configuration
 
-### omp model selections
+Review [the omp configuration](harnesses/omp/config.yml) for its model selectors and other native settings; [the agy settings template](harnesses/agy/settings.json) is available for manual adoption. Model selections are personal configuration, not a performance ranking, entitlement check, or fixed agent-identity policy. Native delegation remains available; KitShift does not impose custom worker routing or a second approval system.
 
-| Native role | Configured selector |
-|---|---|
-| `smol` | `openai-codex/gpt-6-luna:low` |
-| `default` | `openai-codex/gpt-6.1-sol:medium` |
-| `slow` | `openai-codex/gpt-6-astra:high` |
-| `commit` | `openai-codex/gpt-6-luna` |
-| `plan` | `openai-codex/gpt-6.1-sol` |
-
-These are personal selections, not a performance ranking, entitlement check, or fixed agent-identity policy. Native delegation remains available; KitShift does not impose custom worker routing or a second approval system.
+Unspecified settings follow the installed harness version's defaults. Upgrading a harness can change those defaults without changing the repository snapshot.
 
 ### Agent collaboration
 
@@ -238,16 +222,16 @@ These are connection definitions, not bundled servers or proof of a working conn
 
 | Integration | Harness | Local requirements and behavior |
 |---|---|---|
-| Playwright | omp; agy with MCP | Readable Playwright MCP JavaScript entry point and executable Chromium. Preserves headless, isolated, and sandbox flags; output goes under the destination's `cache/playwright-mcp`. |
+| Playwright | omp; agy | Readable Playwright MCP JavaScript entry point and executable Chromium. Preserves headless, isolated, and sandbox flags; output goes under the destination's `cache/playwright-mcp`. |
 | GitHub | omp template; agy host-managed | omp connects to `https://api.githubcopilot.com/mcp/` and resolves authentication through `gh` on `PATH`; no token is committed. The agy plugin does not define GitHub MCP or configure host authentication. |
-| OpenDesign Cloud / Local Codex | omp; agy with MCP | Readable local design CLI entry point and daemon expected at `http://127.0.0.1:7456`. Preserves the template's process-scoped privacy environment. |
-| LSP | agy with MCP | `npx -y @theupsider/lsp-mcp`; package availability, language-server setup and runtime capabilities are not established by installation. |
-| Codegraph | agy with MCP | `npx -y @colbymchenry/codegraph serve --mcp`; indexing and server connectivity were not exercised by installer validation. |
-| Filesystem | agy with MCP | `npx -y @modelcontextprotocol/server-filesystem` with the roots rendered from `--workspace-dir`; defaults to the installer's cwd, not the future agy session's cwd. |
+| OpenDesign Cloud / Local Codex | omp; agy | Readable local design CLI entry point and daemon expected at `http://127.0.0.1:7456`. Preserves the template's process-scoped privacy environment. |
+| LSP | agy | `npx -y @theupsider/lsp-mcp`; package availability, language-server setup and runtime capabilities are not established by installation. |
+| Codegraph | agy | `npx -y @colbymchenry/codegraph serve --mcp`; indexing and server connectivity were not exercised by installer validation. |
+| Filesystem | agy | `npx -y @modelcontextprotocol/server-filesystem` with the roots rendered from `--workspace-dir`; defaults to the installer's cwd, not the future agy session's cwd. |
 
 Playwright and OpenDesign commands use the Node executable that ran the installer; the three additional agy servers resolve `npx` through runtime `PATH`. Their package versions are unpinned, and `npx -y` may download and execute packages when the host starts the servers. The installer itself does not download or launch them.
 
-Moving Node, a CLI, or the browser can require re-rendering MCP configuration. All three local path arguments are required for omp installs, previews, and updates, and whenever agy uses `--with-mcp`. An agy update without that flag leaves existing MCP configuration in place.
+Moving Node, a CLI, or the browser can require re-rendering MCP configuration. All three local path arguments are required for every install, preview, and update on both harnesses. agy always renders all five definitions; retain the intended workspace roots when updating.
 
 ## Safety and privacy
 
@@ -282,21 +266,22 @@ node scripts/install.mjs agy --help
 | Update target | Preview | Apply |
 |---|---|---|
 | omp | Repeat the omp [setup command](#oh-my-pi-omp-setup) with `--update --dry-run`, retaining all three local MCP paths and any custom `--target`. | Remove `--dry-run`. |
-| agy skills, rules, and agents | `node scripts/install-agy.mjs --update --dry-run`, retaining any custom `--target`. Existing MCP configuration remains untouched. | Remove `--dry-run`. |
-| agy including rendered MCP | Repeat the agy [MCP setup command](#install-with-all-five-mcp-definitions) with `--update --dry-run`, retaining `--with-mcp`, all three local paths, the intended workspace roots, and any custom `--target`. | Remove `--dry-run`. |
+| agy | Repeat the agy [setup command](#antigravity-cli-agy-setup) with `--update --dry-run`, retaining all three local MCP paths, the intended workspace roots, and any custom `--target`. | Remove `--dry-run`. |
 
-Keep `.kitshift-manifest.json` in the destination. Updates can replace previously managed files only when they still match the recorded hash. Identical files can be adopted; locally edited files are protected. Host or manual changes in the destination do not flow back into the repository. Files removed from a newer kit are left in place, so an update is not an exact mirror or uninstaller. Omitting agy's `--with-mcp` does not remove a previously installed MCP file.
+Keep `.kitshift-manifest.json` in the destination. Updates can replace previously managed files only when they still match the recorded hash. Identical files can be adopted; locally edited files, including MCP configuration, are protected. Host or manual changes in the destination do not flow back into the repository. Files removed from a newer kit are left in place, so an update is not an exact mirror or uninstaller.
+
+To migrate an older agy installation made without MCP, supply all three local MCP paths and run the setup command with `--update --dry-run`, then remove `--dry-run` to apply. Choose explicit `--workspace-dir` roots if the installer's current directory is not the intended Filesystem scope. Existing local MCP edits or unmanaged conflicts must be reconciled deliberately; the update does not overwrite them.
 
 | Symptom | What to check |
 |---|---|
-| Required path is missing or unreadable | For omp or agy with `--with-mcp`, supply all three absolute MCP paths and confirm the browser is executable. The installer does not install dependencies. |
+| Required path is missing or unreadable | For either harness, supply all three absolute MCP paths and confirm the browser is executable. The installer does not install dependencies. |
 | `Unmanaged file differs` | Compare the named destination with the kit. Preserve the original and reconcile it explicitly; `--update` does not override unmanaged conflicts. |
 | `Managed file has local edits` | Preserve your local edits and decide which belong in the canonical repository. The installer will not discard them. |
 | `Managed file needs --update` | Preview with `--update --dry-run`, then apply with `--update`. |
 | Symlink destination rejected | Choose a real directory path. The installer rejects symlinked files and directory ancestors. |
 | omp cannot select a configured model | Authenticate `openai-codex`, check account availability, or change the model selectors. Configured IDs are not proof of access. |
 | An MCP connection fails after installation | Check the service, paths, local daemon, and authentication. Successful installation validates files and rendering, not server connectivity. |
-| agy's Filesystem server exposes the wrong project | Re-render MCP with `--update --with-mcp`, all three local paths, and explicit `--workspace-dir` roots. The default is the installer's cwd. |
+| agy's Filesystem server exposes the wrong project | Re-render MCP with `--update`, all three local paths, and explicit `--workspace-dir` roots. The default is the installer's cwd. |
 | Updating omp changes behavior | Review upstream changes and effective settings. The kit does not pin every native default or guarantee compatibility with later versions. |
 
 ## Verification and known limits
@@ -307,9 +292,15 @@ Run the full installer and helper regression suite from the repository root:
 node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs
 ```
 
-### Current integration verification
+### Mandatory MCP verification
 
-On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6:
+On 2026-10-26, the full suite passed **114/114 tests with zero skips**, including required and invalid path handling through both agy installer entrypoints, no-write previews, managed updates, local-edit protection, migration from managed bundles without MCP, and native agy validation of the full five-server bundle.
+
+A separate disposable CLI smoke exercised a five-server install and managed workspace-root update, then upgraded a real no-MCP bundle installed by `ec92364`. The omp installer, configuration and MCP template remained byte-identical to that snapshot. Across this README and the three compatibility documents, 173 local link occurrences and 31 heading fragments resolved. MCP services and model calls were not launched; live installations and settings were untouched.
+
+### Recorded integration verification
+
+The following checks predate the mandatory-agy-MCP cutover and describe that earlier snapshot, not a fresh verification of the current installer. On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6:
 
 - **47/47 tests passed with zero skips**, including task/notebook data-preservation regressions, both search engines, installer conflict/update/symlink scenarios, and required omp MCP paths.
 - Native agy validation of a disposable bundle reported 55 skills, four agents, one rule, five MCP definitions and zero errors. This establishes packaging validation, not server connectivity or role dispatch.

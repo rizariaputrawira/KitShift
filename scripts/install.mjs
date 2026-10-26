@@ -18,8 +18,8 @@ Supported harnesses:
 Examples:
   node scripts/install.mjs omp --help
   node scripts/install.mjs agy --help
-  node scripts/install.mjs agy --dry-run
-  node scripts/install.mjs agy --with-mcp --playwright-cli ... --browser ... --open-design-cli ...
+  node scripts/install.mjs agy --dry-run --playwright-cli /path/to/cli.js --browser /path/to/chromium --open-design-cli /path/to/od.mjs
+  node scripts/install.mjs agy --playwright-cli /path/to/cli.js --browser /path/to/chromium --open-design-cli /path/to/od.mjs
 `;
 
 const args = process.argv.slice(2);

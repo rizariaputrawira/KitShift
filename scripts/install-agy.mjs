@@ -16,24 +16,22 @@ import {
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const help = `Usage:
   node scripts/install-agy.mjs [--target DIR] [--dry-run] [--update]
-    [--with-mcp --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH [--workspace-dir DIR]]
+    --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH [--workspace-dir DIR]
 
-Copies this repository's skills, plugin rules, subagents, and optional MCP
-configuration into a native Antigravity CLI plugin bundle. The default target is
+Copies this repository's skills, plugin rules, subagents, and MCP configuration
+into a native Antigravity CLI plugin bundle. The default target is
 ~/.gemini/config/plugins/kitshift. No symlinks are installed.
 
-By default, installs without MCP configuration. To include Playwright and
-OpenDesign MCP servers (along with LSP, Codegraph, and Filesystem), pass --with-mcp
-along with existing local paths for the three MCP flags. JavaScript entry points
-must be readable; the browser must be executable.
+Every install, update, and dry run requires existing local paths for the three
+MCP flags. JavaScript entry points must be readable; the browser must be
+executable. Playwright, OpenDesign, LSP, Codegraph, and Filesystem are always included.
 
   --target DIR         Install into this plugin directory (relative paths allowed).
   --dry-run            Preflight and show planned copies without writing anything.
   --update             Replace only files unchanged since a prior managed install.
-  --with-mcp           Render and install mcp_config.json for Playwright, OpenDesign, LSP, Codegraph, and Filesystem.
-  --playwright-cli P   Absolute path to Playwright MCP cli.js (requires --with-mcp).
-  --browser P          Absolute path to Chromium browser executable (requires --with-mcp).
-  --open-design-cli P  Absolute path to OpenDesign CLI od.mjs (requires --with-mcp).
+  --playwright-cli P   Required absolute path to Playwright MCP cli.js.
+  --browser P          Required absolute path to Chromium browser executable.
+  --open-design-cli P  Required absolute path to OpenDesign CLI od.mjs.
   --workspace-dir DIR  Workspace root(s) for filesystem MCP (optional, comma-separated allowed, defaults to cwd).
   --help, -h           Show this help.
 
@@ -46,7 +44,7 @@ keep it for safe updates. Manifest and MCP config permissions are 0600.
 function parseArgs(args) {
   const options = { target: path.join(os.homedir(), '.gemini', 'config', 'plugins', 'kitshift') };
   const values = new Set(['--target', '--playwright-cli', '--browser', '--open-design-cli', '--workspace-dir']);
-  const switches = new Set(['--dry-run', '--update', '--with-mcp', '--help', '-h']);
+  const switches = new Set(['--dry-run', '--update', '--help', '-h']);
   const seen = new Set();
   for (let index = 0; index < args.length; index++) {
     const argument = args[index];
@@ -62,20 +60,6 @@ function parseArgs(args) {
       options[argument.slice(2)] = value;
     } else {
       fail(`Unknown option: ${argument}. Use --help for usage.`);
-    }
-  }
-
-  const mcpFlags = ['playwright-cli', 'browser', 'open-design-cli'];
-  const hasAnyMcpFlag = mcpFlags.some(flag => options[flag]);
-
-  if (!options['with-mcp'] && hasAnyMcpFlag) {
-    fail('--playwright-cli, --browser, and --open-design-cli require --with-mcp.');
-  }
-  if (options['with-mcp']) {
-    for (const flag of mcpFlags) {
-      if (!options[flag]) {
-        fail(`Required option --${flag} is missing when --with-mcp is specified. Use --help for usage.`);
-      }
     }
   }
 
@@ -103,7 +87,7 @@ function main() {
   const pluginJson = Buffer.from(`${JSON.stringify({
     name: 'kitshift',
     version: '0.1.0',
-    description: 'KitShift portable coding-agent skills, working guidance, subagents, and optional MCP configuration.',
+    description: 'KitShift portable coding-agent skills, working guidance, subagents, and MCP configuration.',
   }, null, 2)}\n`);
   files.set('plugin.json', { content: pluginJson, mode: 0o644 });
 
@@ -113,24 +97,22 @@ function main() {
   collectFiles(path.join(repository, 'skills'), 'skills', files);
   collectFiles(path.join(repository, 'harnesses', 'agy', 'agents'), 'agents', files);
 
-  if (options['with-mcp']) {
-    const replacements = {
-      '{{NODE}}': process.execPath,
-      '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
-      '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
-      '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
-      '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
-      '{{WORKSPACE_DIR}}': options['workspace-dir']
-        ? (options['workspace-dir'].includes(',')
-            ? options['workspace-dir'].split(',').map(d => d.trim()).filter(Boolean).map(d => validateLocalPath('--workspace-dir', d, false, true))
-            : validateLocalPath('--workspace-dir', options['workspace-dir'], false, true))
-        : process.cwd(),
-    };
-    files.set('mcp_config.json', {
-      content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),
-      mode: 0o600,
-    });
-  }
+  const replacements = {
+    '{{NODE}}': process.execPath,
+    '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
+    '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
+    '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
+    '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
+    '{{WORKSPACE_DIR}}': options['workspace-dir']
+      ? (options['workspace-dir'].includes(',')
+          ? options['workspace-dir'].split(',').map(d => d.trim()).filter(Boolean).map(d => validateLocalPath('--workspace-dir', d, false, true))
+          : validateLocalPath('--workspace-dir', options['workspace-dir'], false, true))
+      : process.cwd(),
+  };
+  files.set('mcp_config.json', {
+    content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),
+    mode: 0o600,
+  });
 
   installBundle({
     target,

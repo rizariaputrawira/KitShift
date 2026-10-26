@@ -15,7 +15,7 @@ For a requested omp assessment, read the packaged [omp compatibility companion](
 
 On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6, compared the pre-agy `main` snapshot `7ad7652226a4061ef1be8b742d439e2963edf34d` with `e75df71` plus the omp installer correction:
 
-- Restored the original omp requirement for all three MCP paths on installs, previews and updates. Optional MCP remains an agy-only installer behavior. A regression scenario rejects missing paths without creating the target.
+- Restored the original omp requirement for all three MCP paths on installs, previews and updates. At this historical snapshot, optional MCP was an agy-only installer behavior; the later mandatory-agy-MCP cutover supersedes that distinction without changing omp's requirement. A regression scenario rejected missing paths without creating the target.
 - Installed the original bundle into a disposable target, previewed and applied the current managed update through the unified installer. Preview changed no target files; `config.yml` and rendered `mcp.json` remained byte-identical after updating. All 52 pre-existing skill entrypoints remained byte-identical to the baseline.
 - The omp bundle retained exactly Playwright, GitHub and OpenDesign MCP definitions, without agy's plugin manifest, `mcp_config.json`, executor or architect. The separately packaged `kitshift-reviewer` and `kitshift-investigator` are additive omp definitions, not replacements for native roles.
 - Installing agy into a separate disposable target changed no omp target paths or bytes. The three new shared skill entrypoints select native omp tools; bundled CLI helpers are conditional agy paths and are not automatically executed by installation.

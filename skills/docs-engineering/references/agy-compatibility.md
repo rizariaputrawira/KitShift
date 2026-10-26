@@ -23,6 +23,10 @@ Use official Antigravity documentation, the requested official release, and vers
 
 Distinguish native plugin discovery, manifest validation (`plugin.json`), rule merging (`rules/AGENTS.md`), subagent registration (`agents/<name>.md`), MCP configuration (`mcp_config.json`), and consuming-agent behavior.
 
+For a KitShift candidate, inspect the installer/template sources as the packaging contract: every install, preview, and update requires `--playwright-cli`, `--browser`, and `--open-design-cli`, and includes all five definitions (`playwright`, `open-design`, `lsp`, `codegraph`, `filesystem`) in `mcp_config.json`. `--workspace-dir` remains optional, defaulting to the installer's cwd rather than a later session's workspace. Record the intended roots separately from host tool containment. Older no-MCP installations require the three paths and `--update` to migrate; normal managed-file checks protect local MCP edits. This contract does not authorize performing that migration.
+
+Treat server readiness separately: the installer neither downloads nor launches servers. LSP, Codegraph, and Filesystem use unpinned `npx -y` runtime commands that may download and execute packages when started by the host. Static validation does not establish package safety, connectivity, or language-server/index readiness.
+
 When a static plugin-loading check is authorized, use a disposable directory outside the active installation. The native plugin validation mechanism exercised in Antigravity CLI is:
 
 ```sh
