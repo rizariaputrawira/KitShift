@@ -54,7 +54,7 @@ export function hash(content) {
   return crypto.createHash('sha256').update(content).digest('hex');
 }
 
-export function validateLocalPath(flag, value, executable = false) {
+export function validateLocalPath(flag, value, executable = false, isDirectory = false) {
   if (!value) fail(`Required option ${flag} is missing. Use --help for local MCP setup instructions.`);
   if (!path.isAbsolute(value)) fail(`${flag} must be an absolute local path: ${value}`);
   let stat;
@@ -62,9 +62,13 @@ export function validateLocalPath(flag, value, executable = false) {
     stat = fs.statSync(value);
     fs.accessSync(value, executable ? fs.constants.R_OK | fs.constants.X_OK : fs.constants.R_OK);
   } catch (error) {
-    fail(`${flag} must name an existing ${executable ? 'readable, executable' : 'readable'} local file: ${value} (${error.code ?? error.message})`);
+    fail(`${flag} must name an existing ${executable ? 'readable, executable' : 'readable'} local ${isDirectory ? 'directory' : 'file'}: ${value} (${error.code ?? error.message})`);
   }
-  if (!stat.isFile()) fail(`${flag} must name a regular file: ${value}`);
+  if (isDirectory) {
+    if (!stat.isDirectory()) fail(`${flag} must name a directory: ${value}`);
+  } else {
+    if (!stat.isFile()) fail(`${flag} must name a regular file: ${value}`);
+  }
   return value;
 }
 
@@ -98,7 +102,12 @@ export function renderMcp(templatePath, replacements) {
       if (/\{\{[^{}]+\}\}/.test(value)) fail(`Unknown or embedded MCP template placeholder: ${value}`);
       return value;
     }
-    if (Array.isArray(value)) return value.map(render);
+    if (Array.isArray(value)) {
+      return value.flatMap(item => {
+        const rendered = render(item);
+        return Array.isArray(rendered) ? rendered : [rendered];
+      });
+    }
     if (value && typeof value === 'object') {
       return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, render(item)]));
     }

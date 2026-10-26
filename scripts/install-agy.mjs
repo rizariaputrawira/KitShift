@@ -34,7 +34,7 @@ must be readable; the browser must be executable.
   --playwright-cli P   Absolute path to Playwright MCP cli.js (requires --with-mcp).
   --browser P          Absolute path to Chromium browser executable (requires --with-mcp).
   --open-design-cli P  Absolute path to OpenDesign CLI od.mjs (requires --with-mcp).
-  --workspace-dir DIR  Workspace root for filesystem MCP (optional, defaults to cwd).
+  --workspace-dir DIR  Workspace root(s) for filesystem MCP (optional, comma-separated allowed, defaults to cwd).
   --help, -h           Show this help.
 
 Unmanaged differing files, user-edited managed files, and symlink destinations
@@ -120,7 +120,11 @@ function main() {
       '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
       '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
       '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
-      '{{WORKSPACE_DIR}}': options['workspace-dir'] ? validateLocalPath('--workspace-dir', options['workspace-dir']) : process.cwd(),
+      '{{WORKSPACE_DIR}}': options['workspace-dir']
+        ? (options['workspace-dir'].includes(',')
+            ? options['workspace-dir'].split(',').map(d => d.trim()).filter(Boolean).map(d => validateLocalPath('--workspace-dir', d, false, true))
+            : validateLocalPath('--workspace-dir', options['workspace-dir'], false, true))
+        : process.cwd(),
     };
     files.set('mcp_config.json', {
       content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),

@@ -108,6 +108,15 @@ test('--with-mcp renders mcp_config.json and requires all three mcp flags', asyn
   assert(mcp.mcpServers.filesystem);
   assert(!('github' in mcp.mcpServers));
 
+  // Multi-workspace root support expands into multiple filesystem args
+  const dir1 = join(f.root, 'dir1');
+  const dir2 = join(f.root, 'dir2');
+  await mkdir(dir1);
+  await mkdir(dir2);
+  f.success(f.runWithMcp('--update', '--workspace-dir', `${dir1},${dir2}`));
+  const multiMcp = JSON.parse(await readFile(join(f.target, 'mcp_config.json'), 'utf8'));
+  assert.deepEqual(multiMcp.mcpServers.filesystem.args.slice(-2), [dir1, dir2]);
+
   // Verify that updating without --with-mcp retains previously managed mcp_config.json
   await writeFile(join(f.repo, 'skills/example/SKILL.md'), '---\nname: example\ndescription: Update3\n---\nNew3\n');
   f.success(f.run('--update'));
