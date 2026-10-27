@@ -1,6 +1,6 @@
 # Shortcut debt ledger
 
-Adapted from DietrichGebert's Ponytail debt snapshot; [full MIT notice](../LICENSE.ponytail). One-shot reporting, not coding-level activation or a general debt tracker.
+Adapted from DietrichGebert's Ponytail debt guidance. For the pinned official source and intentional local adaptations, read [SOURCES.md](../SOURCES.md); retain the [full MIT notice](../LICENSE.ponytail). One-shot reporting, not coding-level activation or a general debt tracker.
 
 Search the explicitly requested boundary for actual `ponytail:` shortcut comments. Exclude dependencies, build/generated output and VCS metadata. A quoted marker in documentation or sample string is not automatically a shortcut comment. Preserve each real marker's file/line and group rows by file.
 

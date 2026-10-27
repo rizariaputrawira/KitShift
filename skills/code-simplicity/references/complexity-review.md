@@ -1,6 +1,6 @@
 # Complexity-only review and audit
 
-Adapted from DietrichGebert's Ponytail review/audit snapshots, with native authority, scope and evidence corrections. See [full MIT notice](../LICENSE.ponytail). Both branches report findings only; no automatic fixes or coding-level changes.
+Adapted from DietrichGebert's Ponytail review/audit guidance, with native authority, scope and evidence corrections. For the pinned official source and intentional local adaptations, read [SOURCES.md](../SOURCES.md); retain the [full MIT notice](../LICENSE.ponytail). Both branches report findings only; no automatic fixes or coding-level changes.
 
 ## Review: real diff boundary
 
