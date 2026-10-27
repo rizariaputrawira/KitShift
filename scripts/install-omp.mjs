@@ -78,6 +78,10 @@ function main() {
   checkDirectoryChain(target);
 
   const files = new Map();
+  collectFiles(path.join(repository, 'LICENSE'), 'LICENSE', files);
+  files.get('LICENSE').mode = 0o644;
+  collectFiles(path.join(repository, 'NOTICE'), 'NOTICE', files);
+  files.get('NOTICE').mode = 0o644;
   collectFiles(path.join(repository, 'harnesses', 'omp', 'config.yml'), 'config.yml', files);
   files.get('config.yml').mode = 0o600;
   collectFiles(path.join(repository, 'guidance', 'APPEND_SYSTEM.md'), 'APPEND_SYSTEM.md', files);

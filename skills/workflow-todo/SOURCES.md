@@ -4,7 +4,7 @@
 Independently authored for KitShift to provide cross-harness task board and todo tracking parity for harnesses (such as Antigravity CLI) lacking a native in-process `todo` tool.
 
 ## License
-MIT License. Part of KitShift portable coding-agent kit.
+Original KitShift material owned or authorized for licensing by rizariaputrawira is licensed under the [MIT License](../../LICENSE), Copyright (c) 2026 rizariaputrawira. The linked notice contains the full grant and conditions; it does not relicense third-party material. Standalone redistributors must retain the accompanying MIT notice.
 
 ## Local correction — 2026-10-26
 

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, access, cp, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, readdir, access, cp, rm, symlink, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,6 +15,8 @@ async function fixture(t) {
   for (const dir of ['scripts', 'guidance', 'harnesses/omp', 'harnesses/omp/agents', 'mcp', 'skills/example']) {
     await mkdir(join(repo, dir), { recursive: true });
   }
+  await cp(join(repository, 'LICENSE'), join(repo, 'LICENSE'));
+  await cp(join(repository, 'NOTICE'), join(repo, 'NOTICE'));
   await cp(join(repository, 'scripts/install-omp.mjs'), join(repo, 'scripts/install-omp.mjs'));
   await cp(join(repository, 'scripts/install-common.mjs'), join(repo, 'scripts/install-common.mjs'));
   await cp(join(repository, 'mcp/omp.json'), join(repo, 'mcp/omp.json'));
@@ -31,6 +33,55 @@ async function fixture(t) {
   const success = result => assert.equal(result.status, 0, result.stderr || result.stdout);
   return { root, repo, target, run, success };
 }
+
+async function snapshot(target) {
+  const names = (await readdir(target, { recursive: true })).sort();
+  return Promise.all(names.map(async name => [
+    name,
+    (await stat(join(target, name))).isFile() ? await readFile(join(target, name)) : null,
+  ]));
+}
+
+test('installation and managed updates preserve root license and third-party notices', async t => {
+  const f = await fixture(t);
+  const license = await readFile(join(repository, 'LICENSE'));
+  const scopeNotice = await readFile(join(repository, 'NOTICE'));
+  const notices = {
+    'LICENSE.txt': Buffer.from('Third-party license\r\nCopyright upstream\r\n'),
+    NOTICE: Buffer.from('Upstream attribution\nKeep this notice.\n'),
+  };
+  for (const [name, bytes] of Object.entries(notices)) {
+    await writeFile(join(f.repo, 'skills/example', name), bytes);
+  }
+  f.success(f.run());
+  assert.deepEqual(await readFile(join(f.target, 'LICENSE')), license);
+  assert.equal((await stat(join(f.target, 'LICENSE'))).mode & 0o777, 0o644);
+  assert.deepEqual(await readFile(join(f.target, 'NOTICE')), scopeNotice);
+  for (const [name, bytes] of Object.entries(notices)) {
+    assert.deepEqual(await readFile(join(f.target, 'skills/example', name)), bytes);
+  }
+
+  const manifestPath = join(f.target, '.kitshift-manifest.json');
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  delete manifest.files.LICENSE;
+  await rm(join(f.target, 'LICENSE'));
+  delete manifest.files.NOTICE;
+  await rm(join(f.target, 'NOTICE'));
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+  await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Updated instructions\n');
+  f.success(f.run('--update'));
+  assert.deepEqual(await readFile(join(f.target, 'LICENSE')), license);
+  assert.deepEqual(await readFile(join(f.target, 'NOTICE')), scopeNotice);
+  for (const [name, bytes] of Object.entries(notices)) {
+    assert.deepEqual(await readFile(join(f.target, 'skills/example', name)), bytes);
+  }
+
+  await writeFile(join(f.target, 'LICENSE'), 'Local license edit\n');
+  await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Another upstream change\n');
+  const before = await snapshot(f.target);
+  assert.notEqual(f.run('--update').status, 0);
+  assert.deepEqual(await snapshot(f.target), before);
+});
 
 test('dry run leaves a missing target absent', async t => {
   const f = await fixture(t);

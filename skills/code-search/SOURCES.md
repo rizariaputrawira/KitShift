@@ -4,7 +4,7 @@
 Authored for KitShift to provide fast code search and globbing capabilities for harnesses (such as Antigravity CLI) lacking in-process `grep` and `glob` native tools.
 
 ## License
-MIT License. Part of KitShift portable coding-agent kit.
+Original KitShift material owned or authorized for licensing by rizariaputrawira is licensed under the [MIT License](../../LICENSE), Copyright (c) 2026 rizariaputrawira. The linked notice contains the full grant and conditions; it does not relicense third-party material. Standalone redistributors must retain the accompanying MIT notice.
 
 ## Local correction — 2026-10-26
 

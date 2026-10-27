@@ -1,0 +1,24 @@
+KitShift licensing scope
+
+Copyright (c) 2026 rizariaputrawira
+
+The root LICENSE contains the MIT License for original KitShift material
+owned or authorized for licensing by rizariaputrawira. It does not claim
+ownership of, or replace the terms for, third-party material.
+
+Third-party and adapted portions remain subject to their applicable
+package-local licenses, copyright notices, and attribution requirements.
+These include MIT and Apache-2.0 components. Consult the corresponding
+SOURCES.md, LICENSE*, and NOTICE* files for source mappings and terms.
+
+Material whose ownership or licensing is unestablished is excluded from the
+new root MIT grant. This includes skills/ui-browser/, skills/workflow-upstream-review/,
+and Humanlayer-derived portions of skills/git-pr-work/. This exclusion does
+not assert that permission is absent under other applicable terms.
+
+The root license does not resolve the recorded historical provenance gaps
+for Ponytail, Platform Design Skills, Humanlayer, or nested UI-design material.
+It is not a certification that the entire distribution is license-cleared.
+
+This notice explains scope; it does not modify the standard MIT license text
+or the applicable third-party license terms.

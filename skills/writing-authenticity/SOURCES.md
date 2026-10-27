@@ -3,11 +3,15 @@
 ## Independently authored procedure
 
 - **Source identity:** Local capability `writing-authenticity`, including its English and Indonesian vocabulary references; no external skill text, template, examples or implementation is incorporated.
-- **Source pins and license:** Not applicable. Original locally authored expression; no third-party license is asserted or required for this content.
+- **Source pins and license:** No upstream source pin applies to the independently authored material. Its KitShift license is stated below; no third-party license is asserted or required for this original expression.
 - **Actual use:** The canonical entrypoint is loaded for explicitly requested writing-quality review/editing and substantial editorial analysis. It conditionally loads [the English vocabulary watchlist](references/vocabulary-en.md) or [the Indonesian vocabulary watchlist](references/vocabulary-id.md) according to the artifact's language, both for mixed-language text. It sets an editorial contract; it does not detect authorship or grant rewrite authority.
 - **Local consumers:** The skill is documented in `README.md` and `SKILL-USAGE.md`; its installation/deployment entry is maintained by the installer.
 - **Intentional divergence:** Not a detector-evasion or fixed humanization recipe. No AI-likelihood scores, style heuristics presented as authorship evidence, fabricated detail or automatic editing. Audit is read-only by default; targeted rewriting requires authority.
 - **Vocabulary reference authorship:** Both watchlists, contextual exceptions and synthetic worked examples are independently authored local editorial guidance. They are not translations or reproductions of the research sources' lists. Common words are evaluated by meaning and context, not asserted statistical association with AI. No external license text or source examples are imported.
+
+### License
+
+Original KitShift material owned or authorized for licensing by rizariaputrawira is licensed under the [MIT License](../../LICENSE), Copyright (c) 2026 rizariaputrawira. The linked notice contains the full grant and conditions. This grant does not cover the research-only references below, relicense GPL material, or establish a grant for sources whose license is unresolved.
 
 ## Research-only inputs and disposition
 

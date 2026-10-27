@@ -116,6 +116,7 @@ The repository is the source of truth. The installers copy content into the targ
 |---|---|---|---|
 | Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
+| Original-material license | [LICENSE](LICENSE) and [scope notice](NOTICE) | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills |
 | Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (55 canonical skills) |
 | Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (reviewer, investigator, executor, architect with `kitshift-` prefix) |
 | MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
@@ -260,6 +261,12 @@ node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-he
 
 For a zero-skip run, make `rg` available on `PATH` and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Real-ripgrep checks skip when `rg` is absent. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
 
+### Licensing distribution verification
+
+On 2026-10-27, all **117/117 tests passed with zero skips**, including notice preservation, adoption by older managed installations, local-license-edit protection, and native agy validation. Separate disposable upgrades for both harnesses added managed root `LICENSE` and `NOTICE` files in mode `0644`, preserved all 60 existing upstream notice files byte-for-byte, resolved all seven local-source license links from the installed trees, and rejected user-edited scope notices without other writes. The existing MIT terms and copyright line were retained.
+
+Across this README and the seven updated local source records, 227 local links and 42 heading fragments resolved; the 55-skill inventory and collapsible sections were preserved. These checks establish packaging and link behavior, not legal clearance, MCP connectivity or model behavior. No live installation or host settings were changed.
+
 ### Mandatory MCP verification
 
 On 2026-10-26, the full suite passed **114/114 tests with zero skips**, including required and invalid path handling through both agy installer entrypoints, no-write previews, managed updates, local-edit protection, migration from managed bundles without MCP, and native agy validation of the full five-server bundle.
@@ -322,9 +329,18 @@ For omp installation and runtime questions, consult the [omp documentation](http
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), [unified installer](scripts/install.mjs), [omp installer](scripts/install-omp.mjs), and [agy installer](scripts/install-agy.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [omp tests](tests/install-omp.test.mjs), [agy tests](tests/install-agy.test.mjs), [state-helper tests](tests/state-helpers.test.mjs), [search-helper tests](tests/search-helper.test.mjs), [omp compatibility](harnesses/omp/COMPATIBILITY.md), [agy compatibility](harnesses/agy/COMPATIBILITY.md), and [changelog](CHANGELOG.md) |
 | Change agent guidance without duplicating its owners | [Agent guidance](skills/agent-guidance/SKILL.md), [authoring](skills/agent-guidance/references/authoring.md), and [passive skill contract](skills/agent-guidance/references/skill-contract.md) |
+| Understand the license for original and third-party material | [Project license](#project-license), [MIT license text](LICENSE), [source families and notices](#skill-sources-and-retained-notices), and [redistribution limits](#attribution-and-redistribution-limits) |
 | Trace copied/adapted material and retained notices | The source-family table below, each applicable skill's `SOURCES.md`, and its full `LICENSE*` files; [UI design notices](skills/ui-design/NOTICE.md) cover the nested UI payloads |
 
 This navigation follows the approach in [Aria OMP Config](https://github.com/rizariaputrawira/aria-omp-config#documentation-sources-and-licenses), not its deployment layout or licensing conclusions. KitShift has no central `config/SKILL-SOURCES.md`; its available evidence is package-local. Historical source records may retain Aria-era paths or former skill names; those are not proof that the old files or integrations exist here.
+
+### Project license
+
+Original KitShift material owned by `rizariaputrawira` is licensed under the [MIT License](LICENSE), Copyright (c) 2026 rizariaputrawira. This covers the holder's original installer/test code, configuration, guidance, documentation and skill material—not ownership of the upstream work adapted or bundled here.
+
+Third-party portions remain subject to their applicable package-local licenses, copyright notices and attribution requirements. This includes MIT and Apache-2.0 components; the root license does not replace those terms. Material whose ownership or licensing is unestablished is excluded from this new default grant; the [source records](#skill-sources-and-retained-notices) and [remaining limits](#attribution-and-redistribution-limits) identify those boundaries.
+
+Both installers include the root `LICENSE` and [licensing-scope notice](NOTICE) in the managed bundle. When redistributing an individual original skill or other substantial portion, carry the MIT copyright and permission notice with it; retain applicable upstream licenses and notices for third-party material too. A license file is not a certification that every historical import or nested component has been cleared.
 
 ### Skill sources and retained notices
 
@@ -348,7 +364,7 @@ This is a mixed-source collection, not a claim that every skill is original KitS
 | [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector) | `security-intake` and its source-only checklist; the scanner/install workflow is not included. | Apache-2.0: [full license](skills/security-intake/LICENSE.skillspector) and [attribution/modification record](skills/security-intake/SOURCES.md). |
 | [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review) | `security-review` and its adapted review guidance, not the upstream execution pipeline. | MIT: [full notice](skills/security-review/LICENSE.anthropic) and [source map](skills/security-review/SOURCES.md). |
 
-Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) in [the PR source record](skills/git-pr-work/SOURCES.md). That record links a moving upstream path rather than a separately pinned downstream license notice. Matt's retained MIT notice alone should not be treated as proof of complete downstream rights or notice coverage.
+Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) in [the PR source record](skills/git-pr-work/SOURCES.md). Humanlayer's [current upstream license](https://raw.githubusercontent.com/humanlayer/skills/main/LICENSE) is MIT, but the local record links a moving source rather than an immutable imported revision and no separately pinned Humanlayer notice is retained. The root KitShift license and Matt's retained notice do not resolve that historical rights/notice gap or relicense the Humanlayer-derived portions.
 
 #### Matt Pocock adoption mapping
 
@@ -414,17 +430,17 @@ These source comparisons do not prove original authorship, comprehensive rights 
 
 ### Local guidance and research-only references
 
-The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. This is an authorship/provenance statement, not a new license grant.
+The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. Their original KitShift material is covered by the [project license](#project-license); the grant does not extend to third-party research inputs.
 
-The [code-search](skills/code-search/SOURCES.md), [code-python](skills/code-python/SOURCES.md), and [workflow-todo](skills/workflow-todo/SOURCES.md) records identify the three helpers as locally authored and declare MIT licensing. Those brief declarations are not full retained MIT notices and do not establish a project-wide license.
+The [code-search](skills/code-search/SOURCES.md), [code-python](skills/code-python/SOURCES.md), and [workflow-todo](skills/workflow-todo/SOURCES.md) records identify the three helpers as locally authored and link the complete root [MIT notice](LICENSE). These package records describe their source and adaptation history; they do not replace the license text.
 
-`ui-browser` and `workflow-upstream-review` currently have no package-level `SOURCES.md` or license notice. Their presence is not evidence of third-party clearance or a project-wide redistribution grant.
+`ui-browser` and `workflow-upstream-review` currently have no package-level `SOURCES.md` or license notice. Their ownership/source basis remains unestablished by the available records, so they are excluded from the new root MIT grant pending clarification. This does not assert that they lack permission under any other applicable terms.
 
 Research citations are not bundled dependencies or permission grants. In particular, the [delivery record](skills/workflow-delivery/SOURCES.md#research-only-ownershipfrontier-evidence--no-titus-text-reused) says no Titus text/template was copied because no covering grant was established. The [writing record](skills/writing-authenticity/SOURCES.md#research-only-inputs-and-disposition) separately identifies unlicensed/unknown-grant and GPL-3.0 research/rejection inputs; it does not identify their code or prose as incorporated into KitShift.
 
 ### Attribution and redistribution limits
 
-**No project-wide `LICENSE` file is present.** This README does not add one, relicense third-party content, or grant blanket permission over locally authored material. Follow the actual terms and scope attached to each component rather than labeling the whole kit MIT or Apache-2.0.
+The root [MIT license](LICENSE) has the scope described under [project license](#project-license). It does not replace third-party terms or cure unresolved provenance. Do not describe every file in this mixed-source distribution as exclusively MIT or fully license-cleared.
 
 - Preserve applicable full copyright, permission, license, and attribution notices with copied/adapted material. For Apache-2.0 components, retain the applicable notices and modification records as required by their terms. A source link or picker description is not a substitute for those files.
 - Keep mixed-source notices together: for example, Matt/Emil UI prototyping, Matt/Superpowers/GSD delivery, both Taste notices, and Impeccable's separately licensed nested components.

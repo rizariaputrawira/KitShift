@@ -94,6 +94,10 @@ function main() {
   const ruleContent = renderAgyRule(path.join(repository, 'guidance', 'APPEND_SYSTEM.md'));
   files.set('rules/AGENTS.md', { content: ruleContent, mode: 0o644 });
 
+  collectFiles(path.join(repository, 'LICENSE'), 'LICENSE', files);
+  files.get('LICENSE').mode = 0o644;
+  collectFiles(path.join(repository, 'NOTICE'), 'NOTICE', files);
+  files.get('NOTICE').mode = 0o644;
   collectFiles(path.join(repository, 'skills'), 'skills', files);
   collectFiles(path.join(repository, 'harnesses', 'agy', 'agents'), 'agents', files);
 

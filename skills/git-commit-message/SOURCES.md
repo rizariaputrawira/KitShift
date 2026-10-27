@@ -11,6 +11,10 @@ The author also inspected these immutable upstream references and their same-rev
 
 These references informed original guidance only; no prose, templates, or code were copied or adapted. No upstream notice is required for this original work. The procedure also reflects the task requirements and supplied, current description of repository commit-message style. This provenance does not claim runtime behavior.
 
+## License
+
+Original KitShift material owned or authorized for licensing by rizariaputrawira is licensed under the [MIT License](../../LICENSE), Copyright (c) 2026 rizariaputrawira. The linked notice contains the full grant and conditions. The research-only upstream references retain their own licenses; this grant does not relicense them.
+
 ## Local maintenance
 
 Explicit user formatting takes precedence over inferred repository style and the default split-concern response template. Status inspection uses `git --no-optional-locks status` to avoid the optional index refresh described in [Git's status documentation](https://git-scm.com/docs/git-status#_background_refresh). These are local guidance corrections, not host runtime behavior or technical sandbox enforcement.

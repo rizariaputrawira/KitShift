@@ -3,10 +3,14 @@
 ## Independently authored procedure
 
 - **Source identity:** Local capability `content-provenance-audit`; no external skill text, template, examples or implementation is incorporated.
-- **Source pins and license:** Not applicable. Original locally authored expression; no third-party license is asserted or required for this content.
+- **Source pins and license:** No upstream source pin applies to the independently authored material. Its KitShift license is stated below; no third-party license is asserted or required for this original expression.
 - **Actual use:** The canonical entrypoint is loaded for authorized, read-only artifact provenance inspection or comparison. It distinguishes evidence classes and inspection limits; it does not execute content, verify authorship or modify artifacts.
 - **Local consumers:** The skill is documented in `README.md` and `SKILL-USAGE.md`; its installation/deployment entry is maintained by the installer.
 - **Intentional divergence:** Distinct from external skill/dependency intake and code-security review because its evidence contract concerns claims about artifacts. No detector, parser, verifier, processor, dependency or executable is bundled or promised. Research sources informed boundaries only; no external expression or implementation is copied.
+
+### License
+
+Original KitShift material owned or authorized for licensing by rizariaputrawira is licensed under the [MIT License](../../LICENSE), Copyright (c) 2026 rizariaputrawira. The linked notice contains the full grant and conditions. This grant does not cover the research-only references below or establish any unresolved source license.
 
 ## Technical references used as research, not runtime dependencies
 
