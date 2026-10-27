@@ -1,6 +1,6 @@
 # KitShift Skill Use Cases
 
-A practical guide to all **55 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
+A practical guide to all **56 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
 
 ## How to use this guide
 
@@ -188,7 +188,7 @@ The image-to-code edge requires a separate implementation request; producing an 
 
 ## 4. Review and prepare delivery
 
-**Situation:** the slice is ready for review, or an artifact/dependency raises a specific question. These are independent review scopes, not nine mandatory release gates. Intake belongs before the relevant adoption decision, not automatically after coding.
+**Situation:** the slice is ready for review, or an artifact/dependency raises a specific question. These are independent review scopes, not mandatory release gates. Intake belongs before the relevant adoption decision, not automatically after coding.
 
 ```mermaid
 flowchart TD
@@ -199,6 +199,7 @@ flowchart TD
     R3 -. "Security-sensitive diff" .-> R5["security-review"]
     R0 -. "Explicit deeper source-audit scope" .-> R6["security-audit"]
     R0 -. "Supplied artifact provenance question" .-> R7["content-provenance-audit"]
+    R0 -. "Source or dependency license evidence" .-> R14["content-license-review"]
     R0 -. "Member-facing copy needs editorial review" .-> R8["writing-authenticity"]
     R2 --> R9["Evidence, findings and explicit limits"]
     R4 --> R9
@@ -206,6 +207,7 @@ flowchart TD
     R6 --> R9
     R7 --> R9
     R8 --> R9
+    R14 --> R9
     R9 -. "PR material requested" .-> R10["git-pr-work"]
     R3 -. "Message draft requested" .-> R11["git-commit-message"]
     R0 -. "Publication or release state is unclear" .-> R12["git-change-status"]
@@ -221,6 +223,7 @@ flowchart TD
 | [security-review](skills/security-review/SKILL.md) | M | “Review this base/head diff changing who may cancel reservations; keep the review source-only.” | Findings tied to the changed boundary and surrounding controls, not an unrequested whole-codebase audit. |
 | [security-audit](skills/security-audit/SKILL.md) | M | “Perform a bounded source-only audit of staff reservation-change authorization and its entry paths.” | Deeper boundary/coverage analysis with challenged findings and unknowns; not a live penetration test or execution permission. |
 | [content-provenance-audit](skills/content-provenance-audit/SKILL.md) | M | “Inspect this supplied booking-policy PDF for observable provenance evidence; preserve it.” | Method-qualified observations and uninspected layers. No AI/human authorship, originality, or legal-clearance verdict. |
+| [content-license-review](skills/content-license-review/SKILL.md) | M | “Review the booking project's copied templates and dependency licenses against their recorded versions; report missing notices and unknowns without editing.” | Source/version/license evidence, applicable notice gaps and coverage limits—not legal clearance. |
 | [writing-authenticity](skills/writing-authenticity/SKILL.md) | M | “Review the return reminder for clarity and workshop voice; suggest targeted edits without rewriting.” | Concrete editorial suggestions preserving meaning and facts—not authorship detection or fabricated personal detail. |
 | [git-change-status](skills/git-change-status/SKILL.md) | M | “Report whether these booking changes are local, pushed, merged, or released; don't fetch or mutate.” | Separate evidence-qualified states, including unknown remote/deployment status. A tag alone does not prove deployment. |
 | [git-commit-message](skills/git-commit-message/SKILL.md) | M | “Suggest a subject for the staged booking-conflict fix using recent repository style.” | Commit-message text based on the applicable diff. It never stages, commits, or pushes. |

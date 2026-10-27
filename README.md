@@ -29,7 +29,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 ## Capabilities
 
-- **Reusable procedures:** 55 skills covering engineering, UI, security, Git, documentation, writing, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
+- **Reusable procedures:** 56 skills covering engineering, UI, security, Git, documentation, writing, license review, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
 - **Dedicated subagents:** `kitshift-reviewer` and `kitshift-investigator` for both harnesses; `kitshift-executor` and `kitshift-architect` additionally packaged for agy. Definitions do not prove effective runtime tools or model selection.
@@ -104,7 +104,7 @@ Once installed:
 - Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
 - The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
 - Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
-- All 55 skills are available on demand.
+- All 56 skills are available on demand.
 - Native subagents `kitshift-reviewer`, `kitshift-investigator`, `kitshift-executor`, and `kitshift-architect` are packaged for dispatch through the host's supported interface. Validation/discovery does not prove every role's tools or model selection at runtime.
 - Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
 
@@ -117,7 +117,7 @@ The repository is the source of truth. The installers copy content into the targ
 | Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
 | Original-material license | [LICENSE](LICENSE) and [scope notice](NOTICE) | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills |
-| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (55 canonical skills) |
+| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (56 canonical skills) |
 | Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (reviewer, investigator, executor, architect with `kitshift-` prefix) |
 | MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
@@ -144,13 +144,13 @@ The shared skill procedures are harness- and agent-neutral: cross-skill referenc
 - “Use ui-mobile-web to investigate this mobile scrolling issue.”
 - “Use workflow-handoff to capture the current state before I pause.”
 
-See the [complete skill use-case guide](SKILL-USAGE.md) for all 55 skills, invocation labels, example prompts, expected results, and workflow diagrams.
+See the [complete skill use-case guide](SKILL-USAGE.md) for all 56 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
 For agy helper commands and limits, read the [task](skills/workflow-todo/references/agy-usage.md), [search](skills/code-search/references/agy-usage.md), or [notebook](skills/code-python/references/agy-usage.md) companion. On omp, use the native tools through their current schemas. The helpers provide selected capabilities, not complete behavioral parity with omp.
 
 ### Skill collection
 
-KitShift includes **55 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
+KitShift includes **56 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
 
 | Capability | Skills |
 |---|---|
@@ -162,7 +162,7 @@ KitShift includes **55 skills**, listed once below by capability. These groups d
 | UI platforms, motion and feedback | [ui-expo-motion](skills/ui-expo-motion/SKILL.md), [ui-gesture-design](skills/ui-gesture-design/SKILL.md), [ui-mobile-web](skills/ui-mobile-web/SKILL.md), [ui-sonner](skills/ui-sonner/SKILL.md), [ui-web-motion](skills/ui-web-motion/SKILL.md) |
 | Workflow planning and execution | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md), [workflow-delivery](skills/workflow-delivery/SKILL.md), [workflow-project-setup](skills/workflow-project-setup/SKILL.md), [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md), [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md), [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md), [workflow-todo](skills/workflow-todo/SKILL.md), [workflow-wizard](skills/workflow-wizard/SKILL.md) |
 | Research, learning and continuity | [workflow-handoff](skills/workflow-handoff/SKILL.md), [workflow-handoff-read](skills/workflow-handoff-read/SKILL.md), [workflow-research](skills/workflow-research/SKILL.md), [workflow-retrospective](skills/workflow-retrospective/SKILL.md), [workflow-teaching](skills/workflow-teaching/SKILL.md), [workflow-upstream-review](skills/workflow-upstream-review/SKILL.md), [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
-| Writing and provenance analysis | [content-provenance-audit](skills/content-provenance-audit/SKILL.md), [writing-authenticity](skills/writing-authenticity/SKILL.md), [writing-explanation](skills/writing-explanation/SKILL.md) |
+| Writing, provenance and license review | [content-license-review](skills/content-license-review/SKILL.md), [content-provenance-audit](skills/content-provenance-audit/SKILL.md), [writing-authenticity](skills/writing-authenticity/SKILL.md), [writing-explanation](skills/writing-explanation/SKILL.md) |
 
 Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
 
@@ -344,7 +344,7 @@ Both installers include the root `LICENSE` and [licensing-scope notice](NOTICE) 
 
 ### Skill sources and retained notices
 
-KitShift selectively adapts material from multiple upstream projects, merging overlapping capabilities rather than installing duplicate workflows, and includes locally authored procedures. The source families below are not additive skill counts: one KitShift skill may combine several contributors. The [55-skill collection](#skill-collection) is the inventory; this section records provenance, not another catalog.
+KitShift selectively adapts material from multiple upstream projects, merging overlapping capabilities rather than installing duplicate workflows, and includes locally authored procedures. The source families below are not additive skill counts: one KitShift skill may combine several contributors. The [56-skill collection](#skill-collection) is the inventory; this section records provenance, not another catalog.
 
 This is a mixed-source collection, not a claim that every skill is original KitShift work. The table identifies source families and representative full notices. Each applicable package retains its own notices; its source record defines the exact files, revisions, adaptations, and exclusions. A comparison or license-evidence pin is not necessarily the historical import commit.
 
@@ -368,14 +368,14 @@ Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `sh
 
 #### Matt Pocock adoption mapping
 
-This is one source-specific mapping, not the full KitShift inventory. Its **27** counts upstream skills; the [collection](#skill-collection) contains **55** current KitShift skill packages.
+This is one source-specific mapping, not the full KitShift inventory. Its **27** counts upstream skills; the [collection](#skill-collection) contains **56** current KitShift skill packages.
 
 <details>
 <summary>Expand upstream-to-KitShift mappings and adaptation boundaries</summary>
 
 The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
 
-This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. The current 55-skill collection also includes the three cross-harness helper skills. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
+This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. The current 56-skill collection also includes the three later cross-harness helper skills and the source-license reviewer. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
 
 | Upstream skill(s) | KitShift owner(s) |
 |---|---|
@@ -430,7 +430,7 @@ These source comparisons do not prove original authorship, comprehensive rights 
 
 ### Local guidance and research-only references
 
-The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. Their original KitShift material is covered by the [project license](#project-license); the grant does not extend to third-party research inputs.
+The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), [content provenance audit](skills/content-provenance-audit/SOURCES.md), and [source license review](skills/content-license-review/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. Their original KitShift material is covered by the [project license](#project-license); the grant does not extend to third-party research inputs.
 
 The [code-search](skills/code-search/SOURCES.md), [code-python](skills/code-python/SOURCES.md), and [workflow-todo](skills/workflow-todo/SOURCES.md) records identify the three helpers as locally authored and link the complete root [MIT notice](LICENSE). These package records describe their source and adaptation history; they do not replace the license text.
 

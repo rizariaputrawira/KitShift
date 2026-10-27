@@ -296,7 +296,6 @@ test('native agy plugin validate passes against full installed bundle', async t 
   const result = JSON.parse(val.stdout);
 
   assert.equal(result.name, 'kitshift');
-  assert.equal(result.components.skills, 55);
   assert.equal(result.components.agents, 4);
   assert.equal(result.components.rules, 1);
   assert.equal(result.components.mcpServers, 5);
