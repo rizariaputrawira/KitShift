@@ -96,3 +96,15 @@ unavailable external owner still blocks its dependent design claim. Removed the
 obsolete staged-test capability mention; explicit-only prototype use is preserved.
 Catalog/schema, templates, notices, adoption and conditional delivery boundaries
 are unchanged. This source correction makes no runtime or consuming-agent claim.
+
+## Antigravity CLI (agy) harness companion addition — 2026-10-26
+
+Added `references/agy-compatibility.md` as the companion for Antigravity CLI (`agy`) harness assessments, updating the routing table in `references/harness-compatibility.md`. It provides native plugin validation checks (`agy plugin validate`) and official source pointers without duplicating shared assessment rules. Catalog/schema, templates, notices, and existing OMP guidance remain unchanged.
+
+## Harness companion naming correction — 2026-10-26
+
+Normalized host-selection labels and companion titles to Oh My Pi (`omp`) and Antigravity CLI (`agy`). Retained the existing `references/omp-compatibility.md` and `references/agy-compatibility.md` filenames under the `<harness>-<topic>.md` convention; no alias or duplicate procedure was added. This is a local navigation correction, not new runtime acceptance evidence. Existing pinned sources and notices remain unchanged.
+
+## Mandatory agy MCP contract alignment — 2026-10-26
+
+Aligned the locally authored `references/agy-compatibility.md` with KitShift's mandatory five-definition MCP bundle, required path arguments on installs/previews/updates, optional workspace roots, and managed migration protections. The companion keeps packaging validation distinct from server readiness and records the unpinned `npx -y` runtime risk. This is a source-contract correction, not a new native validation or behavioral acceptance claim; shared assessment rules, pinned upstream sources, and notices remain unchanged.

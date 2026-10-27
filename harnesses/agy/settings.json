@@ -1,0 +1,6 @@
+{
+  "colorScheme": "dark",
+  "model": "Gemini 3.8 Flash (High)",
+  "toolPermission": "always-proceed",
+  "showFeedbackSurvey": false
+}

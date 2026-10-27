@@ -1,6 +1,6 @@
 # User preferences
 
-These preferences supplement OMP defaults. They do not change native permissions or task scope, or require delegation or an extra review pass.
+These preferences supplement host defaults. They do not change native permissions or task scope, or require delegation or an extra review pass.
 
 ## Evidence and output quality
 
@@ -37,7 +37,7 @@ Do not expose credential values or private authentication parameters in chat, lo
 
 ## Commit requests
 
-For commit-message work, read and apply `skill://git-commit-message` when available and enabled. Message drafting does not authorize a commit or push; explicit requests authorize only the requested action. Report an unavailable skill without automatically installing or re-enabling it.
+For commit-message work, locate the enabled `git-commit-message` skill through the selected host's skill catalog and read its canonical `SKILL.md`. Resolve references from that file's directory, not the workspace or this prompt's installation directory. Message drafting does not authorize a commit or push; explicit requests authorize only the requested action. Report an unavailable skill without automatically installing or re-enabling it.
 
 Before destructive `git clean`, inspect a dry-run preview with the same targets and exclusions.
 

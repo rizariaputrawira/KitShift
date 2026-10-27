@@ -1,6 +1,6 @@
-# omp compatibility assessment companion
+# Oh My Pi (`omp`): compatibility assessment
 
-Load only when the selected compatibility or upgrade target is omp. Apply the shared [harness compatibility procedure](harness-compatibility.md) for scope, authorization, evidence layers, safe missing-capability handling and result reporting. This companion supplies omp-specific sources and checks, not a second assessment workflow or permission to install, update or execute.
+Load only when the selected compatibility or upgrade target is Oh My Pi (`omp`). Apply the shared [harness compatibility procedure](harness-compatibility.md) for scope, authorization, evidence layers, safe missing-capability handling and result reporting. This companion supplies `omp`-specific sources and checks, not a second assessment workflow or permission to install, update or execute.
 
 ## Establish the actual baseline
 

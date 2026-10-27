@@ -1,4 +1,5 @@
 .handoff/
+.plan/
 .env
 .env.*
 !.env.example
@@ -9,3 +10,4 @@
 *.bak*
 node_modules/
 .DS_Store
+.workflow/
