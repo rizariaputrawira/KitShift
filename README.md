@@ -192,9 +192,9 @@ Moving Node, a CLI, or the browser can require re-rendering MCP configuration. A
 
 ## Safety and privacy
 
-- **Review YOLO mode before use.** Targeted force-push, hard-reset, and Git-clean approval patterns do not provide OS isolation or cover all tools and shell spellings.
+- **Review host approval settings before use.** omp ships with `tools.approvalMode: yolo`; its targeted force-push, hard-reset, and Git-clean prompts do not provide OS isolation or cover all tools and shell spellings. The agy reference settings contain `toolPermission: "always-proceed"`; review that setting before manual adoption. The installer does not change agy's host settings.
 - **Keep credentials local.** Authentication databases, OAuth tokens, API keys, sessions, caches, backups, and private handoffs are not part of this public kit. Do not add them when updating your setup or reporting an issue.
-- **Know which account is used.** GitHub MCP inherits the account available to `gh`; the kit does not reduce that account's permissions.
+- **Know which account is used.** The bundled omp GitHub MCP configuration inherits the account available to `gh`; the kit does not reduce that account's permissions. agy's host-managed GitHub connection and authentication are separate and are not configured by this plugin.
 - **Keep privacy claims scoped.** The omp configuration disables OTLP telemetry export and AutoQA, denies AutoQA consent, and disables automatic Codex saved-reset redemption. The design MCP has separate process-scoped privacy settings. These are not a guarantee that every external tool sends no telemetry.
 - **Preserve local data.** Config, MCP config, and the install manifest use mode `0600`. The installer rejects symlink destinations, does not automatically delete obsolete files, and does not promise transactional rollback after an I/O failure.
 
@@ -258,13 +258,22 @@ Run the full installer and helper regression suite from the repository root:
 node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs
 ```
 
+For a zero-skip run, make `rg` available on `PATH` and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Real-ripgrep checks skip when `rg` is absent. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
+
 ### Mandatory MCP verification
 
 On 2026-10-26, the full suite passed **114/114 tests with zero skips**, including required and invalid path handling through both agy installer entrypoints, no-write previews, managed updates, local-edit protection, migration from managed bundles without MCP, and native agy validation of the full five-server bundle.
 
 A separate disposable CLI smoke exercised a five-server install and managed workspace-root update, then upgraded a real no-MCP bundle installed by `ec92364`. The omp installer, configuration and MCP template remained byte-identical to that snapshot. Across this README and the three compatibility documents, 173 local link occurrences and 31 heading fragments resolved. MCP services and model calls were not launched; live installations and settings were untouched.
 
-### Recorded integration verification
+The [omp compatibility record](harnesses/omp/COMPATIBILITY.md#observed-agy-integration-isolation), [agy compatibility record](harnesses/agy/COMPATIBILITY.md) and [changelog](CHANGELOG.md) retain the scoped evidence and earlier verification history.
+
+### Earlier verification
+
+<details>
+<summary>Expand prior integration checks and historical snapshots</summary>
+
+#### Recorded integration verification
 
 The following checks predate the mandatory-agy-MCP cutover and describe that earlier snapshot, not a fresh verification of the current installer. On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6:
 
@@ -273,9 +282,9 @@ The following checks predate the mandatory-agy-MCP cutover and describe that ear
 - A disposable omp upgrade from pre-agy `main` (`7ad7652`) preserved config and rendered MCP bytes, with all 52 existing skill entrypoints unchanged. Its dry-run wrote nothing; installing agy in a separate target changed no omp target paths or bytes.
 - Native omp reads from a separate consumer workspace loaded all 55 installed skill bodies with matching canonical content and no inference. Separate CLI smokes exercised the helper corrections.
 
-The [omp compatibility record](harnesses/omp/COMPATIBILITY.md#observed-agy-integration-isolation), [agy compatibility record](harnesses/agy/COMPATIBILITY.md) and [changelog](CHANGELOG.md) retain the scoped evidence. No live installation or host settings were changed by these checks. The native agy validator test skips when its binary is unavailable; set `AGY_BIN` to an installed executable when it is not at the test's documented default path.
+No live installation or host settings were changed by these recorded integration checks.
 
-### Historical verification
+#### Historical verification
 
 The following records describe earlier snapshots and counts, not the current inventory or a fresh rerun.
 
@@ -292,13 +301,15 @@ The active Matt Pocock adoption was checked with Node.js 24.20.0 and omp 18.12.6
 
 The harness-neutral skill revision preserved all 52 entrypoint frontmatters, exact license files and bundled scripts; 773 relative file links/anchors resolved across skill and affected operator documents. Isolated omp 18.12.6 reads loaded all 52 candidate skill bodies and both renamed shared references with exact source equality and no inference requests. A final browser-safety correction was reloaded separately. Ten source-loaded actor runs covered incompatible handoffs without delegation, lightweight ordinary changes, deliberate skill disablement and browser-interface routing without a CLI, including the corrected browser branch and ordinary countercase. Baseline decisions also succeeded; these bounded observations establish no comparative behavioral improvement or other-harness runtime support. The active installation was not updated.
 
+</details>
+
 **Not verified:** MCP connectivity, provider authentication, effective configured tool/model availability or agent dispatch, consuming-agent behavior beyond the recorded synthetic cases, performance/context overhead, other operating systems, prospective harness integrations, or compatibility with other omp versions. The new skill/agent metadata is discoverable in omp; no zero-context-cost claim is made. MCP servers were disabled only for the earlier isolated startup probe. Passing installer tests, agy validation or discovering skills is not proof of end-to-end agent behavior.
 
 ## Help and maintenance
 
 Maintained by [@rizariaputrawira](https://github.com/rizariaputrawira) as a personal setup. For KitShift problems or suggestions, [open an issue](https://github.com/rizariaputrawira/kitshift/issues) with the command, relevant versions, and redacted error output. Never attach authentication stores, tokens, or raw session histories.
 
-For omp installation and runtime questions, consult the [omp documentation](https://github.com/can1357/oh-my-pi/tree/main/docs). For agy, consult the [Antigravity project](https://github.com/google-deepmind/antigravity), your installed `agy --help`, and KitShift's [agy compatibility record](harnesses/agy/COMPATIBILITY.md). See the [changelog](CHANGELOG.md) for kit changes. This repository does not promise a support schedule or a compatibility matrix beyond the verification above.
+For omp installation and runtime questions, consult the [omp documentation](https://github.com/can1357/oh-my-pi/tree/main/docs). For agy, consult the [official CLI documentation](https://antigravity.google/docs/getting-started?tab=cli), your installed `agy --help`, and KitShift's [agy compatibility record](harnesses/agy/COMPATIBILITY.md). See the [changelog](CHANGELOG.md) for kit changes. This repository does not promise a support schedule or a compatibility matrix beyond the verification above.
 
 ## Documentation, sources, and licenses
 
@@ -404,6 +415,8 @@ These source comparisons do not prove original authorship, comprehensive rights 
 ### Local guidance and research-only references
 
 The records for [Git change status](skills/git-change-status/SOURCES.md), [commit-message guidance](skills/git-commit-message/SOURCES.md), [writing authenticity](skills/writing-authenticity/SOURCES.md), and [content provenance audit](skills/content-provenance-audit/SOURCES.md) describe locally authored procedures and distinguish conceptual research from incorporated material. This is an authorship/provenance statement, not a new license grant.
+
+The [code-search](skills/code-search/SOURCES.md), [code-python](skills/code-python/SOURCES.md), and [workflow-todo](skills/workflow-todo/SOURCES.md) records identify the three helpers as locally authored and declare MIT licensing. Those brief declarations are not full retained MIT notices and do not establish a project-wide license.
 
 `ui-browser` and `workflow-upstream-review` currently have no package-level `SOURCES.md` or license notice. Their presence is not evidence of third-party clearance or a project-wide redistribution grant.
 
