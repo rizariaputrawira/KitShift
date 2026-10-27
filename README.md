@@ -133,6 +133,8 @@ Unspecified settings follow the installed harness version's defaults. Upgrading 
 
 The selected harness supplies execution and native capabilities; assignments define responsibilities, while skills supply reusable procedures. Neither a skill nor a configured model selector is a fixed worker identity. [How agents work in KitShift](AGENT-WORKFLOW.md) explains direct work, optional delegation, handoffs, conditional independent review and evidence acceptance, with diagrams and hypothetical booking examples.
 
+Start with the [daily workflow](AGENT-WORKFLOW.md#daily-workflow) for small corrections, substantial features and externally consequential changes.
+
 ## Skills and workflows
 
 Ask for the task directly, or name the relevant skill when you want a specific procedure.
@@ -262,6 +264,8 @@ node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-he
 ```
 
 For a zero-skip run, make `rg` available on `PATH` and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Real-ripgrep checks skip when `rg` is absent. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
+
+The [KitShift CI workflow](.github/workflows/ci.yml) configures the same suite for pull requests to any branch and pushes to `main`, on Linux (Ubuntu 24.04) with Node 24 and real ripgrep supplied. Fixture-based installer tests and real/fallback search tests run; native agy validation intentionally remains unavailable and should visibly skip on the hosted runner. This does not prove live MCP, model or browser behavior. Creating the workflow does not mean it has run or become a required check; the [human acceptance gates and recommended GitHub setup](AGENT-WORKFLOW.md#human-acceptance-gates) explain the separate merge decision and unconfigured enforcement.
 
 ### Licensing distribution verification
 
