@@ -1,6 +1,6 @@
 # KitShift Skill Use Cases
 
-A practical guide to all **56 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
+A practical guide to all **57 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
 
 ## How to use this guide
 
@@ -223,7 +223,8 @@ flowchart TD
 | [security-review](skills/security-review/SKILL.md) | M | “Review this base/head diff changing who may cancel reservations; keep the review source-only.” | Findings tied to the changed boundary and surrounding controls, not an unrequested whole-codebase audit. |
 | [security-audit](skills/security-audit/SKILL.md) | M | “Perform a bounded source-only audit of staff reservation-change authorization and its entry paths.” | Deeper boundary/coverage analysis with challenged findings and unknowns; not a live penetration test or execution permission. |
 | [content-provenance-audit](skills/content-provenance-audit/SKILL.md) | M | “Inspect this supplied booking-policy PDF for observable provenance evidence; preserve it.” | Method-qualified observations and uninspected layers. No AI/human authorship, originality, or legal-clearance verdict. |
-| [content-license-review](skills/content-license-review/SKILL.md) | M | “Review the booking project's copied templates and dependency licenses against their recorded versions; report missing notices and unknowns without editing.” | Source/version/license evidence, applicable notice gaps and coverage limits—not legal clearance. |
+| [content-software-licensing](skills/content-software-licensing/SKILL.md) | M | “Compare MIT, Apache-2.0 and GPLv3 for our booking library; after we choose, add the license files for our own code without replacing vendored notices.” | Conditional recommendation, explicit ownership/scope, contributor and license-change considerations; local setup only when authorized. No invented legal text or automatic relicensing. |
+| [content-license-review](skills/content-license-review/SKILL.md) | M | “Before shipping the booking app, check copied templates and exact dependency versions for notice, source-delivery and other license obligations; report gaps without editing.” | Source/version/license evidence and activity-specific compliance checklist, including unknown grants and possible violations—not legal clearance or permission to edit. |
 | [writing-authenticity](skills/writing-authenticity/SKILL.md) | M | “Review the return reminder for clarity and workshop voice; suggest targeted edits without rewriting.” | Concrete editorial suggestions preserving meaning and facts—not authorship detection or fabricated personal detail. |
 | [git-change-status](skills/git-change-status/SKILL.md) | M | “Report whether these booking changes are local, pushed, merged, or released; don't fetch or mutate.” | Separate evidence-qualified states, including unknown remote/deployment status. A tag alone does not prove deployment. |
 | [git-commit-message](skills/git-commit-message/SKILL.md) | M | “Suggest a subject for the staged booking-conflict fix using recent repository style.” | Commit-message text based on the applicable diff. It never stages, commits, or pushes. |

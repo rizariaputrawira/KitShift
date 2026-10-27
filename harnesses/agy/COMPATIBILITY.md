@@ -6,7 +6,7 @@ This directory owns Antigravity CLI (`agy`) configuration, deployment guidance, 
 
 - The [shared passive skill contract](../../skills/agent-guidance/references/skill-contract.md) owns packaging, discovery, invocation, and permission rules. This document records integration evidence, not another authoring procedure.
 - Installation and managed updates remain separate explicit operations through [`scripts/install-agy.mjs`](../../scripts/install-agy.mjs).
-- KitShift packages as a native Antigravity plugin (`plugins/kitshift/`), containing `plugin.json`, `rules/AGENTS.md`, the canonical 56-skill tree, `agents/`, rendered `mcp_config.json` with all five definitions, and `.kitshift-manifest.json`.
+- KitShift packages as a native Antigravity plugin (`plugins/kitshift/`), containing `plugin.json`, `rules/AGENTS.md`, the canonical 57-skill tree, `agents/`, rendered `mcp_config.json` with all five definitions, and `.kitshift-manifest.json`.
 - Every install, preview, and update requires `--playwright-cli`, `--browser`, and `--open-design-cli`, matching omp's path requirement. `--workspace-dir` remains optional; use explicit existing absolute readable roots for the intended Filesystem scope, otherwise the installer's cwd is recorded.
 - Older agy installations made without MCP migrate by supplying all three paths with `--update` (preview first with `--dry-run`). Existing local MCP edits and unmanaged differences remain protected by normal conflict checks. Host settings are not changed.
 
