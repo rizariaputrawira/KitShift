@@ -2,7 +2,7 @@
 
 **One kit. Any harness.**
 
-My personal coding-agent kit: skills, working preferences, harness settings, and MCP connections in one repository. Clone it on another machine, review the configuration, and explicitly install the setup you want to use.
+**My personal coding-agent kit**: skills, working preferences, harness settings, and MCP connections in one repository. Clone it on another machine, review the configuration, and explicitly install the setup you want to use.
 
 [Oh My Pi (omp)](https://github.com/can1357/oh-my-pi) and [Antigravity CLI (agy)](https://github.com/google-deepmind/antigravity) are the supported harnesses. They supply the coding-agent runtimes; KitShift supplies the configuration, reusable guidance, subagents, and skills. Pi and Claude Code are prospective targets.
 
