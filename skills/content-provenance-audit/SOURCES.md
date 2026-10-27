@@ -6,7 +6,7 @@
 - **Source pins and license:** No upstream source pin applies to the independently authored material. Its KitShift license is stated below; no third-party license is asserted or required for this original expression.
 - **Actual use:** The canonical entrypoint is loaded for authorized, read-only artifact provenance inspection or comparison. It distinguishes evidence classes and inspection limits; it does not execute content, verify authorship or modify artifacts.
 - **Local consumers:** The skill is documented in `README.md` and `SKILL-USAGE.md`; its installation/deployment entry is maintained by the installer.
-- **Intentional divergence:** Distinct from external skill/dependency intake and code-security review because its evidence contract concerns claims about artifacts. No detector, parser, verifier, processor, dependency or executable is bundled or promised. Research sources informed boundaries only; no external expression or implementation is copied.
+- **Intentional divergence:** Distinct from external skill/dependency intake and code-security review because its evidence contract concerns claims about artifacts. Source-license and redistribution-obligation review belongs to the separate [content-license-review](../content-license-review/SKILL.md) owner. No detector, parser, verifier, processor, dependency or executable is bundled or promised. Research sources informed boundaries only; no external expression or implementation is copied.
 
 ### License
 
