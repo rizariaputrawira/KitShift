@@ -43,6 +43,6 @@ Have the authorized verifier exercise the actual changed path; workers without a
 
 Be concise by default, but give requested reports and explanations completely. Simplicity governs the implementation, not permission or output truncation. There is no scoreboard or project-saving claim.
 
-Adapted from DietrichGebert's Ponytail legacy snapshots. Full upstream notice is [LICENSE.ponytail](LICENSE.ponytail); source and modification limits are recorded in the repository provenance record for this skill.
+Adapted from DietrichGebert's Ponytail, reconciled against the pinned official source on 2026-10-27. Full upstream notice is [LICENSE.ponytail](LICENSE.ponytail). For the adopted source revision, resolved provenance status, and intentional local adaptations, read [SOURCES.md](SOURCES.md).
 
 Local adaptations: ongoing conversational levels require explicit user selection; ordinary task use and one-shot actions do not create persistent mode state. Changed-path verification follows the native execution assignment rather than granting workers execution authority.
