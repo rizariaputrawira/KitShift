@@ -1,0 +1,32 @@
+# Apply licenses and manage changes
+
+Load for creating license files, contributor policies, dual licensing, custom terms or relicensing. “Create a license” normally means apply an established license; genuinely new legal terms are a different, counsel-reviewed task.
+
+## Add a license to authorized work
+
+1. Establish the exact license/version and covered paths. Confirm the copyright holder and applicable years from evidence or the owner; never substitute the Git username, committer or current year by assumption. If rights or the selected license remain material unknowns, return the proposed scope and ask before applying the grant.
+2. Obtain the complete legal text from its steward or authoritative license record. Save it using existing project conventions (`LICENSE`, `COPYING`, or a scoped license directory). Replace only fields the instructions designate, such as MIT's year/holder. Some licenses use separate application notices: Apache's appendix placeholders are not an instruction to rewrite its standard terms. For GNU licenses, inspect the [official application instructions](https://www.gnu.org/licenses/gpl-howto.html); LGPLv3 requires both its supplement and GPLv3 text. Do not reconstruct terms from memory, shorten disclaimers or insert project-specific restrictions into a standard text.
+3. Make applicability explicit in existing documentation and appropriate source/header conventions. Align package metadata with the grant; metadata, a badge, an SPDX header or a remote link does not replace required full notices. Preserve copied-file notices and document third-party/asset exclusions. Reuse the repository's notice format rather than introduce a second inventory.
+4. Express actual choices correctly using [SPDX expressions](https://spdx.github.io/spdx-spec/v2.3.1/SPDX-license-expressions/): `OR` is a granted alternative, `AND` requires both, and `WITH` attaches an applicable exception. Distinguish `GPL-3.0-only` from `GPL-3.0-or-later`. Do not invent an exception, later-version option or alternative absent from the grant. A `LicenseRef-...` records custom terms; it does not make them standard or approved. Check the consumer's metadata syntax rather than assuming every package format accepts every expression.
+5. Carry applicable third-party licenses, attribution/NOTICE entries, change notices and source obligations into the actual release channel. Use [the compliance checklist](../../content-license-review/references/compliance.md) for release-specific checks, not a blanket assertion that the root LICENSE is enough. The review skill remains read-only even when a separate implementation assignment authorizes fixing its findings.
+6. Follow the entrypoint's artifact verification step. Compare immutable terms, inspect included notices and exercise any implemented source-access path. Report exactly what was checked and what remains a condition of release.
+
+## Contributions and employment
+
+- Check the project's inbound policy, applicable license terms and any employer/client agreements. Do not assume a repository license necessarily covers an earlier unlicensed import or that a maintainer owns contributors' rights.
+- A Developer Certificate of Origin records a contributor's certification about the contribution; a sign-off is not copyright assignment or blanket relicensing permission. A Contributor License Agreement grants only the rights its actual terms specify. Neither is automatically required; do not add one without a justified owner decision.
+- Before open-sourcing company/client work, establish release authority, third-party obligations and material confidential/patent/trademark issues. Return unresolved rights questions to the authorized owner or counsel; do not contact employers or disclose code on the user's behalf without authority.
+
+These governance distinctions are discussed in the [Open Source Guides contribution and legal-team sections](https://opensource.guide/legal/#does-my-project-need-an-additional-contributor-agreement).
+
+## Existing licenses, dual licensing and custom terms
+
+1. Separate licensing new owned contributions, distributing a combined work under compatible terms, and relicensing others' existing contributions. Preserve upstream terms required by a permissive grant; compatibility or sublicensing permission does not establish ownership or permission to remove notices.
+2. Inspect the existing grant, rights-holder agreements and dependency constraints. Obtain needed authorization from relevant rights holders unless the existing terms already permit the proposed action. Commit history is a lead, not complete proof of title; there is no safe universal line-count exemption.
+3. Distinguish future releases from copies already granted under earlier terms. Do not promise that a new LICENSE revokes compliant recipients' existing rights. Explain the affected versions, contribution policy and downstream migration before applying a change. See [changing a project's license](https://opensource.guide/legal/#what-if-i-want-to-change-the-license-of-my-project).
+4. For open-source/commercial dual licensing, establish rights to offer both grants over the actual covered material; a copyleft third-party component is not made proprietary by changing your own license file. Keep commercial entitlements separate from open-source permissions and retained obligations.
+5. If custom/proprietary terms are explicitly requested, gather intended grants, restrictions, recipients, ownership, jurisdiction, termination, support/warranty and patent/trademark boundaries. Provide a labeled draft for qualified legal review or a requirements brief as requested, not a claim of enforceability or OSI approval. Do not alter a standard license and continue calling it the unchanged standard. A request to teach or set up licensing alone does not authorize inventing an EULA, CLA or enforcement system.
+
+## Suspected past noncompliance
+
+Use the read-only review owner to establish the used versions, shipped artifacts, omitted obligations and distribution dates first. Preserve evidence. Recommend a proportionate, authorized correction and legal review for termination/reinstatement, recipient remediation or disputes. A later notice fix is not proof that past noncompliance is cured; cure rules vary. Do not erase history, admit liability, contact claimants, publish a settlement or delete shipped material without the corresponding authority.
