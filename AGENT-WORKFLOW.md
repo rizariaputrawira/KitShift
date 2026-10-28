@@ -28,6 +28,14 @@ The [responsibility and return contract](skills/workflow-delivery/references/imp
 
 These are not four registered agents, automatic stages or model identities. One main agent can perform the authorized work directly; not every task needs every responsibility. The [implementation brief](skills/workflow-delivery/references/implementation-brief.md) owns assignment details rather than this explanatory guide.
 
+## Daily workflow
+
+These ordered paths explain existing contracts and recommended project practice, not a mandatory global pipeline.
+
+1. **Small correction:** inspect the requested boundary and expected result, make the bounded change, exercise the changed consumer path, and report observed results and limits. No obligatory spec, worker, independent reviewer, branch or PR. **Result:** the corrected output or behavior is observed at its consumer, with unrun checks identified.
+2. **Substantial feature:** identify observable acceptance and error cases, split the work into complete reviewable vertical slices using the [whole-spec task graph](skills/code-implementation/SKILL.md#whole-spec-task-graph), implement a ready slice, and exercise its acceptance cases. Obtain fresh independent [source review](skills/code-review/SKILL.md) when correctness/security risk warrants it or project policy requires it; resolve findings, then assess [human acceptance](#human-acceptance-gates) before an authorized merge or release. Use the canonical [acceptance-evidence rules](skills/workflow-delivery/references/verification.md); select [documentation-first delivery](skills/workflow-delivery/SKILL.md) only when explicitly requested or project-required. **Result:** integrated slices have current criterion-level evidence, findings are dispositioned, and acceptance or remaining gaps are explicit.
+3. **Release or externally consequential change:** inspect intended scope and latest-change evidence, settle actionable review findings, verify the real affected environment when required, and obtain explicit authorization for the actual publish/install/merge action. Local code completion is not permission to execute those actions. **Result:** the authorized action has an observed outcome and stated limits, or the prepared change remains unapplied pending authorization or missing evidence.
+
 ## From request to accepted result
 
 ```mermaid
@@ -114,6 +122,24 @@ sequenceDiagram
 The [source-inspecting review brief](skills/code-review/references/review-brief.md) keeps review read-only: source inspection, no execution, writes, network or delegation. When independent review is requested or required, a fresh permitted reviewer receives original requirements, the inspectable comparison and accessible evidence; author explanations remain claims. The reviewer examines decisive source and callers independently, reports findings and gaps, and does not repair the change or regenerate runtime evidence. The integration owner handles authorized corrections and reserved integrated checks. Material revisions need review of the affected boundary, not reuse of an obsolete verdict.
 
 Advice is not approval. For a consequential choice outside a worker's discretion, the [decision escalation contract](skills/workflow-delivery/references/implementation-brief.md#decision-escalation) calls for the exact unresolved decision, inspected facts and uncertainty, viable options and consequences, any supported recommendation, completed work/evidence and dependent work held. The owner settles choices within its authority and asks the user only for a material user-retained decision or new authorization. Settled scope then returns to the worker; an escalation is useful progress, not completion of the deliverable.
+
+### Choosing review depth
+
+Fresh independent source review is recommended for substantial multi-boundary behavior changes and changes affecting authorization, credentials/privacy, destructive filesystem behavior, managed-update/conflict handling or external effects. A project or user can require it; otherwise selection is risk-based advice, not a rule that every edit invokes a subagent. Small wording-only corrections remain on the direct path.
+
+Use the existing [source-only review contract](skills/code-review/references/review-brief.md), with runtime verification retained by the integration owner. No named review vendor or fixed number of agents is required.
+
+### Human acceptance gates
+
+Before accepting a consequential merge, release or install, assess the intended diff scope, evidence relevant to the current implementation, disposition of actionable review findings, and any required target-environment or manual check. Acceptance does not itself authorize the external action: obtain explicit authorization for the actual merge, release or install.
+
+When a review fix changes a material basis, refresh affected checks and affected-boundary review. Do not reuse an obsolete green result or mechanically rerun unrelated checks. The canonical [acceptance-evidence rules](skills/workflow-delivery/references/verification.md) own evidence relevance and invalidation.
+
+**Recommended GitHub setup for KitShift maintainers — not configured by this change:** after the CI check exists on GitHub, configure a ruleset targeting `main` to require pull requests and the `Regression tests` status check, require the branch to be up to date, block force pushes and branch deletion, and avoid routine bypass. Do not require an approving GitHub review count: a solo maintainer cannot approve their own PR. Independent source-review evidence and the human merge decision remain distinct.
+
+Ruleset availability depends on repository/account support; recommending it creates no remote enforcement. If enforcement is unavailable, use the same acceptance checklist above and label it **manual-only**, not enforced. Creating remote rules, pushing and merging remain outside local implementation authority unless separately authorized.
+
+Merge rules protect the merge boundary, not earlier local execution, credential disclosure or live-system modification. Existing model selectors, YOLO settings and selected Git prompts remain unchanged; those settings are not execution isolation.
 
 ## Practical use cases
 
