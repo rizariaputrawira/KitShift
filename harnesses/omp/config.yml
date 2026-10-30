@@ -6,8 +6,8 @@ theme:
   light: onyx
 modelRoles:
   smol: openai-codex/gpt-6-luna:low
-  default: openai-codex/gpt-6.1-sol:medium
-  slow: openai-codex/gpt-6-astra:high
+  default: openai-codex/gpt-6.1-terra:high
+  slow: openai-codex/gpt-6.1-sol:high
   commit: openai-codex/gpt-6-luna
   plan: openai-codex/gpt-6.1-sol
 cycleOrder:
