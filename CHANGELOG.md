@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added shared format-selection guidance: preserve requested and native formats, default prose and agent instructions to Markdown, recover task-relevant relationships with semantic HTML or structured data when needed, and use browser evidence for rendered or interactive state. No installer, browser skill, or live installation changed.
+  - Verification: an author walkthrough covered six format and evidence decisions; this is not an independent agent assessment. Disposable omp and agy previews left targets absent, and installs preserved the guidance and browser skill byte-for-byte; the guidance is 6,751 bytes. Both installer suites passed all 82 tests with no skips, including native agy validation. Agent compliance, model performance, native discovery, browser operation, and MCP connectivity remain unverified.
+
 - Updated canonical omp model routing: `default` now selects `openai-codex/gpt-6.1-terra:high`, and `slow` selects `openai-codex/gpt-6.1-sol:high`. Preserved every other configuration byte, including `smol`, `commit`, `plan`, cycle order, approvals and privacy; reviewer selection remains `@slow`. No live installation or agy settings changed.
   - Verification: native `omp models openai-codex --config harnesses/omp/config.yml` exited 0 and listed both models with `high` support. A disposable real-installer smoke confirmed unique requested role mappings, unchanged remaining configuration bytes against a pre-edit snapshot, byte-identical installed configuration with mode `0600`, and the installed reviewer's `@slow` selector. All six omp installer regression tests passed. Model inference, account entitlement, automatic routing, response quality, latency, savings and MCP connectivity remain unverified.
 
