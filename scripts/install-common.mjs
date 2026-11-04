@@ -1,8 +1,39 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 
 export const manifestName = '.kitshift-manifest.json';
+
+export function shellQuote(value) {
+  return `'${value.replaceAll("'", "'\\''")}'`;
+}
+
+// Only a clean checkout can identify the bytes copied by the installers.
+export function readInstallSource(repository) {
+  const root = fs.realpathSync(repository);
+  const source = { repository: root, revision: null, node: fs.realpathSync(process.execPath) };
+  const git = (...args) => spawnSync('git', args, {
+    cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+  });
+  const top = git('rev-parse', '--show-toplevel');
+  if (top.status !== 0) return source;
+  try {
+    if (fs.realpathSync(top.stdout.trim()) !== root) return source;
+  } catch {
+    return source;
+  }
+  const status = git('status', '--porcelain=v1', '--untracked-files=all');
+  const ignored = git('ls-files', '--others', '--ignored', '--exclude-standard', '--',
+    'scripts', 'skills', 'guidance', 'harnesses', 'mcp', 'LICENSE', 'NOTICE');
+  const revision = git('rev-parse', '--verify', 'HEAD^{commit}');
+  const objectFormat = git('rev-parse', '--show-object-format');
+  const length = objectFormat.stdout?.trim() === 'sha1' ? 40 : objectFormat.stdout?.trim() === 'sha256' ? 64 : 0;
+  const id = revision.stdout?.trim();
+  if (status.status === 0 && !status.stdout && ignored.status === 0 && !ignored.stdout &&
+      revision.status === 0 && id?.length === length && /^[a-f0-9]+$/.test(id)) source.revision = id;
+  return source;
+}
 
 export function fail(message) {
   throw new Error(message);
@@ -138,6 +169,16 @@ export function loadManifest(filename) {
       typeof manifest.files !== 'object' || Array.isArray(manifest.files)) {
     fail(`Unsupported or invalid install manifest: ${filename}`);
   }
+  if (Object.hasOwn(manifest, 'source') && manifest.source !== null) {
+    const source = manifest.source;
+    if (!source || typeof source !== 'object' || Array.isArray(source) ||
+        typeof source.repository !== 'string' || !path.isAbsolute(source.repository) ||
+        typeof source.node !== 'string' || !path.isAbsolute(source.node) ||
+        !(source.revision === null || (typeof source.revision === 'string' &&
+          /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(source.revision)))) {
+      fail(`Invalid installation source in ${filename}`);
+    }
+  }
   for (const [relative, entry] of Object.entries(manifest.files)) {
     if (!safeManifestPath(relative) || !entry || typeof entry !== 'object' ||
         typeof entry.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
@@ -176,7 +217,7 @@ export function writeAtomic(filename, content, mode) {
   }
 }
 
-export function installBundle({ target, files, update = false, dryRun = false, warning = null }) {
+export function installBundle({ target, files, update = false, dryRun = false, warning = null, source = null }) {
   const manifestPath = path.join(target, manifestName);
   const previous = loadManifest(manifestPath);
   const nextFiles = Object.assign(Object.create(null), previous.files);
@@ -223,7 +264,7 @@ export function installBundle({ target, files, update = false, dryRun = false, w
   if (conflicts.length) fail(`Preflight refused installation; no files changed:\n  ${conflicts.join('\n  ')}`);
 
   const orderedFiles = Object.fromEntries(Object.entries(nextFiles).sort(([a], [b]) => a.localeCompare(b)));
-  const manifestContent = Buffer.from(`${JSON.stringify({ version: 1, files: orderedFiles }, null, 2)}\n`);
+  const manifestContent = Buffer.from(`${JSON.stringify({ version: 1, files: orderedFiles, source }, null, 2)}\n`);
   const manifestStat = inspectDestination(manifestPath);
   const manifestUnchanged = manifestStat && readRegularFile(manifestPath).equals(manifestContent) &&
     (manifestStat.mode & 0o777) === 0o600;
