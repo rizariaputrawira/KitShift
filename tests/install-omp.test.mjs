@@ -12,7 +12,7 @@ async function fixture(t) {
   const root = await mkdtemp(join(tmpdir(), 'kitshift-test-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const repo = join(root, 'repo');
-  for (const dir of ['scripts', 'guidance', 'harnesses/omp', 'harnesses/omp/agents', 'mcp', 'skills/example']) {
+  for (const dir of ['scripts', 'guidance', 'harnesses/omp', 'harnesses/omp/agents', 'harnesses/omp/extensions', 'mcp', 'skills/example']) {
     await mkdir(join(repo, dir), { recursive: true });
   }
   await cp(join(repository, 'LICENSE'), join(repo, 'LICENSE'));
@@ -21,6 +21,7 @@ async function fixture(t) {
   await cp(join(repository, 'scripts/install-common.mjs'), join(repo, 'scripts/install-common.mjs'));
   await cp(join(repository, 'mcp/omp.json'), join(repo, 'mcp/omp.json'));
   await cp(join(repository, 'harnesses/omp/agents/kitshift-reviewer.md'), join(repo, 'harnesses/omp/agents/kitshift-reviewer.md'));
+  await cp(join(repository, 'harnesses/omp/extensions/kitshift-update.js'), join(repo, 'harnesses/omp/extensions/kitshift-update.js'));
   await cp(join(repository, 'harnesses/omp/agents/kitshift-investigator.md'), join(repo, 'harnesses/omp/agents/kitshift-investigator.md'));
   await writeFile(join(repo, 'guidance/APPEND_SYSTEM.md'), '# Personal preferences\n');
   await writeFile(join(repo, 'harnesses/omp/config.yml'), 'theme:\n  dark: onyx\n');
@@ -41,6 +42,38 @@ async function snapshot(target) {
     (await stat(join(target, name))).isFile() ? await readFile(join(target, name)) : null,
   ]));
 }
+
+test('manifest records only clean checkout provenance and preserves it on preview and conflict', async t => {
+  const f = await fixture(t);
+  const git = (...args) => {
+    const result = spawnSync('git', args, { cwd: f.repo, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout.trim();
+  };
+  git('init', '-q');
+  git('config', 'user.email', 'fixture@example.invalid');
+  git('config', 'user.name', 'Fixture');
+  await writeFile(join(f.repo, '.gitignore'), 'skills/example/ignored\n');
+  git('add', '.');
+  git('commit', '-qm', 'fixture');
+  const revision = git('rev-parse', 'HEAD');
+  f.success(f.run());
+  const manifestPath = join(f.target, '.kitshift-manifest.json');
+  const original = await readFile(manifestPath, 'utf8');
+  assert.deepEqual(JSON.parse(original).source, {
+    repository: f.repo, revision, node: process.execPath,
+  });
+  await writeFile(join(f.repo, 'skills/example/ignored'), 'ignored source bytes');
+  f.success(f.run('--update', '--dry-run'));
+  assert.equal(await readFile(manifestPath, 'utf8'), original);
+  f.success(f.run('--update'));
+  assert.equal(JSON.parse(await readFile(manifestPath, 'utf8')).source.revision, null);
+  await writeFile(join(f.target, 'config.yml'), 'local edit');
+  await writeFile(join(f.repo, 'harnesses/omp/config.yml'), 'upstream edit');
+  const before = await readFile(manifestPath, 'utf8');
+  assert.notEqual(f.run('--update').status, 0);
+  assert.equal(await readFile(manifestPath, 'utf8'), before);
+});
 
 test('installation and managed updates preserve root license and third-party notices', async t => {
   const f = await fixture(t);

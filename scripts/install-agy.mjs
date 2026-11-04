@@ -10,6 +10,8 @@ import {
   collectFiles,
   readRegularFile,
   renderMcp,
+  readInstallSource,
+  shellQuote,
   installBundle,
 } from './install-common.mjs';
 
@@ -81,6 +83,7 @@ function main() {
   }
   const target = path.resolve(options.target);
   checkDirectoryChain(target);
+  const source = readInstallSource(repository);
 
   const files = new Map();
 
@@ -100,6 +103,10 @@ function main() {
   files.get('NOTICE').mode = 0o644;
   collectFiles(path.join(repository, 'skills'), 'skills', files);
   collectFiles(path.join(repository, 'harnesses', 'agy', 'agents'), 'agents', files);
+  const hookCommand = [source.node, path.join(source.repository, 'scripts', 'kitshift.mjs'), '_agy-notice', '--target', target].map(shellQuote).join(' ');
+  files.set('hooks.json', { content: Buffer.from(`${JSON.stringify({
+    'kitshift-update': { SessionStart: [{ type: 'command', command: hookCommand, timeout: 2 }] },
+  }, null, 2)}\n`), mode: 0o644 });
 
   const replacements = {
     '{{NODE}}': process.execPath,
@@ -117,10 +124,13 @@ function main() {
     content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),
     mode: 0o600,
   });
+  const afterAssembly = readInstallSource(repository);
+  if (source.revision !== afterAssembly.revision) source.revision = null;
 
   installBundle({
     target,
     files,
+    source,
     update: options.update,
     dryRun: options['dry-run'],
   });

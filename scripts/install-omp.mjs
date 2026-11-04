@@ -10,6 +10,7 @@ import {
   validateLocalPath,
   collectFiles,
   renderMcp,
+  readInstallSource,
   installBundle,
 } from './install-common.mjs';
 
@@ -76,6 +77,7 @@ function main() {
   }
   const target = path.resolve(options.target);
   checkDirectoryChain(target);
+  const source = readInstallSource(repository);
 
   const files = new Map();
   collectFiles(path.join(repository, 'LICENSE'), 'LICENSE', files);
@@ -89,6 +91,7 @@ function main() {
   if (fs.existsSync(path.join(repository, 'harnesses', 'omp', 'agents'))) {
     collectFiles(path.join(repository, 'harnesses', 'omp', 'agents'), 'agents', files);
   }
+  collectFiles(path.join(repository, 'harnesses', 'omp', 'extensions', 'kitshift-update.js'), 'extensions/kitshift-update.js', files);
 
   const replacements = {
     '{{NODE}}': process.execPath,
@@ -99,10 +102,13 @@ function main() {
     '{{TMP_DIR}}': os.tmpdir(),
   };
   files.set('mcp.json', { content: renderMcp(path.join(repository, 'mcp', 'omp.json'), replacements), mode: 0o600 });
+  const afterAssembly = readInstallSource(repository);
+  if (source.revision !== afterAssembly.revision) source.revision = null;
 
   installBundle({
     target,
     files,
+    source,
     update: options.update,
     dryRun: options['dry-run'],
     warning: 'Warning: this bundle preserves the current YOLO settings; review config.yml before using omp.',

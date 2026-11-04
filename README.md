@@ -205,6 +205,37 @@ Moving Node, a CLI, or the browser can require re-rendering MCP configuration. A
 
 ## Updates and troubleshooting
 
+### Checkout-backed updates
+
+On Linux/WSL2, Node 20+, Git and util-linux `flock` are required. After installing a harness with the direct installer, register its existing managed target and the same local paths. Registration and setup do not change the installation or shell startup files. A legacy manifest has an unknown installed revision until a successful managed update.
+
+```sh
+node scripts/kitshift.mjs setup
+kitshift profile add personal-omp --harness omp --target "$HOME/.omp/agent" \
+  --executable /absolute/path/to/omp \
+  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
+  --browser /absolute/path/to/chromium/chrome \
+  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
+kitshift profile list
+kitshift status personal-omp
+kitshift update personal-omp --check
+kitshift update personal-omp
+```
+
+For agy, use `--harness agy`, its actual plugin target and native executable, and an explicit `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Save the intended Filesystem roots rather than relying on the updater's working directory. Use `kitshift profile edit NAME ...`, including `--checks off` or `--checks on`, to change a registration; `profile remove NAME` removes only the registration. Set an absolute `KITSHIFT_HOME` or `XDG_STATE_HOME` to isolate state. A moved checkout requires a deliberate private profile-store repair or a new isolated store; the launcher does not relocate it automatically.
+
+State must remain outside the checkout and managed installation targets. An existing state directory must be owned by the current user with mode `0700`; insecure directories are refused rather than automatically changing ownership or arbitrary ancestor permissions. Checks-only profile edits remain available if an unchanged browser or MCP path has moved; applying still validates every required dependency. Changing the effective upstream URL invalidates cached comparisons without storing the URL itself; older caches without an upstream fingerprint refresh from unknown.
+
+`update --check` fetches the configured Git upstream into a private Git ref and caches the result; it does not change checkout files or installed files. Applying may **fast-forward the checkout before preview and confirmation**. It previews all selected targets before applying any; a refusal, cancellation or later I/O failure does not roll back the checkout, and multi-target application is not transactional. Review the configured upstream as executable source: an explicit apply runs installers from the updated checkout. With multiple profiles, an interactive update selects one; use `--all` explicitly for all. Noninteractive application requires `NAME` or `--all` and `--yes`. Restart or reload the harness after installation.
+
+For opt-in launch shortcuts, source the output of `kitshift shell-init --shell bash --omp personal-omp` (or use `--shell zsh`, `--agy NAME`, or both mappings). Zsh is optional: devices without it can use Bash or invoke omp directly; neither installation nor updates require Zsh. Review the output before adding it to a shell startup file. Existing aliases and functions are not overwritten. The shortcut does not select a native profile or plugin target; native discovery, `PI_CODING_AGENT_DIR`, and native profile options still determine what loads. `command omp` and `command agy` bypass the functions.
+
+`kitshift run` gives the native process its own POSIX session while inheriting stdin/stdout/stderr, so the wrapper forwards signals to its original process group exactly once. Inherited terminal input, including raw input, is supported; controlling-terminal `/dev/tty` access and shell job-control semantics are not identical to a direct launch. Use `command omp` if those semantics are required.
+
+An installed, enabled omp extension can check in the main TUI, including direct launches. The agy shortcut checks asynchronously and its plugin `SessionStart` hook can inject a **transient system message** using the previous cached result; a newly fetched result can appear at the next hook invocation, and resumed conversations need not invoke that hook. Direct agy launches remain quiet. These checks download Git objects and update the private ref/cache, never the checkout or installation. `kitshift cache clear` removes cached results, not profiles or manifests.
+
+### Manual updates
+
 Update the checkout, then select the installer for the harness you use:
 
 ```sh
@@ -260,10 +291,10 @@ The installer does not remove old paths or obsolete manifest entries. Backups le
 Run the full installer and helper regression suite from the repository root:
 
 ```sh
-node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs
+node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs tests/update.test.mjs tests/update-notify.test.mjs tests/update-launch.test.mjs tests/update-safety.test.mjs
 ```
 
-For a zero-skip run, make `rg` available on `PATH` and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Real-ripgrep checks skip when `rg` is absent. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
+The updater tests require Git and util-linux `flock`. For a zero-skip run, also make `rg`, util-linux `script`, and Zsh available on `PATH`, and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Zsh is not a runtime requirement: only its shell-specific tests skip when absent. PTY tests skip if `script` is absent; real-ripgrep checks skip without `rg`. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
 
 The [KitShift CI workflow](.github/workflows/ci.yml) configures the same suite for pull requests to any branch and pushes to `main`, on Linux (Ubuntu 24.04) with Node 24 and real ripgrep supplied. Fixture-based installer tests and real/fallback search tests run; native agy validation intentionally remains unavailable and should visibly skip on the hosted runner. This does not prove live MCP, model or browser behavior. Creating the workflow does not mean it has run or become a required check; the [human acceptance gates and recommended GitHub setup](AGENT-WORKFLOW.md#human-acceptance-gates) explain the separate merge decision and unconfigured enforcement.
 

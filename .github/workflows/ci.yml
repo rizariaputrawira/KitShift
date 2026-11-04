@@ -29,4 +29,4 @@ jobs:
           node --version
           rg --no-config --version
       - name: Run regression suite
-        run: node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs
+        run: node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs tests/update.test.mjs tests/update-notify.test.mjs tests/update-launch.test.mjs tests/update-safety.test.mjs
