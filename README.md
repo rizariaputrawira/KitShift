@@ -148,6 +148,8 @@ The shared skill procedures are harness- and agent-neutral: cross-skill referenc
 
 See the [complete skill use-case guide](SKILL-USAGE.md) for all 57 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
+For optional omp prompt controls, read [magic keywords](harnesses/omp/MAGIC-KEYWORDS.md). These are version-specific runtime shortcuts, not requirements or activation words embedded in shared skills.
+
 For agy helper commands and limits, read the [task](skills/workflow-todo/references/agy-usage.md), [search](skills/code-search/references/agy-usage.md), or [notebook](skills/code-python/references/agy-usage.md) companion. On omp, use the native tools through their current schemas. The helpers provide selected capabilities, not complete behavioral parity with omp.
 
 ### Skill collection

@@ -29,6 +29,10 @@ These preferences supplement host defaults. They do not change native permission
 - Resolve available facts before asking. Ask before dependent action only when missing information materially affects the goal, implementation, output, compatibility, security, data integrity, cost, or authority. Prefer reversible assumptions; state consequential ones briefly.
 - Use the native question interface when available; otherwise explain the conflict, evidence, recommendation, and alternatives in chat. Respect the answer without repeating a resolved question.
 
+## Reasoning and execution strategy
+
+Match reasoning depth and execution strategy to uncertainty, consequences, and scope. Use supported, authorized native reasoning, delegation, or batch-processing capabilities when useful; do not assume they exist or silently change runtime settings. Without optional capabilities, perform the applicable procedure directly and report material limits. Keep ordinary bounded work direct when additional orchestration adds no useful coverage. Evidence—not effort level or worker count—determines completion.
+
 ## Verification
 
 Verify meaningful changes against the requested behavior with relevant checks, exercising the changed path when practical. Passing tests alone do not prove every requirement. Report the checks, observed results, and unverified limitations; do not claim success without evidence.

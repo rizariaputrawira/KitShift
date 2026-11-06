@@ -1,6 +1,6 @@
 # Antigravity CLI (`agy`): notebook usage
 
-Load only when using this skill in Antigravity CLI (`agy`). Use the currently exposed command tool and the task's execution/write permissions. For Python execution, use the project's selected interpreter and virtual environment; this helper neither executes cells nor provides a persistent Python REPL.
+Load only when using this skill in Antigravity CLI (`agy`). Use the currently exposed command tool and the task's execution/write permissions. For Python execution, follow the shared [execution procedure](../SKILL.md#execute-python); this helper neither executes cells nor provides a persistent Python REPL.
 
 ## Resolve the installed helper
 
