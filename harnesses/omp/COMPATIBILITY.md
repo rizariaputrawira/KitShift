@@ -11,6 +11,32 @@ This directory owns omp configuration, deployment notes and verification records
 
 For a requested omp assessment, read the packaged [omp compatibility companion](../../skills/docs-engineering/references/omp-compatibility.md). It selects the shared [harness compatibility procedure](../../skills/docs-engineering/references/harness-compatibility.md) and owns native commands, official version-pinned sources, isolated loading checks and permission/evidence limits. It is installed with the skills and does not depend on this repository-only document.
 
+For optional prompt controls in omp 18.16.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+
+## Observed portable effort and fallback assessment
+
+On 2026-11-04, Linux/WSL2, Node.js 24.20.0 and omp 18.16.0, two read-only source assessments covered all 57 canonical skill entrypoints and relevant conditional companions. Criteria were trigger, necessary inputs, actionable decisions, observable completion/evidence, authority boundaries and direct execution without optional native acceleration. This was not an exhaustive audit of every bundled reference or executable.
+
+The assessment found two bounded procedure gaps: Python environment/execution/result accounting was not host-neutral, and task tracking lacked an operational conversational fallback. The corresponding `code-python` and `workflow-todo` procedures were corrected; the other 55 entrypoints stayed byte-identical. Existing conditional tool mappings were retained as adapters, not confused with keyword activation. The shared preferences own proportional effort; the passive skill contract's existing loading and authority boundaries did not need another copy.
+
+Twelve fresh source-loaded task actors exercised six baseline/candidate pairs on equivalent isolated fixtures. Each read its actual copied guidance and applicable skill body; relative references stayed in the selected copied tree. Explicit `code-implementation` file loading was authorized for its cases without changing its explicit-only metadata. The controller inspected actor tool transcripts and performed the integrated fixture checks rather than accepting self-reported passes.
+
+| Case | Observed baseline and candidate result |
+|---|---|
+| Revision-order debugging | Both used a discriminating pre-fix probe to locate balance-based ordering in the ledger rather than JSON conversion, then made the revision-based correction. All eight parent-owned adapter assertions per fixture passed, including revision zero, equal-revision stability, newer lower balances and account isolation. |
+| Multi-file implementation | Both implemented normalization through users, teams and the real stdin/stdout CLI. Parent checks passed for Unicode, retained fields, new arrays/objects, frozen-input nonmutation, empty arrays and both collection error paths with exact stderr/exit behavior. |
+| Read-only review | Both found the removed finiteness checks with concrete `NaN`/infinity consequences and separate correctness/spec verdicts. Transcripts contained reads only; fixture bytes stayed unchanged. No reviewer claimed runtime reproduction. |
+| Trivial edit countercase | Both changed only the greeting literal. Actual CLI stdout was exactly `Welcome\n`; no extra artifacts, delegated work, additional skills or documentation pipeline were introduced. |
+| Python without a native Python tool | Both used the authorized command interface and project-selected `/usr/bin/python3` from the fixture working directory. Python 3.14.4 returned `{"total": "0.30", "rows": 2}` with successful completion. No dependency installation or fixture changes were observed. |
+| Tracking without a board | Both returned all three items conversationally, withheld completion for a worker claim lacking output evidence, preserved the user's undecided retention policy, and completed only the item supported by the inspected API document. No execution, persistence or helper installation occurred. |
+
+Baseline also succeeded in every case; these observations do not establish comparative behavioral improvement. Exact actor model/fallback identity, generalization to other tasks/harnesses, native role enforcement and OS containment were not established. Delegation and runtime-control changes were prohibited by the assignments; observed compliance is not proof that tools were technically unavailable.
+
+The four installer/helper suites passed all 118 tests with zero skips, including native agy plugin validation. Disposable real-installer previews and baseline-to-candidate managed updates for both harnesses preserved all 57 installed skill bodies and delivered the 7,298-byte shared guidance exactly; preview targets/bytes were unchanged, rendered MCP bytes were preserved, and root notices matched. All skill metadata and 60 retained skill notice files were unchanged. Protected source configuration/MCP hashes matched. Five isolated native omp reads matched `code-debugging`, `code-implementation`, `code-review`, `code-python` and `workflow-todo` bodies byte-for-byte without inference.
+
+Private actor transcripts remain in the assessment session. Copied baseline/candidate sources, fixture directories and machine-readable smoke receipts under `/tmp/kitshift-capability-4c7hpC` were ephemeral and were no longer available when this record was finalized; the observed command output and actor transcripts, not a durable fixture archive, support this record. No private transcript or credential content was added to the repository. No live installation, persistent runtime/model/approval settings, credentials or services were changed. Keyword highlighting, notice injection, automatic effort selection and kernel/judge behavior were inspected in pinned source only, not exercised by these portable-guidance cases.
+
+
 ## Observed agy integration isolation
 
 On 2026-10-26, Linux/WSL2, Node.js 24.20.0 and omp 18.12.6, compared the pre-agy `main` snapshot `7ad7652226a4061ef1be8b742d439e2963edf34d` with `e75df71` plus the omp installer correction:
