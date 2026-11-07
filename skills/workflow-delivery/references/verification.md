@@ -16,6 +16,8 @@ Load when defining or assessing delivery proof. The integration owner coordinate
 6. Reuse relevant already observed evidence when its material source, environment and acceptance basis remain unchanged; no gratuitous replay solely because a new message/session started. If implementation, inputs, deployment or requirement basis changed, name what was invalidated and obtain appropriate fresh proof. Run broad integrated checks once when needed after workers land, not repeatedly per criterion or concurrently against half-finished siblings.
    In an optional supported execution mode, milestone reports feed this same evidence map; status alone does not establish acceptance. Honor assigned checker/write boundaries and use available native interfaces for any specialist proof actually required by the task. The current integration owner accepts evidence; no fixed director, model or independent-review role is imposed here.
 
+Honor an explicit pause. On authorized resume, reconcile current scope and authority, the operative plan and partial results; reuse valid unchanged-basis evidence and invalidate proof whose material basis changed. This does not select documentation-first resumption or restart jobs.
+
 ## Result contract
 
 For each criterion connect its canonical anchor, delivered behavior/current consumer, decisive evidence locator and inspected material source/input/environment basis. State whether decisive proof was actually inspected, only reported by another actor, unavailable/unrun/incomplete, or invalidated by a changed material basis; explain the missing fact or invalidated basis. These are provenance explanations, not new result states or a required schema. Record implementation/consumer evidence, observed behavioral evidence and one of:

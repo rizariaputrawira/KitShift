@@ -32,7 +32,7 @@ Use this kit to keep a consistent setup across projects without copying credenti
 - **Reusable procedures:** 57 skills covering engineering, UI, security, Git, documentation, writing, software licensing and compliance review, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
-- **Dedicated subagents:** `kitshift-reviewer` and `kitshift-investigator` for both harnesses; `kitshift-executor` and `kitshift-architect` additionally packaged for agy. Definitions do not prove effective runtime tools or model selection.
+- **Dedicated subagents:** seven omp and eight agy definitions, with retained existing identities and distinct research, planning, QA and acceptance responsibilities. See the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Packaged definitions do not prove runtime dispatch, effective tools, model selection or behavior.
 - **Portable MCP definitions:** Playwright and local design tooling for both harnesses, GitHub for omp, and LSP, Codegraph, and Filesystem for agy. Machine-specific local paths are rendered during every installation and managed update.
 - **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
@@ -105,7 +105,7 @@ Once installed:
 - The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
 - Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
 - All 57 skills are available on demand.
-- Native subagents `kitshift-reviewer`, `kitshift-investigator`, `kitshift-executor`, and `kitshift-architect` are packaged for dispatch through the host's supported interface. Validation/discovery does not prove every role's tools or model selection at runtime.
+- Eight native subagent definitions are packaged; see the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Static validation does not prove dispatch, effective tools, model selection or behavior.
 - Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
 
 ## How it works
@@ -118,7 +118,7 @@ The repository is the source of truth. The installers copy content into the targ
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
 | Original-material license | [LICENSE](LICENSE) and [scope notice](NOTICE) | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills |
 | Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (57 canonical skills) |
-| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (`kitshift-reviewer`, `kitshift-investigator`) | `agents/` (reviewer, investigator, executor, architect with `kitshift-` prefix) |
+| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (seven definitions) | `agents/` (eight definitions); [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity) |
 | MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |

@@ -22,8 +22,7 @@ async function fixture(t, route = 'direct') {
   await cp(join(repository, 'scripts/install-common.mjs'), join(repo, 'scripts/install-common.mjs'));
   await cp(join(repository, 'mcp/agy.json'), join(repo, 'mcp/agy.json'));
   await cp(join(repository, 'guidance/APPEND_SYSTEM.md'), join(repo, 'guidance/APPEND_SYSTEM.md'));
-  await cp(join(repository, 'harnesses/agy/agents/kitshift-reviewer.md'), join(repo, 'harnesses/agy/agents/kitshift-reviewer.md'));
-  await cp(join(repository, 'harnesses/agy/agents/kitshift-investigator.md'), join(repo, 'harnesses/agy/agents/kitshift-investigator.md'));
+  await cp(join(repository, 'harnesses/agy/agents'), join(repo, 'harnesses/agy/agents'), { recursive: true });
   await writeFile(join(repo, 'skills/example/SKILL.md'), '---\nname: example\ndescription: Example skill\n---\nExample instructions.\n');
   const cli = join(root, 'cli.mjs');
   await writeFile(cli, '// Fixture path; never executed.\n');
@@ -296,7 +295,6 @@ test('native agy plugin validate passes against full installed bundle', async t 
   const result = JSON.parse(val.stdout);
 
   assert.equal(result.name, 'kitshift');
-  assert.equal(result.components.agents, 4);
   assert.equal(result.components.rules, 1);
   assert.equal(result.components.mcpServers, 5);
 

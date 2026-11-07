@@ -11,7 +11,31 @@ This directory owns omp configuration, deployment notes and verification records
 
 For a requested omp assessment, read the packaged [omp compatibility companion](../../skills/docs-engineering/references/omp-compatibility.md). It selects the shared [harness compatibility procedure](../../skills/docs-engineering/references/harness-compatibility.md) and owns native commands, official version-pinned sources, isolated loading checks and permission/evidence limits. It is installed with the skills and does not depend on this repository-only document.
 
-For optional prompt controls in omp 18.16.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+For optional prompt controls in omp 18.17.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+
+## Intended role adapter
+
+The packaged adapter defines seven agents: retained `kitshift-investigator` and `kitshift-reviewer`, plus `kitshift-researcher`, `kitshift-plan-consultant`, `kitshift-plan-reviewer`, `kitshift-qa` and `kitshift-acceptance-reviewer`. This is an intended inventory, not evidence of dispatch or model behavior.
+
+| Responsibility | Intended omp identity |
+|---|---|
+| Main/planning | Native main session/plan interface |
+| Locate local code | Bundled `scout`; retained `kitshift-investigator` for source/root-cause tracing |
+| External research | `kitshift-researcher` |
+| Pre-plan gap consultation | `kitshift-plan-consultant` |
+| Concrete-plan review | `kitshift-plan-reviewer` |
+| Source code review | Retained `kitshift-reviewer`; bundled reviewers unchanged |
+| Authorized scenario execution | `kitshift-qa` only outside a mode reserving checks to main; otherwise main |
+| Independent evidence recommendation | `kitshift-acceptance-reviewer` |
+| Implementation, including architecture implementation | Bundled default `task`; `sonic` only for suitable mechanical work under native policy |
+
+The retained investigator and new researcher declare `@smol`; the retained reviewer, plan consultant, plan reviewer and acceptance reviewer declare `@slow`; QA declares `@default`. Tool lists and `spawns: []` express the packaged definitions, not observed effective tools, confinement, actual model routing or delegation enforcement. Reviewers return results through native channels without requiring filesystem writes. QA may execute only assigned scenarios when both native rules and the assignment allow it; source and acceptance review do not execute or repair.
+
+The responsibilities are original local expression informed by the immutable [OmO Native specialist registry](https://github.com/code-yeongyu/oh-my-openagent/blob/9afd6e6c307b84a750f2986b69377b050a46c05f/packages/senpi-task/src/agents/builtin/index.ts), [orchestration guide](https://github.com/code-yeongyu/oh-my-openagent/blob/9afd6e6c307b84a750f2986b69377b050a46c05f/docs/guide/orchestration.md), and the pinned omp [keyword registry](https://github.com/can1357/oh-my-pi/blob/75e7801e247d4e3263439d4cc08ccad60dc64bdd/packages/coding-agent/src/modes/magic-keywords.ts) and [orchestration notice](https://github.com/can1357/oh-my-pi/blob/75e7801e247d4e3263439d4cc08ccad60dc64bdd/packages/coding-agent/src/prompts/system/orchestrate-notice.md). They do not copy upstream prompts or import its runtime, report storage or model chains. The shared [implementation brief](../../skills/workflow-delivery/references/implementation-brief.md#responsibility-and-return) owns assignment returns; native gates and result channels prevail, review is conditional, and main owns acceptance.
+
+This source-level adapter does not establish native discovery or dispatch, actual model/tool resolution, role compliance, acceptance independence or keyword notice injection. Historical observations below apply only to their stated snapshots, not these new definitions.
+
+Disposable repository-boundary checks delivered seven readable definitions and the shared coordinated-work entrypoint; preview left the target absent. A clean managed update from the original two definitions retained both and added the five new ones. Locally edited managed and differing unmanaged role files caused refusal without target or manifest changes. These checks did not launch an omp actor.
 
 ## Observed portable effort and fallback assessment
 

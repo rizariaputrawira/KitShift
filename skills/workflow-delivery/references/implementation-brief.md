@@ -17,9 +17,24 @@ Name the assignment's primary responsibility, permitted actions and expected ret
 | Consultation | A supported recommendation, material alternatives/tradeoffs, assumptions and decisions still owned by the caller or user. Advice is not an approved design or permission to implement it. |
 | Review | Findings and verdicts against the supplied comparison, requirements and applicable standards, with evidence and coverage gaps. A requested verdict or the implementer's confidence is not proof; the review does not authorize repairs or scope changes. |
 
+Distinguish these bounded assignments:
+
+- **Local exploration:** return caller/callee locations and observed behavior. **External research:** return authoritative URLs and versions, relevant source examples and unavailable evidence. Neither authorizes repairs.
+- **Pre-plan consultation:** return missing criteria, hidden assumptions, contradictions and owner-retained choices. **Concrete-plan review:** inspect the actual supplied current plan and return a verdict, criterion/consumer/proof coverage and executable blockers. Neither writes or approves the operative plan, implements or delegates.
+- **Source code review:** follow the existing code-review contract and return separate Spec and Standards/correctness findings; do not execute or write.
+- **QA:** when execution is authorized, return exact scenarios and criteria, inputs/invocations, independent expectations, actual outputs/status, evidence locators, adversarial coverage and missing prerequisites. A skipped or unavailable required scenario is unverified/blocked, never PASS. Do not fix product code.
+- **Acceptance review:** inspect original intent and criteria and actual implementation, review and QA artifacts. Return criterion-linked satisfied/failed/unverified recommendations and blockers; do not repair or regenerate evidence. Missing evidence blocks approval only when needed for an actual criterion; taste is a note. Main retains final acceptance and external-action authority.
+
+Return reports through the host's native result/artifact channel and provide consumers an inspectable locator; filesystem writes or an upstream report directory are not required. These are assignment contracts, not universal technical read-only claims.
+
 Keep domain procedures with their enabled owners: for primary-source research read [workflow-research](../../workflow-research/SKILL.md); for module/interface design consultation read [code-architecture](../../code-architecture/SKILL.md); for code/change review read [code-review](../../code-review/SKILL.md); for consequential plan review read [docs-plan-review](../../docs-plan-review/SKILL.md). Load only the applicable branch, without bypassing deliberate disablement. Explicit scenario execution belongs under Verification below; reviewing a result does not mean the scenario was run.
 
 The integration owner connects these returns to the requested outcome, resolves decisions within current authority and inspects acceptance evidence. Do not dispatch every responsibility for every task or delegate final acceptance to a worker's self-assessment.
+
+## Coordinated work
+
+When coordinated work is explicitly selected in ordinary language or by a supported native mode, bind the full outcome and authority under Objective and Constraints; map ready work and one writer per shared file under Scope; and supply bounded briefs and named checkers. Use the available native job/tracking lifecycle while doing unrelated ready work. Inspect actual producer interfaces before dependent mutation under [Dependency handoffs](#dependency-handoffs). Integrate and inspect criterion-level proof under [Verification](#verification) and [verification evidence](verification.md); adjudicate conditional reviews and corrections using [review feedback](review-feedback.md). Continue until acceptance or a precise blocker or explicit pause, and report evidence and limits. Available native tools and stricter active native rules prevail. This adds no approval gate, documentation-first baseline, mandatory delegation or review chain, board, retries or continuation engine.
+
 
 ## Scope
 
@@ -66,7 +81,7 @@ For substantial work, name useful checkpoints at an actual interface handoff, co
 
 ## Verification
 
-Name the authorized checker, concrete input/check, expected observable result and inspectable evidence location. Workers MUST NOT run builds/tests/linters/formatters/smokes unless specifically assigned; name any focused check and permissible fixture/environment. Read-only workers provide exact source-inspection evidence and identify checks reserved for the parent. The parent performs integrated checks after dependent changes land, not parallel gate storms. Requested test-first uses [code-tdd](../../code-tdd/SKILL.md) with genuine RED/GREEN evidence, not a universal requirement. Separate observed results from planned/unrun checks.
+Name the authorized checker, concrete input/check, expected observable result and inspectable evidence location. Workers MUST NOT run builds/tests/linters/formatters/smokes unless both the assignment and the active native contract permit it; name any focused check and permissible fixture/environment. If the active native mode reserves all gates to main, main runs executable QA and must not dispatch a worker to violate that mode. Outside that mode an expressly authorized QA assignment may execute its scenarios. Read-only workers provide exact source-inspection evidence and identify checks reserved for the parent. The parent performs integrated checks after dependent changes land, not parallel gate storms. Requested test-first uses [code-tdd](../../code-tdd/SKILL.md) with genuine RED/GREEN evidence, not a universal requirement. Separate observed results from planned/unrun checks.
 
 ## Done When
 
