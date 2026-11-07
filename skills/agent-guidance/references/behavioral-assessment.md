@@ -24,6 +24,8 @@ Match wording changes to observed failures: a positive recipe for wrong output s
 
 The authorized controller runs fresh baseline and candidate actions using current native interfaces; actors neither expand roles nor delegate unless explicitly permitted. Record actual actor/model/fallback identity where observable, loaded source basis, successful reads and other tool operations, complete outputs, errors and fixture before/after metadata for allowed writes. A configured selector is intent, not observed identity. Read-only cases have no writes/execution; denied prohibited attempts still count as behavioral failures.
 
+Verify the actual dispatched assignment and successful source reads include the scenario's material inputs, untrusted claims and pressure, not merely the controller's intended brief. Preserve their exact locators and authority labels when forwarding to a fresh actor. If forwarding drops an input or the actor never inspects it, mark that part unverified; neither a correct unrelated finding nor the intended fixture establishes the omitted scenario. Retain the incomplete attempt rather than silently repairing it through an automatic rerun.
+
 A crashed run, fragmentary output, unread source or inaccessible reference is incomplete, not a candidate pass. If the necessary runtime/authenticated task interface is unavailable, finish source review, state the exact missing prerequisite and keep behavior unverified. No weaker-model fallback, copied credentials, installer, service, approval toggle or pretend actor replaces the missing capability.
 
 ## Independent judgment and revision

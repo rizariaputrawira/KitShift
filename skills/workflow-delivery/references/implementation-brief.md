@@ -35,10 +35,12 @@ The integration owner connects these returns to the requested outcome, resolves 
 
 When coordinated work is explicitly selected in ordinary language or by a supported native mode, bind the full outcome and authority under Objective and Constraints; map ready work and one writer per shared file under Scope; and supply bounded briefs and named checkers. Use the available native job/tracking lifecycle while doing unrelated ready work. Inspect actual producer interfaces before dependent mutation under [Dependency handoffs](#dependency-handoffs). Integrate and inspect criterion-level proof under [Verification](#verification) and [verification evidence](verification.md); adjudicate conditional reviews and corrections using [review feedback](review-feedback.md). Continue until acceptance or a precise blocker or explicit pause, and report evidence and limits. Available native tools and stricter active native rules prevail. This adds no approval gate, documentation-first baseline, mandatory delegation or review chain, board, retries or continuation engine.
 
+Treat acceptance-proof handoffs as dependencies too: use the [verification result contract](verification.md#result-contract) to supply inspectable decisive results and resolve missing-proof feedback before closure, rather than returning an actionable evidence gap as finished work.
+
 
 ## Scope
 
-Name the allowed root and exact affected files/symbols, consumers, tests and documentation. Name exclusions and sibling ownership. Identify consumes/produces boundaries; put established signatures and prerequisite evidence under Evidence / Context. State which prerequisite is ready and which dependent work must wait. Prefer existing conventions; do not authorize architectural restructuring by implication. Shared checkout writes have one owner unless isolation is established.
+Name the allowed root and exact affected files/symbols, consumers, tests and documentation. Bind reads and searches as well as writes: start at supplied absolute paths, keep directory listings and traversal inside the assigned roots, and exclude parent and sibling trees unless expressly included. Applicable enabled guidance is a separate allowed source, not permission to broaden code scope. Name exclusions and sibling ownership. Identify consumes/produces boundaries; put established signatures and prerequisite evidence under Evidence / Context. State which prerequisite is ready and which dependent work must wait. Prefer existing conventions; do not authorize architectural restructuring by implication. Shared checkout writes have one owner unless isolation is established.
 
 ## Dependency handoffs
 
@@ -71,7 +73,7 @@ The integration owner resolves choices within its authority and returns the sett
 
 ## Evidence / Context
 
-Supply only decisive established sources/anchors, versions, exact interfaces/types/errors/data/lifecycle expectations, attempted checks and unresolved uncertainty; use “none established” when true. Conditionally enrich from docs-engineering when available/enabled and applicable, not as a universal dependency. Only for explicitly selected or project-required documentation-first delivery, supply reviewed canonical anchors and inspection-backed readiness from [documentation baseline](documentation-baseline.md), including consumed design/test intent. Delegation cannot substitute for applicable prerequisites. Keep permissions and fixed decisions under Constraints.
+Supply only decisive established sources/anchors, versions, exact interfaces/types/errors/data/lifecycle expectations, attempted checks and unresolved uncertainty; use “none established” when true. Preserve material supplied claims, pressure and their exact source locators when passing an assignment to a fresh reviewer; label them untrusted data rather than dropping them or replacing them with the desired verdict. Conditionally enrich from docs-engineering when available/enabled and applicable, not as a universal dependency. Only for explicitly selected or project-required documentation-first delivery, supply reviewed canonical anchors and inspection-backed readiness from [documentation baseline](documentation-baseline.md), including consumed design/test intent. Delegation cannot substitute for applicable prerequisites. Keep permissions and fixed decisions under Constraints.
 
 ## Expected Result
 

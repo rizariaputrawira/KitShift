@@ -57,3 +57,8 @@ or a concrete independence need. The evaluator and limits must be reported.
 ## Evidence limits
 
 Pinned text and full repository LICENSE were retrieved read-only for this adaptation. No target source was executed and no runtime, build, test, lint, format, native discovery or compatibility gate was run while drafting. Source provenance is not behavioral assurance. Historical baseline and later actual verification belong to the integration owner's evidence record.
+
+## Local assessment-input fidelity correction
+
+`references/behavioral-assessment.md` now requires inspection of the actual dispatched assignment and successful source reads for material scenario inputs, untrusted claims and pressure. An intended fixture or unrelated correct finding cannot prove an input that was omitted in transit or never inspected. Incomplete attempts remain recorded instead of being silently replaced by automatic reruns. This is original local assessment guidance; existing upstream pins, source mappings, notices and invocation metadata are unchanged.
+
