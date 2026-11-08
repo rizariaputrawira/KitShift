@@ -4,7 +4,7 @@
 
 ## What KitShift supplies
 
-KitShift supplies passive skills, working preferences, harness settings and MCP definitions; omp supplies the implemented agent runtime. [How installation works](README.md#how-it-works) explains the explicit copy/update operation: using agents is separate from installation, and editing a checkout does not synchronize an installed setup. The [omp compatibility record](harnesses/omp/COMPATIBILITY.md) describes scoped integration evidence, not a guarantee for your current runtime. This guide explains the existing contracts for repository readers; it is not another agent policy or runtime registry.
+KitShift supplies passive skills, working preferences, harness settings and MCP definitions, with implemented omp and agy integrations; each host supplies its own runtime. [How installation works](README.md#how-it-works) explains the explicit copy/update operation: using agents is separate from installation, and editing a checkout does not synchronize an installed setup. The [omp](harnesses/omp/COMPATIBILITY.md) and [agy](harnesses/agy/COMPATIBILITY.md) compatibility records describe scoped integration evidence, not guarantees for your current runtime. This guide explains existing contracts; it is not another agent policy or runtime registry.
 
 ## Terms and responsibilities
 
@@ -15,7 +15,7 @@ The [passive skill contract](skills/agent-guidance/references/skill-contract.md#
 - **Assignment:** the current outcome, scope, permitted actions, discretion and expected return—not a reusable agent identity.
 - **Skill:** passive reusable knowledge or procedure, loaded when relevant, enabled and authorized. Naming it does not prove its body was read or grant tools; see [invocation and loading](skills/agent-guidance/references/skill-contract.md#real-invocation-and-loading).
 - **Native role / capability:** the tools and interaction policy the host actually implements. Markdown does not register roles or enforce isolation.
-- **Model selector:** a configured model choice for a native purpose, not an assignment responsibility or worker identity; see [model selections](README.md#model-selections).
+- **Model selector:** a configured model choice for a native purpose, not an assignment responsibility or worker identity; see [configuration](README.md#configuration).
 
 The [responsibility and return contract](skills/workflow-delivery/references/implementation-brief.md#responsibility-and-return) distinguishes these assignments:
 
@@ -28,6 +28,41 @@ The [responsibility and return contract](skills/workflow-delivery/references/imp
 
 These are not four registered agents, automatic stages or model identities. One main agent can perform the authorized work directly; not every task needs every responsibility. The [implementation brief](skills/workflow-delivery/references/implementation-brief.md) owns assignment details rather than this explanatory guide.
 
+Resident memory recall is reference context, not a task identity or an implemented KitShift memory system.
+
+### Responsibility to native identity
+
+This is the intended adapter map, not observed dispatch or a model capability guarantee. Actual effective tools may be additive and native enforcement requires observation.
+
+| Responsibility | omp | agy |
+|---|---|---|
+| Main/planning | Native main session/plan interface | Native main session/plan interface |
+| Locate local code | Bundled `scout`; retained `kitshift-investigator` for source/root-cause tracing | `kitshift-investigator` |
+| External research | `kitshift-researcher` | `kitshift-researcher` |
+| Pre-plan gap consultation | `kitshift-plan-consultant` | Advisory `kitshift-architect` |
+| Concrete-plan review | `kitshift-plan-reviewer` | `kitshift-plan-reviewer` |
+| Source code review | `kitshift-reviewer`; bundled reviewers remain untouched | `kitshift-reviewer` |
+| Authorized scenario execution | `kitshift-qa` only outside modes reserving checks to main; otherwise main | `kitshift-qa` |
+| Independent evidence recommendation | `kitshift-acceptance-reviewer` | `kitshift-acceptance-reviewer` |
+| Implementation, including architecture implementation | Bundled `task`; `sonic` only for suitable mechanical work under native policy | `kitshift-executor` |
+
+### Assignment intents
+
+These are worker assignments, not dispatched category identifiers, model selections or ten new agents. Reference category labels are provenance only.
+
+| Neutral intent | Reference category | Required assignment/return |
+|---|---|---|
+| Small correction | `quick` | Explicit steps, forbidden deviations and concrete success evidence; direct main work when appropriate. |
+| Contained general work | `unspecified-low` | Moderate bounded result when no specialist fits; complete assigned checks and evidence. |
+| Broad general work | `unspecified-high` | Complete affected-consumer change across systems with relevant evidence and assumptions. |
+| Evidence-resolvable deep work | `deep-low` | Trace mechanism and callers and finish; if a consequential contract/tradeoff remains unresolved, stop before affected edits and return the decision, inspected facts, options and held work under [Decision escalation](skills/workflow-delivery/references/implementation-brief.md#decision-escalation). |
+| Decision-bearing deep work | `deep-high` | Name the unsettled decision, honor owner-retained authority, implement only when discretion/contract is settled; return decision, rejected alternative, assumptions and evidence. No automatic model escalation. |
+| Hard reasoning | `ultrabrain` | Goal-led evidence-backed conclusion, strongest countercase and executable claims checked by the authorized checker. |
+| Architecture | `architect` | Boundaries, options, recommendation and root-cause basis; advisory assignments do not edit, implementation uses an implementation-capable identity. |
+| Visual implementation | `visual-engineering` | Product-specific authorized UI and actual rendered/interaction evidence using relevant existing UI owners. |
+| Creative work | `artistry` | Coherent unconventional result meeting the brief without invented real-world evidence. |
+| Writing | `writing` | Finished audience-appropriate prose preserving supplied facts, structure and uncertainty. |
+
 ## Daily workflow
 
 These ordered paths explain existing contracts and recommended project practice, not a mandatory global pipeline.
@@ -35,6 +70,8 @@ These ordered paths explain existing contracts and recommended project practice,
 1. **Small correction:** inspect the requested boundary and expected result, make the bounded change, exercise the changed consumer path, and report observed results and limits. No obligatory spec, worker, independent reviewer, branch or PR. **Result:** the corrected output or behavior is observed at its consumer, with unrun checks identified.
 2. **Substantial feature:** identify observable acceptance and error cases, split the work into complete reviewable vertical slices using the [whole-spec task graph](skills/code-implementation/SKILL.md#whole-spec-task-graph), implement a ready slice, and exercise its acceptance cases. Obtain fresh independent [source review](skills/code-review/SKILL.md) when correctness/security risk warrants it or project policy requires it; resolve findings, then assess [human acceptance](#human-acceptance-gates) before an authorized merge or release. Use the canonical [acceptance-evidence rules](skills/workflow-delivery/references/verification.md); select [documentation-first delivery](skills/workflow-delivery/SKILL.md) only when explicitly requested or project-required. **Result:** integrated slices have current criterion-level evidence, findings are dispositioned, and acceptance or remaining gaps are explicit.
 3. **Release or externally consequential change:** inspect intended scope and latest-change evidence, settle actionable review findings, verify the real affected environment when required, and obtain explicit authorization for the actual publish/install/merge action. Local code completion is not permission to execute those actions. **Result:** the authorized action has an observed outcome and stated limits, or the prepared change remains unapplied pending authorization or missing evidence.
+
+When coordinated work is explicitly selected, the [coordinated-work contract](skills/workflow-delivery/references/implementation-brief.md#coordinated-work) connects existing brief, handoff, review and evidence owners without imposing documentation-first delivery or a mandatory worker chain.
 
 ## From request to accepted result
 
@@ -78,6 +115,8 @@ Workers do not automatically inherit all caller context. The [implementation bri
 - The expected return, authorized checker, concrete check/input and expected observable evidence.
 
 For a producer/consumer dependency, provide the actual output or a readable locator in the consumer's context. Under the [dependency handoff contract](skills/workflow-delivery/references/implementation-brief.md#dependency-handoffs), the integration owner inspects that output and relevant evidence against the consumer's prerequisite contract on the current integration basis before dependent mutation. A worker's completion label alone does not make the input ready. Missing, inaccessible, stale or incompatible inputs hold only affected dependent work; independent authorized work can continue. This also applies when one agent handles every slice.
+
+The [assignment distinctions](skills/workflow-delivery/references/implementation-brief.md#responsibility-and-return) separate local exploration from external research, consultation from concrete-plan review, and source review from authorized QA and acceptance recommendation. Reports use the native result channel and an inspectable locator; no filesystem report path is required.
 
 ## Independent review and decisions
 
@@ -230,6 +269,6 @@ CLI path and report its actual result. Do not commit or publish.
 
 ## Boundaries and evidence
 
-Actual host-supported roles and tools determine capability. The [passive permission contract](skills/agent-guidance/references/skill-contract.md#consumerpermission-binding) does not turn Markdown instructions, read-only labels or tool lists into role registration or enforced confinement. [MCP definitions](README.md#mcp-integrations) are not proof of connectivity, authentication or successful actions. [Configured model selectors](README.md#model-selections) are personal selections, not performance rankings or fixed worker identities.
+Actual host-supported roles and tools determine capability. The [passive permission contract](skills/agent-guidance/references/skill-contract.md#consumerpermission-binding) does not turn Markdown instructions, read-only labels or tool lists into role registration or enforced confinement. [MCP definitions](README.md#mcp-integrations) are not proof of connectivity, authentication or successful actions. [Configured model selectors](README.md#configuration) are personal selections, not performance rankings or fixed worker identities.
 
 Read [safety and privacy](README.md#safety-and-privacy) before relying on configured approvals or external tools. The [historical installed-responsibility assessment](harnesses/omp/COMPATIBILITY.md#observed-installed-responsibility-acceptance) records its tested snapshots and limitations; it is not current compatibility acceptance or a universal behavioral guarantee. This guide reports no new consuming-agent experiments or runtime behavior tests.

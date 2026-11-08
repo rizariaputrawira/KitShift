@@ -1,6 +1,6 @@
 # Acceptance evidence before completion
 
-Load when defining or assessing delivery proof. The integration owner coordinates checks after all workers land. Execute only checks allowed by current native authorization and the assignment; a read-only reviewer or source-only investigation does not become an executor by loading this reference.
+Load when defining or assessing delivery proof. The integration owner coordinates checks after all workers land and retains evidence acceptance. An expressly assigned QA checker executes only its bounded scenarios when the complete active native rule permits them, including any assignment exception; a mode reserving all checks to main still wins. Loading this reference never authorizes a read-only reviewer or investigator to execute.
 
 ## Work backward from full acceptance
 
@@ -11,10 +11,12 @@ Load when defining or assessing delivery proof. The integration owner coordinate
    - **Substantive shape:** it implements the contract rather than a placeholder, no-op, static fallback or mock. Compilation/type shape alone is not behavior.
    - **Wiring and data flow:** actual callers invoke it; real inputs/results traverse the intended producer/consumer path. An import, unused export or hardcoded prop is insufficient.
    - **Exercised behavior:** the required transition/output/denial/error/cleanup/order is observed at the relevant seam with its stated inputs. UI interaction/accessibility/responsiveness and external integration require their appropriate real evidence, not source grep.
-4. The integration owner runs each needed authorized check, reads complete results and records command/action, input, expected result, actual output/exit/status, code/source basis and limitations. Never count a partially completed, crashed, skipped or unavailable check as passed. A worker report is a lead to evidence, not an authoritative pass; inspect the actual changed boundary and actual tool results.
+4. The authorized checker runs each needed check, reads complete results and records command/action, working directory, input, independent expected result, actual output/exit/status, source basis and limitations. Capture decisive distinctions the criterion requires, such as exact bytes and separate stdout/stderr; a rendered line cannot prove information the tool did not expose. The integration owner inspects that evidence, not a worker's pass assertion. Never count a partially completed, crashed, skipped or unavailable check as passed.
 5. Diagnose actual failure before claiming a fix; user-reported failure is ground truth and is not rerun merely for confirmation. A permanent fix needs meaningful regression coverage and successful original-path evidence when authorized. Genuine TDD completion additionally requires meaningful wrong-before/right-after proof, not a harness error. A source-only diagnosis may yield hypotheses, not fabricated runtime proof.
 6. Reuse relevant already observed evidence when its material source, environment and acceptance basis remain unchanged; no gratuitous replay solely because a new message/session started. If implementation, inputs, deployment or requirement basis changed, name what was invalidated and obtain appropriate fresh proof. Run broad integrated checks once when needed after workers land, not repeatedly per criterion or concurrently against half-finished siblings.
    In an optional supported execution mode, milestone reports feed this same evidence map; status alone does not establish acceptance. Honor assigned checker/write boundaries and use available native interfaces for any specialist proof actually required by the task. The current integration owner accepts evidence; no fixed director, model or independent-review role is imposed here.
+
+Honor an explicit pause. On authorized resume, reconcile current scope and authority, the operative plan and partial results; reuse valid unchanged-basis evidence and invalidate proof whose material basis changed. This does not select documentation-first resumption or restart jobs.
 
 ## Result contract
 
@@ -23,6 +25,8 @@ For each criterion connect its canonical anchor, delivered behavior/current cons
 - **satisfied:** the required proof was inspected and is relevant to the current basis; reported-only or invalidated checks cannot establish satisfaction;
 - **failed:** current evidence contradicts the criterion or required implementation is absent/unwired;
 - **unverified:** implementation may be present but decisive evidence is unrun, missing, incomplete or environment-dependent.
+
+When another reviewer consumes proof, supply the complete decisive results inline or through a locator readable in that reviewer's context, with the criterion and current source/input/environment basis. A history summary or “all checks passed” is not a substitute for omitted streams or statuses. If the reviewer reports required proof inaccessible or incomplete, the integration owner repairs the handoff from retained actual results, or performs a narrowly necessary authorized capture when those results lack the required information. Resolve the gap before final acceptance; otherwise name the concrete unavailable prerequisite and affected criterion. Do not ask the reviewer to regenerate evidence or relabel an actionable handoff gap as completion.
 
 Include explicit human/deployment needs and exclusions. A required unverified or failed criterion prevents a full-completion claim. Distinguish “present and wired, behavior unverified” from both absence and pass. Check counts and green builds cannot substitute for full criterion coverage. Never filter away a current acceptance gap because a vague later-phase name sounds related; a deferred slice criterion must have an exact plan mapping and remains open for final acceptance.
 

@@ -33,6 +33,8 @@ These preferences supplement host defaults. They do not change native permission
 
 Match reasoning depth and execution strategy to uncertainty, consequences, and scope. Use supported, authorized native reasoning, delegation, or batch-processing capabilities when useful; do not assume they exist or silently change runtime settings. Without optional capabilities, perform the applicable procedure directly and report material limits. Keep ordinary bounded work direct when additional orchestration adds no useful coverage. Evidence—not effort level or worker count—determines completion.
 
+When coordinated work is explicitly requested, locate the enabled `workflow-delivery` owner through the selected host's skill catalog and read `references/implementation-brief.md`, specifically `Coordinated work`, from that owner's actual directory. Reading this reference does not select the documentation-first entrypoint or baseline, require delegation or review, bypass disablement, or change native authority. If the optional owner is missing or disabled, use supported native coordination directly and report the unavailable KitShift-specific contract.
+
 ## Verification
 
 Verify meaningful changes against the requested behavior with relevant checks, exercising the changed path when practical. Passing tests alone do not prove every requirement. Report the checks, observed results, and unverified limitations; do not claim success without evidence.

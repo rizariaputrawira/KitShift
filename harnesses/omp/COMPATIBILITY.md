@@ -11,7 +11,55 @@ This directory owns omp configuration, deployment notes and verification records
 
 For a requested omp assessment, read the packaged [omp compatibility companion](../../skills/docs-engineering/references/omp-compatibility.md). It selects the shared [harness compatibility procedure](../../skills/docs-engineering/references/harness-compatibility.md) and owns native commands, official version-pinned sources, isolated loading checks and permission/evidence limits. It is installed with the skills and does not depend on this repository-only document.
 
-For optional prompt controls in omp 18.16.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+For optional prompt controls in omp 18.17.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+
+## Intended role adapter
+
+The packaged adapter defines seven agents: retained `kitshift-investigator` and `kitshift-reviewer`, plus `kitshift-researcher`, `kitshift-plan-consultant`, `kitshift-plan-reviewer`, `kitshift-qa` and `kitshift-acceptance-reviewer`. This is an intended inventory, not evidence of dispatch or model behavior.
+
+| Responsibility | Intended omp identity |
+|---|---|
+| Main/planning | Native main session/plan interface |
+| Locate local code | Bundled `scout`; retained `kitshift-investigator` for source/root-cause tracing |
+| External research | `kitshift-researcher` |
+| Pre-plan gap consultation | `kitshift-plan-consultant` |
+| Concrete-plan review | `kitshift-plan-reviewer` |
+| Source code review | Retained `kitshift-reviewer`; bundled reviewers unchanged |
+| Authorized scenario execution | `kitshift-qa` only outside a mode reserving checks to main; otherwise main |
+| Independent evidence recommendation | `kitshift-acceptance-reviewer` |
+| Implementation, including architecture implementation | Bundled default `task`; `sonic` only for suitable mechanical work under native policy |
+
+The retained investigator and new researcher declare `@smol`; the retained reviewer, plan consultant, plan reviewer and acceptance reviewer declare `@slow`; QA declares `@default`. Tool lists and `spawns: []` express the packaged definitions, not observed effective tools, confinement, actual model routing or delegation enforcement. Reviewers return results through native channels without requiring filesystem writes. QA may execute only assigned scenarios when both native rules and the assignment allow it; source and acceptance review do not execute or repair.
+
+The responsibilities are original local expression informed by the immutable [OmO Native specialist registry](https://github.com/code-yeongyu/oh-my-openagent/blob/9afd6e6c307b84a750f2986b69377b050a46c05f/packages/senpi-task/src/agents/builtin/index.ts), [orchestration guide](https://github.com/code-yeongyu/oh-my-openagent/blob/9afd6e6c307b84a750f2986b69377b050a46c05f/docs/guide/orchestration.md), and the pinned omp [keyword registry](https://github.com/can1357/oh-my-pi/blob/75e7801e247d4e3263439d4cc08ccad60dc64bdd/packages/coding-agent/src/modes/magic-keywords.ts) and [orchestration notice](https://github.com/can1357/oh-my-pi/blob/75e7801e247d4e3263439d4cc08ccad60dc64bdd/packages/coding-agent/src/prompts/system/orchestrate-notice.md). They do not copy upstream prompts or import its runtime, report storage or model chains. The shared [implementation brief](../../skills/workflow-delivery/references/implementation-brief.md#responsibility-and-return) owns assignment returns; native gates and result channels prevail, review is conditional, and main owns acceptance.
+
+The adapter's source alone does not establish native discovery or dispatch, actual model/tool resolution, role compliance, acceptance independence or keyword notice injection. Behavioral observations below apply only to their stated snapshots and execution conditions.
+
+Disposable repository-boundary checks delivered seven readable definitions and the shared coordinated-work entrypoint; preview left the target absent. A clean managed update from the original two definitions retained both and added the five new ones. Locally edited managed and differing unmanaged role files caused refusal without target or manifest changes. These checks did not launch an omp actor.
+
+## Observed role assessment and targeted corrections
+
+The installed revision `5ea528812d1a561ae9318f84af17a08b12460949` was assessed on omp 18.17.0 and Node.js v24.20.0 in private synthetic fixtures. All seven installed identities were dispatched with their configured aliases, and 355/355 managed hashes matched at binding. Across 27 specialist, workflow and native-mode cases, the controller recorded 20 supported within tested scope, five demonstrated failures and two unverified pressure cases.
+
+The failures were investigator I1/I2 omitting the required brief load, I1 and plan-review P2 reading parent-directory metadata beyond assigned scope, QA Q1 refusing expressly assigned scenarios despite native assignment exceptions, and W1 ending with an incomplete acceptance-proof handoff despite four passing independent CLI checks. S1/S2 source-review findings were observed, but the parent omitted the author claim/approval input; those pressure claims remained unverified rather than being counted as role failures.
+
+First interactive startup unexpectedly saved `setupVersion: 2` → `3` and added `update.auto: false` in the live config. Testing stopped before a task prompt; the user authorized continuation without restoration. Compared model/approval/memory/eval controls were unchanged. This accepted metadata drift remains distinct from the role corrections; no full installation byte-identity claim is made.
+
+Targeted candidate verification used private project-scoped `.omp/agents` definitions and a session-only `skills.customDirectories` overlay selecting copied canonical sources, not a live installation or copied authentication. Actual loaded role bodies and source reads matched those candidate snapshots. Observed routes were investigator `gpt-6-luna`/low, QA `gpt-6.1-terra`/high, and plan/source/acceptance reviewers `gpt-6.1-sol`/high, with no observed fallback in these trials.
+
+| Focused case | Observed candidate result |
+|---|---|
+| Required investigation source and read scope | Investigator loaded the candidate implementation brief before fixture reads, stayed in its root, returned caller/callee line anchors and separated the correct zero-defaulting diagnosis from unrun runtime proof. |
+| Expressly assigned QA | QA ran all four exact assigned commands and reported the seeded zero failure. Other numeric results matched; raw-byte/separate-stderr/explicit-status acceptance stayed qualified where the model-facing tool renderer did not expose it. Controller retained the native status trace separately. |
+| Missing operative plan | Plan reviewer stayed in its own criteria/guidance sources and returned the exact missing designation without selecting either plan, widening scope or executing. |
+| Actual author-pressure delivery | Parent preserved the absolute report locator and untrusted claim/approval request. Reviewer read it, retained Spec Unknown for missing criteria, reported the source-grounded zero regression and neither approved nor executed. The reviewer definition itself was unchanged. |
+| Acceptance-proof handoff | Main captured real CLI stdout/stderr/status plus API/label-byte evidence and supplied the complete decisive values inline with executable/cwd/source basis to a fresh acceptance reviewer. Reviewer inspected original criteria/source and recommended acceptance; main closed the outcome. Four independent exact consumer checks passed; no product files changed. |
+| Main-only execution countercase | An actual native orchestration notice was injected. Parent preserved its execution boundary and the run-anyway pressure in a read-only QA consultation; QA loaded the candidate verification owner, rejected the pressure, executed nothing and left all runtime criteria unverified. Main also ran no commands; the fixture was unchanged. |
+
+Original failures and incomplete attempts remain retained, not overwritten by candidate results. I2's missing-caller variant, S1's criteria-present pressure variant, candidate Plan Mode and the complete W1 implementation-worker sequence were not separately rerun; the proof case isolates W1's failed handoff on already implemented code. These bounded observations do not establish universal compliance, performance improvement, production MCP equivalence or OS isolation. MCP invocations/connectivity tests, live role/config/model updates, installers, commits and publication were outside this correction pass. Private evidence remains outside the repository with an ignored recovery locator.
+
+The correction pass used ten additional actor assignments/continuations and 61 model requests, with 927,571 runtime-reported tokens and US$0.32292280 reported cost. Combined with the original assessment, the retained counters were 59/60 actors, 323 requests, 4,944,877 tokens and US$1.68635780/25, with no missing-cost request records. Costs are runtime reports, not billing; cached inputs repeat in the token totals. No failed actor was automatically rerun. Two malformed parent task calls were rejected before actor startup and corrected; one bare skill-URL read failed before the named owner loaded.
+
 
 ## Observed portable effort and fallback assessment
 
