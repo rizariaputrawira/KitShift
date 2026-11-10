@@ -58,3 +58,40 @@ omp config get magicKeywords.jevify
 `workflowz` uses the setting ID `workflow`. In this version the global and five per-keyword switches default to `true`; effective values can differ. The global switch gates hidden notices and editor animation; per-keyword switches gate their notices and the `ultrathink` and `chillax` effort effects. Static highlighting can remain when notices are disabled. The packaged configuration leaves both eval backends disabled; do not enable eval as part of this reference. Inspect the selected host's current controls; this reference does not authorize configuration changes, installation, model calls, remote actions, or expanded permissions.
 
 The keyword mechanisms above were inspected in pinned sources. Enabled settings and source loading do not prove notice injection or compliance. Native highlighting, notice delivery, automatic effort selection, kernel helpers and keyword-triggered model behavior require separate runtime evidence; source inspection and the portable-guidance cases do not prove them. See [integration evidence](COMPATIBILITY.md) for the exact checks actually exercised.
+
+## Documentation-first delivery with native orchestration
+
+This composition is based on **omp 18.18.6**, official revision [`9058ab9d229663e229e2867824ba6df6f21e9e59`](https://github.com/can1357/oh-my-pi/tree/9058ab9d229663e229e2867824ba6df6f21e9e59). The earlier sections retain their separate 18.17.0 source basis; this section does not relabel their historical evidence or claim new runtime testing.
+
+Immutable primary sources:
+
+- [Magic-keyword documentation](https://github.com/can1357/oh-my-pi/blob/9058ab9d229663e229e2867824ba6df6f21e9e59/docs/magic-keywords.md): matching and turn scope.
+- [Keyword registry](https://github.com/can1357/oh-my-pi/blob/9058ab9d229663e229e2867824ba6df6f21e9e59/packages/coding-agent/src/modes/magic-keywords.ts): registered words and tool prerequisites.
+- [Native orchestration contract](https://github.com/can1357/oh-my-pi/blob/9058ab9d229663e229e2867824ba6df6f21e9e59/packages/coding-agent/src/prompts/system/orchestrate-notice.md): outcome ownership, continuation and main-only gates.
+
+For explicitly selected or project-required documentation-first app delivery, read [workflow-delivery](../../skills/workflow-delivery/SKILL.md); when autonomous delivery is selected, load its [shared delivery policy](../../skills/workflow-delivery/references/autonomous-delivery.md). A keyword alone does not select a documentation baseline. KitShift supplies product/document readiness and acceptance; the host supplies its available execution mechanisms.
+
+`orchestrate` is the recommended native shortcut for this large documented-app workflow when `task` is active and the keyword switches allow notice delivery. It already supplies decomposition, delegation, integration, verification and continued orchestration until completion or a genuine blocker. Follow that native contract rather than adding another autonomy runtime.
+
+- `workflowz` is not a synonym or required upgrade: it requires both `task` and `eval`. The planning inspection recorded `eval.js` and `eval.py` as `false`. Do not enable eval, change approval controls, select models, install OmO or add kernel infrastructure for this path.
+- `ultrathink` is optional reasoning control, not delivery autonomy. `ultrawork` is absent from the inspected omp registry; do not import OmO commands into omp prompts.
+- Submit exact lowercase standalone keywords as **user prose**, not inline code, fenced payloads, XML/HTML or skill-body text. Reading a skill does not activate a keyword.
+- A notice applies to its containing user turn. At a new execution or authorized-resume boundary, include the keyword in that user request when the native contract is wanted; do not infer activation from the old plan. No re-entry is needed between documents or slices inside the active execution turn.
+- Under an active native orchestration contract, main integrates and performs its required gates. Implementation workers skip builds, tests, linters and formatters. The native contract owns gate scheduling; this reference does not introduce a competing schedule.
+- Current read-only Plan Mode, permissions, required approvals, real blockers and explicit pauses still apply. Enabled settings or highlighting do not prove notice delivery or compliance.
+
+The fences below are documentation: type their contents as the user prompt, not as fenced code.
+
+**Initial baseline-first request**
+
+```text
+orchestrate use workflow-delivery for documentation-first delivery of this app. Generate the complete applicable baseline and implementation plan, batch consequential questions, and use the native approval boundary. Once authorized, carry implementation, tests, in-scope fixes, and document reconciliation through verified local ready-to-run delivery without stage-advance prompts. Do not deploy, publish, or commit.
+```
+
+**Execution or authorized resume in a new user turn**
+
+```text
+orchestrate execute or resume the approved workflow-delivery plan at <plan-path>. Reconcile current authority, existing work, and evidence; continue only the remaining authorized work through verified local readiness. Preserve valid completed work. Do not deploy, publish, or commit.
+```
+
+Replace `<plan-path>` with the actual readable plan locator; it is not literal executable syntax. Native plan approval is not repeated for settled exact decisions. These local-ready examples do not waive an existing deployment criterion or grant deployment authority.
