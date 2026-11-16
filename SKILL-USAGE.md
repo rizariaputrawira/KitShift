@@ -128,8 +128,16 @@ flowchart TD
 | [code-tdd](skills/code-tdd/SKILL.md) | M | “Use test-first development for simultaneous booking conflicts at the existing service seam.” | A meaningful failing test, minimal correction, and refactor cycle—not tests of incidental internal calls. |
 | [code-simplicity](skills/code-simplicity/SKILL.md) | M | “Review this booking diff for unnecessary abstractions; recommendations only.” | Consequence-backed simplifications without dropping acceptance or safety checks. One-shot review does not activate an ongoing mode. |
 | [code-debugging](skills/code-debugging/SKILL.md) | M | “The reported conflict bug is established; investigate its cause and fix the authorized path.” | Discriminating evidence, causal correction, and remediation proof—not another run merely to confirm the report. |
-| [workflow-delivery](skills/workflow-delivery/SKILL.md) | M | “Use documentation-first delivery for this approved booking boundary; reuse existing owners and prove each criterion.” | The explicitly selected baseline, reviewed plan, implementation, and reconciled evidence; not a universal requirement for other work. |
+| [workflow-delivery](skills/workflow-delivery/SKILL.md) | M | “Use documentation-first delivery for this approved booking boundary; reuse existing owners and prove each criterion.” | The explicitly selected baseline, reviewed plan, implementation, and reconciled evidence; explicitly selected autonomous delivery continues through readiness without routine stage handoffs. Not a universal requirement for other work. |
 | [workflow-wizard](skills/workflow-wizard/SKILL.md) | M | “Create a reviewed Bash wizard for the operator's manual provider-dashboard setup; do not run it.” | A task-specific script with consent, interruption, and secret-handling safeguards. Not automatic credential discovery or infrastructure execution. |
+
+For portable [autonomous documentation-first delivery](skills/workflow-delivery/references/autonomous-delivery.md), request:
+
+```text
+Use workflow-delivery for autonomous documentation-first delivery of this booking app. Generate the complete applicable documentation baseline and implementation plan, batch consequential choices with recommendations, and use current native approval where required. Once authorized, continue implementation, testing, in-scope fixes and document reconciliation through actual verified local ready-to-run delivery without stage-advance prompts. Do not commit, deploy or publish.
+```
+
+On omp, the [native shortcut](harnesses/omp/MAGIC-KEYWORDS.md#documentation-first-delivery-with-native-orchestration) composes this policy with the host's orchestration; no keyword is required by the portable policy. Existing deployment acceptance is not waived by this local-ready example.
 
 ## 3. Choose the UI/platform branch
 

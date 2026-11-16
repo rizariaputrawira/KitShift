@@ -73,6 +73,8 @@ These ordered paths explain existing contracts and recommended project practice,
 
 When coordinated work is explicitly selected, the [coordinated-work contract](skills/workflow-delivery/references/implementation-brief.md#coordinated-work) connects existing brief, handoff, review and evidence owners without imposing documentation-first delivery or a mandatory worker chain.
 
+When autonomous documentation-first delivery is explicitly selected, the [shared policy](skills/workflow-delivery/references/autonomous-delivery.md) keeps the whole authorized outcome with main, from applicable baseline generation through proof and reconciliation, without user-managed stage handoffs. On omp, compose it with the [native operator path](harnesses/omp/MAGIC-KEYWORDS.md#documentation-first-delivery-with-native-orchestration). This neither selects the baseline from coordination alone nor grants external-action authority.
+
 ## From request to accepted result
 
 ```mermaid

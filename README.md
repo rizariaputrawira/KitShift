@@ -150,6 +150,8 @@ See the [complete skill use-case guide](SKILL-USAGE.md) for all 57 skills, invoc
 
 For optional omp prompt controls, read [magic keywords](harnesses/omp/MAGIC-KEYWORDS.md). These are version-specific runtime shortcuts, not requirements or activation words embedded in shared skills.
 
+For explicitly selected autonomous documentation-first delivery, the [shared policy](skills/workflow-delivery/references/autonomous-delivery.md) carries applicable document generation through authorized implementation, proof and reconciliation without routine stage-advance prompts. On omp, use the [native orchestration shortcut](harnesses/omp/MAGIC-KEYWORDS.md#documentation-first-delivery-with-native-orchestration); KitShift supplies passive readiness/acceptance guidance, not another runtime. A native keyword or coordination alone does not opt into the documentation baseline.
+
 For agy helper commands and limits, read the [task](skills/workflow-todo/references/agy-usage.md), [search](skills/code-search/references/agy-usage.md), or [notebook](skills/code-python/references/agy-usage.md) companion. On omp, use the native tools through their current schemas. The helpers provide selected capabilities, not complete behavioral parity with omp.
 
 ### Skill collection

@@ -11,7 +11,7 @@ This directory owns omp configuration, deployment notes and verification records
 
 For a requested omp assessment, read the packaged [omp compatibility companion](../../skills/docs-engineering/references/omp-compatibility.md). It selects the shared [harness compatibility procedure](../../skills/docs-engineering/references/harness-compatibility.md) and owns native commands, official version-pinned sources, isolated loading checks and permission/evidence limits. It is installed with the skills and does not depend on this repository-only document.
 
-For optional prompt controls in omp 18.17.0, read [magic keywords](MAGIC-KEYWORDS.md). That operator reference records matching, tool prerequisites and portable alternatives; it does not add a shared skill or change runtime settings.
+For optional prompt controls and documentation-first native orchestration, read [magic keywords](MAGIC-KEYWORDS.md). It retains the omp 18.17.0 explanation and separately scopes its omp 18.18.6 composition to immutable official sources, not new runtime testing; it does not add a shared skill or change runtime settings.
 
 ## Intended role adapter
 
