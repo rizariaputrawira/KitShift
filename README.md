@@ -303,6 +303,8 @@ The updater tests require Git and util-linux `flock`. For a zero-skip run, also 
 
 The [KitShift CI workflow](.github/workflows/ci.yml) configures the same suite for pull requests to any branch and pushes to `main`, on Linux (Ubuntu 24.04) with Node 24 and real ripgrep supplied. Fixture-based installer tests and real/fallback search tests run; native agy validation intentionally remains unavailable and should visibly skip on the hosted runner. This does not prove live MCP, model or browser behavior. Creating the workflow does not mean it has run or become a required check; the [human acceptance gates and recommended GitHub setup](AGENT-WORKFLOW.md#human-acceptance-gates) explain the separate merge decision and unconfigured enforcement.
 
+For authorized source-loaded data-skill assessments, use the [synthetic edge fixtures and verification recipe](tests/fixtures/data-skills/README.md). These separately exercise output conflicts and matching relationships/review reuse; they are not part of the installer suite and do not establish native analyst dispatch or generalized matching accuracy.
+
 ### Licensing distribution verification
 
 On 2026-10-27, all **117/117 tests passed with zero skips**, including notice preservation, adoption by older managed installations, local-license-edit protection, and native agy validation. Separate disposable upgrades for both harnesses added managed root `LICENSE` and `NOTICE` files in mode `0644`, preserved all 60 existing upstream notice files byte-for-byte, resolved all seven local-source license links from the installed trees, and rejected user-edited scope notices without other writes. The existing MIT terms and copyright line were retained.
