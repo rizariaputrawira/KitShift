@@ -43,8 +43,11 @@ This is the intended adapter map, not observed dispatch or a model capability gu
 | Concrete-plan review | `kitshift-plan-reviewer` | `kitshift-plan-reviewer` |
 | Source code review | `kitshift-reviewer`; bundled reviewers remain untouched | `kitshift-reviewer` |
 | Authorized scenario execution | `kitshift-qa` only outside modes reserving checks to main; otherwise main | `kitshift-qa` |
+| Local tabular preparation and cross-dataset matching | `kitshift-data-analyst` | `kitshift-data-analyst` |
 | Independent evidence recommendation | `kitshift-acceptance-reviewer` | `kitshift-acceptance-reviewer` |
 | Implementation, including architecture implementation | Bundled `task`; `sonic` only for suitable mechanical work under native policy | `kitshift-executor` |
+
+The analyst writes only assigned derived artifacts and reproduction scripts, not source replacements or application repairs. Broader business analysis, SQL-only work and independent analysis review belong to enabled optional Skillstash `data-analysis`, `data-sql-analysis` and `data-analysis-review` respectively when available; their absence does not block independent preparation or matching.
 
 ### Assignment intents
 
