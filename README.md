@@ -173,6 +173,10 @@ KitShift includes **59 skills**, listed once below by capability. These groups d
 
 Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
 
+For local-file exploration and question-to-report work, `kitshift-data-analyst` combines an enabled external `data-analysis` owner with [code-python's execution/artifact handoff](skills/code-python/references/local-analysis.md). KitShift supplies the local execution contract, not a duplicate methods skill or an analysis application. Jupyter is optional: authorized plain-Python scripts can produce tables and offline reports when it is inaccessible; an explicitly required executed notebook remains a separately reported gap. Missing analysis guidance holds that branch while preparation and matching remain usable.
+
+Original synthetic inputs and the bounded [local-analysis assessment recipe](tests/fixtures/local-analysis/README.md) cover offline reports, notebook freshness/failure and a disabled analysis owner. Generated reports/scripts remain disposable; the fixtures are not an analysis runtime or native-dispatch proof.
+
 For license selection, creating license files, contributor rights and license changes, use `content-software-licensing`; it gives advice or performs explicitly authorized local changes. For dependency/source obligations, release compliance or suspected violations, use `content-license-review`, which stays read-only. Both use primary evidence and report unresolved permissions; neither provides legal clearance.
 
 ### Skill naming

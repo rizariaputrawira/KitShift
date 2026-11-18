@@ -13,6 +13,8 @@ Use the selected host's available tools and the current task's execution/write p
 2. Execute through an available authorized interface using that environment and working directory. Use a supported native execution tool or the selected interpreter through a command interface; do not install dependencies or substitute another environment implicitly. If execution is unavailable, report the missing capability and continue only independently authorized source work.
 3. Inspect the actual returned value/output, error and completion status. Report the code/input and environment used, observed result, and material limits; saved notebook source or old cell outputs are not proof of this execution.
 
+When executing assigned local-file exploration, question-to-answer analysis or analytical reports, read [local analysis execution and handoff](references/local-analysis.md). It binds the enabled analysis-method owner, prepared inputs, fresh execution and inspectable output artifacts without adding another analysis skill.
+
 ## Harness-specific usage
 
 - **Oh My Pi (`omp`):** Use the available native `python` and `notebook` tools through their current schemas. A bundled CLI command is not native tool syntax.

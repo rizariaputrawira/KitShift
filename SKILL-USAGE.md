@@ -40,6 +40,8 @@ Each entrypoint selects native tools for Oh My Pi (`omp`) or its conditional `re
 
 For broader business questions, query-only work or independent review of supplied analysis, use enabled `data-analysis`, `data-sql-analysis` or `data-analysis-review` respectively when actually available. These optional Skillstash capabilities are not installed prerequisites; report an unavailable capability rather than treating preparation or matching as its replacement.
 
+For “Explore these local files” or “Answer this question and save a reusable report,” `kitshift-data-analyst` can execute the enabled analysis owner's procedure using the [local execution/artifact handoff](skills/code-python/references/local-analysis.md). Request a script or notebook, checked result tables and appropriate charts/report; fresh execution and rendered inspection are separate evidence. This does not add an analysis skill or silently enable an unavailable owner.
+
 
 ## Example: a community-workshop booking product
 
