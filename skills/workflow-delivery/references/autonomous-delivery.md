@@ -7,7 +7,7 @@ Load when the user explicitly requests autonomous documentation-first delivery, 
 Record the selected policy in the existing operative plan/context, using its scope, constraints and verification sections:
 
 - Complete outcome, acceptance anchors, constraints and exclusions.
-- Completion environment: existing requirements control. When unspecified, propose verified local ready-to-run delivery; neither silently add deployment nor downgrade an existing deployment criterion.
+- Completion environment: existing requirements control. When unspecified, propose verified local ready-to-run delivery; neither silently add deployment nor downgrade an existing deployment criterion. For actual prerequisites of the selected action/proof, follow [environment preflight](documentation-baseline.md#environment-preflight).
 - Fixed product/interface/architecture/security/data decisions, agent discretion within them and user-retained decisions.
 - Allowed document/source changes, checks and applicable external-action authority. Autonomy grants no spending, publication, live-kit installation, destructive data changes or deployment permission.
 - Existing review/checker responsibilities under the active native rules.
