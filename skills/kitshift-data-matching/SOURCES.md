@@ -13,3 +13,11 @@ Ownership comparison only: [Skillstash](https://github.com/rizariaputrawira/skil
 ## Checks — 2026-11-18
 
 A source-loaded actor using Python 3.14.4 and RapidFuzz 3.14.6 processed disposable exact, normalization-collision and city-blocked fuzzy fixtures. Independent artifact inspection and fresh-root reproduction confirmed two accepted exact pairs, collision review, three review-only approximate candidates and a separate reviewer decision accepting one pair. This is synthetic behavior evidence, not production accuracy, native analyst dispatch or sandboxing.
+
+## Independent review-reuse refinement — 2026-11-18
+
+Added source-snapshot and rule-basis checks before replaying reviewer decisions, preserving stale history without treating it as current authority. The entrypoint conditionally loads this procedure before review reuse; shared reproduction maintenance remains with the preparation lineage owner. This is independently authored KitShift guidance, not copied or adapted upstream expression.
+
+Research comparison: [master-data-and-entity-resolution](https://github.com/vaquarkhan/data-engineering-agent-skills/blob/421ef57e8d42c464b29339193c18dd5bd2946bc2/skills/master-data-and-entity-resolution/SKILL.md), retrieved 2026-11-18, highlighted entity contracts and ambiguity handling already covered locally. Stale-decision invalidation is a local design decision, not attributed to that source. No master-data publication, survivorship, model-scoring workflow or upstream payload is incorporated.
+
+Refinement verification: a fresh source-loaded actor used Python 3.14.4 standard-library difflib scoring on six synthetic review-reuse cases. Controller inspection and fresh-root reproduction confirmed one unchanged-basis approval applied; source, rule and relationship changes and a missing basis each retained stale history without acceptance; a current one-to-one conflict preserved the caller's trusted pair and blocked reviewer reassignment. Candidate evidence, decision history and input hashes reproduced. Across the preparation and matching fixtures, the independent controller verifier passed 46 checks. No baseline actor comparison, production accuracy or native analyst dispatch was established.

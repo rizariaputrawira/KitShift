@@ -15,3 +15,16 @@ Arrow documentation retrieval timed out; no universal cross-engine compatibility
 ## Checks — 2026-11-18
 
 On Python 3.14.4, openpyxl 3.1.5 and PyArrow 26.0.1, a source-loaded actor processed disposable CSV/XLSX/Parquet fixtures and reproduced its results into a fresh root. Independent inspection confirmed source hashes, lexical IDs, unresolved values, spreadsheet text-cell type and Parquet schema/values. The first independent verifier reported a false failure because it assumed scalar issue fields instead of the actor's structured evidence; the values were separately inspected. The inspection-only actor made no observed execution or writes. These synthetic observations do not prove generalized model behavior, native analyst dispatch or sandboxing.
+
+## Independent quality refinements — 2026-11-18
+
+Extended `references/quality-and-lineage.md` with conditional integrity, domain, freshness and coverage checks; comparable before/after profiles; restricted field-level change evidence; and generator/output consistency. New wording and procedures were independently authored for KitShift. These pinned sources were consulted as research comparisons, not copied, paraphrased into adaptations, bundled or required at runtime:
+
+- [Nimrod Fisher quality audit](https://github.com/nimrodfisher/data-analytics-skills/blob/9449d363e1ae43cf1706c73bebc16774e339c427/01-data-quality-validation/data-quality-audit/SKILL.md): integrity and freshness check categories.
+- [JayRHa cleaning checklist](https://github.com/JayRHa/agent-skills/blob/f9a456bf34c297bd23fb234f410ec9b239ebed14/pandas-data-cleaning/references/cleaning-checklist.md): comparison of initial and final profiles. Its destructive defaults and universal assertions are not adopted.
+- [GenOffice cleaning workflow](https://github.com/genspark-ai/genoffice/blob/d8ee8c50611998bac210e89069c996a6047934b3/skills/recommended/data-cleaning/SKILL.md): inspectable change evidence. No workbook template or formula-cleaning procedure is incorporated.
+- [Cline artifact management](https://github.com/cline/skills/blob/26378461e978f2b4e2e6d67b57121b86b2a79ba5/skills/data-analyst/skills/artifact-management/SKILL.md): consistency between saved generators and outputs. No ClickHouse workflow, artifact layout or template is incorporated.
+
+Comparison retrieval date: 2026-11-18. Citations establish research provenance, not a grant over linked material or proof of behavior. Existing MIT terms apply to the original KitShift additions.
+
+Refinement verification: a fresh source-loaded actor used Python 3.14.4 standard-library CSV/Decimal/datetime processing with a supplied parent snapshot, calendar, lag criterion, category mapping and two explicit correction inputs. Controller-owned checks inspected an orphan, missing period, 24-hour lag against a 12-hour requirement, cross-field violation, absent domain criterion, before/after categories and exact changed-cell evidence. Both correction versions reproduced into fresh roots with unchanged input hashes. Matching was disabled for this preparation assignment and was not loaded. No baseline actor comparison was run; these observations do not measure generalized improvement, large-data behavior, native role dispatch or enforcement.
