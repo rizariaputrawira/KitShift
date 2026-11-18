@@ -17,6 +17,8 @@ When the user explicitly requests autonomous documentation-first delivery, inclu
 2. For `resume`, load [resumption](references/resumption.md) before dependent work. A read/load-only handoff request belongs to [workflow-handoff-read](../workflow-handoff-read/SKILL.md), not this execution branch.
 3. Separate already observed acceptance, partial implementation, remaining acceptance and missing evidence. Do not replay completed stages simply because this is a fresh session. Missing material context or authorization blocks its dependent mutation, not unrelated safe inspection.
 
+When an action or its planned proof in this selected delivery depends on environment capabilities, follow [environment preflight](references/documentation-baseline.md#environment-preflight) before relying on that prerequisite.
+
 ## Delivery procedure
 
 1. **Specify the outcome.** Load [specification](references/specification.md). Synthesize supplied facts and inspected sources; do not re-interview for known answers. Use [workflow-brainstorming](../workflow-brainstorming/SKILL.md) only for unresolved consequential behavior. Extend the existing canonical product/requirement/design owner. For adopted projects resolve exact destinations through [docs-engineering locations](../docs-engineering/references/locations.md) and the manifest; before adoption respect existing owners without implicit migration. Do not establish a competing spec owner. In a host read-only planning mode keep checkout files read-only and return proposed content through its allowed channel.
