@@ -42,3 +42,9 @@ Original synthetic inputs, setup, an independent artifact verifier and a source-
 - Disposable omp/agy installations contained 59 skills and eight/nine agents. Initial omp **18.22.2** passive entrypoint/companion reads succeeded; agy native validation exited 0 with 59 skills, nine agents and only the three existing oversized-skill warnings. Inert MCP path fixtures were not executed; no connectivity/authentication claim follows.
 
 Limits: no baseline actor comparison, generalized analytical accuracy, scale/performance measurement, native analyst selection/dispatch, production privacy or filesystem/network isolation was established. The final browser result includes controller artifact corrections rather than an unassisted actor pass. No live installation, user-setting change, commit or push was performed.
+
+## Optional local Jupyter environment hint — 2026-11-19
+
+At the user's request, recorded `~/apps/jupyter/.venv/bin/python` in the shared execution entrypoint as an optional workstation discovery hint, subordinate to the user- or project-selected environment and subject to availability/package checks. If the hint does not match, the user may optionally supply another Jupyter interpreter path for validation; no replacement path or reply is required. An absent or unsuitable candidate does not require installation or block independently authorized script work. This is independently authored local guidance; existing license notices and third-party source mappings are unchanged.
+
+Verification: `/home/personal/apps/jupyter/.venv/bin/python` was executable and reported Python 3.12.15, nbclient 0.11.0, nbconvert 7.17.2, nbformat 5.11.1 and ipykernel 7.4.0. This metadata check did not execute a notebook or assess agent compliance. No live installation or environment changes.
