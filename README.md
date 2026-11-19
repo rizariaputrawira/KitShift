@@ -29,10 +29,10 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 ## Capabilities
 
-- **Reusable procedures:** 57 skills covering engineering, UI, security, Git, documentation, writing, software licensing and compliance review, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
+- **Reusable procedures:** 59 skills covering engineering, data preparation and matching, UI, security, Git, documentation, writing, software licensing and compliance review, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
-- **Dedicated subagents:** seven omp and eight agy definitions, with retained existing identities and distinct research, planning, QA and acceptance responsibilities. See the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Packaged definitions do not prove runtime dispatch, effective tools, model selection or behavior.
+- **Dedicated subagents:** eight omp and nine agy definitions, including a local data analyst and distinct research, planning, QA and acceptance responsibilities. See the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Packaged definitions do not prove runtime dispatch, effective tools, model selection or behavior.
 - **Portable MCP definitions:** Playwright and local design tooling for both harnesses, GitHub for omp, and LSP, Codegraph, and Filesystem for agy. Machine-specific local paths are rendered during every installation and managed update.
 - **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
@@ -104,8 +104,8 @@ Once installed:
 - Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
 - The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
 - Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
-- All 57 skills are available on demand.
-- Eight native subagent definitions are packaged; see the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Static validation does not prove dispatch, effective tools, model selection or behavior.
+- All 59 skills are available on demand.
+- Nine native subagent definitions are packaged; see the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Static validation does not prove dispatch, effective tools, model selection or behavior.
 - Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
 
 ## How it works
@@ -117,8 +117,8 @@ The repository is the source of truth. The installers copy content into the targ
 | Harness settings | [harnesses/omp/config.yml](harnesses/omp/config.yml) / [harnesses/agy/settings.json](harnesses/agy/settings.json) | `config.yml` (model selectors, YOLO mode) | Reference template (never overwrites host settings) |
 | Personal guidance | [guidance/APPEND_SYSTEM.md](guidance/APPEND_SYSTEM.md) | `APPEND_SYSTEM.md` appended to prompt | `rules/AGENTS.md` always-on plugin rule |
 | Original-material license | [LICENSE](LICENSE) and [scope notice](NOTICE) | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills |
-| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (57 canonical skills) |
-| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (seven definitions) | `agents/` (eight definitions); [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity) |
+| Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (59 canonical skills) |
+| Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (eight definitions) | `agents/` (nine definitions); [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity) |
 | MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
@@ -146,7 +146,7 @@ The shared skill procedures are harness- and agent-neutral: cross-skill referenc
 - “Use ui-mobile-web to investigate this mobile scrolling issue.”
 - “Use workflow-handoff to capture the current state before I pause.”
 
-See the [complete skill use-case guide](SKILL-USAGE.md) for all 57 skills, invocation labels, example prompts, expected results, and workflow diagrams.
+See the [complete skill use-case guide](SKILL-USAGE.md) for all 59 skills, invocation labels, example prompts, expected results, and workflow diagrams.
 
 For optional omp prompt controls, read [magic keywords](harnesses/omp/MAGIC-KEYWORDS.md). These are version-specific runtime shortcuts, not requirements or activation words embedded in shared skills.
 
@@ -156,11 +156,12 @@ For agy helper commands and limits, read the [task](skills/workflow-todo/referen
 
 ### Skill collection
 
-KitShift includes **57 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
+KitShift includes **59 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
 
 | Capability | Skills |
 |---|---|
 | Engineering and agent guidance | [agent-guidance](skills/agent-guidance/SKILL.md), [code-architecture](skills/code-architecture/SKILL.md), [code-debugging](skills/code-debugging/SKILL.md), [code-implementation](skills/code-implementation/SKILL.md), [code-prototyping](skills/code-prototyping/SKILL.md), [code-python](skills/code-python/SKILL.md), [code-review](skills/code-review/SKILL.md), [code-search](skills/code-search/SKILL.md), [code-simplicity](skills/code-simplicity/SKILL.md), [code-swift-development](skills/code-swift-development/SKILL.md), [code-tdd](skills/code-tdd/SKILL.md) |
+| Tabular data | [kitshift-data-preparation](skills/kitshift-data-preparation/SKILL.md) prepares traceable derived datasets; [kitshift-data-matching](skills/kitshift-data-matching/SKILL.md) resolves cross-dataset correspondences and reconciles joins. |
 | Documentation and domain modeling | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md), [docs-engineering](skills/docs-engineering/SKILL.md), [docs-plan-review](skills/docs-plan-review/SKILL.md), [docs-specification](skills/docs-specification/SKILL.md) |
 | Git and pull requests | [git-change-status](skills/git-change-status/SKILL.md), [git-commit-message](skills/git-commit-message/SKILL.md), [git-pr-work](skills/git-pr-work/SKILL.md), [git-triage](skills/git-triage/SKILL.md) |
 | Security | [security-audit](skills/security-audit/SKILL.md), [security-intake](skills/security-intake/SKILL.md), [security-review](skills/security-review/SKILL.md) |
@@ -172,11 +173,15 @@ KitShift includes **57 skills**, listed once below by capability. These groups d
 
 Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
 
+For local-file exploration and question-to-report work, `kitshift-data-analyst` combines an enabled external `data-analysis` owner with [code-python's execution/artifact handoff](skills/code-python/references/local-analysis.md). KitShift supplies the local execution contract, not a duplicate methods skill or an analysis application. Jupyter is optional: authorized plain-Python scripts can produce tables and offline reports when it is inaccessible; an explicitly required executed notebook remains a separately reported gap. Missing analysis guidance holds that branch while preparation and matching remain usable.
+
+Original synthetic inputs and the bounded [local-analysis assessment recipe](tests/fixtures/local-analysis/README.md) cover offline reports, notebook freshness/failure and a disabled analysis owner. Generated reports/scripts remain disposable; the fixtures are not an analysis runtime or native-dispatch proof.
+
 For license selection, creating license files, contributor rights and license changes, use `content-software-licensing`; it gives advice or performs explicitly authorized local changes. For dependency/source obligations, release compliance or suspected violations, use `content-license-review`, which stays read-only. Both use primary evidence and report unresolved permissions; neither provides legal clearance.
 
 ### Skill naming
 
-Canonical skill directory names match the frontmatter `name` in their `SKILL.md` and start with a functional domain: `agent-`, `code-`, `content-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`.
+Canonical skill directory names match the frontmatter `name` in their `SKILL.md` and normally start with a functional domain: `agent-`, `code-`, `content-`, `data-`, `docs-`, `git-`, `security-`, `ui-`, `workflow-`, or `writing-`. The KitShift data skills use the `kitshift-data-` prefix.
 
 Harness-specific companions use `references/<harness>-<topic>.md`, with lowercase harness IDs `omp` and `agy` and kebab-case topics: `omp-compatibility.md`, `agy-compatibility.md`, and `agy-usage.md`. Use **Oh My Pi (`omp`)** and **Antigravity CLI (`agy`)** consistently in host-selection labels. Shared procedures stay in the entrypoint or shared reference; load a companion only for its named host and operation. Do not create empty counterpart files merely for symmetry or rename retained upstream source paths.
 
@@ -301,6 +306,8 @@ node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-he
 The updater tests require Git and util-linux `flock`. For a zero-skip run, also make `rg`, util-linux `script`, and Zsh available on `PATH`, and set `AGY_BIN` to a working installed agy executable if it is not at the test's fallback path. Zsh is not a runtime requirement: only its shell-specific tests skip when absent. PTY tests skip if `script` is absent; real-ripgrep checks skip without `rg`. Native agy validation skips if its `--version` probe cannot succeed, including when the configured binary is nonfunctional. A passing run with skips does not exercise those capabilities.
 
 The [KitShift CI workflow](.github/workflows/ci.yml) configures the same suite for pull requests to any branch and pushes to `main`, on Linux (Ubuntu 24.04) with Node 24 and real ripgrep supplied. Fixture-based installer tests and real/fallback search tests run; native agy validation intentionally remains unavailable and should visibly skip on the hosted runner. This does not prove live MCP, model or browser behavior. Creating the workflow does not mean it has run or become a required check; the [human acceptance gates and recommended GitHub setup](AGENT-WORKFLOW.md#human-acceptance-gates) explain the separate merge decision and unconfigured enforcement.
+
+For authorized source-loaded data-skill assessments, use the [synthetic edge fixtures and verification recipe](tests/fixtures/data-skills/README.md). These separately exercise output conflicts and matching relationships/review reuse; they are not part of the installer suite and do not establish native analyst dispatch or generalized matching accuracy.
 
 ### Licensing distribution verification
 

@@ -1,0 +1,9 @@
+# Approximate entity resolution
+
+Bound candidate generation separately from scoring. Estimate the potential pair volume and choose explicit blocking rules justified by the assignment. Report excluded regions, search caps/truncation and missed-match risk; an absent candidate after blocking is not a definitive nonmatch. Compare attributes with recorded preprocessing, missingness, disagreements and reliable conflicts. Retain alternatives and ties for each record and enforce the declared relationship across stages. Never infer identity from candidate ranking alone.
+
+For example, `Jon Smyth, York` against `John Smith, York` is a plausible typo candidate, not an accepted match. `Alex Kim, Leeds` against two separate `Alex Kim, Leeds` records is an exact-name tie, not a reason to pick the first. Even a close name with a contradictory reliable identifier requires review rather than a top-score override. Locators are not shared identifiers.
+
+If already available and appropriate, RapidFuzz can supply a named similarity such as `fuzz.ratio` with explicit preprocessing and its 0–100 scale. Preprocessing is disabled by default; token-set similarity can return 100 for a subset with meaningful extra text. Its ordering for ties is not identity evidence. Scores are not calibrated probabilities. Do not require RapidFuzz or install it implicitly. Probabilistic methods are optional only when task-appropriate evidence supports them, not an automatic escalation.
+
+Automatic approximate acceptance requires explicit assignment authority, a defined rule and reviewed representative labeled pairs supporting the relevant error tradeoff. Candidate coverage/blocking recall is different from pair precision and recall; synthetic or unlabeled pairs do not establish production accuracy. Otherwise retain candidates as review-required and record independently supplied review decisions for reproducible authorized reruns.

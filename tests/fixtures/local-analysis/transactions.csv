@@ -1,0 +1,7 @@
+record,date,segment,amount,person,email
+P1,2026-09-05,low,10.00,Private Person One,private-person-01@example.invalid
+P2,2026-09-10,low,10.00,Private Person Two,private-person-02@example.invalid
+P3,2026-09-20,high,80.00,Private Person Three,private-person-03@example.invalid
+P4,2026-09-25,high,80.00,Private Person Four,private-person-04@example.invalid
+C1,2026-10-05,low,12.00,Private Person Five,private-person-05@example.invalid
+C2,2026-10-10,low,12.00,Private Person Six,private-person-06@example.invalid

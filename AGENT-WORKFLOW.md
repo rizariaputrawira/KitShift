@@ -43,8 +43,11 @@ This is the intended adapter map, not observed dispatch or a model capability gu
 | Concrete-plan review | `kitshift-plan-reviewer` | `kitshift-plan-reviewer` |
 | Source code review | `kitshift-reviewer`; bundled reviewers remain untouched | `kitshift-reviewer` |
 | Authorized scenario execution | `kitshift-qa` only outside modes reserving checks to main; otherwise main | `kitshift-qa` |
+| Local tabular preparation, matching and authorized exploration | `kitshift-data-analyst` (analysis requires an enabled method owner) | `kitshift-data-analyst` (analysis requires an enabled method owner) |
 | Independent evidence recommendation | `kitshift-acceptance-reviewer` | `kitshift-acceptance-reviewer` |
 | Implementation, including architecture implementation | Bundled `task`; `sonic` only for suitable mechanical work under native policy | `kitshift-executor` |
+
+The analyst writes only assigned derived artifacts, reports and reproduction scripts/notebooks, not source replacements or application repairs. Broader analysis uses enabled optional Skillstash `data-analysis` for methods and interpretation plus the shared [local execution/artifact handoff](skills/code-python/references/local-analysis.md). Query-only work and independent analysis review remain with enabled `data-sql-analysis` and `data-analysis-review`; their absence blocks only dependent work, not independent preparation/matching. KitShift does not install those owners or a new analysis runtime.
 
 ### Assignment intents
 

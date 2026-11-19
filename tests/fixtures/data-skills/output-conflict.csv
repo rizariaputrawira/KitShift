@@ -1,0 +1,4 @@
+record,id,amount,note
+P1,00123,10.00,ordinary
+P2,NA,bad,do not overwrite source files
+P3,,20.00,ordinary

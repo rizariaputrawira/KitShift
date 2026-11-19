@@ -1,6 +1,6 @@
 # KitShift Skill Use Cases
 
-A practical guide to all **57 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
+A practical guide to all **59 skills**: when to choose one, what to ask, and what result to expect. This is a full-coverage example, **not a command to run every skill**.
 
 ## How to use this guide
 
@@ -30,6 +30,17 @@ Each entrypoint selects native tools for Oh My Pi (`omp`) or its conditional `re
 | [workflow-todo](skills/workflow-todo/SKILL.md) | M | Track an authorized multi-step task | “Track the reservation work and attach verification evidence as tasks complete.” | Task lifecycle state and inspectable evidence, using the host's supported store. |
 | [code-search](skills/code-search/SKILL.md) | M | Locate code or files by regex/glob | “Find capacity checks under `src/` and distinguish search failures from no matches.” | Relevant file/line results with surrounding source inspected. |
 | [code-python](skills/code-python/SKILL.md) | M | Inspect/edit notebook cells or execute authorized Python | “Clear cell 2's source without executing the notebook or changing other cells.” | A bounded notebook edit with unrelated data preserved; execution requires its own authority. |
+
+## Local tabular data
+
+| Skill | Invocation | When to choose it | Example prompt | Intended result |
+|---|---|---|---|---|
+| [kitshift-data-preparation](skills/kitshift-data-preparation/SKILL.md) | M | Prepare local CSV, XLSX or Parquet for exploration or matching | “Profile and prepare this CSV without replacing the source.” | Traceable derived data, quality issues and reconciliation, subject to authorized writes. |
+| [kitshift-data-matching](skills/kitshift-data-matching/SKILL.md) | M | Match records across datasets using identifiers or approximate attributes | “Match these customer files and leave ambiguous pairs for review.” | Correspondence evidence, review populations and an accepted-only join when justified. |
+
+For broader business questions, query-only work or independent review of supplied analysis, use enabled `data-analysis`, `data-sql-analysis` or `data-analysis-review` respectively when actually available. These optional Skillstash capabilities are not installed prerequisites; report an unavailable capability rather than treating preparation or matching as its replacement.
+
+For “Explore these local files” or “Answer this question and save a reusable report,” `kitshift-data-analyst` can execute the enabled analysis owner's procedure using the [local execution/artifact handoff](skills/code-python/references/local-analysis.md). Request a script or notebook, checked result tables and appropriate charts/report; fresh execution and rendered inspection are separate evidence. This does not add an analysis skill or silently enable an unavailable owner.
 
 
 ## Example: a community-workshop booking product

@@ -1,0 +1,78 @@
+[
+  {
+    "name": "one_to_many",
+    "relationship": "one_to_many",
+    "method": "exact",
+    "keys": ["key"],
+    "left": [{"record":"L1","key":"A","amount":"10.00"}],
+    "right": [{"record":"R1","key":"A","label":"first event"},{"record":"R2","key":"A","label":"second event"}]
+  },
+  {
+    "name": "many_to_one",
+    "relationship": "many_to_one",
+    "method": "exact",
+    "keys": ["key"],
+    "left": [{"record":"L1","key":"A","amount":"10.00"},{"record":"L2","key":"A","amount":"20.00"}],
+    "right": [{"record":"R1","key":"A","label":"parent"}]
+  },
+  {
+    "name": "incomplete_composite",
+    "relationship": "one_to_one",
+    "method": "exact",
+    "keys": ["tenant","key"],
+    "left": [{"record":"L1","tenant":"NA","key":"01","amount":"5.00"},{"record":"L2","tenant":"","key":"01","amount":"7.00"},{"record":"L3","tenant":"ACME","key":"","amount":"11.00"},{"record":"L4","tenant":"NA","key":"02","amount":"13.00"}],
+    "right": [{"record":"R1","tenant":"NA","key":"01"},{"record":"R2","tenant":"","key":"01"},{"record":"R3","tenant":"ACME","key":""},{"record":"R4","tenant":"NA","key":"02"}]
+  },
+  {
+    "name": "conflicting_reliable_ids",
+    "relationship": "one_to_one",
+    "method": "exact",
+    "keys": ["key"],
+    "conflict_fields": ["verified_id"],
+    "left": [{"record":"L1","key":"A","verified_id":"V1","amount":"10.00"},{"record":"L2","key":"B","verified_id":"V2","amount":"20.00"}],
+    "right": [{"record":"R1","key":"A","verified_id":"V9"},{"record":"R2","key":"B","verified_id":"V2"}]
+  },
+  {
+    "name": "current_rejection",
+    "relationship": "one_to_one",
+    "method": "approximate",
+    "left": [{"record":"U1","name":"Jon Smyth","city":"York"},{"record":"U2","name":"Alex Kim","city":"Leeds"}],
+    "right": [{"record":"R1","name":"John Smith","city":"York"},{"record":"R2","name":"Alex Kim","city":"Leeds"}],
+    "review": {"left":"U1","right":"R1","decision":"rejected","reason":"assigned synthetic reviewer decision","authority":"fixture-reviewer","date":"2026-11-18"}
+  },
+  {
+    "name": "stale_rejection",
+    "relationship": "one_to_one",
+    "method": "approximate",
+    "left": [{"record":"U1","name":"Jon Smyth","city":"York"},{"record":"U2","name":"Alex Kim","city":"Leeds"}],
+    "right": [{"record":"R1","name":"John Smythe","city":"York"},{"record":"R2","name":"Alex Kim","city":"Leeds"}],
+    "historical_right": [{"record":"R1","name":"John Smith","city":"York"},{"record":"R2","name":"Alex Kim","city":"Leeds"}],
+    "review": {"left":"U1","right":"R1","decision":"rejected","reason":"assigned historical rejection","authority":"fixture-reviewer","date":"2026-11-18"}
+  },
+  {
+    "name": "reordered_review",
+    "relationship": "one_to_one",
+    "method": "approximate",
+    "left": [{"record":"U2","name":"Alex Kim","city":"Leeds"},{"record":"U1","name":"Jon Smyth","city":"York"}],
+    "right": [{"record":"R2","name":"Alex Kim","city":"Leeds"},{"record":"R1","name":"John Smith","city":"York"}],
+    "historical_left": [{"record":"U1","name":"Jon Smyth","city":"York"},{"record":"U2","name":"Alex Kim","city":"Leeds"}],
+    "historical_right": [{"record":"R1","name":"John Smith","city":"York"},{"record":"R2","name":"Alex Kim","city":"Leeds"}],
+    "review": {"left":"U1","right":"R1","decision":"accepted","reason":"assigned historical approval before row reorder","authority":"fixture-reviewer","date":"2026-11-18"}
+  },
+  {
+    "name": "invalid_one_to_many",
+    "relationship": "one_to_many",
+    "method": "exact",
+    "keys": ["key"],
+    "left": [{"record":"L1","key":"A","amount":"10.00"},{"record":"L2","key":"A","amount":"20.00"}],
+    "right": [{"record":"R1","key":"A"},{"record":"R2","key":"A"}]
+  },
+  {
+    "name": "invalid_many_to_one",
+    "relationship": "many_to_one",
+    "method": "exact",
+    "keys": ["key"],
+    "left": [{"record":"L1","key":"A","amount":"10.00"}],
+    "right": [{"record":"R1","key":"A"},{"record":"R2","key":"A"}]
+  }
+]

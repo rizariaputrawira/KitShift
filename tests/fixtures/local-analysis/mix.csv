@@ -1,0 +1,5 @@
+period,segment,successes,trials
+prior,A,80,100
+prior,B <script>window.__fixture=1</script>,20,100
+current,A,9,10
+current,B <script>window.__fixture=1</script>,27,90
