@@ -97,4 +97,3 @@ Name the authorized checker, concrete input/check, expected observable result an
 List every material criterion, actual consumer connection and observable result. “File exists,” a compiling scaffold or a reduced mock is not completion. State blockers precisely: missing fact/decision, attempted source inspection and affected dependent work. Infer ordinary details supported by the code; research discoverable facts before asking. Stop dependent mutation for material ambiguity, scope conflict or permission failure, and finish independent reachable work.
 
 The assigned slice's affected canonical documents and evidence must be reconciled to supported levels. Distinguish slice completion from full app completion, which also needs every required criterion and every affected selected owner.
-
