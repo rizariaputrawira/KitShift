@@ -61,31 +61,24 @@ For a small, clear bug, skip the large-project planning and design branches. For
 
 **Situation:** “Members need reservations, but we disagree about holds, cancellations, and staff overrides.” Choose the branch that resolves the actual uncertainty; setup and documentation adoption are not prerequisites for every task.
 
+Use brainstorming for unresolved intent, direct specification synthesis for settled context, wayfinding only when consequential decisions still obstruct the route, and ticket breakdown only when requested for settled scope. Setup applies only when needed and requested; none is a universal predecessor.
+
 ```mermaid
 flowchart TD
-    P0["A booking outcome or decision is unclear"] --> P1["workflow-brainstorming"]
-    P0 -. "Which procedure fits?" .-> P2["workflow-skill-selection"]
-    P2 --> P0
-    P0 -. "I need to learn the concept" .-> P3["workflow-teaching"]
-    P1 -. "The explanation did not land" .-> P4["writing-explanation"]
-    P4 --> P1
-    P1 -. "Terms or relationships conflict" .-> P5["docs-domain-modeling"]
-    P1 -. "An external fact is missing" .-> P6["workflow-research"]
-    P1 -. "Another person knows the answer" .-> P7["workflow-questionnaire"]
-    P1 --> P8["docs-specification"]
-    P5 --> P8
-    P6 --> P8
-    P7 --> P8
+    P0["What does the booking work need?"]
+    P0 -->|"Consequential intent is unresolved"| P1["workflow-brainstorming"]
+    P0 -->|"Settled context; spec requested"| P8["docs-specification"]
+    P0 -->|"Large uncertain effort; decision map requested"| P10["workflow-wayfinder"]
+    P0 -->|"Approved scope; ticket breakdown requested"| P11["workflow-ticket-planning"]
+    P0 -. "Ask which skill fits" .-> P2["workflow-skill-selection"]
+    P0 -. "Ask to learn a concept" .-> P3["workflow-teaching"]
+    P0 -. "Ask to re-explain a prior point" .-> P4["writing-explanation"]
+    P0 -. "Terms or relationships conflict" .-> P5["docs-domain-modeling"]
+    P0 -. "An external fact is missing" .-> P6["workflow-research"]
+    P0 -. "Ask for questions to send to someone else" .-> P7["workflow-questionnaire"]
     P0 -. "Need authoritative documentation context" .-> P9["docs-engineering"]
-    P9 --> P8
-    P8 -. "Large effort still has unresolved decisions" .-> P10["workflow-wayfinder"]
-    P10 --> P8
-    P8 --> P11["workflow-ticket-planning"]
-    P0 -. "Tracker or document conventions need setup" .-> P12["workflow-project-setup"]
-    P12 --> P11
-    P11 -. "Consequential multi-slice plan" .-> P13["docs-plan-review"]
-    P11 --> P14["Requested scope and material choices resolved"]
-    P13 --> P14
+    P0 -. "Convention setup needed and requested" .-> P12["workflow-project-setup"]
+    P0 -. "Consequential multi-slice plan to review" .-> P13["docs-plan-review"]
 ```
 
 | Skill | Mode | Example prompt | Useful result and boundary |
@@ -110,25 +103,26 @@ flowchart TD
 
 **Situation:** the approved slice is “show availability and reject conflicting reservations.” Ordinary implementation stays lightweight. Documentation-first delivery is a separate opt-in or established project requirement, not a reward for having a large spec.
 
+A plain authorized change proceeds directly with native work and observed checks. Use `code-implementation` only when explicitly selected. Documentation-first delivery applies only when selected or project-required and has its own implementation stage.
+
 ```mermaid
 flowchart TD
-    B0["Authorized booking change"] --> B1["code-implementation"]
-    B0 -. "Documentation-first explicitly selected or required" .-> B2["workflow-delivery"]
-    B2 --> B1
-    B0 -. "A module or interface needs design" .-> B3["code-architecture"]
-    B3 -. "A concrete state-model question remains" .-> B4["code-prototyping"]
-    B3 --> B1
-    B4 --> B1
-    B0 -. "Test-first requested or required" .-> B5["code-tdd"]
-    B5 --> B1
-    B1 -. "A difficult failure needs diagnosis" .-> B6["code-debugging"]
-    B6 --> B1
-    B1 -. "Unnecessary complexity is present" .-> B7["code-simplicity"]
-    B7 --> B8["Changed path and observed verification evidence"]
+    B0["Authorized booking change"]
+    B0 -->|"Documentation-first selected or project-required"| B2["workflow-delivery"]
+    B2 -->|"Whole-boundary readiness and current authority"| B13["Implement within workflow-delivery"]
+    B13 --> B14["Observed proof and as-built reconciliation"]
+    B0 -->|"Otherwise"| B11{"Was code-implementation expressly selected?"}
+    B11 -->|"No"| B12["Direct native implementation"]
+    B11 -->|"Yes"| B1["code-implementation"]
+    B12 --> B8["Exercise the changed path; report observed evidence and limits"]
     B1 --> B8
-    B0 -. "A prerequisite is genuinely human-only" .-> B9["workflow-wizard"]
-    B9 --> B10["Human reviews and performs the manual stages"]
-    B10 --> B1
+    B0 -. "Module or interface design needed" .-> B3["code-architecture"]
+    B3 -. "Authorized experiment for a concrete state-model question" .-> B4["code-prototyping"]
+    B0 -. "Test-first requested or required" .-> B5["code-tdd"]
+    B0 -. "Difficult failure needs diagnosis" .-> B6["code-debugging"]
+    B0 -. "Unnecessary complexity needs attention" .-> B7["code-simplicity"]
+    B0 -. "Wizard requested for a human-only prerequisite" .-> B9["workflow-wizard"]
+    B9 --> B10["Human reviews and performs authorized manual stages"]
 ```
 
 | Skill | Mode | Example prompt | Useful result and boundary |
