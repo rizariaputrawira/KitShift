@@ -63,8 +63,16 @@ test('notification adapters consume real cached checker data and reject stale la
   const response = JSON.parse(check.stdout);
   assert.equal(response.check.outcome, 'ok');
   const envMarker = { KITSHIFT_LAUNCH_PROFILE: 'alpha', KITSHIFT_LAUNCH_INTERACTIVE: '1', KITSHIFT_LAUNCH_NOTICE: check.stdout };
-  let result = run(['_agy-notice', '--target', agy], envMarker);
-  assert.match(JSON.parse(result.stdout).injectSteps[0].ephemeralMessage, /^Cached: KitShift update available for alpha\./);
+  const result = run(['_agy-notice', '--target', agy], envMarker);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    injectSteps: [{
+      systemMessage: {
+        systemMessage: '',
+        metadata: { user_markdown: 'Cached: KitShift update available for alpha. Run kitshift update alpha to review and apply.' },
+      },
+    }],
+  });
   assert.deepEqual(JSON.parse(run(['_agy-notice', '--target', omp], envMarker).stdout), {});
   assert.deepEqual(JSON.parse(run(['_agy-notice', '--target', agy]).stdout), {});
   await writeFile(path.join(agy, '.kitshift-manifest.json'), manifest(b));

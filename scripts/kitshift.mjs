@@ -184,18 +184,22 @@ fi`);
 }
 
 function agyInteractive(args) {
-  const noCheck = new Set(['-p', '--print', '--prompt', '--input-format', '--output-format', '--json-schema', '--help', '-h', '--version', '-v', '--print-timeout', '--disable-slash-commands']);
-  const valueOptions = new Set(['--add-dir', '--agent', '--conversation', '--effort', '-i', '--prompt-interactive', '--log-file', '--mode', '--model', '--new-project', '--project']);
-  const booleanOptions = new Set(['-c', '--continue', '--dangerously-skip-permissions', '--remote-control', '--sandbox']);
+  const noCheck = new Set(['p', 'print', 'prompt', 'input-format', 'output-format', 'json-schema', 'help', 'h', 'version', 'v', 'print-timeout', 'disable-slash-commands']);
+  const valueOptions = new Set(['add-dir', 'agent', 'conversation', 'effort', 'i', 'prompt-interactive', 'log-file', 'mode', 'model', 'project', 'settings']);
+  const booleanOptions = new Set(['c', 'continue', 'dangerously-skip-permissions', 'new-project', 'remote-agent', 'remote-control', 'sandbox']);
+  const booleanValues = new Set(['1', 't', 'T', 'true', 'TRUE', 'True', '0', 'f', 'F', 'false', 'FALSE', 'False']);
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    const flag = arg.split('=', 1)[0];
+    if (!arg.startsWith('-')) return false;
+    // agy uses Go flag syntax: one or two dashes, and optional =value for booleans.
+    const equals = arg.indexOf('=');
+    const flag = arg.slice(arg.startsWith('--') ? 2 : 1, equals === -1 ? arg.length : equals);
     if (noCheck.has(flag)) return false;
     if (valueOptions.has(flag)) {
-      if (!arg.includes('=') && ++i >= args.length) return false;
+      if (equals === -1 && ++i >= args.length) return false;
       continue;
     }
-    if (!booleanOptions.has(flag) || arg.includes('=')) return false;
+    if (!booleanOptions.has(flag) || (equals !== -1 && !booleanValues.has(arg.slice(equals + 1)))) return false;
   }
   return true;
 }
@@ -296,7 +300,8 @@ function agyNotice(args) {
     const ancestor = spawnSync('git', ['merge-base', '--is-ancestor', installed, record.candidateRevision], { cwd: repository, stdio: 'ignore' });
     if (ancestor.status !== 0) return {};
     const kind = record.origin === 'checkout' ? 'KitShift checkout changes are ready' : 'KitShift update available';
-    return { injectSteps: [{ ephemeralMessage: `Cached: ${kind} for ${name}. Run kitshift update ${name} to review and apply.` }] };
+    const notice = `Cached: ${kind} for ${name}. Run kitshift update ${name} to review and apply.`;
+    return { injectSteps: [{ systemMessage: { systemMessage: '', metadata: { user_markdown: notice } } }] };
   } catch { return {}; }
 }
 

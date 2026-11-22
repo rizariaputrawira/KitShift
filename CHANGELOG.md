@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Updated the `agy` integration for Antigravity CLI 1.5.12: the launcher recognizes `--settings`, `--remote-agent`, and boolean `--new-project` with native flag spellings. The `SessionStart` hook replaces deprecated `ephemeralMessage` with a `systemMessage` step carrying the cached notice in user-only metadata, not model text.
+  - Verification: all 14 launcher and notification tests passed with no skips. Isolated PTY cases verified launch classification and argv passthrough; the hook command test verified the payload against real cached update data. The separate [static bundle validation record](harnesses/agy/COMPATIBILITY.md#harness-architectural-boundaries) covers the 59 skills and nine agents. Native rendering of the notice, live MCP connections, and model inference were not exercised.
+
 - Recorded the existing `~/apps/jupyter/.venv/bin/python` interpreter in `code-python` as an optional local hint, not a portable prerequisite or override of user/project environment selection. Users may supply a different Jupyter interpreter path when the hint does not match; no replacement path or reply is required. Verified executable/package metadata; missing Jupyter still permits authorized script work. No live installation or environment changes.
 
 - Added a shared local-analysis execution/artifact handoff under `code-python`, conditionally consumed by both analyst roles. Jupyter is optional: authorized scripts can produce aggregate tables and offline reports without it; explicitly required fresh notebook execution remains a separately reported gap. Enabled external analysis guidance retains methods/interpretation ownership; preparation, matching, query-only work and independent review keep their existing boundaries. No new skill, bundled analysis engine or optional-owner installation is introduced.
