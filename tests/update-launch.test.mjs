@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
@@ -286,4 +286,59 @@ test('checks-only profile edits do not revalidate missing dependencies; changed 
   assert.notEqual(addedMissing.status, 0);
   assert.match(addedMissing.stderr, /playwright-cli|exist|regular file/i);
   assert.equal(await readFile(filename, 'utf8'), before);
+});
+
+test('kitshift run distinguishes interactive agy 1.5.12 flags from print mode and invalid options', async t => {
+  const availability = spawnSync('script', ['--version'], { encoding: 'utf8' });
+  if (availability.error?.code === 'ENOENT') { t.skip('util-linux script is unavailable'); return; }
+  assert.equal(availability.status, 0, availability.stderr);
+  const f = await fixture(t);
+  const log = path.join(f.root, 'agy.jsonl');
+  const executable = path.join(f.root, 'agy');
+  const recorder = [process.execPath, f.recorder, log, 'exit'].map(shellQuote).join(' ');
+  await writeFile(executable, `#!/bin/sh\nexec ${recorder} "$@"\n`, { mode: 0o755 });
+  const target = path.join(f.root, 'target');
+  const added = f.run('profile', 'add', 'agy-test', '--harness', 'agy', '--target', target,
+    '--executable', executable, '--playwright-cli', f.entry, '--browser', process.execPath, '--open-design-cli', f.entry,
+    '--workspace-dir', f.root);
+  assert.equal(added.status, 0, added.stderr);
+
+  const cache = path.join(f.store, 'status.json');
+  for (const [interactive, nativeArgs] of [
+    [true, ['--remote-agent', '--settings', '{}', '--new-project']],
+    [true, ['--remote-agent=1', '-settings={}', '--continue=false']],
+    [false, ['--settings', '{}', '-p', 'prompt']],
+    [false, ['plugin', 'list']],
+    [false, ['--remote-agent=maybe']],
+    [false, ['--settings']],
+  ]) {
+    await rm(log, { force: true });
+    const command = [process.execPath, f.cli, 'run', 'agy-test', '--', ...nativeArgs].map(shellQuote).join(' ');
+    const result = spawnSync('script', ['-qefc', `exec ${command}`, '/dev/null'], {
+      cwd: f.root, env: f.env, encoding: 'utf8', timeout: 10000,
+    });
+    assert.equal(result.status, 37, result.stderr || result.stdout);
+    const [ready] = await events(log);
+    if (ready.launchInteractive === '1') {
+      // Wait for this launch's detached checker before removing its cache or the fixture.
+      await until(async () => {
+        try { await access(cache); } catch (error) {
+          if (error.code === 'ENOENT') return false;
+          throw error;
+        }
+        return spawnSync('flock', ['--nonblock', path.join(f.store, 'check.lock'), 'true']).status === 0;
+      }, 'detached background check completion');
+      await rm(cache);
+    }
+    const label = JSON.stringify(nativeArgs);
+    assert.deepEqual(ready.args, nativeArgs, label);
+    assert.deepEqual(ready.tty, [true, true, true], label);
+    assert.equal(ready.launchProfile, interactive ? 'agy-test' : null, label);
+    assert.equal(ready.launchInteractive, interactive ? '1' : null, label);
+    if (interactive) {
+      assert.equal(JSON.parse(ready.launchNotice).profiles[0].target, target, label);
+    } else {
+      assert.equal(ready.launchNotice, null, label);
+    }
+  }
 });

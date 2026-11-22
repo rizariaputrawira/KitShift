@@ -241,7 +241,7 @@ For opt-in launch shortcuts, source the output of `kitshift shell-init --shell b
 
 `kitshift run` gives the native process its own POSIX session while inheriting stdin/stdout/stderr, so the wrapper forwards signals to its original process group exactly once. Inherited terminal input, including raw input, is supported; controlling-terminal `/dev/tty` access and shell job-control semantics are not identical to a direct launch. Use `command omp` if those semantics are required.
 
-An installed, enabled omp extension can check in the main TUI, including direct launches. The agy shortcut checks asynchronously and its plugin `SessionStart` hook can inject a **transient system message** using the previous cached result; a newly fetched result can appear at the next hook invocation, and resumed conversations need not invoke that hook. Direct agy launches remain quiet. These checks download Git objects and update the private ref/cache, never the checkout or installation. `kitshift cache clear` removes cached results, not profiles or manifests.
+An installed, enabled omp extension can check in the main TUI, including direct launches. The agy shortcut checks asynchronously. On a new conversation, the plugin's `SessionStart` hook can send the previous cached result as a user-facing notice, not as model text. A newly fetched result can appear at the next hook invocation, and resumed conversations need not invoke that hook. Direct agy launches remain quiet. These checks download Git objects and update the private ref/cache, never the checkout or installation. `kitshift cache clear` removes cached results, not profiles or manifests.
 
 ### Manual updates
 

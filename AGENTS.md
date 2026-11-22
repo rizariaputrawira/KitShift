@@ -8,7 +8,7 @@ KitShift is a portable personal coding-agent kit: passive skills, working guidan
 
 KitShift provides a unified installer (`scripts/install.mjs`) alongside dedicated harness scripts:
 - `node scripts/install.mjs omp` (or `scripts/install-omp.mjs`) builds an installation plan into the omp agent directory (`~/.omp/agent` by default) from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, subagents from `harnesses/omp/agents/` → `agents/`, and rendered `mcp/omp.json` → `mcp.json`.
-- `node scripts/install.mjs agy` (or `scripts/install-agy.mjs`) builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (from `guidance/APPEND_SYSTEM.md`), all 57 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, rendered `mcp/agy.json` → `mcp_config.json` with all five MCP definitions, and `.kitshift-manifest.json`.
+- `node scripts/install.mjs agy` (or `scripts/install-agy.mjs`) builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (from `guidance/APPEND_SYSTEM.md`), all 59 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, `hooks.json`, rendered `mcp/agy.json` → `mcp_config.json` with all five MCP definitions, and `.kitshift-manifest.json`.
 
 All installers share the engine in `scripts/install-common.mjs` (`installBundle()`, `collectFiles()`, `renderMcp()`, `loadManifest()`, `writeAtomic()`). MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
 
@@ -72,9 +72,9 @@ There is no root build command, lint command, package manifest, or dependency-in
 - `scripts/install-agy.mjs`: Antigravity CLI plugin installer, rule renderer, subagent bundling, and managed updates.
 - `harnesses/omp/config.yml`: native omp model, approval, privacy, and appearance settings.
 - `harnesses/agy/settings.json`: reference host settings template for Antigravity CLI.
-- `harnesses/agy/agents/`: native subagent definitions (`kitshift-reviewer.md`, `kitshift-investigator.md`, `kitshift-executor.md`, `kitshift-architect.md`).
+- `harnesses/agy/agents/`: native subagent definitions (`kitshift-acceptance-reviewer.md`, `kitshift-architect.md`, `kitshift-data-analyst.md`, `kitshift-executor.md`, `kitshift-investigator.md`, `kitshift-plan-reviewer.md`, `kitshift-qa.md`, `kitshift-researcher.md`, `kitshift-reviewer.md`).
 - `mcp/omp.json`: JSON template for omp MCP connections.
-- `mcp/agy.json`: JSON template for Antigravity MCP connections (omitting unsupported stdio `cwd`).
+- `mcp/agy.json`: JSON template for Antigravity MCP connections (omitting stdio `cwd`).
 - `guidance/APPEND_SYSTEM.md`: personal preferences appended to native prompts.
 - `harnesses/omp/COMPATIBILITY.md`: omp integration evidence and assessment records.
 - `harnesses/agy/COMPATIBILITY.md`: Antigravity CLI integration evidence, native validator checks, and architecture boundaries.
