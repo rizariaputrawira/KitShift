@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Simplified the daily workflow and skill-selection routes, moved coordinated work to the start of its existing brief, and consolidated opted-in plan review under the planning reference. Explicit skill selection, documentation-first readiness, native authority and evidence boundaries remain distinct.
+  - Verification: source-navigation walkthrough covered ordinary and explicitly selected implementation, settled specification and ticket requests, coordination and proof handoffs, documentation-first readiness and plan review, handoff-only reading, and merge acceptance. Checked 137 relative links and 34 fragments across affected guidance; all resolved. All 59 catalog rows and invocation labels matched the pre-edit baseline. No installed discovery, native approval or agent behavior was exercised.
+
 - Updated the `agy` integration for Antigravity CLI 1.5.12: the launcher recognizes `--settings`, `--remote-agent`, and boolean `--new-project` with native flag spellings. The `SessionStart` hook replaces deprecated `ephemeralMessage` with a `systemMessage` step carrying the cached notice in user-only metadata, not model text.
   - Verification: all 14 launcher and notification tests passed with no skips. Isolated PTY cases verified launch classification and argv passthrough; the hook command test verified the payload against real cached update data. The separate [static bundle validation record](harnesses/agy/COMPATIBILITY.md#harness-architectural-boundaries) covers the 59 skills and nine agents. Native rendering of the notice, live MCP connections, and model inference were not exercised.
 
