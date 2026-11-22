@@ -131,7 +131,7 @@ Unspecified settings follow the installed harness version's defaults. Upgrading 
 
 ### Agent collaboration
 
-The selected harness supplies execution and native capabilities; assignments define responsibilities, while skills supply reusable procedures. Neither a skill nor a configured model selector is a fixed worker identity. [How agents work in KitShift](AGENT-WORKFLOW.md) explains direct work, optional delegation, handoffs, conditional independent review and evidence acceptance, with diagrams and hypothetical booking examples.
+The selected harness supplies execution and native capabilities; assignments define responsibilities, while skills supply reusable procedures. Neither a skill nor a configured model selector is a fixed worker identity. [How agents work in KitShift](AGENT-WORKFLOW.md) explains direct work, optional delegation, handoffs, conditional independent review and evidence acceptance; the [skill catalog](SKILL-USAGE.md) provides example prompts.
 
 Start with the [daily workflow](AGENT-WORKFLOW.md#daily-workflow) for small corrections, substantial features and externally consequential changes.
 
