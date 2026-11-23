@@ -120,10 +120,8 @@ export function collectFiles(source, destination, files) {
   }
 }
 
-export function renderMcp(templatePath, replacements) {
-  const source = readRegularFile(templatePath).toString('utf8');
+function renderMcp(template, replacements) {
   const used = new Set();
-  const template = JSON.parse(source);
   function render(value) {
     if (typeof value === 'string') {
       if (Object.hasOwn(replacements, value)) {
@@ -148,7 +146,53 @@ export function renderMcp(templatePath, replacements) {
   for (const token of Object.keys(replacements)) {
     if (!used.has(token)) fail(`MCP template is missing required placeholder ${token}.`);
   }
-  return Buffer.from(`${JSON.stringify(rendered, null, 2)}\n`);
+  return rendered;
+}
+
+export function mcpBundleFile(templatePath, options, { target, tmpDir, workspaceRoots }) {
+  const playwright = Boolean(options['playwright-cli'] || options.browser);
+  const design = Boolean(options['open-design-cli']);
+  const replacements = {};
+  if (playwright || design) replacements['{{NODE}}'] = process.execPath;
+  if (playwright) {
+    replacements['{{PLAYWRIGHT_CLI}}'] = validateLocalPath('--playwright-cli', options['playwright-cli']);
+    replacements['{{BROWSER}}'] = validateLocalPath('--browser', options.browser, true);
+    replacements['{{PLAYWRIGHT_OUTPUT_DIR}}'] = path.join(target, 'cache', 'playwright-mcp');
+    if (tmpDir !== undefined) replacements['{{TMP_DIR}}'] = tmpDir;
+  }
+  if (design) replacements['{{OPEN_DESIGN_CLI}}'] = validateLocalPath('--open-design-cli', options['open-design-cli']);
+  return {
+    mode: 0o600,
+    content(previousContent) {
+      const template = JSON.parse(readRegularFile(templatePath).toString('utf8'));
+      const previous = previousContent ? JSON.parse(previousContent.toString('utf8')) : null;
+      const priorServers = previous?.mcpServers ?? {};
+      if (workspaceRoots !== undefined) {
+        let roots = workspaceRoots;
+        if (roots === null && Object.hasOwn(priorServers, 'filesystem')) {
+          const args = priorServers.filesystem?.args;
+          if (!Array.isArray(args) || args[0] !== '-y' ||
+              args[1] !== '@modelcontextprotocol/server-filesystem' ||
+              args.length < 3 || !args.slice(2).every(root => typeof root === 'string' && path.isAbsolute(root))) {
+            fail('Cannot preserve installed Filesystem roots; pass --workspace-dir explicitly.');
+          }
+          roots = args.slice(2);
+        }
+        replacements['{{WORKSPACE_DIR}}'] = roots ?? process.cwd();
+      }
+      const selected = { playwright, 'open-design': design };
+      const definitions = template.mcpServers;
+      const filtered = Object.fromEntries(Object.entries(definitions).filter(([name]) =>
+        !Object.hasOwn(selected, name) || selected[name]));
+      const rendered = renderMcp({ ...template, mcpServers: filtered }, replacements);
+      rendered.mcpServers = Object.fromEntries(Object.keys(definitions).flatMap(name => {
+        if (Object.hasOwn(filtered, name)) return [[name, rendered.mcpServers[name]]];
+        if (Object.hasOwn(priorServers, name)) return [[name, priorServers[name]]];
+        return [];
+      }));
+      return Buffer.from(`${JSON.stringify(rendered, null, 2)}\n`);
+    },
+  };
 }
 
 export function safeManifestPath(relative) {
@@ -228,7 +272,7 @@ export function installBundle({ target, files, update = false, dryRun = false, w
   for (const [relative, file] of files) {
     if (!safeManifestPath(relative)) fail(`Unsafe bundle path: ${relative}`);
     const filename = path.join(target, ...relative.split('/'));
-    const desiredHash = hash(file.content);
+    const managed = Object.hasOwn(previous.files, relative) ? previous.files[relative] : null;
     let stat;
     try {
       stat = inspectDestination(filename);
@@ -236,13 +280,17 @@ export function installBundle({ target, files, update = false, dryRun = false, w
       conflicts.push(error.message);
       continue;
     }
+    const existingContent = stat ? readRegularFile(filename) : null;
+    const existingHash = existingContent ? hash(existingContent) : null;
+    const content = typeof file.content === 'function'
+      ? file.content(managed && existingHash === managed.sha256 ? existingContent : null)
+      : file.content;
+    const desiredHash = hash(content);
     let action = 'create';
     if (stat) {
-      const existingHash = hash(readRegularFile(filename));
       if (existingHash === desiredHash) {
         action = (stat.mode & 0o777) === file.mode ? 'keep' : 'permissions';
       } else {
-        const managed = Object.hasOwn(previous.files, relative) ? previous.files[relative] : null;
         if (!managed) {
           conflicts.push(`Unmanaged file differs: ${filename}`);
           continue;
@@ -258,7 +306,7 @@ export function installBundle({ target, files, update = false, dryRun = false, w
         action = 'update';
       }
     }
-    plan.push({ relative, filename, action, ...file });
+    plan.push({ relative, filename, action, ...file, content });
     nextFiles[relative] = { sha256: desiredHash };
   }
   if (conflicts.length) fail(`Preflight refused installation; no files changed:\n  ${conflicts.join('\n  ')}`);

@@ -66,7 +66,10 @@ function plainObject(value) {
 
 function validProfileShape(profile) {
   return plainObject(profile) && ['omp', 'agy'].includes(profile.harness) &&
-    ['target', 'executable', 'playwrightCli', 'browser', 'openDesignCli'].every(key => typeof profile[key] === 'string' && path.isAbsolute(profile[key])) &&
+    ['target', 'executable'].every(key => typeof profile[key] === 'string' && path.isAbsolute(profile[key])) &&
+    (Object.hasOwn(profile, 'playwrightCli') === Object.hasOwn(profile, 'browser')) &&
+    ['playwrightCli', 'browser', 'openDesignCli'].every(key =>
+      !Object.hasOwn(profile, key) || (typeof profile[key] === 'string' && path.isAbsolute(profile[key]))) &&
     Array.isArray(profile.workspaceDirs) && profile.workspaceDirs.every(root => typeof root === 'string' && path.isAbsolute(root) && !root.includes(',')) &&
     (profile.harness === 'omp' ? profile.workspaceDirs.length === 0 : profile.workspaceDirs.length > 0) &&
     typeof profile.checks === 'boolean';
@@ -125,7 +128,7 @@ export function validateProfile(profile, previous = null) {
     ['browser', '--browser', true],
     ['openDesignCli', '--open-design-cli', false],
   ]) {
-    if (changed(key)) validateLocalPath(flag, profile[key], executable);
+    if (Object.hasOwn(profile, key) && changed(key)) validateLocalPath(flag, profile[key], executable);
   }
   if (changed('workspaceDirs')) {
     profile.workspaceDirs = profile.workspaceDirs.map(root => path.normalize(validateLocalPath('--workspace-dir', root, false, true)));

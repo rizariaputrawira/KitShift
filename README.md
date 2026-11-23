@@ -13,10 +13,8 @@ Use this kit to keep a consistent setup across projects without copying credenti
 
 ## In this guide
 
-- [Capabilities](#capabilities)
 - [Quick start](#quick-start)
-  - [Oh My Pi (omp) setup](#oh-my-pi-omp-setup)
-  - [Antigravity CLI (agy) setup](#antigravity-cli-agy-setup)
+- [Capabilities](#capabilities)
 - [How it works](#how-it-works)
 - [Agent collaboration](#agent-collaboration)
 - [Skills and workflows](#skills-and-workflows)
@@ -27,86 +25,43 @@ Use this kit to keep a consistent setup across projects without copying credenti
 - [Help and maintenance](#help-and-maintenance)
 - [Documentation, sources, and licenses](#documentation-sources-and-licenses)
 
+## Quick start
+
+These shell examples target Linux/WSL2. Choose [Oh My Pi (`omp`)](https://github.com/can1357/oh-my-pi#install) or [Antigravity CLI (`agy`)](https://antigravity.google/docs/getting-started?tab=cli#download-and-install), and install that runtime, Node.js 20 or newer, and Git.
+
+Review your effective harness approvals before installing. omp ships with `tools.approvalMode: yolo`; selected destructive Git prompts are not isolation. agy's reference settings are not applied by the installer. See [safety and privacy](#safety-and-privacy).
+
+Clone the kit, select your harness, preview, and install:
+
+```sh
+git clone https://github.com/rizariaputrawira/kitshift.git
+cd kitshift
+harness=omp  # Use harness=agy for Antigravity CLI.
+node scripts/install.mjs "$harness" --dry-run
+node scripts/install.mjs "$harness"
+```
+
+The default destination is `~/.omp/agent` for omp or `~/.gemini/config/plugins/kitshift` for agy. For agy, review [Filesystem root selection](#mcp-integrations) at installation: the initial default is the current directory, which here is the kit checkout.
+
+In your project directory, launch the native harness directly and ask for your task in plain language:
+
+```sh
+cd /path/to/your/project
+command "$harness"
+```
+
 ## Capabilities
 
 - **Reusable procedures:** 59 skills covering engineering, data preparation and matching, UI, security, Git, documentation, writing, software licensing and compliance review, task tracking, notebook editing, and handoffs, with their supporting files and attribution.
 - **Personal working preferences:** append-only guidance for evidence, scope, verification, communication, and credential privacy, universally applied across harnesses (`APPEND_SYSTEM.md` for omp, `rules/AGENTS.md` for agy).
 - **Native harness configurations:** omp cycling model-role selections (`config.yml`), and Antigravity reference host settings (`harnesses/agy/settings.json`).
 - **Dedicated subagents:** eight omp and nine agy definitions, including a local data analyst and distinct research, planning, QA and acceptance responsibilities. See the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Packaged definitions do not prove runtime dispatch, effective tools, model selection or behavior.
-- **Portable MCP definitions:** Playwright and local design tooling for both harnesses, GitHub for omp, and LSP, Codegraph, and Filesystem for agy. Machine-specific local paths are rendered during every installation and managed update.
+- **Portable MCP definitions:** GitHub for omp and LSP, Codegraph, and Filesystem for agy by default, with optional Playwright and local design tooling for both. See [MCP integrations](#mcp-integrations).
 - **Explicit installation:** unified `scripts/install.mjs` (or direct `install-omp.mjs` / `install-agy.mjs`) to preview changes, copy files, and apply managed updates. Conflicting files and local edits are rejected rather than silently overwritten.
 
 Skills and guidance are instructions for the agent, not guarantees of compliance, isolation, service availability, or lower cost.
 
-## Quick start
-
-### 1. Prepare the prerequisites
-
-The documented shell examples target Linux/WSL2. Other operating systems have not been verified.
-
-Install these separately:
-
-- **Node.js 20 or newer** to run the installer scripts. Initial verification used Node.js 24.20.0.
-- **omp** and/or **Antigravity CLI (agy)** depending on your target harness.
-  - omp: [official installation instructions](https://github.com/can1357/oh-my-pi#install).
-  - agy: [official CLI installation instructions](https://antigravity.google/docs/getting-started?tab=cli#download-and-install).
-- **Git** to clone and update the repository.
-- **GitHub CLI** (`gh` on `PATH`) for GitHub MCP authentication.
-- **Playwright MCP** and a Chromium executable for browser tooling, required for both harness installers.
-- The local design CLI used by **OpenDesign Cloud or Local Codex**, required for both harness installers, plus its local daemon when you use that integration.
-- **npm / `npx` on `PATH`** for agy's LSP, Codegraph, and Filesystem servers. Their runtime commands may download and execute packages; see [MCP integrations](#mcp-integrations).
-
-### Oh My Pi (omp) setup
-
-Clone and preview:
-
-```sh
-git clone https://github.com/rizariaputrawira/kitshift.git
-cd kitshift
-
-node scripts/install-omp.mjs --dry-run \
-  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
-  --browser /absolute/path/to/chromium/chrome \
-  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
-```
-
-Rerun **without `--dry-run`** to install into `~/.omp/agent`. For managed updates, run `node scripts/install-omp.mjs --update ...`.
-
-All three local MCP path arguments are required for installs, previews, and updates on both harnesses. The agy-specific LSP, Codegraph, and Filesystem definitions are not added to omp's `mcp.json`; its native tools remain the selected path in the three helper skills.
-
-Start omp from your project directory:
-
-```sh
-omp
-```
-
-### Antigravity CLI (agy) setup
-
-KitShift installs as a native Antigravity plugin under `~/.gemini/config/plugins/kitshift` (or in a project workspace under `<workspace>/.agents/plugins/kitshift` via `--target`).
-
-```sh
-node scripts/install-agy.mjs --dry-run \
-  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
-  --browser /absolute/path/to/chromium/chrome \
-  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs \
-  --workspace-dir /absolute/path/to/your/project
-```
-
-Rerun **without `--dry-run`** to install. Every agy install, preview, and update requires all three local MCP paths and renders all five definitions: Playwright, OpenDesign, LSP, Codegraph, and Filesystem. `--workspace-dir` remains optional.
-
-The former `--with-mcp` switch has been removed; omit it from older commands.
-
-Set `--workspace-dir` to the directory the Filesystem server should expose. For multiple roots, use one quoted comma-separated value, such as `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Roots must be existing absolute readable directories. If omitted, the installer records its current working directory; opening agy in another project does not automatically change those configured roots. This filesystem-server scope is not a sandbox for other host tools.
-
-For managed updates and migration from an older installation without MCP, follow [updates and troubleshooting](#updates-and-troubleshooting).
-
-Once installed:
-- Verify with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`.
-- The plugin is enabled automatically. Toggle with `agy plugin enable kitshift` / `agy plugin disable kitshift`.
-- Rules in `rules/AGENTS.md` are active whenever the plugin is enabled.
-- All 59 skills are available on demand.
-- Nine native subagent definitions are packaged; see the [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity). Static validation does not prove dispatch, effective tools, model selection or behavior.
-- Reference host settings are available in `harnesses/agy/settings.json` for optional manual adoption; host application settings (`~/.gemini/antigravity-cli/settings.json`) are never modified by the installer.
+For a custom destination, pass `--target` to the installer; for example, agy supports a workspace plugin at `<workspace>/.agents/plugins/kitshift`. Verify an agy plugin with `agy plugin list` or `agy plugin validate ~/.gemini/config/plugins/kitshift --json`, and toggle it with `agy plugin enable kitshift` or `agy plugin disable kitshift`. Its rules are active while enabled; packaged agent definitions do not prove dispatch. The agy reference settings are available for optional manual adoption and do not modify host application settings.
 
 ## How it works
 
@@ -119,7 +74,7 @@ The repository is the source of truth. The installers copy content into the targ
 | Original-material license | [LICENSE](LICENSE) and [scope notice](NOTICE) | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills | Managed root `LICENSE` and `NOTICE` (0644); upstream notices retained in skills |
 | Skills | [skills/](skills/) | `skills/` directory | `skills/` directory (59 canonical skills) |
 | Subagents | [harnesses/omp/agents/](harnesses/omp/agents/) / [harnesses/agy/agents/](harnesses/agy/agents/) | `agents/` (eight definitions) | `agents/` (nine definitions); [identity and authority map](AGENT-WORKFLOW.md#responsibility-to-native-identity) |
-| MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (Playwright, GitHub, OpenDesign) | `mcp_config.json` (Playwright, OpenDesign, LSP, Codegraph, Filesystem; GitHub at host level) |
+| MCP connections | [mcp/omp.json](mcp/omp.json) / [mcp/agy.json](mcp/agy.json) | `mcp.json` (GitHub; optional Playwright and OpenDesign) | `mcp_config.json` (LSP, Codegraph, Filesystem; optional Playwright and OpenDesign; GitHub at host level) |
 | Installer | [scripts/install.mjs](scripts/install.mjs) | Agent directory preflight and atomic write | Plugin preflight and atomic write |
 | Shared core | [scripts/install-common.mjs](scripts/install-common.mjs) | Traversal, manifest validation, atomic writing | Traversal, manifest validation, atomic writing |
 
@@ -141,12 +96,9 @@ Ask for the task directly, or name the relevant skill when you want a specific p
 
 The shared skill procedures are harness- and agent-neutral: cross-skill references are relative file links, and instructions use the selected host's available tools, permissions and approval mechanisms. Read linked canonical sources only when enabled and authorized; a link does not bypass deliberate disablement. The [passive skill contract](skills/agent-guidance/references/skill-contract.md) owns packaging, invocation and permission rules. Runtime-specific checks live in the conditional [omp compatibility companion](skills/docs-engineering/references/omp-compatibility.md) and [agy compatibility companion](skills/docs-engineering/references/agy-compatibility.md). Configuration, deployment and recorded runtime evidence remain with the [omp adapter](harnesses/omp/COMPATIBILITY.md) and [agy adapter](harnesses/agy/COMPATIBILITY.md). Source packaging and native validation do not prove consuming-agent behavior or MCP connectivity.
 
-- “Use code-debugging to investigate this failure and verify the fix.”
-- “Use code-review on my current changes. Report findings without editing.”
-- “Use ui-mobile-web to investigate this mobile scrolling issue.”
-- “Use workflow-handoff to capture the current state before I pause.”
+For example: “Use code-debugging to investigate this failure and verify the fix.”
 
-See the [complete skill use-case guide](SKILL-USAGE.md) for all 59 skills, invocation labels, example prompts, expected results, and workflow diagrams.
+The [complete skill catalogue](SKILL-USAGE.md) lists the skills, invocation guidance, examples and expected results. [Agent workflows](AGENT-WORKFLOW.md) explains roles and ordinary versus documentation-first work.
 
 For optional omp prompt controls, read [magic keywords](harnesses/omp/MAGIC-KEYWORDS.md). These are version-specific runtime shortcuts, not requirements or activation words embedded in shared skills.
 
@@ -154,24 +106,6 @@ For explicitly selected autonomous documentation-first delivery, the [shared pol
 
 For agy helper commands and limits, read the [task](skills/workflow-todo/references/agy-usage.md), [search](skills/code-search/references/agy-usage.md), or [notebook](skills/code-python/references/agy-usage.md) companion. On omp, use the native tools through their current schemas. The helpers provide selected capabilities, not complete behavioral parity with omp.
 
-### Skill collection
-
-KitShift includes **59 skills**, listed once below by capability. These groups describe use, not exclusive ownership or source attribution. For invocation rules, example prompts and expected results, use [SKILL-USAGE.md](SKILL-USAGE.md).
-
-| Capability | Skills |
-|---|---|
-| Engineering and agent guidance | [agent-guidance](skills/agent-guidance/SKILL.md), [code-architecture](skills/code-architecture/SKILL.md), [code-debugging](skills/code-debugging/SKILL.md), [code-implementation](skills/code-implementation/SKILL.md), [code-prototyping](skills/code-prototyping/SKILL.md), [code-python](skills/code-python/SKILL.md), [code-review](skills/code-review/SKILL.md), [code-search](skills/code-search/SKILL.md), [code-simplicity](skills/code-simplicity/SKILL.md), [code-swift-development](skills/code-swift-development/SKILL.md), [code-tdd](skills/code-tdd/SKILL.md) |
-| Tabular data | [kitshift-data-preparation](skills/kitshift-data-preparation/SKILL.md) prepares traceable derived datasets; [kitshift-data-matching](skills/kitshift-data-matching/SKILL.md) resolves cross-dataset correspondences and reconciles joins. |
-| Documentation and domain modeling | [docs-domain-modeling](skills/docs-domain-modeling/SKILL.md), [docs-engineering](skills/docs-engineering/SKILL.md), [docs-plan-review](skills/docs-plan-review/SKILL.md), [docs-specification](skills/docs-specification/SKILL.md) |
-| Git and pull requests | [git-change-status](skills/git-change-status/SKILL.md), [git-commit-message](skills/git-commit-message/SKILL.md), [git-pr-work](skills/git-pr-work/SKILL.md), [git-triage](skills/git-triage/SKILL.md) |
-| Security | [security-audit](skills/security-audit/SKILL.md), [security-intake](skills/security-intake/SKILL.md), [security-review](skills/security-review/SKILL.md) |
-| UI design, assets and inspection | [ui-brand-concepts](skills/ui-brand-concepts/SKILL.md), [ui-browser](skills/ui-browser/SKILL.md), [ui-design](skills/ui-design/SKILL.md), [ui-image-generation](skills/ui-image-generation/SKILL.md), [ui-image-to-code](skills/ui-image-to-code/SKILL.md), [ui-library-selection](skills/ui-library-selection/SKILL.md), [ui-prototyping](skills/ui-prototyping/SKILL.md), [ui-stitch-design-input](skills/ui-stitch-design-input/SKILL.md), [ui-stress-test](skills/ui-stress-test/SKILL.md), [ui-taste-frontend](skills/ui-taste-frontend/SKILL.md) |
-| UI platforms, motion and feedback | [ui-expo-motion](skills/ui-expo-motion/SKILL.md), [ui-gesture-design](skills/ui-gesture-design/SKILL.md), [ui-mobile-web](skills/ui-mobile-web/SKILL.md), [ui-sonner](skills/ui-sonner/SKILL.md), [ui-web-motion](skills/ui-web-motion/SKILL.md) |
-| Workflow planning and execution | [workflow-brainstorming](skills/workflow-brainstorming/SKILL.md), [workflow-delivery](skills/workflow-delivery/SKILL.md), [workflow-project-setup](skills/workflow-project-setup/SKILL.md), [workflow-questionnaire](skills/workflow-questionnaire/SKILL.md), [workflow-skill-selection](skills/workflow-skill-selection/SKILL.md), [workflow-ticket-planning](skills/workflow-ticket-planning/SKILL.md), [workflow-todo](skills/workflow-todo/SKILL.md), [workflow-wizard](skills/workflow-wizard/SKILL.md) |
-| Research, learning and continuity | [workflow-handoff](skills/workflow-handoff/SKILL.md), [workflow-handoff-read](skills/workflow-handoff-read/SKILL.md), [workflow-research](skills/workflow-research/SKILL.md), [workflow-retrospective](skills/workflow-retrospective/SKILL.md), [workflow-teaching](skills/workflow-teaching/SKILL.md), [workflow-upstream-review](skills/workflow-upstream-review/SKILL.md), [workflow-wayfinder](skills/workflow-wayfinder/SKILL.md) |
-| Writing, provenance and licensing | [content-software-licensing](skills/content-software-licensing/SKILL.md), [content-license-review](skills/content-license-review/SKILL.md), [content-provenance-audit](skills/content-provenance-audit/SKILL.md), [writing-authenticity](skills/writing-authenticity/SKILL.md), [writing-explanation](skills/writing-explanation/SKILL.md) |
-
-Browse [all installed skill sources](skills/) for the full collection and each procedure's boundaries. Documentation-first delivery is conditional, not a requirement for ordinary work. A review request does not authorize edits, and naming a skill does not grant new tool permissions.
 
 For local-file exploration and question-to-report work, `kitshift-data-analyst` combines an enabled external `data-analysis` owner with [code-python's execution/artifact handoff](skills/code-python/references/local-analysis.md). KitShift supplies the local execution contract, not a duplicate methods skill or an analysis application. Jupyter is optional: authorized plain-Python scripts can produce tables and offline reports when it is inaccessible; an explicitly required executed notebook remains a separately reported gap. Missing analysis guidance holds that branch while preparation and matching remain usable.
 
@@ -189,7 +123,20 @@ Request a skill by its canonical name in ordinary language. Use `skill://<name>`
 
 ## MCP integrations
 
-These are connection definitions, not bundled servers or proof of a working connection.
+These are connection definitions, not bundled servers or proof of a working connection. Fresh installs include GitHub for omp, and LSP, Codegraph and Filesystem for agy. Playwright and local design are independently optional.
+
+From the checkout, add either integration (or combine both sets of flags) to a new install:
+
+```sh
+node scripts/install.mjs "$harness" --playwright-cli /absolute/path/to/playwright-mcp/cli.js --browser /absolute/path/to/chromium/chrome
+node scripts/install.mjs "$harness" --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
+```
+
+Both Playwright flags must be supplied together. To add or refresh integrations on an installed target, use the chosen flags with `--update --dry-run` first, then repeat with `--update` instead of `--update --dry-run`. Include any custom `--target`. Moving Node or a selected CLI or browser can require re-rendering that integration.
+
+For agy, pass `--workspace-dir /absolute/path/to/project` to choose the Filesystem scope, or a quoted comma-separated list such as `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Roots must be existing absolute readable directories. A fresh install without this flag uses the installer's current directory, not the future agy session's directory. This scope is not a sandbox for other host tools.
+
+Omitted optional definitions and agy Filesystem roots are retained only from an installed configuration whose bytes match its manifest hash. Omission does not remove an existing integration. If installed Filesystem roots cannot be safely preserved, supply `--workspace-dir` explicitly. Local edits and differing unmanaged configurations remain conflicts.
 
 | Integration | Harness | Local requirements and behavior |
 |---|---|---|
@@ -202,7 +149,6 @@ These are connection definitions, not bundled servers or proof of a working conn
 
 Playwright and OpenDesign commands use the Node executable that ran the installer; the three additional agy servers resolve `npx` through runtime `PATH`. Their package versions are unpinned, and `npx -y` may download and execute packages when the host starts the servers. The installer itself does not download or launch them.
 
-Moving Node, a CLI, or the browser can require re-rendering MCP configuration. All three local path arguments are required for every install, preview, and update on both harnesses. agy always renders all five definitions; retain the intended workspace roots when updating.
 
 ## Safety and privacy
 
@@ -216,24 +162,21 @@ Moving Node, a CLI, or the browser can require re-rendering MCP configuration. A
 
 ### Checkout-backed updates
 
-On Linux/WSL2, Node 20+, Git and util-linux `flock` are required. After installing a harness with the direct installer, register its existing managed target and the same local paths. Registration and setup do not change the installation or shell startup files. A legacy manifest has an unknown installed revision until a successful managed update.
+On Linux/WSL2, Node 20+, Git and util-linux `flock` are required. After installing a harness, register its existing managed target and native executable. Registration and setup do not change the installation or shell startup files. A legacy manifest has an unknown installed revision until a successful managed update.
 
 ```sh
 node scripts/kitshift.mjs setup
 kitshift profile add personal-omp --harness omp --target "$HOME/.omp/agent" \
-  --executable /absolute/path/to/omp \
-  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
-  --browser /absolute/path/to/chromium/chrome \
-  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
+  --executable /absolute/path/to/omp
 kitshift profile list
 kitshift status personal-omp
 kitshift update personal-omp --check
 kitshift update personal-omp
 ```
 
-For agy, use `--harness agy`, its actual plugin target and native executable, and an explicit `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Save the intended Filesystem roots rather than relying on the updater's working directory. Use `kitshift profile edit NAME ...`, including `--checks off` or `--checks on`, to change a registration; `profile remove NAME` removes only the registration. Set an absolute `KITSHIFT_HOME` or `XDG_STATE_HOME` to isolate state. A moved checkout requires a deliberate private profile-store repair or a new isolated store; the launcher does not relocate it automatically.
+For agy, use `--harness agy`, its actual plugin target and native executable, and an explicit `--workspace-dir "/absolute/project-one,/absolute/project-two"`. Save the intended Filesystem roots rather than relying on the updater's working directory. Optionally register the Playwright pair and/or the design CLI using the flags in [MCP integrations](#mcp-integrations); omitted integrations already in hash-matching managed configuration are retained. Use `kitshift profile edit NAME ...`, including `--checks off` or `--checks on`, to change a registration; omitted options remain unchanged. `profile remove NAME` removes only the registration. Set an absolute `KITSHIFT_HOME` or `XDG_STATE_HOME` to isolate state. A moved checkout requires a deliberate private profile-store repair or a new isolated store; the launcher does not relocate it automatically.
 
-State must remain outside the checkout and managed installation targets. An existing state directory must be owned by the current user with mode `0700`; insecure directories are refused rather than automatically changing ownership or arbitrary ancestor permissions. Checks-only profile edits remain available if an unchanged browser or MCP path has moved; applying still validates every required dependency. Changing the effective upstream URL invalidates cached comparisons without storing the URL itself; older caches without an upstream fingerprint refresh from unknown.
+State must remain outside the checkout and managed installation targets. An existing state directory must be owned by the current user with mode `0700`; insecure directories are refused rather than automatically changing ownership or arbitrary ancestor permissions. Checks-only profile edits remain available if an unchanged browser or MCP path has moved; applying validates all present saved paths. Changing the effective upstream URL invalidates cached comparisons without storing the URL itself; older caches without an upstream fingerprint refresh from unknown.
 
 `update --check` fetches the configured Git upstream into a private Git ref and caches the result; it does not change checkout files or installed files. Applying may **fast-forward the checkout before preview and confirmation**. It previews all selected targets before applying any; a refusal, cancellation or later I/O failure does not roll back the checkout, and multi-target application is not transactional. Review the configured upstream as executable source: an explicit apply runs installers from the updated checkout. With multiple profiles, an interactive update selects one; use `--all` explicitly for all. Noninteractive application requires `NAME` or `--all` and `--yes`. Restart or reload the harness after installation.
 
@@ -253,14 +196,11 @@ node scripts/install.mjs omp --help
 node scripts/install.mjs agy --help
 ```
 
-| Update target | Preview | Apply |
-|---|---|---|
-| omp | Repeat the omp [setup command](#oh-my-pi-omp-setup) with `--update --dry-run`, retaining all three local MCP paths and any custom `--target`. | Remove `--dry-run`. |
-| agy | Repeat the agy [setup command](#antigravity-cli-agy-setup) with `--update --dry-run`, retaining all three local MCP paths, the intended workspace roots, and any custom `--target`. | Remove `--dry-run`. |
+Select `harness=omp` or `harness=agy` as in [Quick start](#quick-start), then preview with `node scripts/install.mjs "$harness" --update --dry-run` and apply with `node scripts/install.mjs "$harness" --update`. Include any custom `--target`; see [MCP integrations](#mcp-integrations) to change integrations or Filesystem roots.
 
 Keep `.kitshift-manifest.json` in the destination. Updates can replace previously managed files only when they still match the recorded hash. Identical files can be adopted; locally edited files, including MCP configuration, are protected. Host or manual changes in the destination do not flow back into the repository. Files removed from a newer kit are left in place, so an update is not an exact mirror or uninstaller.
 
-To migrate an older agy installation made without MCP, supply all three local MCP paths and run the setup command with `--update --dry-run`, then remove `--dry-run` to apply. Choose explicit `--workspace-dir` roots if the installer's current directory is not the intended Filesystem scope. Existing local MCP edits or unmanaged conflicts must be reconciled deliberately; the update does not overwrite them.
+To migrate an older agy installation made without MCP, run the update preview and apply commands above. The three default agy definitions are added; optional integrations can be selected as described in [MCP integrations](#mcp-integrations). Choose explicit `--workspace-dir` roots if the installer's current directory is not the intended Filesystem scope. Existing local MCP edits or unmanaged conflicts must be reconciled deliberately; the update does not overwrite them.
 
 ### Migrating older skill names
 
@@ -274,7 +214,7 @@ The domain-prefix migration renamed `brand-concepts` to `ui-brand-concepts`, `st
 For an affected installation, do not rename the old directories into the new destinations: the manifest still owns their old paths, so changed files at the new paths are rejected as unmanaged conflicts. Instead:
 
 1. Move each old skill directory to a separate, unused backup location **outside every skill-discovery root**, preserving its contents and local edits. If you already renamed it in place, move that directory to the backup location too. Do not overwrite an existing backup or a separately installed new-name directory.
-2. Keep `.kitshift-manifest.json` intact. Preview the normal installer command with `--update --dry-run` and all three local MCP path arguments, then remove `--dry-run` to apply. With the new destinations absent, the installer creates and manages them; other conflicts still require deliberate reconciliation.
+2. Keep `.kitshift-manifest.json` intact. Preview the normal installer command with `--update --dry-run`, then remove `--dry-run` to apply. With the new destinations absent, the installer creates and manages them; other conflicts still require deliberate reconciliation.
 3. Compare the backups with the new packages and reconcile any local edits deliberately. Do not copy an old `SKILL.md` back wholesale, because its old frontmatter name would undo the identity migration. For an older omp installation, restart omp after completing the migration; use the selected host's supported reload procedure otherwise.
 
 The installer does not remove old paths or obsolete manifest entries. Backups left inside a discovery root can expose duplicate skills; keep them outside those roots until you decide they are no longer needed.
@@ -285,14 +225,14 @@ The installer does not remove old paths or obsolete manifest entries. Backups le
 
 | Symptom | What to check |
 |---|---|
-| Required path is missing or unreadable | For either harness, supply all three absolute MCP paths and confirm the browser is executable. The installer does not install dependencies. |
+| Selected path is missing or unreadable | Supply both absolute Playwright paths together when selecting Playwright, and confirm the browser is executable; supply a readable absolute design CLI path when selecting design. The installer does not install dependencies. |
 | `Unmanaged file differs` | Compare the named destination with the kit. Preserve the original and reconcile it explicitly; `--update` does not override unmanaged conflicts. |
 | `Managed file has local edits` | Preserve your local edits and decide which belong in the canonical repository. The installer will not discard them. |
 | `Managed file needs --update` | Preview with `--update --dry-run`, then apply with `--update`. |
 | Symlink destination rejected | Choose a real directory path. The installer rejects symlinked files and directory ancestors. |
 | omp cannot select a configured model | Authenticate `openai-codex`, check account availability, or change the model selectors. Configured IDs are not proof of access. |
 | An MCP connection fails after installation | Check the service, paths, local daemon, and authentication. Successful installation validates files and rendering, not server connectivity. |
-| agy's Filesystem server exposes the wrong project | Re-render MCP with `--update`, all three local paths, and explicit `--workspace-dir` roots. The default is the installer's cwd. |
+| agy's Filesystem server exposes the wrong project | Re-render MCP with `--update` and explicit `--workspace-dir` roots. The fresh-install default is the installer's cwd. |
 | Updating omp changes behavior | Review upstream changes and effective settings. The kit does not pin every native default or guarantee compatibility with later versions. |
 
 ## Verification and known limits
@@ -315,9 +255,9 @@ On 2026-10-27, all **117/117 tests passed with zero skips**, including notice pr
 
 Across this README and the seven updated local source records, 227 local links and 42 heading fragments resolved; the 55-skill inventory and collapsible sections were preserved. These checks establish packaging and link behavior, not legal clearance, MCP connectivity or model behavior. No live installation or host settings were changed.
 
-### Mandatory MCP verification
+### Historical mandatory MCP verification
 
-On 2026-10-26, the full suite passed **114/114 tests with zero skips**, including required and invalid path handling through both agy installer entrypoints, no-write previews, managed updates, local-edit protection, migration from managed bundles without MCP, and native agy validation of the full five-server bundle.
+In the then-mandatory MCP snapshot on 2026-10-26, the full suite passed **114/114 tests with zero skips**, including required and invalid path handling through both agy installer entrypoints, no-write previews, managed updates, local-edit protection, migration from managed bundles without MCP, and native agy validation of the full five-server bundle. These requirements are not the current installer contract.
 
 A separate disposable CLI smoke exercised a five-server install and managed workspace-root update, then upgraded a real no-MCP bundle installed by `ec92364`. The omp installer, configuration and MCP template remained byte-identical to that snapshot. Across this README and the three compatibility documents, 173 local link occurrences and 31 heading fragments resolved. MCP services and model calls were not launched; live installations and settings were untouched.
 
@@ -372,7 +312,7 @@ For omp installation and runtime questions, consult the [omp documentation](http
 
 | Need | Reference |
 |---|---|
-| Choose a skill, see use cases, or find the adopted upstream name | [Skill collection](#skill-collection), [complete skill use-case guide](SKILL-USAGE.md), [Matt Pocock adoption mapping](#matt-pocock-adoption-mapping), and the relevant `skills/<name>/SKILL.md` |
+| Choose a skill, see use cases, or find the adopted upstream name | [Complete skill catalogue](SKILL-USAGE.md), [Matt Pocock adoption mapping](#matt-pocock-adoption-mapping), and the relevant `skills/<name>/SKILL.md` |
 | Work on this repository | [Repository Guidelines](AGENTS.md) |
 | Preview, install, or update the kit | [Quick start](#quick-start), [updates and troubleshooting](#updates-and-troubleshooting), [unified installer](scripts/install.mjs), [omp installer](scripts/install-omp.mjs), and [agy installer](scripts/install-agy.mjs) |
 | Inspect recorded checks and remaining limits | [Verification and known limits](#verification-and-known-limits), [omp tests](tests/install-omp.test.mjs), [agy tests](tests/install-agy.test.mjs), [state-helper tests](tests/state-helpers.test.mjs), [search-helper tests](tests/search-helper.test.mjs), [omp compatibility](harnesses/omp/COMPATIBILITY.md), [agy compatibility](harnesses/agy/COMPATIBILITY.md), and [changelog](CHANGELOG.md) |
@@ -392,7 +332,7 @@ Both installers include the root `LICENSE` and [licensing-scope notice](NOTICE) 
 
 ### Skill sources and retained notices
 
-KitShift selectively adapts material from multiple upstream projects, merging overlapping capabilities rather than installing duplicate workflows, and includes locally authored procedures. The source families below are not additive skill counts: one KitShift skill may combine several contributors. The [57-skill collection](#skill-collection) is the inventory; this section records provenance, not another catalog.
+KitShift selectively adapts material from multiple upstream projects, merging overlapping capabilities rather than installing duplicate workflows, and includes locally authored procedures. The source families below are not additive skill counts: one KitShift skill may combine several contributors. The [skill catalogue](SKILL-USAGE.md) is the inventory; this section records provenance, not another catalog.
 
 This is a mixed-source collection, not a claim that every skill is original KitShift work. The table identifies source families and representative full notices. Each applicable package retains its own notices; its source record defines the exact files, revisions, adaptations, and exclusions. A comparison or license-evidence pin is not necessarily the historical import commit.
 
@@ -416,14 +356,14 @@ Additional PR-writing attribution is recorded for [Dex Horthy / Humanlayer's `sh
 
 #### Matt Pocock adoption mapping
 
-This is one source-specific mapping, not the full KitShift inventory. Its **27** counts upstream skills; the [collection](#skill-collection) contains **57** current KitShift skill packages.
+This is one source-specific mapping, not the full KitShift inventory. Its **27** counts upstream skills; see the [skill catalogue](SKILL-USAGE.md) for current KitShift packages.
 
 <details>
 <summary>Expand upstream-to-KitShift mappings and adaptation boundaries</summary>
 
 The 27 active skills declared by [mattpocock/skills at `5beb35b040e3de97e54fa9e386d7e42d15c295c2`](https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2) are selectively adapted into the owners below. Overlapping disciplines are merged rather than installed as duplicate upstream names. The upstream `in-progress/` and `misc/` packages are not part of this active set.
 
-This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. The current 57-skill collection also includes the three later cross-harness helper skills, the source-license reviewer and software-licensing guidance. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
+This adoption added 13 skills and merged into 11 existing owners, for 24 adoption owners within the then-52-skill collection. Later additions include the three cross-harness helper skills, the source-license reviewer and software-licensing guidance. The documentation-first delivery workflow reuses the standalone specification content contract instead of maintaining a duplicate.
 
 | Upstream skill(s) | KitShift owner(s) |
 |---|---|
@@ -459,7 +399,7 @@ These adopted procedures are passive instructions packaged for both harnesses, n
 
 #### Historical provenance checks
 
-These checks explain earlier source investigations, not additional skills or separate installation steps. All three packages are part of the [skill collection](#skill-collection).
+These checks explain earlier source investigations, not additional skills or separate installation steps. All three packages are part of the [skill catalogue](SKILL-USAGE.md).
 
 <details>
 <summary>Expand historical Stitch, Taste and UI-design evidence</summary>

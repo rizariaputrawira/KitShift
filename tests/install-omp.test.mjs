@@ -28,10 +28,11 @@ async function fixture(t) {
   const cli = join(root, 'cli.mjs');
   await writeFile(cli, '// Fixture path; never executed.\n');
   const target = join(root, 'agent');
-  const run = (...args) => spawnSync(process.execPath, [join(repo, 'scripts/install-omp.mjs'), '--target', target,
-    '--playwright-cli', cli, '--browser', process.execPath, '--open-design-cli', cli, ...args], { encoding: 'utf8' });
+  const raw = (...args) => spawnSync(process.execPath, [join(repo, 'scripts/install-omp.mjs'), '--target', target,
+    ...args], { encoding: 'utf8' });
+  const run = (...args) => raw('--playwright-cli', cli, '--browser', process.execPath, '--open-design-cli', cli, ...args);
   const success = result => assert.equal(result.status, 0, result.stderr || result.stdout);
-  return { root, repo, target, run, success };
+  return { root, repo, target, cli, raw, run, success };
 }
 
 async function snapshot(target) {
@@ -117,20 +118,93 @@ test('installation and managed updates preserve root license and third-party not
 
 test('dry run leaves a missing target absent', async t => {
   const f = await fixture(t);
-  f.success(f.run('--dry-run'));
+  f.success(f.raw('--dry-run'));
   await assert.rejects(access(f.target), { code: 'ENOENT' });
 });
 
-test('omp refuses missing MCP paths before writing on install, preview, and update', async t => {
+test('omp refuses an incomplete Playwright selection before writing', async t => {
   const f = await fixture(t);
-  for (const args of [[], ['--dry-run'], ['--update'], ['--playwright-cli', join(f.root, 'cli.mjs')]]) {
-    const result = spawnSync(process.execPath, [
-      join(f.repo, 'scripts/install-omp.mjs'), '--target', f.target, ...args,
-    ], { encoding: 'utf8' });
-    assert.equal(result.status, 1);
-    assert.match(result.stderr, /Required option --(?:playwright-cli|browser) is missing/);
-    await assert.rejects(access(f.target), { code: 'ENOENT' });
+  for (const [selection, missing] of [
+    [['--playwright-cli', f.cli], '--browser'],
+    [['--browser', process.execPath], '--playwright-cli'],
+  ]) {
+    for (const operation of [[], ['--dry-run'], ['--update'], ['--update', '--dry-run']]) {
+      const result = f.raw(...selection, ...operation);
+      assert.equal(result.status, 1);
+      assert.ok(result.stderr.includes(`Required option ${missing} is missing`), result.stderr);
+      await assert.rejects(access(f.target), { code: 'ENOENT' });
+    }
   }
+  f.success(f.raw());
+  const before = await snapshot(f.target);
+  for (const [selection, missing] of [
+    [['--playwright-cli', f.cli], '--browser'],
+    [['--browser', process.execPath], '--playwright-cli'],
+  ]) {
+    for (const operation of [['--update'], ['--update', '--dry-run']]) {
+      const result = f.raw(...selection, ...operation);
+      assert.equal(result.status, 1);
+      assert.ok(result.stderr.includes(`Required option ${missing} is missing`), result.stderr);
+      assert.deepEqual(await snapshot(f.target), before);
+    }
+  }
+});
+
+test('core install and incremental integrations retain trusted MCP entries', async t => {
+  const f = await fixture(t);
+  const mcpPath = join(f.target, 'mcp.json');
+  const manifestPath = join(f.target, '.kitshift-manifest.json');
+  const servers = async () => JSON.parse(await readFile(mcpPath, 'utf8')).mcpServers;
+
+  f.success(f.raw());
+  assert.equal(await readFile(join(f.target, 'APPEND_SYSTEM.md'), 'utf8'), '# Personal preferences\n');
+  assert.match(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'), /Example instructions/);
+  assert.ok((await readdir(join(f.target, 'agents'))).length > 0);
+  assert.deepEqual(Object.keys(await servers()), ['github']);
+  assert.equal((await stat(mcpPath)).mode & 0o777, 0o600);
+
+  f.success(f.raw('--update', '--open-design-cli', f.cli));
+  const withDesign = await servers();
+  assert.deepEqual(Object.keys(withDesign), ['github', 'open-design']);
+  assert.equal(withDesign['open-design'].command, process.execPath);
+  assert.deepEqual(withDesign['open-design'].args, [f.cli, 'mcp']);
+
+  f.success(f.raw('--update', '--playwright-cli', f.cli, '--browser', process.execPath));
+  const withPlaywright = await servers();
+  assert.deepEqual(Object.keys(withPlaywright), ['playwright', 'github', 'open-design']);
+  assert.deepEqual(withPlaywright['open-design'], withDesign['open-design']);
+  assert.equal(withPlaywright.playwright.command, process.execPath);
+  assert.equal(withPlaywright.playwright.args[0], f.cli);
+  const browserIndex = withPlaywright.playwright.args.indexOf('--executable-path');
+  assert.notEqual(browserIndex, -1);
+  assert.equal(withPlaywright.playwright.args[browserIndex + 1], process.execPath);
+
+  const previousBytes = await readFile(mcpPath);
+  const previousHash = JSON.parse(await readFile(manifestPath, 'utf8')).files['mcp.json'].sha256;
+  await rm(f.cli);
+  await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Updated upstream skill\n');
+  f.success(f.raw('--update'));
+  assert.equal(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'), 'Updated upstream skill\n');
+  assert.deepEqual(await readFile(mcpPath), previousBytes);
+  assert.equal(JSON.parse(await readFile(manifestPath, 'utf8')).files['mcp.json'].sha256, previousHash);
+});
+
+test('unmanaged and locally edited MCP files prevent all planned writes without integration flags', async t => {
+  const unmanaged = await fixture(t);
+  await mkdir(unmanaged.target);
+  await writeFile(join(unmanaged.target, 'mcp.json'), '{"mcpServers":{"custom":{}}}\n');
+  await writeFile(join(unmanaged.repo, 'skills/example/SKILL.md'), 'Upstream skill change\n');
+  const unmanagedBefore = await snapshot(unmanaged.target);
+  assert.notEqual(unmanaged.raw().status, 0);
+  assert.deepEqual(await snapshot(unmanaged.target), unmanagedBefore);
+
+  const managed = await fixture(t);
+  managed.success(managed.raw());
+  await writeFile(join(managed.target, 'mcp.json'), '{"mcpServers":{"custom":{}}}\n');
+  await writeFile(join(managed.repo, 'skills/example/SKILL.md'), 'Upstream skill change\n');
+  const managedBefore = await snapshot(managed.target);
+  assert.notEqual(managed.raw('--update').status, 0);
+  assert.deepEqual(await snapshot(managed.target), managedBefore);
 });
 
 test('an unmanaged conflict prevents every planned write', async t => {
