@@ -7,9 +7,8 @@ import {
   manifestName,
   fail,
   checkDirectoryChain,
-  validateLocalPath,
   collectFiles,
-  renderMcp,
+  mcpBundleFile,
   readInstallSource,
   installBundle,
 } from './install-common.mjs';
@@ -17,17 +16,17 @@ import {
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const help = `Usage:
   node scripts/install-omp.mjs [--target DIR] [--dry-run] [--update]
-    --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH
-    --open-design-cli ABSOLUTE_JS_PATH
+    [--playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH]
+    [--open-design-cli ABSOLUTE_JS_PATH]
 
 Copies this repository's omp config, system guidance, skills, subagents, and
 rendered MCP configuration. The default target is ~/.omp/agent. No symlinks are installed.
 
-All three MCP paths are required, including for updates and dry runs. Install
-Playwright MCP, its Chromium browser, and OpenDesign separately, then pass their
-existing local paths. JavaScript entry points must be readable; the browser must
-be executable. Node MCP commands use this installer's Node executable. GitHub
-keeps native PATH-resolved gh auth; no token is read or exported by this script.
+Without optional flags, only GitHub is configured. Select Playwright with both
+paths; select local OpenDesign independently. JavaScript entry points must be
+readable and the browser executable. Omitted integrations already installed
+are retained only from hash-matching managed config. Node MCP commands use this
+installer's Node executable. GitHub uses PATH-resolved gh authentication.
 
   --target DIR         Install into this agent directory (relative paths allowed).
   --dry-run            Preflight and show planned copies without writing anything.
@@ -93,15 +92,7 @@ function main() {
   }
   collectFiles(path.join(repository, 'harnesses', 'omp', 'extensions', 'kitshift-update.js'), 'extensions/kitshift-update.js', files);
 
-  const replacements = {
-    '{{NODE}}': process.execPath,
-    '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
-    '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
-    '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
-    '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
-    '{{TMP_DIR}}': os.tmpdir(),
-  };
-  files.set('mcp.json', { content: renderMcp(path.join(repository, 'mcp', 'omp.json'), replacements), mode: 0o600 });
+  files.set('mcp.json', mcpBundleFile(path.join(repository, 'mcp', 'omp.json'), options, { target, tmpDir: os.tmpdir() }));
   const afterAssembly = readInstallSource(repository);
   if (source.revision !== afterAssembly.revision) source.revision = null;
 

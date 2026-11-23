@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Made Playwright and local design independent opt-ins for both installers and saved profiles; retained hash-verified managed integrations and agy Filesystem roots when omitted. Core installs retain host-specific base MCP definitions. Consolidated onboarding and operator guidance.
+  - Verification: 77 installer fixture tests passed, including native agy validation of core and full bundles; six updater tests passed, including isolated two-target updates and conflict refusal. Disposable default-home previews and installs verified both core server sets; 177 local README links resolved and the catalogue matched all 59 skill packages. MCP connectivity, authenticated services and model behavior were not exercised.
+
 - Simplified the daily workflow and skill-selection routes, moved coordinated work to the start of its existing brief, and consolidated opted-in plan review under the planning reference. Explicit skill selection, documentation-first readiness, native authority and evidence boundaries remain distinct.
   - Verification: source-navigation walkthrough covered ordinary and explicitly selected implementation, settled specification and ticket requests, coordination and proof handoffs, documentation-first readiness and plan review, handoff-only reading, and merge acceptance. Checked 137 relative links and 34 fragments across affected guidance; all resolved. All 59 catalog rows and invocation labels matched the pre-edit baseline. No installed discovery, native approval or agent behavior was exercised.
 

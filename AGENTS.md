@@ -8,11 +8,11 @@ KitShift is a portable personal coding-agent kit: passive skills, working guidan
 
 KitShift provides a unified installer (`scripts/install.mjs`) alongside dedicated harness scripts:
 - `node scripts/install.mjs omp` (or `scripts/install-omp.mjs`) builds an installation plan into the omp agent directory (`~/.omp/agent` by default) from `harnesses/omp/config.yml` → `config.yml`, `guidance/APPEND_SYSTEM.md` → `APPEND_SYSTEM.md`, the complete `skills/` tree → `skills/`, subagents from `harnesses/omp/agents/` → `agents/`, and rendered `mcp/omp.json` → `mcp.json`.
-- `node scripts/install.mjs agy` (or `scripts/install-agy.mjs`) builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (from `guidance/APPEND_SYSTEM.md`), all 59 `skills/`, native subagents from `harnesses/agy/agents/` → `agents/`, `hooks.json`, rendered `mcp/agy.json` → `mcp_config.json` with all five MCP definitions, and `.kitshift-manifest.json`.
+- `node scripts/install.mjs agy` (or `scripts/install-agy.mjs`) builds a native Antigravity CLI plugin bundle into `~/.gemini/config/plugins/kitshift` (or `<workspace>/.agents/plugins/kitshift` via `--target`), containing `plugin.json`, `rules/AGENTS.md` (from `guidance/APPEND_SYSTEM.md`), the complete `skills/` tree, native subagents from `harnesses/agy/agents/` → `agents/`, `hooks.json`, rendered `mcp/agy.json` → `mcp_config.json`, and `.kitshift-manifest.json`.
 
-All installers share the engine in `scripts/install-common.mjs` (`installBundle()`, `collectFiles()`, `renderMcp()`, `loadManifest()`, `writeAtomic()`). MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
+All installers share the engine in `scripts/install-common.mjs`. Selected MCP placeholders are substituted with validated local paths, and the complete plan is preflighted against destination contents and SHA-256 hashes in `.kitshift-manifest.json`.
 
-Both harness installers require `--playwright-cli`, `--browser`, and `--open-design-cli` for every install, preview, and update. agy's `--workspace-dir` is optional; supply explicit roots to avoid binding Filesystem MCP to an unintended installer cwd. Older agy installs without MCP migrate with the three paths and `--update`; local MCP edits remain protected by normal conflict checks.
+Fresh installs include GitHub for omp, or LSP, Codegraph and Filesystem for agy. Playwright is selected by supplying both `--playwright-cli` and `--browser`; `--open-design-cli` independently selects local design. Omitted optional entries and agy Filesystem roots are retained only from hash-matching managed configuration. agy's optional `--workspace-dir` selects explicit roots; a fresh install otherwise records the installer cwd. Older agy installs without MCP gain the base servers with `--update`; local MCP edits remain protected by normal conflict checks. See [MCP integrations](README.md#mcp-integrations).
 
 Conflicts abort before writes. Identical files can be adopted; updates reject unmanaged differing files and locally edited managed files. Approved files use per-file atomic replacement, followed by a private manifest update. Preserve the manifest for managed updates. This is not transactional rollback, a symlink installation, or two-way synchronization; removed source files remain installed unless explicitly migrated.
 
@@ -38,16 +38,13 @@ node scripts/install.mjs agy --help
 node --test tests/install-omp.test.mjs tests/install-agy.test.mjs tests/state-helpers.test.mjs tests/search-helper.test.mjs
 ```
 
-Preview installation using existing absolute local paths:
+Preview a core installation:
 
 ```sh
-node scripts/install-omp.mjs --dry-run --target /tmp/kitshift-agent \
-  --playwright-cli /absolute/path/to/playwright-mcp/cli.js \
-  --browser /absolute/path/to/chromium/chrome \
-  --open-design-cli /absolute/path/to/design-daemon/bin/od.mjs
+node scripts/install-omp.mjs --dry-run --target /tmp/kitshift-agent
 ```
 
-All three path arguments are required for previews and updates: readable JavaScript entrypoints for the CLIs and an executable browser. Remove `--dry-run` to apply; preview managed updates with `--update --dry-run`, then apply with `--update`. Omitting `--target` installs into `~/.omp/agent`. Start the separately installed runtime with `omp`; a custom target does not automatically configure its agent directory. For an isolated default-profile launch:
+Remove `--dry-run` to apply; preview managed updates with `--update --dry-run`, then apply with `--update`. Optional integrations require readable CLI entrypoints and, for Playwright, an executable browser; see [MCP integrations](README.md#mcp-integrations). Omitting `--target` installs into `~/.omp/agent`. Start the separately installed runtime with `omp`; a custom target does not automatically configure its agent directory. For an isolated default-profile launch:
 
 ```sh
 PI_CODING_AGENT_DIR=/tmp/kitshift-agent omp
@@ -88,7 +85,7 @@ There is no root build command, lint command, package manifest, or dependency-in
 
 ## Runtime/Tooling Preferences
 
-Use Node.js 20+; no root package manager is prescribed. Linux/WSL2 is the documented environment; other platforms are unverified. Install omp, Git, GitHub CLI (`gh`), MCP CLIs, Chromium, and authentication separately. The installer does not download dependencies, authenticate accounts, or start services. MCP commands use the Node executable running the installer.
+Use Node.js 20+; no root package manager is prescribed. Linux/WSL2 is the documented environment; other platforms are unverified. Install the chosen harness and Git separately; runtime MCP dependencies and optional integrations are described in [MCP integrations](README.md#mcp-integrations). The installer does not download dependencies, authenticate accounts, or start services. Selected local MCP commands use the Node executable running the installer.
 
 Preserve declared approval/privacy/model settings unless the task changes them. YOLO mode and selected Git prompts are not sandboxing. Keep credentials, `.env` files, databases, backups, and private handoffs out of commits; preserve `.gitignore` exclusions.
 

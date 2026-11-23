@@ -27,10 +27,16 @@ test('profile registration, editing, launcher protection and removal', async t =
   await writeFile(entry, '');
   const run = (...args) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8', env: { ...process.env, KITSHIFT_HOME: store } });
   const ok = result => assert.equal(result.status, 0, result.stderr);
-  ok(run('profile', 'add', 'personal', '--harness', 'omp', '--target', target, '--executable', process.execPath,
-    '--playwright-cli', entry, '--browser', process.execPath, '--open-design-cli', entry));
-  assert.match(run('profile', 'list').stdout, /personal\s+omp.*checks enabled/);
+  assert.notEqual(run('profile', 'add', 'personal', '--harness', 'omp', '--target', target, '--executable', process.execPath, '--browser', process.execPath).status, 0);
   const configPath = path.join(store, 'profiles.json');
+  await assert.rejects(readFile(configPath));
+  ok(run('profile', 'add', 'personal', '--harness', 'omp', '--target', target, '--executable', process.execPath));
+  const core = JSON.parse(await readFile(configPath, 'utf8')).profiles.personal;
+  for (const key of ['playwrightCli', 'browser', 'openDesignCli']) assert.equal(Object.hasOwn(core, key), false);
+  ok(run('profile', 'edit', 'personal', '--open-design-cli', entry));
+  assert.equal(JSON.parse(await readFile(configPath, 'utf8')).profiles.personal.openDesignCli, entry);
+  assert.equal(await readFile(path.join(target, '.kitshift-manifest.json'), 'utf8'), '{"version":1,"files":{}}\n');
+  assert.match(run('profile', 'list').stdout, /personal\s+omp.*checks enabled/);
   const before = await readFile(configPath, 'utf8');
   assert.notEqual(run('profile', 'add', 'personal', '--harness', 'omp').status, 0);
   assert.equal(await readFile(configPath, 'utf8'), before);
@@ -150,7 +156,7 @@ test('all-target update preflights and applies both harnesses while preserving a
   const run = (script, ...args) => spawnSync(process.execPath, [path.join(repo, 'scripts', script), ...args], {
     cwd: root, env: { ...process.env, KITSHIFT_HOME: store }, encoding: 'utf8',
   });
-  const options = ['--target', target, '--playwright-cli', entry, '--browser', process.execPath, '--open-design-cli', entry];
+  const options = ['--target', target];
   let result = run('install-omp.mjs', ...options);
   assert.equal(result.status, 0, result.stderr);
   result = run('kitshift.mjs', 'profile', 'add', 'example', '--harness', 'omp', '--executable', process.execPath, ...options);
@@ -170,11 +176,14 @@ test('all-target update preflights and applies both harnesses while preserving a
   git(other, 'push', '-q');
   result = run('kitshift.mjs', 'update', '--all', '--yes');
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.match(result.stdout, /Dry run/);
   assert.equal(git(repo, 'rev-parse', 'HEAD'), b);
   assert.equal(await readFile(path.join(target, 'skills/example/SKILL.md'), 'utf8'), 'revision B\n');
   assert.equal(JSON.parse(await readFile(path.join(target, '.kitshift-manifest.json'), 'utf8')).source.revision, b);
   assert.equal(await readFile(path.join(agyTarget, 'skills/example/SKILL.md'), 'utf8'), 'revision B\n');
   assert.equal(JSON.parse(await readFile(path.join(agyTarget, '.kitshift-manifest.json'), 'utf8')).source.revision, b);
+  assert.deepEqual(Object.keys(JSON.parse(await readFile(path.join(target, 'mcp.json'), 'utf8')).mcpServers), ['github']);
+  assert.deepEqual(Object.keys(JSON.parse(await readFile(path.join(agyTarget, 'mcp_config.json'), 'utf8')).mcpServers), ['playwright', 'open-design', 'lsp', 'codegraph', 'filesystem']);
   assert.deepEqual(JSON.parse(await readFile(path.join(agyTarget, 'mcp_config.json'), 'utf8')).mcpServers.filesystem.args.slice(-2), roots);
   await writeFile(path.join(other, 'skills/example/SKILL.md'), 'revision C\n');
   git(other, 'add', '.');

@@ -30,11 +30,11 @@ async function fixture(t, route = 'direct') {
   const entry = route === 'unified'
     ? [join(repo, 'scripts/install.mjs'), 'agy']
     : [join(repo, 'scripts/install-agy.mjs')];
-  const requiredArgs = ['--playwright-cli', cli, '--browser', process.execPath, '--open-design-cli', cli];
+  const mcpArgs = ['--playwright-cli', cli, '--browser', process.execPath, '--open-design-cli', cli];
   const raw = (...args) => spawnSync(process.execPath, [...entry, '--target', target, ...args], { encoding: 'utf8' });
-  const run = (...args) => raw(...requiredArgs, ...args);
+  const run = (...args) => raw(...mcpArgs, ...args);
   const success = result => assert.equal(result.status, 0, result.stderr || result.stdout);
-  return { root, repo, target, cli, requiredArgs, raw, run, success };
+  return { root, repo, target, cli, mcpArgs, raw, run, success };
 }
 
 async function snapshot(target) {
@@ -97,12 +97,12 @@ for (const route of ['direct', 'unified']) {
 
   test(`${route} valid dry run plans MCP without writing absent or existing targets`, async t => {
     const f = await fixture(t, route);
-    f.success(f.run('--dry-run'));
+    f.success(f.raw('--dry-run'));
     await assert.rejects(access(f.target), { code: 'ENOENT' });
-    f.success(f.run());
+    f.success(f.raw());
     await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Upstream change\n');
     const before = await snapshot(f.target);
-    f.success(f.run('--update', '--dry-run'));
+    f.success(f.raw('--update', '--dry-run'));
     assert.deepEqual(await snapshot(f.target), before);
   });
 
@@ -116,22 +116,24 @@ for (const route of ['direct', 'unified']) {
           directory: f.root,
           nonexecutable: f.cli,
         }[invalid];
-        const args = f.requiredArgs.map((argument, index, values) => values[index - 1] === flag ? value : argument);
+        const args = f.mcpArgs.map((argument, index, values) => values[index - 1] === flag ? value : argument);
         assert.notEqual(f.raw(...args).status, 0);
         await assert.rejects(access(f.target), { code: 'ENOENT' });
       });
     }
   }
 
-  for (const missing of ['--playwright-cli', '--browser', '--open-design-cli']) {
+  for (const missing of ['--playwright-cli', '--browser']) {
     for (const mode of [[], ['--dry-run'], ['--update']]) {
       for (const existing of [false, true]) {
         test(`${route} rejects missing ${missing} in ${mode[0] || 'fresh'} mode with ${existing ? 'existing' : 'absent'} target unchanged`, async t => {
           const f = await fixture(t, route);
           if (existing) f.success(f.run());
           const before = existing ? await snapshot(f.target) : null;
-          const args = f.requiredArgs.filter((value, index, values) => value !== missing && values[index - 1] !== missing);
-          assert.notEqual(f.raw(...args, ...mode).status, 0);
+          const args = f.mcpArgs.filter((value, index, values) => value !== missing && values[index - 1] !== missing);
+          const result = f.raw(...args, ...mode);
+          assert.notEqual(result.status, 0);
+          assert.match(result.stderr + result.stdout, new RegExp(`Required option ${missing} is missing`));
           if (existing) {
             assert.deepEqual(await snapshot(f.target), before);
           } else {
@@ -141,6 +143,30 @@ for (const route of ['direct', 'unified']) {
       }
     }
   }
+
+  test(`${route} core install uses the three default servers`, async t => {
+    const f = await fixture(t, route);
+    f.success(f.raw('--dry-run'));
+    await assert.rejects(access(f.target), { code: 'ENOENT' });
+    f.success(f.raw());
+    const mcpPath = join(f.target, 'mcp_config.json');
+    const mcp = JSON.parse(await readFile(mcpPath, 'utf8'));
+    assert.deepEqual(Object.keys(mcp.mcpServers).sort(), ['codegraph', 'filesystem', 'lsp']);
+    assert.deepEqual(mcp.mcpServers.filesystem.args.slice(2), [process.cwd()]);
+    assert.equal((await stat(mcpPath)).mode & 0o777, 0o600);
+    assert(await readFile(join(f.target, 'rules/AGENTS.md'), 'utf8'));
+    assert(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'));
+    assert(await readFile(join(f.target, 'agents/kitshift-reviewer.md'), 'utf8'));
+  });
+
+  test(`${route} selects Playwright without local design`, async t => {
+    const f = await fixture(t, route);
+    f.success(f.raw('--playwright-cli', f.cli, '--browser', process.execPath));
+    const mcp = JSON.parse(await readFile(join(f.target, 'mcp_config.json'), 'utf8'));
+    assert.deepEqual(Object.keys(mcp.mcpServers).sort(), ['codegraph', 'filesystem', 'lsp', 'playwright']);
+    assert.equal(mcp.mcpServers.playwright.args[0], f.cli);
+    assert.equal(mcp.mcpServers.playwright.args[mcp.mcpServers.playwright.args.indexOf('--executable-path') + 1], process.execPath);
+  });
 
   test(`${route} installs and updates all MCP servers`, async t => {
     const f = await fixture(t, route);
@@ -169,6 +195,13 @@ for (const route of ['direct', 'unified']) {
     assert.equal((await stat(join(f.target, 'mcp_config.json'))).mode & 0o777, 0o600);
     const manifest = JSON.parse(await readFile(join(f.target, '.kitshift-manifest.json'), 'utf8'));
     assert(manifest.files['mcp_config.json']);
+    const beforeMcp = await readFile(join(f.target, 'mcp_config.json'));
+    await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Updated with retained MCP\n');
+    f.success(f.raw('--update'));
+    assert.deepEqual(await readFile(join(f.target, 'mcp_config.json')), beforeMcp);
+    const afterManifest = JSON.parse(await readFile(join(f.target, '.kitshift-manifest.json'), 'utf8'));
+    assert.deepEqual(afterManifest.files['mcp_config.json'], manifest.files['mcp_config.json']);
+    assert.equal(await readFile(join(f.target, 'skills/example/SKILL.md'), 'utf8'), 'Updated with retained MCP\n');
   });
 
   test(`${route} protects local MCP edits before any update writes`, async t => {
@@ -177,7 +210,7 @@ for (const route of ['direct', 'unified']) {
     await writeFile(join(f.target, 'mcp_config.json'), '{"local":true}\n');
     await writeFile(join(f.repo, 'skills/example/SKILL.md'), 'Upstream change\n');
     const before = await snapshot(f.target);
-    assert.notEqual(f.run('--update').status, 0);
+    assert.notEqual(f.raw('--update').status, 0);
     assert.deepEqual(await snapshot(f.target), before);
   });
 
@@ -189,9 +222,9 @@ for (const route of ['direct', 'unified']) {
     delete manifest.files['mcp_config.json'];
     await rm(join(f.target, 'mcp_config.json'));
     await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-    f.success(f.run('--update'));
+    f.success(f.raw('--update'));
     const mcp = JSON.parse(await readFile(join(f.target, 'mcp_config.json'), 'utf8'));
-    assert.equal(Object.keys(mcp.mcpServers).length, 5);
+    assert.deepEqual(Object.keys(mcp.mcpServers).sort(), ['codegraph', 'filesystem', 'lsp']);
     const updatedManifest = JSON.parse(await readFile(manifestPath, 'utf8'));
     assert(updatedManifest.files['mcp_config.json']);
   });
@@ -261,7 +294,7 @@ test('symlinked destination ancestors cannot redirect installation outside targe
   await assert.rejects(access(join(f.target, 'plugin.json')), { code: 'ENOENT' });
 });
 
-test('native agy plugin validate passes against full installed bundle', async t => {
+test('native agy plugin validate passes against core and full installed bundles', async t => {
   const agyBinary = process.env.AGY_BIN || '/home/personal/.local/bin/agy';
   let hasAgy = false;
   try {
@@ -279,25 +312,23 @@ test('native agy plugin validate passes against full installed bundle', async t 
   t.after(() => rm(root, { recursive: true, force: true }));
   const cli = join(root, 'cli.mjs');
   await writeFile(cli, '// Fixture path; never executed.\n');
-  const target = join(root, 'kitshift');
+  for (const [name, args, expectedServers] of [
+    ['core', [], 3],
+    ['full', ['--playwright-cli', cli, '--browser', process.execPath, '--open-design-cli', cli], 5],
+  ]) {
+    const target = join(root, name);
+    const install = spawnSync(process.execPath, [
+      join(repository, 'scripts/install-agy.mjs'), '--target', target, ...args,
+    ], { encoding: 'utf8' });
+    assert.equal(install.status, 0, install.stderr || install.stdout);
 
-  const install = spawnSync(process.execPath, [
-    join(repository, 'scripts/install-agy.mjs'),
-    '--target', target,
-    '--playwright-cli', cli,
-    '--browser', process.execPath,
-    '--open-design-cli', cli,
-  ], { encoding: 'utf8' });
-  assert.equal(install.status, 0, install.stderr || install.stdout);
-
-  const val = spawnSync(agyBinary, ['plugin', 'validate', target, '--json'], { encoding: 'utf8' });
-  assert.equal(val.status, 0, val.stderr || val.stdout);
-  const result = JSON.parse(val.stdout);
-
-  assert.equal(result.name, 'kitshift');
-  assert.equal(result.components.rules, 1);
-  assert.equal(result.components.mcpServers, 5);
-
-  const errors = (result.findings || []).filter(f => f.severity === 'error');
-  assert.equal(errors.length, 0, `Expected 0 validation errors, got: ${JSON.stringify(errors)}`);
+    const val = spawnSync(agyBinary, ['plugin', 'validate', target, '--json'], { encoding: 'utf8' });
+    assert.equal(val.status, 0, val.stderr || val.stdout);
+    const result = JSON.parse(val.stdout);
+    assert.equal(result.name, 'kitshift');
+    assert.equal(result.components.rules, 1);
+    assert.equal(result.components.mcpServers, expectedServers);
+    const errors = (result.findings || []).filter(f => f.severity === 'error');
+    assert.equal(errors.length, 0, `Expected 0 validation errors, got: ${JSON.stringify(errors)}`);
+  }
 });

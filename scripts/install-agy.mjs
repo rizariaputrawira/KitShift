@@ -9,7 +9,7 @@ import {
   validateLocalPath,
   collectFiles,
   readRegularFile,
-  renderMcp,
+  mcpBundleFile,
   readInstallSource,
   shellQuote,
   installBundle,
@@ -18,22 +18,24 @@ import {
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const help = `Usage:
   node scripts/install-agy.mjs [--target DIR] [--dry-run] [--update]
-    --playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH --open-design-cli ABSOLUTE_JS_PATH [--workspace-dir DIR]
+    [--playwright-cli ABSOLUTE_JS_PATH --browser ABSOLUTE_EXECUTABLE_PATH]
+    [--open-design-cli ABSOLUTE_JS_PATH] [--workspace-dir DIR]
 
 Copies this repository's skills, plugin rules, subagents, and MCP configuration
 into a native Antigravity CLI plugin bundle. The default target is
 ~/.gemini/config/plugins/kitshift. No symlinks are installed.
 
-Every install, update, and dry run requires existing local paths for the three
-MCP flags. JavaScript entry points must be readable; the browser must be
-executable. Playwright, OpenDesign, LSP, Codegraph, and Filesystem are always included.
+Without optional flags, LSP, Codegraph and Filesystem are configured. Select
+Playwright with both paths; select local OpenDesign independently. Entry points
+must be readable and the browser executable. Omitted integrations and roots
+are retained only from hash-matching managed config.
 
   --target DIR         Install into this plugin directory (relative paths allowed).
   --dry-run            Preflight and show planned copies without writing anything.
   --update             Replace only files unchanged since a prior managed install.
-  --playwright-cli P   Required absolute path to Playwright MCP cli.js.
-  --browser P          Required absolute path to Chromium browser executable.
-  --open-design-cli P  Required absolute path to OpenDesign CLI od.mjs.
+  --playwright-cli P   Absolute path to Playwright MCP cli.js (with --browser).
+  --browser P          Absolute path to Chromium browser executable (with --playwright-cli).
+  --open-design-cli P  Absolute path to OpenDesign CLI od.mjs.
   --workspace-dir DIR  Workspace root(s) for filesystem MCP (optional, comma-separated allowed, defaults to cwd).
   --help, -h           Show this help.
 
@@ -108,22 +110,18 @@ function main() {
     'kitshift-update': { SessionStart: [{ type: 'command', command: hookCommand, timeout: 2 }] },
   }, null, 2)}\n`), mode: 0o644 });
 
-  const replacements = {
-    '{{NODE}}': process.execPath,
-    '{{PLAYWRIGHT_CLI}}': validateLocalPath('--playwright-cli', options['playwright-cli']),
-    '{{BROWSER}}': validateLocalPath('--browser', options.browser, true),
-    '{{OPEN_DESIGN_CLI}}': validateLocalPath('--open-design-cli', options['open-design-cli']),
-    '{{PLAYWRIGHT_OUTPUT_DIR}}': path.join(target, 'cache', 'playwright-mcp'),
-    '{{WORKSPACE_DIR}}': options['workspace-dir']
-      ? (options['workspace-dir'].includes(',')
-          ? options['workspace-dir'].split(',').map(d => d.trim()).filter(Boolean).map(d => validateLocalPath('--workspace-dir', d, false, true))
-          : validateLocalPath('--workspace-dir', options['workspace-dir'], false, true))
-      : process.cwd(),
-  };
-  files.set('mcp_config.json', {
-    content: renderMcp(path.join(repository, 'mcp', 'agy.json'), replacements),
-    mode: 0o600,
-  });
+  let workspaceRoots = null;
+  if (options['workspace-dir'] !== undefined) {
+    const input = options['workspace-dir'];
+    if (input.includes(',')) {
+      workspaceRoots = input.split(',').map(d => d.trim()).filter(Boolean);
+      if (!workspaceRoots.length) fail('--workspace-dir must name at least one directory.');
+      workspaceRoots = workspaceRoots.map(d => validateLocalPath('--workspace-dir', d, false, true));
+    } else {
+      workspaceRoots = validateLocalPath('--workspace-dir', input, false, true);
+    }
+  }
+  files.set('mcp_config.json', mcpBundleFile(path.join(repository, 'mcp', 'agy.json'), options, { target, workspaceRoots }));
   const afterAssembly = readInstallSource(repository);
   if (source.revision !== afterAssembly.revision) source.revision = null;
 

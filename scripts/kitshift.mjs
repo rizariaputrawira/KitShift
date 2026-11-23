@@ -22,7 +22,8 @@ const help = `Usage: kitshift <command> [options]
   cache clear                      Clear cached check results
 
 Profile values: --harness omp|agy --target DIR --executable ABSOLUTE_PATH
-  --playwright-cli PATH --browser PATH --open-design-cli PATH
+  Optional: --playwright-cli PATH --browser PATH (both required together)
+            --open-design-cli PATH (independent)
   --workspace-dir DIRS (required for agy; comma-separated)
   profile edit also accepts --checks on|off.
 
@@ -94,7 +95,9 @@ function selectedProfiles(config, name, all) {
 function installer(profile, preview) {
   const args = [path.join(repository, 'scripts', `install-${profile.harness}.mjs`), '--update'];
   if (preview) args.push('--dry-run');
-  args.push('--target', profile.target, '--playwright-cli', profile.playwrightCli, '--browser', profile.browser, '--open-design-cli', profile.openDesignCli);
+  args.push('--target', profile.target);
+  if (profile.playwrightCli !== undefined) args.push('--playwright-cli', profile.playwrightCli, '--browser', profile.browser);
+  if (profile.openDesignCli !== undefined) args.push('--open-design-cli', profile.openDesignCli);
   if (profile.harness === 'agy') args.push('--workspace-dir', profile.workspaceDirs.join(','));
   return spawnSync(process.execPath, args, { cwd: repository, stdio: 'inherit' });
 }
